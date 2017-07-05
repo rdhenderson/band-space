@@ -88,10 +88,10 @@ Initial Development Goals:
   - /api/artists (add an artist to the system)
   
 ### Built With
-ReactJS
-Redux
-Express
-MongoJS and Mongoose
+ReactJS  
+Redux  
+Express  
+MongoJS and Mongoose  
 
 
 ### Prerequisites
@@ -100,38 +100,19 @@ What is needed to set up the dev environment. For instance, global dependencies 
 
 ### Setting up Dev
 
-Here's a brief intro about what a developer must do in order to start developing
-the project further:
-
-```shell
-git clone https://github.com/your/your-project.git
-cd your-project/
-packagemanager install
-```
-
-And state what happens step-by-step. If there is any virtual environment, local server or database feeder needed, explain here.
+See Getting Started above. 
 
 ### Building
 
-If your project needs some additional steps for the developer to build the
-project after some code changes, state them here. for example:
-
-```shell
-./configure
-make
-make install
-```
-
-Here again you should state what actually happens when the code above gets
-executed.
+See Getting Started above. 
 
 ### Deploying / Publishing
 give instructions on how to build and release a new version
 In case there's some step you have to take that publishes this project to a
 server, this is the right time to state it.
 
-```shell
-packagemanager deploy your-project -s server.com -u username -p password
+```
+npm run build
 ```
 
 And again you'd need to tell what the previous code actually does.
