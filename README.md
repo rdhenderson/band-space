@@ -10,11 +10,18 @@ Community-driven site committed to providing working musicians free access to in
 A quick introduction of the minimal setup you need to get a hello world up &
 running.
 
-```shell
-commands here
+**installation**
 ```
-
-Here you should say what actually happens when you execute the code above.
+git clone https://github.com/rdhenderson/project-3.git  
+cd project-3
+npm install
+```
+**development**
+*NOTE: This process will be simplified once concurrently or grunt is set up to run both commands
+```
+npm run start & nodemon server.js
+```
+The npm start script will create a webpack dev server that will compile the bundle.js file and update that file on changes.  Nodemon will run the express server and restart the server on file changes. If you encounter any issues, run each command in a separate terminal window (until grunt or concurrently is set up). 
 
 ## Developing
 
@@ -28,6 +35,58 @@ Initial Development Goals:
   - Allow fans to sign up for notification of a band/gig (and venue to see number of fans? with comparison actual turnout?)
   - Allow venues to rate/recommend musicians that drew a big crowd
 
+#### Models
+*This is a draft structure. Update as additional fields determined.*
+1. User
+  - Name
+  - Status: (new, verified, moderator)
+  - Role: (musician, venue)
+  - Profile: (link to musician/venue profile page) //TODO: Decide how to structure
+2. Venue
+  - Name
+  - Address
+  - Capacity
+  - Events: [Array of event links]
+  - Reviews: [array of review ids]
+  - Link to User if established
+3. Musician
+  - Name
+  - Profile
+  - Events: [Array of event links]
+  - Reviews: [array of review ids]
+  - User ID (link)
+4. Events
+  - Venue
+  - Musician
+  - Date
+  - Reviews
+5. Reviews
+  - Title
+  - Body
+  - Venue (link)
+  - Musician (link)
+  - User (link)
+
+#### Routes
+*This is a draft structure. Update as additional routes determined.*
+
+**Venue Routes**
+1. GET
+  - /api/venues (array of all venues)
+  - /api/venues/:id (specific venue)
+  - /api/venues/:id/artists (all artists who have played venue)
+  - /api/venues/:id/artists/:id (all events played at specified venue by specified artist)
+2. POST
+  - /api/venues (add a venue to system)
+**Artist Routes**
+1. GET
+  - /api/artists (array of all artists)
+  - /api/artists/:id (specific artist)
+  - /api/artists/:id/venues (all venues played by specified artist)
+  - /api/artists/:id/venues/:id (all events played at specified venue by specified artist [duplicated for ease of use]
+2. POST 
+  - /api/artists (add an artist to the system)
+  
 ### Built With
 ReactJS
 Redux
