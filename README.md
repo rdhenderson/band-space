@@ -101,7 +101,7 @@ If the api is external, link to api documentation. If not describe your api incl
   - /api/venues/:id/artists (all artists who have played venue)
   - /api/venues/:id/artists/:id (all events played at specified venue by specified artist)
 2. POST
-  - /api/venues (add a venue to system)
+  - /api/venues (add a venue to system)  
 **Artist Routes**
 1. GET
   - /api/artists (array of all artists)
