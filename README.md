@@ -91,10 +91,10 @@ Explain your code style and show how to check it.
 ## Api Reference
 
 If the api is external, link to api documentation. If not describe your api including authentication methods as well as explaining all the endpoints with their required parameters.
-#### Routes
+### Routes
 *This is a draft structure. Update as additional routes determined.*
 
-**Venue Routes**
+#### Venue Routes
 1. GET
   - /api/venues (array of all venues)
   - /api/venues/:id (specific venue)
@@ -102,7 +102,7 @@ If the api is external, link to api documentation. If not describe your api incl
   - /api/venues/:id/artists/:id (all events played at specified venue by specified artist)
 2. POST
   - /api/venues (add a venue to system)  
-**Artist Routes**
+#### Artist Routes
 1. GET
   - /api/artists (array of all artists)
   - /api/artists/:id (specific artist)
@@ -116,30 +116,30 @@ If the api is external, link to api documentation. If not describe your api incl
 
 ### Models
 *This is a draft structure. Update as additional fields determined.*
-1. User
+#### User
   - Name
   - Status: (new, verified, moderator)
   - Role: (musician, venue)
   - Profile: (link to musician/venue profile page) //TODO: Decide how to structure
-2. Venue
+#### Venue
   - Name
   - Address
   - Capacity
   - Events: [Array of event links]
   - Reviews: [array of review ids]
   - Link to User if established
-3. Musician
+#### Musician
   - Name
   - Profile
   - Events: [Array of event links]
   - Reviews: [array of review ids]
   - User ID (link)
-4. Events
+#### Events
   - Venue
   - Musician
   - Date
   - Reviews
-5. Reviews
+#### Reviews
   - Title
   - Body
   - Venue (link)
