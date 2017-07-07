@@ -35,6 +35,14 @@ Initial Development Goals:
   - Allow fans to sign up for notification of a band/gig (and venue to see number of fans? with comparison actual turnout?)
   - Allow venues to rate/recommend musicians that drew a big crowd
 
+### Front-End
+Peter and Benga
+First Sprint: Build HTML for each view.  Barebones by Saturday. 
+
+### Back-End
+Reid and Joe
+First Sprint: Set up database models for Venue, Artist, Band (peter) Dummy data and routes to display and edit on test page (Reid) by Saturday. User model and login. 
+
 ### Built With
 ReactJS  
 Redux  
