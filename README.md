@@ -111,6 +111,28 @@ If the api is external, link to api documentation. If not describe your api incl
 2. POST 
   - /api/artists (add an artist to the system)
   
+## Views
+
+### Splash
+  - Logo
+  - Login buttons (guest, musician, venue)
+### Main
+  - Navbar
+  - Logo
+  - Searchbar
+  - Local Population
+### Gigs
+  - Navbar
+  - Filtration
+  - Results
+### Profile
+  - Photo
+  - Stars
+  - name
+  - Scoring Div
+  - Events Div
+  - Members module
+
 
 ## Database
 
