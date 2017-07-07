@@ -116,11 +116,20 @@ If the api is external, link to api documentation. If not describe your api incl
 ### Splash
   - Logo
   - Login buttons (guest, musician, venue)
+  - Modal for Sign-up/Register
 ### Main
   - Navbar
   - Logo
   - Searchbar
   - Local Population
+### Create User
+  - Photo
+  - Input fields
+  - Submit
+### Create Venue/ Band
+  - Photo
+  - Parameters
+  - Submit Button
 ### Gigs
   - Navbar
   - Filtration
