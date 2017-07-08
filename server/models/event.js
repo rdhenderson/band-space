@@ -21,7 +21,7 @@ const EventSchema = new Schema({
 
 });
 
-const Event = mongoose.model("Venue", VenueSchema);
+const Event = mongoose.model("Event", EventSchema);
 
 // Export the model
-module.exports = Venue;
+module.exports = Event;
