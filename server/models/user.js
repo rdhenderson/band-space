@@ -1,13 +1,22 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const EventSchema = new Schema({
+const UserSchema = new Schema({
   name: { type: String, trim: true, required: true },
-  artist: {
+  // password: { type: String, trim: true, required: true },
+  // Status - Basic, Moderator, Admin
+  status: { type: String, trim: true, required: true, default: "Basic"},
+  // Role - Artist, Staff, Both(?)
+  role: { type: String },
+  // Either artist of staff id could be filled
+  artist_id: {
     type: Schema.Types.ObjectId,
     ref: 'Artist',
   },
-  date: { type: Date },
+  staff_id: {
+    type: Schema.Types.ObjectId,
+    ref: 'Artist',
+  },
   reviews: [
     {
       // Store ObjectIds in the array
@@ -21,7 +30,7 @@ const EventSchema = new Schema({
 
 });
 
-const Event = mongoose.model("Event", EventSchema);
+const User = mongoose.model("User", UserSchema);
 
 // Export the model
-module.exports = Event;
+module.exports = User;
