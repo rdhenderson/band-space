@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <main>
+      <video poster="https://ak3.picdn.net/shutterstock/videos/12190862/thumb/3.jpg" id="bgvid" playsinline autoplay muted loop>
+  <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
+        <source src="http://ak2.picdn.net/shutterstock/videos/12190862/preview/stock-footage-lot-of-people-clapping-at-rave-party-here-is-footage-of-people-crowd-partying-at-a-concert-or-a-ni.webm" type="video/webm">
+        <source src="http://ak2.picdn.net/shutterstock/videos/12190862/preview/stock-footage-lot-of-people-clapping-at-rave-party-here-is-footage-of-people-crowd-partying-at-a-concert-or-a-ni.mp4" type="video/mp4">
+      </video>
+      <div id="log-but">
+        <div id="Logo">
+          <p> This is the Logo
+        </div>
+        <div id="buttons">
+          <button class="butTest" href="#"> Musician </button>
+          <button class="butTest" href="#"> Venue </button>
+          <button class="butTest" href="#"> Guest </button>
+        </div>
+      </div>
+      <div id="modal">
+        <div id="modal-box">
+          <h3> Musician Log-In </h3>
+          <div id="modalX">
+            <img src="./x.svg">
+          </div>
+          <form id="form" action="/action_page.php">
+            <label> Username </label>
+            <input id="uname" placeholder="username">
+            <label> Password </label>
+            <input id="password" placeholder="password">
+            <button id="mod-button"> submit </button>
+          </form>
+          <div id="forgot_register">
+          <a href="#"> Forgot Password/UserName? </a>
+          <a href="#"> Register </a>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+  </body>
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script>
+    $(".butTest").click(() => $("#modal").show().css('display', 'flex'));
+    $("#modalX").click(() => $("#modal").hide());
+  </script>
+</html>

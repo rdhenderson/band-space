@@ -1,0 +1,88 @@
+h1{
+  color: black;
+  font-size: 100px;
+  text-align: center;
+}
+body{
+  margin: 0;
+}
+main{
+  display: flex;
+  flex-direction: column;
+}
+
+#splash{
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#navbar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  text-align: center;
+  border: 2px red solid;
+  width: 100%;
+  color: black;
+}
+
+#links > ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#searchbar > input{
+  height: 50px;
+  width: 500px;
+  line-height: 50px;
+  font-size: 40px;
+}
+
+#links,
+#logo,
+#profile{
+  width: 100%;
+}
+
+#lheader{
+  text-align: center;
+}
+
+.flitem{
+  display: flex;
+  width: 300px;
+  padding: 25px;
+  margin: 25px;
+  border: solid 2px red;
+}
+
+.flimg{
+  border-radius: 100px;
+  width: 100px;
+}
+
+.stars{
+  width: 100px;
+  height: 50px;
+}
+
+.imgdiv{
+  display:flex;
+  flex-direction: column;
+}
+
+.fltext{
+  text-align: center;
+}
+
+#flitems{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
