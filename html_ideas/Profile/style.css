@@ -1,0 +1,152 @@
+main{
+  display: flex;
+  flex-direction: column;
+}
+
+h3{
+  margin: 0;
+}
+
+#navbar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  text-align: center;
+  border: 2px red solid;
+  width: 100%;
+  color: black;
+  margin-bottom: 20px;
+}
+
+#links,
+#logo,
+#profile{
+  width: 100%;
+}
+
+#links > ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#profimg{
+  margin: 20px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+#profblock{
+  width: 400px;
+  border: solid 2px black;
+  display: flex;
+  height: 400px;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+#profpic {
+  width: 250px;
+}
+
+#proftext{
+  margin-left: 30px;
+}
+
+.stars{
+  width: 100px;
+}
+
+#profheader{
+  display: flex;
+  width: 100%;
+}
+
+#Header{
+
+}
+
+#Header > h1{
+  font-size: 75px;
+  text-align: center;
+  margin: 10px;
+}
+
+#sliders{
+  width: 100%;
+  border: red solid 2px;
+}
+
+.slider{
+  width: 500px;
+  height: 100px;
+}
+
+.sliderItem{
+  text-align: center;
+  margin: 0;
+}
+
+#topbody{
+  display: flex;
+  flex-direction: row;
+}
+
+#left{
+  margin-left: 5vw;
+}
+
+#right{
+  width: 100%;
+  margin-right: 5vw;
+}
+
+#details{
+
+  border: 2px solid black;
+}
+
+#bottombody{
+  display: flex;
+  flex-direction: column;
+}
+
+#botmain{
+  display: flex;
+  flex-direction: row;
+
+  margin-right: 5vw;
+  margin-left: 5vw;
+
+}
+
+#botheader{
+  text-align: center;
+  border: solid 2px blue;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-right: 5vw;
+  margin-left: 5vw;
+
+}
+
+#botleft{
+  width: 33%;
+  text-align: center;
+  border: solid 2px black;
+}
+
+#botright{
+  margin-left: 5vw;
+  width: 67%;
+  text-align: center;
+}
+
+.event{
+  text-align: left;
+  border: solid 2px;
+  margin-right: 5vw;
+  margin-bottom: 20px;
+}
