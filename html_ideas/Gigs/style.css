@@ -1,0 +1,61 @@
+#navbar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  text-align: center;
+  border: 2px red solid;
+  width: 100%;
+  color: black;
+}
+
+#results {
+	overflow: auto;
+}
+
+#available {
+	text-align: center;
+}
+
+#logo {
+	width: 100%;
+}
+
+#links > ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  justify-content: space-around;
+  width: 100%;
+}
+
+#links {
+	width: 100%;
+}
+
+#profile{
+	width: 100%;
+}
+
+#main-gig {
+	display: flex;
+	flex-direction: row;
+	width: 66%;
+	float: left;
+}
+
+#other-gigs {
+	display: flex;
+	flex-direction: row;
+	width: 34%;
+	float: right;
+	justify-content: center;
+}
+
+#other-gigs > ul {
+	text-align: center;
+}
+
+li {
+	text-align: center;
+}
