@@ -1,27 +1,38 @@
 /* Eventful API Documentation - https://api.eventful.com/docs/venues/search */
 
-const axios = require('axios');
+import axios from 'axios';
+import Venue from '../models/venue';
 
 //Query Eventful API for venue information
-const eventfulApiKey = "B3rvtFwc45vjtTFK";
-const defaultSearchCoords = "38.9072,-77.0369";
-const queryURL = "http://api.eventful.com/json/venues/search"
-const baseQueryString = `${queryURL}?app_key=${eventfulApiKey}&category=bar_nightlife&page_size=50&location=${encodeURIComponent("washington, dc")}`;
 
-function getEventfulVenues(pageNumber=1) {
+async function getEventfulVenues() {
   // Page defaults to 1, increments with each call until it has listed all pages.
-  const queryString = `${baseQueryString}&page_number=${pageNumber}`;
-  axios.get(queryString)
-    .then( (response) => {
-      const page = response.data.page_number;
-      const totalPages = response.data.page_count;
-      response.data.venues.venue.forEach( (item) => console.log(item.venue_name));
-      if (page < totalPages) return getEventfulVenues(page+1);
+  const eventfulApiKey = "B3rvtFwc45vjtTFK";
+  const defaultSearchCoords = "38.9072,-77.0369";
+  const queryURL = "http://api.eventful.com/json/venues/search"
+  const queryString = `${queryURL}?app_key=${eventfulApiKey}&category=bar_nightlife&page_size=999&location=${encodeURIComponent("washington, dc")}`;
 
+  return axios.get(queryString)
+  .then( (results) => {
+    // console.log("Results", results.data.venues.venue);
+    results.data.venues.venue.forEach( (item) => {
+      const venueObj = {
+        name: item.venue_name,
+        description: item.description,
+        type: item.venue_type,
+        evently_id: item.id,
+        address: item.address,
+        city: item.city_name,
+        state: item.region_abbr,
+        zipcode: item.postal_code,
+        // image: item.image.medium.url
+      };
+      Venue.findOrCreate({name: item.venue_name}, venueObj, (doc) => console.log('item added', doc) );
     });
+    return results;
+  });
 }
 //Function to create local event object and push to eventArr
 //Parameters: json event object, API identifier ("local", "ticketmaster", or "eventful")
-
-
-getEventfulVenues();
+// export default getEventfulVenues;
+module.exports = getEventfulVenues;

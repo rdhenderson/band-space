@@ -14,14 +14,14 @@ const app = express();
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static('src'));
+app.use(express.static(path.resolve(`${__dirname}/../public/`)));
 // app.use(express.static(path.join(__dirname, '/')));
 
 // Initialize routes
 routes(app);
 
 // Setup Mongo/Mongoose and add promise model
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/news-scraper';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/gig-aware';
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);

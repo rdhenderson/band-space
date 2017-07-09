@@ -3,10 +3,9 @@ var path = require('path');
 
 module.exports = {
   devtool: 'inline-sourcemap',
-  entry: './src/js/entry.js',
+  entry: './src/entry.js',
   output: {
-      path: path.join(__dirname, 'src'),
-      publicPath: '/src/',
+      path: path.join(__dirname, 'public'),
       filename: 'bundle.js'
   },
   module: {
