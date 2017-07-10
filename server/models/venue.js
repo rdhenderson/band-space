@@ -1,10 +1,19 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import findOrCreate from 'mongoose-find-or-create';
+
 const Schema = mongoose.Schema;
 
 const VenueSchema = new Schema({
   name: { type: String, trim: true, required: true },
-  address: { type: String, trim: true, required: true, index: { unique: true } },
-  capacity: { type: Integer },
+  address: { type: String, trim: true },
+  city: { type: String, trim: true },
+  state: { type: String, trim: true },
+  zipcode: { type: String, trim: true },
+  image: { type: String, trim: true },
+  description: { type: String, trim: true },
+
+  capacity: { type: Number },
+  //TODO: Make profile a separate model and link here instead of String
   profile: { type: String, trim: true },
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },
@@ -23,6 +32,8 @@ const VenueSchema = new Schema({
     },
   ],
 });
+
+VenueSchema.plugin(findOrCreate);
 
 const Venue = mongoose.model("Venue", VenueSchema);
 
