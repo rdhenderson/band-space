@@ -3,7 +3,10 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   name: { type: String, trim: true, required: true },
-  // password: { type: String, trim: true, required: true },
+  // email: {type: String, trim: true, require: true},
+  // password: { type: String, trim: true, require: true },
+  // zipcode: {type: Integer, trim:true, require: false},
+  // phonenumber: {type: integer, trim:true, require: false},
   // Status - Basic, Moderator, Admin
   status: { type: String, trim: true, required: true, default: "Basic"},
   // Role - Artist, Staff, Both(?)
