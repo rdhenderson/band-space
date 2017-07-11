@@ -38,36 +38,118 @@ class Welcome extends Component {
 
   render() {
     return (
-      <Row>
-        <Col md={8} offset={{ md: 2 }}>
-          <Card>
-            <CardText>
-              React-Redux Example!
-            </CardText>
-            <CardTitle
-              title={`Welcome ${this.props.user}!`}
-              subtitle={`The Count is ${this.props.count} and color is ${this.props.color}`}
-            />
-            <CardActions>
-              <RaisedButton
-                label="Increment Count!"
-                primary={true}
-                onClick={this.incrementCount}
-              />
-              <RaisedButton
-                label="Decrement Count!"
-                secondary={true}
-                onClick={this.decrementCount}
-              />
-              <RaisedButton
-                label="Change Color!"
-                secondary={true}
-                onClick={this.changeColor}
-              />
-            </CardActions>
-          </Card>
-        </Col>
-      </Row>
+      <div>
+        <div className="splash">
+          <div className="splash__logo">
+            <h1> BandSpace </h1>
+          </div>
+
+          <div className="splash__searchbar">
+            <input name="query" placeholder="Search your venue here!" />
+          </div>
+
+      </div>
+      <div className="mreview">
+        <div className="mreview__header">
+          <h2> Reviews in Washington D.C. </h2>
+        </div>
+        <div className="mreview__body">
+
+          <div className="mreview__body__item">
+            <div className="mreview__body__item__imgdiv">
+              <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
+              <img className="mreview__body__item__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+            </div>
+            <div className="mreview__body__item__text">
+              <h3> Bill </h3>
+              <ul>
+                <li> Very Professional </li>
+                <li> Drinks A Lot </li>
+                <li> Cheap! </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mreview__body__item">
+            <div className="mreview__body__item__imgdiv">
+              <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
+              <img className="mreview__body__item__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+            </div>
+            <div className="mreview__body__item__text">
+              <h3> Bill </h3>
+              <ul>
+                <li> Very Professional </li>
+                <li> Drinks A Lot </li>
+                <li> Cheap! </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mreview__body__item">
+            <div className="mreview__body__item__imgdiv">
+              <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
+              <img className="mreview__body__item__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+            </div>
+            <div className="mreview__body__item__text">
+              <h3> Bill </h3>
+              <ul>
+                <li> Very Professional </li>
+                <li> Drinks A Lot </li>
+                <li> Cheap! </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mreview__body__item">
+            <div className="mreview__body__item__imgdiv">
+              <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
+              <img className="mreview__body__item__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+            </div>
+            <div className="mreview__body__item__text">
+              <h3> Bill </h3>
+              <ul>
+                <li> Very Professional </li>
+                <li> Drinks A Lot </li>
+                <li> Cheap! </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+      // <Row>
+      //   <Col md={8} offset={{ md: 2 }}>
+      //     <Card>
+      //       <CardText>
+      //         React-Redux Example!
+      //       </CardText>
+      //       <CardTitle
+      //         title={`Welcome ${this.props.user}!`}
+      //         subtitle={`The Count is ${this.props.count} and color is ${this.props.color}`}
+      //       />
+      //       <CardActions>
+      //         <RaisedButton
+      //           label="Increment Count!"
+      //           primary={true}
+      //           onClick={this.incrementCount}
+      //         />
+      //         <RaisedButton
+      //           label="Decrement Count!"
+      //           secondary={true}
+      //           onClick={this.decrementCount}
+      //         />
+      //         <RaisedButton
+      //           label="Change Color!"
+      //           secondary={true}
+      //           onClick={this.changeColor}
+      //         />
+      //       </CardActions>
+      //     </Card>
+      //   </Col>
+      // </Row>
     );
   }
 }

@@ -1,4 +1,38 @@
-h1{
-  color: pink;
-  font-size: 300px;
+@import "./vendor/reset.scss";
+@import "./regions/home.scss";
+@import "./regions/signup.scss";
+
+
+body{
+  margin: 0;
+}
+main{
+  display: flex;
+  flex-direction: column;
+}
+
+
+//Navbar styles
+.navbar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  text-align: center;
+  border: 2px red solid;
+  width: 100%;
+  color: black;
+
+  &__links > ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  &__links,
+  &__logo,
+  &__profile{
+    width: 100%;
+  }
+
 }
