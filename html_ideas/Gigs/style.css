@@ -9,8 +9,13 @@
   color: black;
 }
 
-#results {
+#gigs-list {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 	overflow: auto;
+ 	width: 50%;
+  	margin: 0 auto;
 }
 
 #available {
@@ -44,13 +49,6 @@
 	float: left;
 }
 
-#other-gigs {
-	display: flex;
-	flex-direction: row;
-	width: 34%;
-	float: right;
-	justify-content: center;
-}
 
 #other-gigs > ul {
 	text-align: center;
