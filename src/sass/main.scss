@@ -1,6 +1,8 @@
 @import "./vendor/reset.scss";
 @import "./regions/home.scss";
 @import "./regions/signup.scss";
+@import "./regions/createband.scss";
+@import "./regions/profile.scss";
 
 
 body{
@@ -34,5 +36,33 @@ main{
   &__profile{
     width: 100%;
   }
+
+}
+
+/*
+===================================
+    MEDIA QUERIES
+===================================
+*/
+
+@media (max-width: 1200px) {
+
+
+
+}
+
+@media (max-width: 960px) {
+
+
+
+}
+
+@media (max-width: 760px) {
+
+
+}
+
+@media (max-width: 480px) {
+
 
 }

@@ -7,6 +7,8 @@ import {
 
 import Main from './containers/Main.js'
 import Signup from './containers/user_signup.js'
+import Createband from './containers/createband.js'
+import Profile from './containers/profile.js'
 // import SignUpPage from './containers/users/signup-page'
 
 const AppRoutes = () => (
@@ -38,8 +40,9 @@ const AppRoutes = () => (
       </div>
 
       <Route exact path="/" component={Main}/>
-      <Route path="/login" component={About}/>
+      <Route path="/bandcreate" component={Createband}/>
       <Route path="/signup" component={Signup}/>
+      <Route path="/profile" component={Profile}/>
     </div>
     </main>
   </Router>
