@@ -1,0 +1,60 @@
+h1{
+  font-size: 500px;
+  color: blue;
+}
+
+h2{
+  margin: 0;
+}
+
+#navbar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  text-align: center;
+  border: 2px red solid;
+  width: 100%;
+  color: black;
+  margin-bottom: 20px;
+}
+
+#links,
+#logo,
+#profile{
+  width: 100%;
+}
+
+#links > ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#body{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+#left{
+  width: 100%;
+  margin-left: 20vw;
+}
+
+#right{
+  width: 100%;
+  margin-right: 20vw;
+}
+
+.sinput{
+  width: 15vw;
+  height: 20px;
+  margin: 2px;
+}
+
+#switch{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

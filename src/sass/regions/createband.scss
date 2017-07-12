@@ -1,0 +1,55 @@
+.createband{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+
+  &__left{
+    width: 100%;
+    margin-left: 20vw;
+
+
+  }
+
+  &__right{
+    width: 100%;
+    margin-right: 20vw;
+  }
+
+}
+
+.sinput{
+  width: 15vw;
+  height: 20px;
+  margin: 2px;
+}
+
+
+
+
+/*
+===================================
+    MEDIA QUERIES
+===================================
+*/
+
+@media (max-width: 1200px) {
+
+
+
+}
+
+@media (max-width: 960px) {
+
+
+
+}
+
+@media (max-width: 760px) {
+
+
+}
+
+@media (max-width: 480px) {
+
+
+}
