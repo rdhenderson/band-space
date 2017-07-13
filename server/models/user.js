@@ -13,9 +13,13 @@ const UserSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Artist',
   },
+  band_id:{
+     type: Schema.Types.ObjectId,
+    ref: 'Band',
+  },
   staff_id: {
     type: Schema.Types.ObjectId,
-    ref: 'Artist',
+    ref: 'Staff',
   },
   reviews: [
     {
