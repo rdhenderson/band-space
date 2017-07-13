@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import findOrCreate from 'mongoose-find-or-create';
+const mongoose = require('mongoose');
+const findOrCreate = require('mongoose-find-or-create');
 
 const Schema = mongoose.Schema;
 

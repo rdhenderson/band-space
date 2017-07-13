@@ -1,5 +1,5 @@
-import Venue from '../models/venue.js';
-import getEventfulVenues from './event-search.js';
+const Venue = require('../models/venue.js');
+const getEventfulVenues = require('./event-search.js');
 
 const API = {
   getEventfulVenues,

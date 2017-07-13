@@ -1,10 +1,10 @@
 // Import Modules
-import express from 'express';
-import path from 'path';
-import bodyParser from 'body-parser';
-import logger from 'morgan';
-import mongoose from 'mongoose';
-import routes from './controllers/routes';
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
+const mongoose = require('mongoose');
+const routes = require('./controllers/routes');
 
 // Express Port/App Declaration
 const PORT = process.env.PORT || 3000;

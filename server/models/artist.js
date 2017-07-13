@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-import findOrCreate from 'mongoose-find-or-create';
+const findOrCreate = require('mongoose-find-or-create');
 
 const ArtistSchema = new Schema({
   name: { type: String, trim: true, required: true },

@@ -1,12 +1,13 @@
-import path from 'path';
-import Venue from '../models/venue.js';
-import Artist from '../models/artist.js';
-import API from '../api';
+const path = require('path');
+const Venue = require('../models/venue.js');
+const Artist = require('../models/artist.js');
+const API = require('../api');
 
 module.exports = function routes (app) {
   // import artist routes
   // TODO: figure out cleaner import/export method
   require('./artistRoutes.js')(app);
+  require('./bandRoutes.js')(app);
 
   app.get('/api/venues/updateFromEventful', (req, res) => {
     API.getEventfulVenues()
@@ -25,34 +26,25 @@ module.exports = function routes (app) {
    Venue.findOne({"_id": req.params._id})
     .then( (results) => res.send(results) )
   });
-  app.get('api/artists',(req.res) => {
-    Artist.find({}).then( (results) => res.send(results))
+
+  app.get('api/venues', (req, res) => {
+    Venue.find({})
+    .then( (results) => res.send(results))
   });
 
-  app.get('api/bands',(req.res) => {
-    Band.find({}).then( (results) => res.send(results))
-  });
-
-  app.get('api/venues',(req.res) => {
-    Venue.find({}).then( (results) => res.send(results))
-  });
-
-  app.get('api/users',(req.res) => {
+  app.get('api/users',(req, res) => {
     User.find({}).then( (results) => res.send(results))
   });
 
-  app.get('api/events',(req.res) => {
+  app.get('api/events',(req, res) => {
     Event.find({}).then( (results) => res.send(results))
   });
 
-  app.get('api/artists',(req.res) => {
-    Artist.find({}).then( (results) => res.send(results))
-  });
 
-  app.get('api/reviews',(req.res) => {
+  app.get('api/reviews',(req, res) => {
     Review.find({}).then( (results) => res.send(results))
   });
-  
+
   //Add a new venue
   app.post('/api/venues', (req, res) => {
     const query = { name: req.body.venue.name };
@@ -68,8 +60,8 @@ module.exports = function routes (app) {
   //Catch-all directs everything else to react front end/index.html
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/../../public/index.html`))
-  
+
   });
 
- 
+
 };

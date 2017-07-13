@@ -1,7 +1,7 @@
 /* Eventful API Documentation - https://api.eventful.com/docs/venues/search */
 
-import axios from 'axios';
-import Venue from '../models/venue';
+const axios = require('axios');
+const Venue = require('../models/venue');
 
 //Query Eventful API for venue information
 
