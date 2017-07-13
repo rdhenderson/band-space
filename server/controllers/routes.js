@@ -16,6 +16,11 @@ module.exports = function routes (app) {
     Venue.find({}).then( (results) => res.send(results));
   });
 
+  app.get('api/venues/:id', (req,res) => {
+   Venue.findOne({"_id": req.params._id})
+    .then( (results) => res.send(results) )
+  });
+ 
   //Catch-all directs everything else to react front end/index.html
   app.get('*', (req, res) =>
     res.sendFile(path.resolve(`${__dirname}/../../public/index.html`))
