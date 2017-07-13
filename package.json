@@ -1,14 +1,20 @@
 {
   "name": "bandspace",
+  "engines": {
+    "node": "8.1.0",
+    "npm": "5.1.0"
+  },
   "version": "1.0.0",
   "description": "",
   "main": "src/js/entry.js",
   "scripts": {
     "prestart": "npm run lint",
-    "build": "webpack --optimize-minimze -w",
+    "heroku-postbuild": "npm run build",
+    "build": "webpack --optimize-minimize",
     "dev-client": "webpack-dev-server --progress --inline --hot",
     "dev-server": "nodemon server/server.js --exec babel-node --presets es2015",
-    "start": "concurrently \"npm run dev-server\" \"webpack -w\"",
+    "start": "npm run dev-server",
+    "dev-start": "concurrently \"npm run dev-server\" \"webpack -w\"",
     "lint": "eslint ./src/**/*.{js, jsx} --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
