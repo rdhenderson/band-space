@@ -1,0 +1,161 @@
+.profile{
+
+
+  &__topbody{
+    display: flex;
+    flex-direction: row;
+
+
+    &__left{
+        margin-left: 5vw;
+
+        &__profblock{
+          width: 400px;
+          border: solid 2px black;
+          display: flex;
+          height: 400px;
+          flex-direction: column;
+          margin-bottom: 20px;
+
+              &__imgdiv{
+                margin: 20px;
+                width: 400px;
+                display: flex;
+                flex-direction: column;
+
+                    &__pic{
+                        width: 250px;
+
+                    }
+
+                    &__stars{
+                        width: 100px;
+                    }
+              }
+
+              &__proftext{
+                  margin-left: 30px;
+
+              }
+
+          }
+
+          &__details{
+              border: 2px solid black;
+
+
+          }
+
+    }
+
+    &__right{
+      width: 100%;
+      margin-right: 5vw;
+
+      &__sliders{
+        width: 100%;
+        border: red solid 2px;
+
+        &__sliderItem{
+          text-align: center;
+          margin: 0;
+
+          &__slider{
+            width: 500px;
+            height: 100px;
+
+          }
+
+        }
+
+      }
+
+    }
+  }
+
+  &__bottombody{
+    display: flex;
+    flex-direction: column;
+
+      &__botheader{
+        text-align: center;
+        border: solid 2px blue;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        margin-right: 5vw;
+        margin-left: 5vw;
+
+      }
+
+      &__botmain{
+        display: flex;
+        flex-direction: row;
+
+        margin-right: 5vw;
+        margin-left: 5vw;
+
+          &__left{
+            width: 33%;
+            text-align: center;
+            border: solid 2px black;
+
+          }
+
+          &__right{
+            margin-left: 5vw;
+            width: 67%;
+            text-align: center;
+
+            &__event{
+              text-align: left;
+              border: solid 2px;
+              margin-right: 5vw;
+              margin-bottom: 20px;
+
+              &__stars{
+                width:100px;
+              }
+            }
+
+          }
+
+      }
+
+
+  }
+}
+
+#skillheader{
+  font-size: 75px;
+  text-align: center;
+  margin: 10px;
+}
+
+
+/*
+===================================
+    MEDIA QUERIES
+===================================
+*/
+
+@media (max-width: 1200px) {
+
+
+
+}
+
+@media (max-width: 960px) {
+
+
+
+}
+
+@media (max-width: 760px) {
+
+
+}
+
+@media (max-width: 480px) {
+
+
+}

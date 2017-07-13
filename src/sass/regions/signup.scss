@@ -1,0 +1,30 @@
+.uSignup{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+
+  &__left{
+    width: 100%;
+    margin-left: 20vw;
+
+    &__input{
+      width: 15vw;
+      height: 20px;
+      margin: 2px;
+    }
+
+  }
+
+  &__right{
+    width: 100%;
+    margin-right: 20vw;
+  }
+}
+
+
+
+#switch{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
