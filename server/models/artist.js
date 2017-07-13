@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+import findOrCreate from 'mongoose-find-or-create';
+
 const ArtistSchema = new Schema({
   name: { type: String, trim: true, required: true },
-  address: { type: String, trim: true, required: true, index: { unique: true } },
-  capacity: { type: Integer },
+  genres: [{ type: String, trim: true }],
   //TODO: Make profile a separate model and link here instead of String
   profile: { type: String, trim: true },
   user_id: {
@@ -22,6 +23,7 @@ const ArtistSchema = new Schema({
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },
 });
+ArtistSchema.plugin(findOrCreate);
 
 const Artist = mongoose.model("Artist", ArtistSchema);
 
