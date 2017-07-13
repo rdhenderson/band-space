@@ -1,4 +1,4 @@
-import Artist from '../models/artist.js';
+const Artist = require('../models/artist.js');
 
 module.exports = function(app) {
   app.get('/api/artists', (req, res) => {

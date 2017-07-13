@@ -1,7 +1,7 @@
-import path from 'path';
-import Venue from '../models/venue.js';
-import Artist from '../models/artist.js';
-import API from '../api';
+const path = require('path');
+const Venue = require('../models/venue.js');
+const Artist = require('../models/artist.js');
+const API = require('../api');
 
 module.exports = function routes (app) {
   // import artist routes
