@@ -12,8 +12,8 @@
     "heroku-postbuild": "npm install --only=dev && npm run build",
     "build": "webpack",
     "dev-client": "webpack-dev-server --progress --inline --hot",
-    "dev-server": "nodemon server/server.js --exec babel-node --presets es2015",
-    "start": "node server/server.js --exec babel-node --presets es2015",
+    "dev-server": "nodemon server/server.js",
+    "start": "node server/server.js",
     "dev-start": "concurrently \"npm run dev-server\" \"webpack -w\"",
     "lint": "eslint ./src/**/*.{js, jsx} --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
