@@ -6,6 +6,12 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const routes = require('./controllers/routes');
 
+const passport = require('passport');
+const flash = require('connect-flash');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
+
 // Express Port/App Declaration
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -14,11 +20,24 @@ const app = express();
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+// Use cookies (required for auth)
+app.use(cookieParser());
+// required for passport
+app.use(session({
+  secret: 'ilovescotchscotchyscotchscotch',
+  resave: true,
+  saveUninitialized: true,
+})); // session secret
+require('./config/passport.js')(passport); // pass passport for configuration
+
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
 app.use(express.static(path.resolve(`${__dirname}/../public/`)));
-// app.use(express.static(path.join(__dirname, '/')));
 
 // Initialize routes
-routes(app);
+routes(app, passport);
 
 // Setup Mongo/Mongoose and add promise model
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/gig-aware';
