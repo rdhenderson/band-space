@@ -11,7 +11,8 @@ module.exports = function(app) {
     .catch( (err) => res.send("ERROR", err));
   });
 
-  //Add a new venue
+  // Add a new venue
+  // FIXME: Add proper fields to query for bands
   app.post('/api/bands', (req, res) => {
     const query = { name: req.body.name };
     const band = {
@@ -19,6 +20,7 @@ module.exports = function(app) {
       profile: req.body.profile,
       genres: req.body.genres,
     }
+
     Band.findOrCreate(query, band, (err, venue) => {
       // my new or existing model is loaded as result
       if (err) console.error('ERROR', err);

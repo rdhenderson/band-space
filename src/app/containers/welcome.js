@@ -9,9 +9,6 @@ import { incrementCount, decrementCount, changeColor } from '../actions/countAct
 import { Row, Col } from 'react-grid-system'
 
 //MORE CSS MAGIC :D
-import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card'
-import RaisedButton from 'material-ui/RaisedButton'
-
 class Welcome extends Component {
 
   //We bind our incrementCount and decrementCount functions to this so that we always keep reference to
@@ -48,76 +45,76 @@ class Welcome extends Component {
             <input name="query" placeholder="Search your venue here!" />
           </div>
 
-      </div>
-      <div className="mreview">
-        <div className="mreview__header">
-          <h2> Reviews in Washington D.C. </h2>
         </div>
-        <div className="mreview__body">
-
-          <div className="mreview__body__item">
-            <div className="mreview__body__item__imgdiv">
-              <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
-              <img className="mreview__body__item__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
-            </div>
-            <div className="mreview__body__item__text">
-              <h3> Bill </h3>
-              <ul>
-                <li> Very Professional </li>
-                <li> Drinks A Lot </li>
-                <li> Cheap! </li>
-              </ul>
-            </div>
+        <div className="mreview">
+          <div className="mreview__header">
+            <h2> Reviews in Washington D.C. </h2>
           </div>
+          <div className="mreview__body">
 
-          <div className="mreview__body__item">
-            <div className="mreview__body__item__imgdiv">
-              <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
-              <img className="mreview__body__item__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+            <div className="mreview__body__item">
+              <div className="mreview__body__item__imgdiv">
+                <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
+                <img className="mreview__body__item__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+              </div>
+              <div className="mreview__body__item__text">
+                <h3> Bill </h3>
+                <ul>
+                  <li> Very Professional </li>
+                  <li> Drinks A Lot </li>
+                  <li> Cheap! </li>
+                </ul>
+              </div>
             </div>
-            <div className="mreview__body__item__text">
-              <h3> Bill </h3>
-              <ul>
-                <li> Very Professional </li>
-                <li> Drinks A Lot </li>
-                <li> Cheap! </li>
-              </ul>
+
+            <div className="mreview__body__item">
+              <div className="mreview__body__item__imgdiv">
+                <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
+                <img className="mreview__body__item__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+              </div>
+              <div className="mreview__body__item__text">
+                <h3> Bill </h3>
+                <ul>
+                  <li> Very Professional </li>
+                  <li> Drinks A Lot </li>
+                  <li> Cheap! </li>
+                </ul>
+              </div>
             </div>
+
+            <div className="mreview__body__item">
+              <div className="mreview__body__item__imgdiv">
+                <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
+                <img className="mreview__body__item__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+              </div>
+              <div className="mreview__body__item__text">
+                <h3> Bill </h3>
+                <ul>
+                  <li> Very Professional </li>
+                  <li> Drinks A Lot </li>
+                  <li> Cheap! </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="mreview__body__item">
+              <div className="mreview__body__item__imgdiv">
+                <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
+                <img className="mreview__body__item__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+              </div>
+              <div className="mreview__body__item__text">
+                <h3> Bill </h3>
+                <ul>
+                  <li> Very Professional </li>
+                  <li> Drinks A Lot </li>
+                  <li> Cheap! </li>
+                </ul>
+              </div>
+            </div>
+
           </div>
-
-          <div className="mreview__body__item">
-            <div className="mreview__body__item__imgdiv">
-              <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
-              <img className="mreview__body__item__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
-            </div>
-            <div className="mreview__body__item__text">
-              <h3> Bill </h3>
-              <ul>
-                <li> Very Professional </li>
-                <li> Drinks A Lot </li>
-                <li> Cheap! </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mreview__body__item">
-            <div className="mreview__body__item__imgdiv">
-              <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
-              <img className="mreview__body__item__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
-            </div>
-            <div className="mreview__body__item__text">
-              <h3> Bill </h3>
-              <ul>
-                <li> Very Professional </li>
-                <li> Drinks A Lot </li>
-                <li> Cheap! </li>
-              </ul>
-            </div>
-          </div>
-
         </div>
       </div>
-    </div>
 
 
       // <Row>

@@ -3,11 +3,13 @@ const Venue = require('../models/venue.js');
 const Artist = require('../models/artist.js');
 const API = require('../api');
 
-module.exports = function routes (app) {
-  // import artist routes
+module.exports = function routes (app, passport) {
+
+  require('./userRoutes.js')(app, passport);
   // TODO: figure out cleaner import/export method
   require('./artistRoutes.js')(app);
   require('./bandRoutes.js')(app);
+
 
   app.get('/api/venues/updateFromEventful', (req, res) => {
     API.getEventfulVenues()
@@ -60,8 +62,6 @@ module.exports = function routes (app) {
   //Catch-all directs everything else to react front end/index.html
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/../../public/index.html`))
-
   });
-
 
 };
