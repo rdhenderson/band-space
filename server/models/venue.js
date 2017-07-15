@@ -11,10 +11,12 @@ const VenueSchema = new Schema({
   zipcode: { type: String, trim: true },
   image: { type: String, trim: true },
   description: { type: String, trim: true },
-
   capacity: { type: Number },
   //TODO: Make profile a separate model and link here instead of String
-  profile: { type: String, trim: true },
+  profile: {
+    type: Schema.Types.ObjectId,
+    ref: 'Profile',
+  },
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },
   events: {
