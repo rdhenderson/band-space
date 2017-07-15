@@ -25,6 +25,19 @@ module.exports = function(app, passport) {
       failureFlash : true // allow flash messages
   }));
 
+  app.get('/auth/spotify', passport.authenticate('spotify'),
+    function(req, res){
+      // The request will be redirected to spotify for authentication, so this
+      // function will not be called.
+    });
+
+  app.get('/auth/spotify/callback',
+    passport.authenticate('spotify', { failureRedirect: '/login' }),
+    function(req, res) {
+      // Successful authentication, redirect home.
+      res.redirect('/');
+    });
+
   // app.get('/forgot', (req, res) => res.sendFile(path.resolve(`${__dirname}/../../public/test-forgot.html`)));
 
   // app.post('/forgot', async function(req, res, next) {
