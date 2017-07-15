@@ -6,7 +6,7 @@ const findOrCreate = require('mongoose-find-or-create');
 const ArtistSchema = new Schema({
   name: { type: String, trim: true, required: true },
   genres: [{ type: String, trim: true }],
-  //TODO: Make profile a separate model and link here instead of String
+  // TODO: Make profile a separate model and link here instead of String
   profile: { type: String, trim: true },
   user_id: {
       type: Schema.Types.ObjectId,

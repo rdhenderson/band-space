@@ -1,31 +1,31 @@
-const Artist = require('../models/artist.js');
+const Event = require('../../models/event.js');
 
 module.exports = function(app) {
-  app.get('/api/artists', (req, res) => {
-    Artist.find({}).then( (results) => res.send(results));
+  app.get('/api/events', (req, res) => {
+    Event.find({}).then( (results) => res.send(results));
   });
 
-  app.get('/api/artists/:id', (req, res) => {
-    Artist.findOne({_id: req.params.id})
+  app.get('/api/events/:id', (req, res) => {
+    Event.findOne({_id: req.params.id})
     .then( (results) => res.send(results))
     .catch( (err) => res.send("ERROR", err));
   });
 
   //Add a new venue
-  app.post('/api/artists/', (req, res) => {
+  app.post('/api/events/', (req, res) => {
     const query = { name: req.body.name };
 
-    const artist = {
+    const event = {
       user_id: req.params.id,
       name: req.body.name,
       profile: req.body.profile,
       genres: req.body.genres,
     }
-    Artist.findOrCreate(query, artist, (err, venue) => {
+    Event.findOrCreate(query, event, (err, venue) => {
       // my new or existing model is loaded as result
       if (err) console.error('ERROR', err);
       // Send to favorites route to populate favorites for return
-      res.redirect(`/api/artists/`);
+      res.redirect(`/api/events/`);
     });
   });
 }
