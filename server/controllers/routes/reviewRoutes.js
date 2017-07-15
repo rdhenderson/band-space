@@ -1,4 +1,4 @@
-const Review = require('../models/review.js');
+const Review = require('../../models/review.js');
 
 module.exports = function(app) {
   app.get('/api/reviews', (req, res) => {

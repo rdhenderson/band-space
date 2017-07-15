@@ -1,4 +1,4 @@
-const Event = require('../models/event.js');
+const Event = require('../../models/event.js');
 
 module.exports = function(app) {
   app.get('/api/events', (req, res) => {
