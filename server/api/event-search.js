@@ -3,11 +3,12 @@
 const axios = require('axios');
 const Venue = require('../models/venue');
 
+const eventfulApiKey = "B3rvtFwc45vjtTFK";
 //Query Eventful API for venue information
 
 async function getEventfulVenues() {
   // Page defaults to 1, increments with each call until it has listed all pages.
-  const eventfulApiKey = "B3rvtFwc45vjtTFK";
+
   const defaultSearchCoords = "38.9072,-77.0369";
   const queryURL = "http://api.eventful.com/json/venues/search"
   const queryString = `${queryURL}?app_key=${eventfulApiKey}&category=bar_nightlife&page_size=999&location=${encodeURIComponent("washington, dc")}`;

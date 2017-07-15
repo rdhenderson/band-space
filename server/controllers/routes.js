@@ -22,26 +22,35 @@ module.exports = function routes (app) {
     Venue.find({}).then( (results) => res.send(results));
   });
 
-  app.get('api/venues/:id', (req,res) => {
+  app.get('/api/venues/:id', (req,res) => {
    Venue.findOne({"_id": req.params._id})
     .then( (results) => res.send(results) )
   });
 
-  app.get('api/venues', (req, res) => {
+  app.get('/api/venues', (req, res) => {
     Venue.find({})
     .then( (results) => res.send(results))
   });
 
-  app.get('api/users',(req, res) => {
+  app.get('/api/test', (req, res) => {
+    API.getEventfulVenues()
+    .then( (res) => {console.log(res)})
+    .catch( (err) => {
+      console.log("ERROR", err);
+      res.send("ERROR!", err);
+    });
+  })
+
+  app.get('/api/users',(req, res) => {
     User.find({}).then( (results) => res.send(results))
   });
 
-  app.get('api/events',(req, res) => {
+  app.get('/api/events',(req, res) => {
     Event.find({}).then( (results) => res.send(results))
   });
 
 
-  app.get('api/reviews',(req, res) => {
+  app.get('/api/reviews',(req, res) => {
     Review.find({}).then( (results) => res.send(results))
   });
 
