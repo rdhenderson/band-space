@@ -1,4 +1,4 @@
-const Band = require('../models/band.js');
+const Band = require('../../models/band.js');
 
 module.exports = function(app) {
   app.get('/api/bands', (req, res) => {
