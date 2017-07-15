@@ -119,9 +119,9 @@ module.exports = function(passport) {
      }));
 
   passport.use(new SpotifyStrategy({
-     clientID: configAuth.spotifyAuth.clientIDd,
+     clientID: configAuth.spotifyAuth.clientID,
      clientSecret: configAuth.spotifyAuth.clientSecret,
-     callbackURL: onfigAuth.spotifyAuth.callbackURL
+     callbackURL: configAuth.spotifyAuth.callbackURL
    },
 
    function(accessToken, refreshToken, profile, done) {
