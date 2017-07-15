@@ -38,6 +38,23 @@ module.exports = function(app, passport) {
       res.redirect('/');
     });
 
+    app.get('/auth/google',
+      passport.authenticate('google', { scope: ['profile'] }));
+
+    app.get('/auth/google/callback',
+      passport.authenticate('google', { failureRedirect: '/login' }),
+      function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/');
+      });
+
+    // app.get('/auth/google/callback', (req, res) => console.log("google response", req.query));
+      // passport.authenticate('google', { failureRedirect: '/login' }),
+      // function(req, res) {
+      //   // Successful authentication, redirect home.
+      //   res.redirect('/');
+      // });
+
   // app.get('/forgot', (req, res) => res.sendFile(path.resolve(`${__dirname}/../../public/test-forgot.html`)));
 
   // app.post('/forgot', async function(req, res, next) {
