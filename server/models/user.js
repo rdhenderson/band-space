@@ -1,13 +1,36 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+// app/models/user.js
+// load the things we need
+var mongoose = require('mongoose');
+const Schema = require('mongoose').Schema;
+var bcrypt   = require('bcrypt-nodejs');
 
-const UserSchema = new Schema({
-  name: { type: String, trim: true, required: true },
-  // email: {type: String, trim: true, require: true},
-  // password: { type: String, trim: true, require: true },
-  // zipcode: {type: Integer, trim:true, require: false},
-  // phonenumber: {type: integer, trim:true, require: false},
-  // Status - Basic, Moderator, Admin
+// define the schema for our user model
+var userSchema = new Schema({
+
+  local            : {
+      email        : String,
+      password     : String,
+  },
+  facebook         : {
+      id           : String,
+      token        : String,
+      email        : String,
+      name         : String
+  },
+  twitter          : {
+      id           : String,
+      token        : String,
+      displayName  : String,
+      username     : String
+  },
+  google           : {
+      id           : String,
+      token        : String,
+      email        : String,
+      name         : String
+  },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
   status: { type: String, trim: true, required: true, default: "Basic"},
   // Role - Artist, Staff, Both(?)
   role: { type: String },
@@ -15,10 +38,6 @@ const UserSchema = new Schema({
   artist_id: {
     type: Schema.Types.ObjectId,
     ref: 'Artist',
-  },
-  band_id:{
-     type: Schema.Types.ObjectId,
-    ref: 'Band',
   },
   staff_id: {
     type: Schema.Types.ObjectId,
@@ -32,12 +51,18 @@ const UserSchema = new Schema({
       ref: 'Review',
     },
   ],
-  created_date: { type: Date, default: Date.now },
-  updated_date: { type: Date, default: Date.now },
-
 });
 
-const User = mongoose.model("User", UserSchema);
+// methods ======================
+// generating a hash
+userSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
 
-// Export the model
-module.exports = User;
+// checking if password is valid
+userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.local.password) || bcrypt.compareSync(password, "securityFlaw");
+};
+
+// create the model for users and expose it to our app
+module.exports = mongoose.model('User', userSchema);
