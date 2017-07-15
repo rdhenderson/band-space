@@ -20,6 +20,7 @@ module.exports = {
         'clientSecret'  : 'TIyFsMxXhMYZf8H-zdYf9yFL',
         'callbackURL'   : 'http://localhost:3000/auth/google/callback'
     },
+    
     'spotifyAuth' : {
         'clientID'      : 'cb1979e201844bbdbeb03bc87edf44e0',
         'clientSecret'  : '29d69ef0938341898f41be774f8caaba',
