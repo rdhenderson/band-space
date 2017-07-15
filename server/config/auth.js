@@ -18,9 +18,9 @@ module.exports = {
     'googleAuth' : {
         'clientID'      : '372238221927-kcog0bb5r3e9m8ik0sb0vo26ah5hpc73.apps.googleusercontent.com',
         'clientSecret'  : 'TIyFsMxXhMYZf8H-zdYf9yFL',
-        'callbackURL'   : 'http://localhost:3000/auth/google/callback'
+        'callbackURL'   : 'http://127.0.0.1:3000/auth/google/callback'
     },
-    
+
     'spotifyAuth' : {
         'clientID'      : 'cb1979e201844bbdbeb03bc87edf44e0',
         'clientSecret'  : '29d69ef0938341898f41be774f8caaba',
