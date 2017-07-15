@@ -3,17 +3,16 @@ const Schema = mongoose.Schema;
 
 const BandSchema = new Schema({
   name: { type: String, trim: true, required: true },
-
-  profile: { type: String, trim: true, ref:"Profile", },
-  spotify: {                   },
-  user_id: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
+  profile: { 
+    type: Schema.Types.ObjectId,
+    trim: true,
+    ref: 'Profile',
   },
-  artist_id:{
+  spotify: {                   },
+  artist_id: [{
      type: Schema.Types.ObjectId,
       ref: 'Artist',
-  },
+  }],
 
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },
