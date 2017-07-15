@@ -1,18 +1,24 @@
 const path = require('path');
-const User = require('../models/user.js');
+const User = require('../../models/user.js');
 
 module.exports = function(app, passport) {
-  app.get('/login', (req, res) => res.sendFile(path.resolve(`${__dirname}/../../public/test-login.html`)));
-
-  app.get('/signup', (req, res) => res.sendFile(path.resolve(`${__dirname}/../../public/test-signup.html`)));
-
-  // app.get('/forgot', (req, res) => res.sendFile(path.resolve(`${__dirname}/../../public/test-forgot.html`)));
-
   app.get('/api/users', (req, res) => {
     User.find({}).then( (users) => res.send(users));
   });
 
-// process the signup form
+  app.get('/login', (req, res) =>
+    res.sendFile(path.resolve(`${__dirname}/../../public/test-login.html`)));
+
+  app.get('/signup', (req, res) =>
+    res.sendFile(path.resolve(`${__dirname}/../../public/test-signup.html`)));
+
+  app.get('/logout', function(req, res) {
+      req.logout();
+      res.redirect('/');
+  });
+  // app.get('/forgot', (req, res) => res.sendFile(path.resolve(`${__dirname}/../../public/test-forgot.html`)));
+
+  // process the signup form
   app.post('/signup', passport.authenticate('local-signup', {
       successRedirect : '/api/users', // redirect to the secure profile section
       failureRedirect : '/signup', // redirect back to the signup page if there is an error
@@ -26,10 +32,7 @@ module.exports = function(app, passport) {
       failureFlash : true // allow flash messages
   }));
 
-  app.get('/logout', function(req, res) {
-      req.logout();
-      res.redirect('/');
-  });
+
   // app.post('/forgot', async function(req, res, next) {
   //   console.log('Hit forgot,', req.body.email)
   //   const token = await crypto.randomBytes(20).toString('hex');
