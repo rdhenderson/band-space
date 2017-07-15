@@ -1,4 +1,4 @@
-const Venue = require('../models/venue.js');
+const Venue = require('../../models/venue.js');
 
 module.exports = function(app) {
   // Initialize route to populate database
