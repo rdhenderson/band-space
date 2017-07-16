@@ -13,15 +13,15 @@ module.exports = function(app, passport) {
 
   // process the signup form -- NOTE Change redirect to proper route once react connected.
   app.post('/signup', passport.authenticate('local-signup', {
-      successRedirect : '/api/users', // redirect to the secure profile section
-      failureRedirect : '/test/signup', // redirect back to the signup page if there is an error
+      successRedirect : '/', // redirect to the secure profile section
+      failureRedirect : '/signup', // redirect back to the signup page if there is an error
       failureFlash : true // allow flash messages
   }));
 
   // process the login form
   app.post('/login', passport.authenticate('local-login', {
-      successRedirect : '/api/users', // redirect to the secure profile section
-      failureRedirect : '/test/login', // redirect back to the signup page if there is an error
+      successRedirect : '/', // redirect to the secure profile section
+      failureRedirect : '/login', // redirect back to the signup page if there is an error
       failureFlash : true // allow flash messages
   }));
 
@@ -111,7 +111,7 @@ module.exports = function(app, passport) {
         res.redirect('/profile');
     });
   });
-  
+
   app.get('/auth/unlink/twitter', function(req, res) {
     const user = req.user;
     user.twitter.token = undefined;
