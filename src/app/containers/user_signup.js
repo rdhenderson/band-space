@@ -128,10 +128,17 @@ class Signup extends Component {
           {/* <Route path={`${match.url}/login`} component={Loginform}/>
           <Route path={`${match.url}/signup`} component={Signupform}/> */}
           <div>
-             <h2> Sign Up for BandSpace today! </h2>
-              <p> Get connecting with other working musicians and venues in your area </p>
-              <hr/>
-              <form role="form" onSubmit={this.handleSignupSubmit}>
+            <h2> Sign Up for BandSpace today! </h2>
+            <p> Get connecting with other working musicians and venues in your area </p>
+            <hr/>
+            <p>Login or Register with:</p>
+            {/* <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
+            <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a> */}
+            <a href="/auth/facebook" className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a> |
+            <a href="/auth/twitter" className="btn btn-info"><span className="fa fa-spotify"></span> Spotify</a> |
+            <a href="/auth/google" className="btn btn-danger"><span className="fa fa-google-plus"></span> Google+</a>
+            <hr />
+            <form role="form" onSubmit={this.handleSignupSubmit}>
                 <div id="sName">
                   <input
                     name="sName"
