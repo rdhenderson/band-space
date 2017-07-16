@@ -7,6 +7,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const SpotifyStrategy = require('passport-spotify').Strategy;
 
+
 // load auth config data
 var configAuth = require('./auth');
 
@@ -46,7 +47,8 @@ module.exports = function(passport) {
       passwordField : 'Password',
       passReqToCallback : true // allows us to pass back the entire request to the callback
   }, function(req, email, password, done) {
-    console.Log("beginning of function")
+    console.log("beggining of function");
+
       // asynchronous
       // User.findOne wont fire unless data is sent back
       process.nextTick(function() {
@@ -60,9 +62,10 @@ module.exports = function(passport) {
 
           // check to see if theres already a user with that email
           if (user) {
+              console.log("user taken");
               return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
           } else {
-
+              console.log("new user");
               // if there is no user with that email
               // create the user
               var newUser            = new User();

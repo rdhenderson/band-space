@@ -5,6 +5,8 @@ import {
   Link
 } from 'react-router-dom'
 
+import Auth from '../../server/config/auth.js';
+
 import Main from './containers/Main.js'
 import Signup from './containers/user_signup.js'
 import Createband from './containers/createband.js'
