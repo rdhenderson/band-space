@@ -37,9 +37,6 @@ module.exports = function(app, passport) {
 
     app.get('/auth/google',
       passport.authenticate('google', { scope: ['profile', 'email'] }));
-      //   'https://www.googleapis.com/auth/plus.login',
-      //   'https://www.googleapis.com/auth/plus.profile.emails.read' ]
-      // }));
 
     app.get('/auth/google/callback',
       passport.authenticate('google', { failureRedirect: '/login' }),
@@ -47,6 +44,16 @@ module.exports = function(app, passport) {
         // Successful authentication, redirect home.
         res.redirect('/');
       });
+
+      app.get('/auth/twitter',
+        passport.authenticate('twitter'));
+
+      app.get('/auth/twitter/callback',
+        passport.authenticate('twitter', { failureRedirect: '/login' }),
+        function(req, res) {
+          // Successful authentication, redirect home.
+          res.redirect('/');
+        });
 
     // route for facebook authentication and login
     app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
@@ -100,6 +107,14 @@ module.exports = function(app, passport) {
   app.get('/auth/unlink/facebook', function(req, res) {
     const user = req.user;
     user.facebook.token = undefined;
+    user.save(function(err) {
+        res.redirect('/profile');
+    });
+  });
+  
+  app.get('/auth/unlink/twitter', function(req, res) {
+    const user = req.user;
+    user.twitter.token = undefined;
     user.save(function(err) {
         res.redirect('/profile');
     });

@@ -26,6 +26,7 @@ module.exports = function(passport) {
   require('./strategy/googleStrategy.js')(passport);
   require('./strategy/facebookStrategy.js')(passport);
   require('./strategy/spotifyStrategy.js')(passport);
-  
+  require('./strategy/twitterStrategy.js')(passport);
+
 
 };
