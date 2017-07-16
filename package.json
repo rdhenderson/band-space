@@ -10,7 +10,7 @@
   "scripts": {
     "prestart": "npm run lint",
     "heroku-postbuild": "npm install --only=dev && npm run build",
-    "build": "webpack",
+    "build": "webpack -w",
     "dev-client": "webpack-dev-server --progress --inline --hot",
     "dev-server": "nodemon server/server.js",
     "start": "node server/server.js",

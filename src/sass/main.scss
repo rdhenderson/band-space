@@ -5,14 +5,91 @@
 @import "./regions/profile.scss";
 
 
-body{
+body {
   margin: 0;
+  background-color: #c5c3d2;
 }
-main{
+#main {
   display: flex;
+  flex-direction: column;
+  background-color: #c5c3d2;
+}
+
+#root {
+  background-color: #c5c3d2;
+}
+
+h1 {
+  color: black;
+  font-size: 100px;
+  text-align: center;
+  color: #4d5e6d;
+  text-shadow: 1px 1px 1px black!important; 
+}
+
+#splash{
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#searchbar > input {
+  height: 50px;
+  width: 500px;
+  line-height: 50px;
+  font-size: 40px;
+}
+
+#lheader{
+  text-align: center;
+}
+
+.mreview__body__item {
+  display: flex;
+  width: 300px;
+  padding: 25px;
+  margin: 25px;
+  border: 2px #4d5e6d solid;
+  background-color: white;
+}
+
+.flimg{
+  border-radius: 100px;
+  width: 100px;
+}
+
+.stars{
+  width: 100px;
+  height: 50px;
+}
+
+.imgdiv{
+  display:flex;
   flex-direction: column;
 }
 
+.fltext{
+  text-align: center;
+}
+
+#flitems{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+
+li, h2, h3, p {
+  color: #80b5bd;
+  text-shadow: 1px 1px 1px black!important;
+
+}
+
+input {
+  background-color: #c5c3d2; 
+}
 
 //Navbar styles
 .navbar{
@@ -21,7 +98,7 @@ main{
   justify-content: space-between;
   align-items: stretch;
   text-align: center;
-  border: 2px red solid;
+  border: 2px #4d5e6d solid;
   width: 100%;
   color: black;
 
@@ -38,6 +115,20 @@ main{
   }
 
 }
+
+.profile__bottombody__botheader,
+.profile__topbody,
+.profile__bottombody,
+.profile__bottombody__botmain,
+.profile__bottombody__botmain__left,
+.profile__bottombody__botmain__right,
+.profile__bottombody__botmain__right__event,
+.profile__topbody__left__profblock,
+.profile__topbody__right__sliders {
+  border: 2px #4d5e6d solid;
+}
+
+
 
 /*
 ===================================

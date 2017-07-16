@@ -26,9 +26,10 @@ const AppRoutes = () => (
       <div className="navbar">
         <div className="navbar__links">
           <ul>
-            <li href="#"> Reviews </li>
-            <li href="#"> Talk Shop </li>
-            <li href="#"> Jobs </li>
+            <li><a href="#"> Reviews</a> </li>
+            <li><a href="#"> Talk Shop</a> </li>
+            <li><a href="#"> Jobs</a></li>
+            <li><Link to="/profile">Profile</Link></li>
           </ul>
         </div>
         <div className="navbar__logo">
