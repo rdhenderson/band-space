@@ -3,6 +3,7 @@ const configAuth = require('./auth');
 const User = require('../models/user.js');
 
 module.exports = function(passport) {
+
   // =========================================================================
   // passport session setup ==================================================
   // =========================================================================
@@ -25,5 +26,6 @@ module.exports = function(passport) {
   require('./strategy/googleStrategy.js')(passport);
   require('./strategy/facebookStrategy.js')(passport);
   require('./strategy/spotifyStrategy.js')(passport);
+  
 
 };
