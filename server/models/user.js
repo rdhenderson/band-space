@@ -23,6 +23,12 @@ var userSchema = new Schema({
       displayName  : String,
       username     : String
   },
+  spotify          : {
+      id           : String,
+      token        : String,
+      displayName  : String,
+      username     : String
+  },
   google           : {
       id           : String,
       token        : String,
