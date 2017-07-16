@@ -78,12 +78,17 @@ class Signup extends Component {
       sPword: "",
       sZipcode: "",
       sPhonenumber:"",
-      sRole: ""
+      sRole: "",
+      lEmail: "",
+      lPword: ""
     }
 
     this.runSignup = this.runSignup.bind(this);
     this.handleSignupSubmit = this.handleSignupSubmit.bind(this);
+    this.runLogin = this.runLogin.bind(this);
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+
 
   }
 
@@ -119,6 +124,22 @@ class Signup extends Component {
     event.preventDefault();
     // Set the parent to have the search term
     this.runSignup(this.state.sName, this.state.sEmail, this.state.sPword, this.state.sZipcode, this.state.sPhonenumber);
+  }
+
+  runLogin(lE, lP){
+    axios.post('/login', {
+      Email: lE,
+      Password: lP,
+    })
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+  }
+
+  handleLoginSubmit(event) {
+
+    event.preventDefault();
+
+    this.runLogin(this.state.lEmail, this.state.lPword);
   }
 
   render(){
@@ -214,12 +235,28 @@ class Signup extends Component {
                <h2> Log Into BandSpace ! </h2>
                 <p> See if you have any new reviews </p>
                 <hr/>
-                <form action="#">
+                <form role="form" onSubmit={this.handleLoginSubmit}>
                   <div id="emaildiv">
-                    <input className="uSignup__left__input" name="email" id="email" placeholder="Email" />
+                    <input
+                      name="lEmail"
+                      value={this.state.lEmail}
+                      type="text"
+                      className="uSignup__left__input"
+                      id="lEmail"
+                      placeholder="Email"
+                      onChange={this.handleInputChange}
+                    />
                   </div>
                   <div id="passworddiv">
-                    <input className="uSignup__left__input" name="pword" id="pword" type="password" placeholder="Password" />
+                    <input
+                      name="lPword"
+                      value={this.state.lPword}
+                      type="password"
+                      className="uSignup__left__input"
+                      id="lPword"
+                      placeholder="Password"
+                      onChange={this.handleInputChange}
+                     />
                   </div>
                   <div id="sButton">
                     <button type="submit"> Submit </button>

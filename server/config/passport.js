@@ -46,7 +46,7 @@ module.exports = function(passport) {
       passwordField : 'Password',
       passReqToCallback : true // allows us to pass back the entire request to the callback
   }, function(req, email, password, done) {
-
+    console.Log("beginning of function")
       // asynchronous
       // User.findOne wont fire unless data is sent back
       process.nextTick(function() {
@@ -96,12 +96,12 @@ module.exports = function(passport) {
 
      passport.use('local-login', new LocalStrategy({
          // by default, local strategy uses username and password, we will override with email
-         usernameField : 'email',
-         passwordField : 'password',
+         usernameField : 'Email',
+         passwordField : 'Password',
          passReqToCallback : true // allows us to pass back the entire request to the callback
      },
      function(req, email, password, done) { // callback with email and password from our form
-
+       console.log(email, "email", password, "password");
          // find a user whose email is the same as the forms email
          // we are checking to see if the user trying to login already exists
          User.findOne({ 'local.email' :  email }, function(err, user) {
