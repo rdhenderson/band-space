@@ -12,7 +12,7 @@ module.exports = function(app) {
   });
 
   app.get('/api/venues', (req, res) => {
-    Venue.find({}).limit(10).then( (results) => res.send(results));
+    Venue.find({}).then( (results) => res.send(results));
   });
 
   app.get('api/venues/:id', (req,res) => {

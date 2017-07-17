@@ -35,13 +35,14 @@ class AppRoutes extends Component {
       <Router>
         <main id="outer-container">
           <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
-            <a href="#"> <img src="http://lorempixel.com/100/100" /> </a>
+            <Link to="/profile"><a> <img src="http://lorempixel.com/100/100" /> </a> </Link>
             <p> Jimmy Twotones </p>
             <br/>
-            <a id="home" className="menu-item" href="/">Home</a>
-            <a id="gigFind" className="menu-item" href="/about">Find Gigs</a>
-            <a id="createGroup" className="menu-item" href="/contact">Create a Group</a>
-            <a id="manageGroup" className="menu-item" href="">Manage Groups</a>
+            <Link to="/"> <a id="home" className="menu-item">Home</a> </Link>
+            <Link to="/signup"> <a id="home" className="menu-item">Signup</a> </Link>
+            <Link to="#"> <a id="gigFind" className="menu-item" href="/about">Find Gigs</a> </Link>
+            <Link to="#"> <a id="createGroup" className="menu-item" href="/contact">Create a Group</a> </Link>
+            <Link to="#"> <a id="manageGroup" className="menu-item" href="">Manage Groups</a> </Link>
           </Menu>
         <div id="page-wrap">
           {/* <ul>

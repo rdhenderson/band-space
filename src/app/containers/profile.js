@@ -5,17 +5,26 @@ import {
   Link
 } from 'react-router-dom'
 
+import HeadSearch from '../components/headSearch.js';
 
 class Profile extends Component {
 
-  // constructor(props) {
-  //   super(props)
-  //
-  // }
+  constructor(props) {
+    super(props)
+    this.state = {
+      query: "",
+      uName: "",
+      skill: {},
+      bands: {},
+      events: {}
+    }
+
+  }
 
   render() {
     return (
-      <div>
+      <div className="profile">
+        <HeadSearch />
       <div className="profile__topbody">
 
         <div className="profile__topbody__left">

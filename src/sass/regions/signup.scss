@@ -3,6 +3,13 @@
   flex-direction: row;
   text-align: center;
 
+  &__top{
+    height: 100px;
+    text-align: center;
+    font-size: 40px;
+    line-height: 100px;
+  }
+
   &__left{
     width: 100%;
     margin-left: 20vw;

@@ -1,19 +1,19 @@
-//Here we grab the needed packages from their libraries. We need connect to connect React and Redux and make
-//state flow in our app. Like Tupac and Biggie #RIP.
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
-//MORE CSS MAGIC :D
+import axios from 'axios';
+import Infinite from 'react-infinite';
+
+
 class Welcome extends Component {
 
-  //We bind our incrementCount and decrementCount functions to this so that we always keep reference to
-  //the scope for when the function is called.
   constructor(props) {
     super(props)
     this.state = {
       querytype: "",
-      query : ""
+      query : "",
+      venues: []
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -30,6 +30,16 @@ class Welcome extends Component {
   })
 
 
+  }
+
+  componentDidMount(){
+    axios.get('/api/venues')
+    .then(res => {
+      this.setState({venues: res.data});
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
 
@@ -76,14 +86,33 @@ class Welcome extends Component {
             <h2> Reviews in Washington D.C. </h2>
           </div>
           <div className="mreview__body">
+          <Infinite className="mreview__body__container" containerHeight={600} width={'100%'} elementHeight={200}>
 
-            <div className="mreview__body__item">
+            {this.state.venues.map((item, index) => (
+              <div key={index} className="mreview__body__item" id={item.id}>
+                <div className="mreview__body__item__imgdiv">
+                  <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
+                  <h3> {item.name} </h3>
+                </div>
+                <div className="mreview__body__item__text">
+                  <img src="http://lorempixel.com/500/100" />
+                  <ul>
+                    <li> Very Professional </li>
+                    <li> Drinks A Lot </li>
+                    <li> Cheap! </li>
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </Infinite>
+
+            {/* <div className="mreview__body__item">
               <div className="mreview__body__item__imgdiv">
                 <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
-                <img className="mreview__body__item__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+                <h3> Bill </h3>
               </div>
               <div className="mreview__body__item__text">
-                <h3> Bill </h3>
+                <img src="http://lorempixel.com/500/100" />
                 <ul>
                   <li> Very Professional </li>
                   <li> Drinks A Lot </li>
@@ -95,10 +124,10 @@ class Welcome extends Component {
             <div className="mreview__body__item">
               <div className="mreview__body__item__imgdiv">
                 <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
-                <img className="mreview__body__item__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+                <h3> Bill </h3>
               </div>
               <div className="mreview__body__item__text">
-                <h3> Bill </h3>
+                <img src="http://lorempixel.com/500/100" />
                 <ul>
                   <li> Very Professional </li>
                   <li> Drinks A Lot </li>
@@ -110,32 +139,20 @@ class Welcome extends Component {
             <div className="mreview__body__item">
               <div className="mreview__body__item__imgdiv">
                 <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
-                <img className="mreview__body__item__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+                <h3> Bill </h3>
               </div>
               <div className="mreview__body__item__text">
-                <h3> Bill </h3>
+                <img src="http://lorempixel.com/500/100" />
                 <ul>
                   <li> Very Professional </li>
                   <li> Drinks A Lot </li>
                   <li> Cheap! </li>
                 </ul>
               </div>
-            </div>
+            </div> */}
 
-            <div className="mreview__body__item">
-              <div className="mreview__body__item__imgdiv">
-                <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
-                <img className="mreview__body__item__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
-              </div>
-              <div className="mreview__body__item__text">
-                <h3> Bill </h3>
-                <ul>
-                  <li> Very Professional </li>
-                  <li> Drinks A Lot </li>
-                  <li> Cheap! </li>
-                </ul>
-              </div>
-            </div>
+
+
 
           </div>
         </div>}
