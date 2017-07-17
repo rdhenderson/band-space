@@ -2,10 +2,9 @@
 
 import { combineReducers } from "redux"
 
-import player from "./player"
-import counter from './counterReducer'
-
+// import player from "./player"
+// import counter from './counterReducer'
 export default combineReducers({
-  counter,
-  player
+  // counter,
+  // player,
 })

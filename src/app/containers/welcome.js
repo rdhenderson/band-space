@@ -11,23 +11,57 @@ class Welcome extends Component {
   //the scope for when the function is called.
   constructor(props) {
     super(props)
+    this.state = {
+      query : "",
+    }
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+
+  handleInputChange(event){
+  const target = event.target;
+  const value = target.type === 'checkbox' ? target.checked : target.value;
+  const name = target.name
+
+  this.setState({
+    [name]: value
+  })
+
 
   }
+
 
   render() {
     return (
       <div>
         <div className="splash">
-          <div className="splash__logo">
-            <img src="./img/amplifier.svg" />
-          </div>
+          {this.state.query.length === 0 &&
+            <div className="splash__logo" id="splashlogo">
+              <img src="./img/amplifier.svg"/>
+              <h1 id="logotemplate"> BandSpace </h1>
+            </div>
+          }
+          {/* <div className="splash__logo" id="splashlogo">
+            <img src="./img/amplifier.svg"/>
+            <h1 id="logotemplate"> BandSpace </h1>
+          </div> */}
 
           <div className="splash__searchbar">
-            <input name="query" placeholder="Search your venue here!" />
+            <input
+              name="query"
+              value={this.state.query}
+              placeholder="Search for a venue or artist!"
+              type="text"
+              id="query"
+              onChange={this.handleInputChange}
+             />
           </div>
 
         </div>
-        <div className="mreview">
+
+        {this.state.query.length !== 0 &&
+          <div className="mreview">
           <div className="mreview__header">
             <h2> Reviews in Washington D.C. </h2>
           </div>
@@ -94,7 +128,7 @@ class Welcome extends Component {
             </div>
 
           </div>
-        </div>
+        </div>}
       </div>
 
 
@@ -133,18 +167,18 @@ class Welcome extends Component {
 }
 
 
-//REDUX MAGIC! This puts both of our functions into the Component's props and links them to dispatch
-function mapDispatchToProps(dispatch){
-  // return bindActionCreators({ incrementCount, decrementCount }, dispatch);
-}
-
-//MORE REDUX MAGIC! This function takes in all of our Application State and takes pieces of it and maps it
-//to the Component's props.
-function mapStateToProps(state) {
-  // return {
-  //   count: state.counter.count,
-  // };
-}
+// //REDUX MAGIC! This puts both of our functions into the Component's props and links them to dispatch
+// function mapDispatchToProps(dispatch){
+//   // return bindActionCreators({ incrementCount, decrementCount }, dispatch);
+// }
+//
+// //MORE REDUX MAGIC! This function takes in all of our Application State and takes pieces of it and maps it
+// //to the Component's props.
+// function mapStateToProps(state) {
+//   // return {
+//   //   count: state.counter.count,
+//   // };
+// }
 
 //We export our Component using connect so that we can connect our React with our Redux for an awesome app!
-export default connect(mapStateToProps, mapDispatchToProps)(Welcome)
+export default Welcome

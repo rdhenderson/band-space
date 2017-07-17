@@ -1,18 +1,33 @@
 .splash{
-  height: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 10vh;
+
+      &__logo{
+        display: flex;
+        flex-direction: column;
+        align-items: center
+      }
 
       &__logo > img{
         width: 20vw;
+        height: 40vh;
+        margin-bottom: 5vh;
+      }
+
+      &__searchbar{
+        width: 100%;
+        // position: absolute;
+        // top: 60vh;
       }
 
       &__searchbar > input {
         height: 50px;
-        width: 500px;
+        width: 100%;
         line-height: 50px;
         font-size: 40px;
+        text-align: center;
       }
 
 }
@@ -63,6 +78,12 @@
 
   }
 
+}
+
+#logotemplate{
+  font-size: calc(4vw + 4vh + 2vmin);
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 

@@ -1,57 +1,76 @@
-import React from 'react'
+import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  ReactDOM
 } from 'react-router-dom'
+import { connect } from "react-redux";
 
 import Auth from '../../server/config/auth.js';
 
-import Main from './containers/Main.js'
-import Signup from './containers/user_signup.js'
-import Createband from './containers/createband.js'
-import Profile from './containers/profile.js'
-import Search from './containers/Search.js'
+import Main from './containers/Main.js';
+import Signup from './containers/user_signup.js';
+import Createband from './containers/createband.js';
+import Profile from './containers/profile.js';
+import Search from './containers/Search.js';
+
 // import SignUpPage from './containers/users/signup-page'
 
-const AppRoutes = () => (
-  <Router>
-    <main>
-    <div>
-      {/* <ul>
-        <li><Link to="/">Main</Link></li>
-        <li><Link to="/login">Log In</Link></li>
-        <li><Link to="/signup">Sign Up</Link></li>
-      </ul>
 
-      <hr/> */}
+class AppRoutes extends Component {
+  constructor(props) {
+    super(props)
 
-      <div className="navbar">
-        <div className="navbar__links">
-          <ul>
-            <li><a href="#"> Reviews</a> </li>
-            <li><a href="#"> Talk Shop</a> </li>
-            <li><a href="#"> Jobs</a></li>
-            <li><Link to="/profile">Profile</Link></li>
+  }
+  showSettings (event) {
+  event.preventDefault();
+
+}
+
+  render(){
+    return(
+      <Router>
+        <main >
+        <div>
+          {/* <ul>
+            <li><Link to="/">Main</Link></li>
+            <li><Link to="/login">Log In</Link></li>
+            <li><Link to="/signup">Sign Up</Link></li>
           </ul>
-        </div>
-        <div className="navbar__logo">
-          <h3> <Link to="/"> BandSpace </Link> </h3>
-        </div>
-        <div className="navbar__profile">
-          <p> <Link to="/signup"> Log In/SignUp </Link> </p>
-        </div>
-      </div>
 
-      <Route exact path="/" component={Main}/>
-      <Route path="/bandcreate" component={Createband}/>
-      <Route path="/signup" component={Signup}/>
-      <Route path="/profile" component={Profile}/>
-      <Route path="/search" component={Search}/>
-    </div>
-    </main>
-  </Router>
-)
+          <hr/> */}
+
+
+
+          <div className="navbar">
+            <div className="navbar__links">
+              <ul>
+                <li href="#"> Reviews </li>
+                <li href="#"> Talk Shop </li>
+                <li href="#"> Jobs </li>
+              </ul>
+            </div>
+            <div className="navbar__logo">
+              <h3> <Link to="/"> BandSpace </Link> </h3>
+            </div>
+            <div className="navbar__profile">
+              <p> <Link to="/signup"> Log In/SignUp </Link> </p>
+            </div>
+          </div>
+
+          <Route exact path="/" component={Main}/>
+          <Route path="/bandcreate" component={Createband}/>
+          <Route path="/signup" component={Signup}/>
+          <Route path="/profile" component={Profile}/>
+          <Route path="/search" component={Search}/>
+        </div>
+        </main>
+      </Router>
+  )
+  }
+}
+
 
 const About = () => (
   <div>
@@ -93,4 +112,18 @@ const About = () => (
 //   </div>
 // )
 
+// //REDUX MAGIC! This puts both of our functions into the Component's props and links them to dispatch
+// function mapDispatchToProps(dispatch){
+//   // return bindActionCreators({ incrementCount, decrementCount }, dispatch);
+// }
+//
+// //MORE REDUX MAGIC! This function takes in all of our Application State and takes pieces of it and maps it
+// //to the Component's props.
+// function mapStateToProps(state) {
+//   return {
+//     isOpen: state.burgerMenu.isOpen,
+//   };
+// }
+//
+// export default connect(mapStateToProps, mapDispatchToProps)(AppRoutes)
 export default AppRoutes

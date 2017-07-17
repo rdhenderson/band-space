@@ -46,6 +46,7 @@
     "react-redux": "^4.4.8",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-sidebar": "^2.3.2",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.7.1",
     "redux-logger": "^3.0.6"
