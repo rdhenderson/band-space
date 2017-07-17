@@ -12,7 +12,8 @@ class Welcome extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      query : "",
+      querytype: "",
+      query : ""
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -48,14 +49,23 @@ class Welcome extends Component {
           </div> */}
 
           <div className="splash__searchbar">
-            <input
-              name="query"
-              value={this.state.query}
-              placeholder="Search for a venue or artist!"
-              type="text"
-              id="query"
-              onChange={this.handleInputChange}
-             />
+            <div className="splash__searchbar__icondiv">
+              <a className="splash__searchbar__icondiv_drop">
+                <img src="http://lorempixel.com/50/50" />
+              </a>
+
+
+            </div>
+            <div className="splash__searchbar__input">
+              <input
+                name="query"
+                value={this.state.query}
+                placeholder="Search for a venue or artist!"
+                type="text"
+                id="query"
+                onChange={this.handleInputChange}
+               />
+           </div>
           </div>
 
         </div>

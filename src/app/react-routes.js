@@ -6,6 +6,8 @@ import {
   ReactDOM
 } from 'react-router-dom'
 import { connect } from "react-redux";
+// import { elastic as Menu } from 'react-burger-menu'
+import Menu from './components/bMenu.js'
 
 import Auth from '../../server/config/auth.js';
 
@@ -31,8 +33,17 @@ class AppRoutes extends Component {
   render(){
     return(
       <Router>
-        <main >
-        <div>
+        <main id="outer-container">
+          <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
+            <a href="#"> <img src="http://lorempixel.com/100/100" /> </a>
+            <p> Jimmy Twotones </p>
+            <br/>
+            <a id="home" className="menu-item" href="/">Home</a>
+            <a id="gigFind" className="menu-item" href="/about">Find Gigs</a>
+            <a id="createGroup" className="menu-item" href="/contact">Create a Group</a>
+            <a id="manageGroup" className="menu-item" href="">Manage Groups</a>
+          </Menu>
+        <div id="page-wrap">
           {/* <ul>
             <li><Link to="/">Main</Link></li>
             <li><Link to="/login">Log In</Link></li>
@@ -43,7 +54,7 @@ class AppRoutes extends Component {
 
 
 
-          <div className="navbar">
+          {/* <div className="navbar">
             <div className="navbar__links">
               <ul>
                 <li href="#"> Reviews </li>
@@ -57,7 +68,7 @@ class AppRoutes extends Component {
             <div className="navbar__profile">
               <p> <Link to="/signup"> Log In/SignUp </Link> </p>
             </div>
-          </div>
+          </div> */}
 
           <Route exact path="/" component={Main}/>
           <Route path="/bandcreate" component={Createband}/>
@@ -99,7 +110,7 @@ const About = () => (
 //       </li>
 //     </ul>
 //
-    // <Route path={`${match.url}/:topicId`} component={Topic}/>
+//     <Route path={`${match.url}/:topicId`} component={Topic}/>
 //     <Route exact path={match.url} render={() => (
 //       <h3>Please select a topic.</h3>
 //     )}/>
@@ -111,19 +122,19 @@ const About = () => (
 //     <h3>{match.params.topicId}</h3>
 //   </div>
 // )
+//
+//REDUX MAGIC! This puts both of our functions into the Component's props and links them to dispatch
+function mapDispatchToProps(dispatch){
+  // return bindActionCreators({ incrementCount, decrementCount }, dispatch);
+}
 
-// //REDUX MAGIC! This puts both of our functions into the Component's props and links them to dispatch
-// function mapDispatchToProps(dispatch){
-//   // return bindActionCreators({ incrementCount, decrementCount }, dispatch);
-// }
-//
-// //MORE REDUX MAGIC! This function takes in all of our Application State and takes pieces of it and maps it
-// //to the Component's props.
-// function mapStateToProps(state) {
-//   return {
-//     isOpen: state.burgerMenu.isOpen,
-//   };
-// }
-//
-// export default connect(mapStateToProps, mapDispatchToProps)(AppRoutes)
-export default AppRoutes
+//MORE REDUX MAGIC! This function takes in all of our Application State and takes pieces of it and maps it
+//to the Component's props.
+function mapStateToProps(state) {
+  return {
+
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppRoutes)
+// export default AppRoutes

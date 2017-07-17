@@ -18,17 +18,40 @@
 
       &__searchbar{
         width: 100%;
+        height: 96px;
+        background-color: #018BE4;
+        display: flex;
+        align-items: center;
+
+        &__icondiv{
+          padding: 10px;
+        }
+
+        &__input{
+          background-color: transparent;
+          height: 50px;
+          width: 100%;
+          flex-grow: 1;
+        }
+
+        &__input > input {
+          background-color: transparent;
+          height: 50px;
+          width: 98%;
+          line-height: 50px;
+          font-size: 40px;
+          flex-grow: 1;
+          color: white;
+        }
+
+        &__input > input::placeholder {
+          color: white;
+        }
+
         // position: absolute;
         // top: 60vh;
       }
 
-      &__searchbar > input {
-        height: 50px;
-        width: 100%;
-        line-height: 50px;
-        font-size: 40px;
-        text-align: center;
-      }
 
 }
 
