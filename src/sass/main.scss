@@ -1,42 +1,115 @@
+//Vendor
 @import "./vendor/reset.scss";
+@import './vendor/oauth.scss';
+
+//Containers
 @import "./regions/home.scss";
 @import "./regions/signup.scss";
-@import "./regions/createband.scss";
 @import "./regions/profile.scss";
 @import './regions/search.scss';
+@import './regions/gigs.scss';
+@import './regions/createGroup.scss';
 
-body{
-  margin: 0;
+//Components
+@import './regions/queryHeader.scss';
+
+
+*{
+  font-family: "acumin-pro-condensed";
 }
+
+html{
+  background-color: rgb(10, 158, 252);
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
 main{
   display: flex;
   flex-direction: column;
 }
 
+#root{
+  position: 'absolute';
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: 'hidden';
+  height: 100%;
+}
 
-//Navbar styles
-.navbar{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
-  text-align: center;
-  border: 2px red solid;
-  width: 100%;
-  color: black;
+#root,
+main{
+  height: 100%;
+}
 
-  &__links > ul{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
 
-  &__links,
-  &__logo,
-  &__profile{
-    width: 100%;
-  }
+//Burger Menu
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: absolute;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
+}
 
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #373a47;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #373a47;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0.8em;
+}
+
+.menu-item{
+  font-size: calc(1.5vw + 1.5vh + 1vmin);
+  padding-bottom: 20px;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+#page-wrap{
+  height: 100%;
 }
 
 /*

@@ -1,7 +1,6 @@
 // config/passport.js
-const configAuth = require('./auth');
+// load up the user model
 const User = require('../models/user.js');
-
 module.exports = function(passport) {
 
   // =========================================================================
@@ -20,7 +19,6 @@ module.exports = function(passport) {
           done(err, user);
       });
   });
-
   // load all the authentication strategies
   require('./strategy/localSignupStrategy.js')(passport);
   require('./strategy/localLoginStrategy.js')(passport);

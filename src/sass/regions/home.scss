@@ -1,62 +1,119 @@
 .splash{
-  height: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 10vh;
+  color: white;
 
       &__logo{
-        text-align: center;
-        font-size: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10vh;
       }
 
-      &__searchbar > input {
-        height: 50px;
-        width: 500px;
-        line-height: 50px;
-        font-size: 40px;
+      &__logo > img{
+        width: 20vw;
+        height: 40vh;
+        margin-bottom: 5vh;
       }
+
+      &__searchbar{
+        width: 80%;
+        padding-left: 10%;
+        padding-right: 10%;
+        height: 96px;
+        background-color: #018BE4;
+        display: flex;
+        align-items: center;
+
+        &__icondiv{
+          padding: 10px;
+        }
+
+        &__input{
+          background-color: transparent;
+          height: 50px;
+          width: 100%;
+          flex-grow: 1;
+
+        }
+
+        &__input > input {
+          background-color: transparent;
+          height: 50px;
+          width: 98%;
+          line-height: 50px;
+          font-size: 40px;
+          flex-grow: 1;
+          color: white;
+          border: 2px solid #0a9efc;
+        }
+
+        &__input > input::placeholder {
+          color: white;
+        }
+
+        // position: absolute;
+        // top: 60vh;
+      }
+
 
 }
 
 .mreview{
+  margin-left: 5vw;
+  margin-right: 5vw;
+  box-shadow: -1px 1px 5px 0.5px black;
+  height: 100vh;
+  margin-bottom: 20px;
+  color: white;
 
   &__header{
     text-align: center;
     font-size: 50px;
+    margin-bottom: 20px;
   }
 
   &__body{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    margin-left: 10vw;
-    margin-right: 10vw;
+    justify-content: center;
+
+        &__container{
+          width: 80%;
+          display: flex;
+          justify-content: center;
+        }
 
         &__item{
           display: flex;
-          width: 300px;
-          padding: 25px;
           margin: 25px;
-          border: solid 2px red;
+          padding: 25px;
+          width: 80%;
+          box-shadow: -1px 1px 3px black;
 
               &__imgdiv{
                 display:flex;
                 flex-direction: column;
+                text-align: center;
 
                     &__img{
                       border-radius: 100px;
                       width: 100px;
                     }
 
-                    &__stars{
-                      width: 100px;
-                      height: 50px;
-                    }
 
               }
 
               &__text{
+                width:100%;
                 text-align: center;
+              }
+
+              &__text > ul {
+                display: flex;
+                justify-content: space-around;
               }
 
 
@@ -64,6 +121,12 @@
 
   }
 
+}
+
+#logotemplate{
+  font-size: calc(4vw + 4vh + 2vmin);
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 
