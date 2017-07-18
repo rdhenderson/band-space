@@ -7,6 +7,8 @@ import {
 
 import axios from "axios";
 
+import GuitarFloat from '../components/GuitarFloat.js'
+
 
 class Signup extends Component {
 
@@ -280,7 +282,7 @@ class Signup extends Component {
 
           </div>
         <div className="uSignup__right">
-          <img src="http://lorempixel.com/300/500" />
+          <GuitarFloat />
         </div>
 
 
