@@ -7,6 +7,7 @@ import GigMap from '../components/Map.js';
 import raf from 'raf'
 import _ from 'lodash';
 import canUseDOM from "can-use-dom";
+import Infinite from 'react-infinite';
 
 const geolocation = (
   canUseDOM && navigator.geolocation ?
@@ -30,7 +31,38 @@ export class Gigs extends Component {
       type: "",
       minPrice: "",
       distance: "",
-      instrument: ""
+      instrument: "",
+      jobs:
+       [
+        {Name :"The Salty Spatoon",
+        Title : "Need a Guitarist",
+        Rating: 11,
+        Pay: 50,
+        Musician: "Guitar",
+        Description: "Need a fill in for our band"
+      },
+        {Name :"The Salty Spatoon",
+        Title : "Need a Guitarist",
+        Rating: 11,
+        Pay: 50,
+        Musician: "Guitar",
+        Description: "Need a fill in for our band"
+      },
+        {Name :"The Salty Spatoon",
+        Title : "Need a Guitarist",
+        Rating: 11,
+        Pay: 50,
+        Musician: "Guitar",
+        Description: "Need a fill in for our band"
+      },
+        {Name :"The Salty Spatoon",
+        Title : "Need a Guitarist",
+        Rating: 11,
+        Pay: 50,
+        Musician: "Guitar",
+       Description: "Need a fill in for our band"
+       }
+       ]
       }
 
       this.handleInputChange = this.handleInputChange.bind(this);
@@ -82,6 +114,7 @@ export class Gigs extends Component {
           lng: 105,
         },
         content: `Error: The Geolocation service failed (${reason}).`,
+
       });
     });
   }
@@ -138,8 +171,29 @@ export class Gigs extends Component {
           </div>
 
           <div className="gigs__body__info">
+          <Infinite containerHeight={800} width={'100%'} elementHeight={200}>
 
-          </div>
+            {this.state.jobs.map((item, index) => (
+              <div key={index} className="gigs__body__info__item">
+                <div className="gigs__body__info__item__price">
+                  <h3> ${item.Pay} </h3>
+                </div>
+                <div className="gigs__body__info__item__description">
+                  <div className="gigs__body__info__item__description__name">
+                    <h3> {item.Name} </h3>
+                    {/* <h3> 11 </h3> */}
+                  </div>
+                  <div className="gigs__body__info__item__description__job">
+                    <h4> {item.Title} </h4>
+                    <p> {item.Description} </p>
+                  </div>
+
+                </div>
+              </div>
+            ))}
+          </Infinite>
+        </div>
+
         </div>
 
 
