@@ -86,7 +86,7 @@ class Welcome extends Component {
             <h2> Reviews in Washington D.C. </h2>
           </div>
           <div className="mreview__body">
-          <Infinite className="mreview__body__container" containerHeight={600} width={'100%'} elementHeight={200}>
+          <Infinite className="mreview__body__container" containerHeight={550} width={'100%'} elementHeight={200}>
 
             {this.state.venues.map((item, index) => (
               <div key={index} className="mreview__body__item" id={item.id}>

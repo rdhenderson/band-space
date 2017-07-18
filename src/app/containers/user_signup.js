@@ -180,8 +180,36 @@ class Signup extends Component {
                   <button type="submit"> Submit </button>
                 </div>
               </form>
+
+              <div className="uSignup__left__oauth">
+                <div className="google-btn login">
+                  <div className="google-icon-wrapper">
+                    <img className="google-icon-svg" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                  </div>
+                  <p className="btn-text"><b>Sign Up with Google</b></p>
+                </div>
+                <div className="google-btn">
+                  <div className="google-icon-wrapper">
+                    <img className="google-icon-svg" src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/Facebook_Home_logo_old.svg/1024px-Facebook_Home_logo_old.svg.png"/>
+                  </div>
+                  <p className="btn-text"><b>Sign Up with FB</b></p>
+                </div>
+                <div className="google-btn">
+                  <div className="google-icon-wrapper">
+                    <img className="google-icon-svg" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9f/Twitter_bird_logo_2012.svg/1259px-Twitter_bird_logo_2012.svg.png"/>
+                  </div>
+                  <p className="btn-text"><b>Sign Up with Twitter</b></p>
+                </div>
+                <div className="google-btn">
+                  <div className="google-icon-wrapper">
+                    <img className="google-icon-svg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2000px-Spotify_logo_without_text.svg.png"/>
+                  </div>
+                  <p className="btn-text"><b>Sign Up with Spotify </b></p>
+                </div>
+              </div>
+
               <div id="switch">
-                   <p> Already a member? </p> <a onClick={this.logSignSwitch}> Log in here </a>
+                   <a onClick={this.logSignSwitch}> Already a member? Log in here </a>
               </div>
             </div>}
 
@@ -229,13 +257,13 @@ class Signup extends Component {
                     <div className="google-icon-wrapper">
                       <img className="google-icon-svg" src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/Facebook_Home_logo_old.svg/1024px-Facebook_Home_logo_old.svg.png"/>
                     </div>
-                    <p className="btn-text"><b>Sign in with Facebook</b></p>
+                    <p className="btn-text"><b>Sign in with FB</b></p>
                   </div>
                   <div className="google-btn">
                     <div className="google-icon-wrapper">
                       <img className="google-icon-svg" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9f/Twitter_bird_logo_2012.svg/1259px-Twitter_bird_logo_2012.svg.png"/>
                     </div>
-                    <p className="btn-text"><b>Sign in with Google</b></p>
+                    <p className="btn-text"><b>Sign in with Twitter</b></p>
                   </div>
                   <div className="google-btn">
                     <div className="google-icon-wrapper">
@@ -245,7 +273,7 @@ class Signup extends Component {
                   </div>
                 </div>
                 <div id="switch">
-                  <p> Not a member? </p> <a onClick={this.logSignSwitch}> Sign Up here </a>
+                  <a onClick={this.logSignSwitch}> Not a member?  Sign Up here </a>
                 </div>
               </div>}
 

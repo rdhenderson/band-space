@@ -17,6 +17,8 @@ import Createband from './containers/createband.js';
 import Profile from './containers/profile.js';
 import Search from './containers/Search.js';
 
+import Gigs from './containers/Gigs.js';
+
 // import SignUpPage from './containers/users/signup-page'
 
 
@@ -40,7 +42,7 @@ class AppRoutes extends Component {
             <br/>
             <Link to="/"> <a id="home" className="menu-item">Home</a> </Link>
             <Link to="/signup"> <a id="home" className="menu-item">Signup</a> </Link>
-            <Link to="#"> <a id="gigFind" className="menu-item" href="/about">Find Gigs</a> </Link>
+            <Link to="/gigs"> <a id="gigFind" className="menu-item" href="/about">Find Gigs</a> </Link>
             <Link to="#"> <a id="createGroup" className="menu-item" href="/contact">Create a Group</a> </Link>
             <Link to="#"> <a id="manageGroup" className="menu-item" href="">Manage Groups</a> </Link>
           </Menu>
@@ -76,6 +78,7 @@ class AppRoutes extends Component {
           <Route path="/signup" component={Signup}/>
           <Route path="/profile" component={Profile}/>
           <Route path="/search" component={Search}/>
+          <Route path="/gigs" component={Gigs}/>
         </div>
         </main>
       </Router>

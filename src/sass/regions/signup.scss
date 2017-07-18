@@ -31,8 +31,8 @@
 
     &__oauth{
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-around;
     }
 
   }
@@ -51,4 +51,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
 }
