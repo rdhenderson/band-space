@@ -22,7 +22,8 @@ module.exports = function(passport) {
   });
 
   // load all the authentication strategies
-  require('./strategy/localStrategy.js')(passport);
+  require('./strategy/localSignupStrategy.js')(passport);
+  require('./strategy/localLoginStrategy.js')(passport);
   require('./strategy/googleStrategy.js')(passport);
   require('./strategy/facebookStrategy.js')(passport);
   require('./strategy/spotifyStrategy.js')(passport);

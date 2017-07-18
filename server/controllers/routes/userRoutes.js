@@ -12,18 +12,75 @@ module.exports = function(app, passport) {
   });
 
   // process the signup form -- NOTE Change redirect to proper route once react connected.
-  app.post('/signup', passport.authenticate('local-signup', {
-      successRedirect : '/', // redirect to the secure profile section
-      failureRedirect : '/signup', // redirect back to the signup page if there is an error
-      failureFlash : true // allow flash messages
-  }));
+  app.post('/signup', (req, res, next) => {
+    console.log("Hit signup route", req.body);
+    return passport.authenticate('local-signup', (err, token, user) => {
+      console.log('token', token);
+      console.log('user', user);
+      if (err) {
+        if (err.name === 'MongoError' && err.code === 11000) {
+          // the 11000 Mongo code is asdffor a duplication email error
+          // the 409 HTTP status code is for conflict error
+          console.log('Hit mongo error');
+          return res.status(409).json({
+            success: false,
+            message: 'Check the form for errors.',
+            errors: {
+              email: 'This email is already taken.'
+            }
+          });
+        }
+
+        return res.status(400).json({
+          success: false,
+          message: 'Could not process the form.'
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: 'You have successfully signed up! Now you should be able to log in.'
+      });
+    })(req, res, next);
+  });
+// passport.authenticate('local-signup', {
+//       successRedirect : '/login', // redirect to the secure profile section
+//       failureRedirect : '/signup', // redirect back to the signup page if there is an error
+//       failureFlash : true // allow flash messages
+//   }));
 
   // process the login form
-  app.post('/login', passport.authenticate('local-login', {
-      successRedirect : '/', // redirect to the secure profile section
-      failureRedirect : '/login', // redirect back to the signup page if there is an error
-      failureFlash : true // allow flash messages
-  }));
+  app.post('/login', (req, res, next) => {
+    passport.authenticate('local-login',  (err, token, userData) => {
+      if (err) {
+        if (err.name === 'IncorrectCredentialsError') {
+          return res.status(400).json({
+            success: false,
+            message: err.message
+          });
+        }
+
+        return res.status(400).json({
+          success: false,
+          message: 'Could not process the form.'
+        });
+      }
+      console.log("Token", token);
+
+      return res.json({
+        success: true,
+        message: 'You have successfully logged in!',
+        token,
+        user: userData
+      });
+    })(req, res, next);
+  });
+// {
+//       successRedirect : '/', // redirect to the secure profile section
+//       failureRedirect : '/login', // redirect back to the signup page if there is an error
+//       failureFlash : true // allow flash messages
+//   }));
+
 
   app.get('/auth/spotify',
     passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private'] }));
