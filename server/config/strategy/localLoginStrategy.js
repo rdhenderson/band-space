@@ -1,7 +1,6 @@
 const LocalStrategy = require('passport-local').Strategy;
-const configAuth = require('../auth');
-const config = require('../../../config');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const helpers = require('../../helpers/users.js');
 const User = require('../../models/user.js');
 
 // expose this function to our app using module.exports
@@ -36,13 +35,12 @@ module.exports = function(passport) {
              if (!user.comparePassword(password))
                  return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
              // all is well, return successful user
-             const payload = {
-              sub: user._id
-            };
-
-            // create a token string
-            const token = jwt.sign(payload, config.jwtSecret);
-
+            //  const payload = {
+            //   sub: user._id
+            // };
+            var token = helpers.generateToken(user);
+            user = helpers.getCleanUser(user);
+            console.log('Token', token);
             return done(null, token, user);
             //  return done(null, user);
          });

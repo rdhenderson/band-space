@@ -1,5 +1,8 @@
 const path = require('path');
+const { getCleanUser } = require('../../helpers/users.js')
 const User = require('../../models/user.js');
+const jwt = require('jsonwebtoken');
+const jwtSecret = process.env.JWT_SECRET;
 
 module.exports = function(app, passport) {
   app.get('/api/users', (req, res) => {
@@ -62,7 +65,6 @@ module.exports = function(app, passport) {
           message: 'Could not process the form.'
         });
       }
-      console.log("Token", token);
 
       return res.json({
         success: true,
@@ -71,6 +73,43 @@ module.exports = function(app, passport) {
         user: userData
       });
     })(req, res, next);
+  });
+
+  //get current user from token
+  app.get('/me/from/token', function(req, res, next) {
+
+    // check header or url parameters or post parameters for token
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (!token) {
+      return res.status(401).json({
+        message: 'Must pass token'
+      });
+    }
+
+    // decode token
+    jwt.verify(token, jwtSecret, function(err, user) {
+      if (err)
+        throw err;
+
+      //return user using the id from w/in JWTToken
+      User.findById({
+        '_id': user._id
+      }, function(err, user) {
+        if (err)
+          throw err;
+
+        user = getCleanUser(user); //dont pass password and stuff
+
+        //note: you can renew token by creating new token(i.e. refresh it) w/ new expiration time at this point, but I'm passing the old token back.
+        // var token = utils.generateToken(user);
+
+        res.json({
+          user: user,
+          token: token
+        });
+
+      });
+    });
   });
 
   app.get('/auth/spotify',

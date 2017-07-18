@@ -4,8 +4,10 @@ import { combineReducers } from "redux"
 
 import player from "./player"
 import counter from './counterReducer'
+import user from './reducer_user'
 
 export default combineReducers({
   counter,
-  player
+  player,
+  user
 })

@@ -1,5 +1,6 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
+const DotenvPlugin = require('webpack-dotenv-plugin');
 
 module.exports = {
   devtool: 'inline-sourcemap',
@@ -25,5 +26,11 @@ module.exports = {
           loaders: ['style', 'css', 'sass']
       },
     ]
-  }
+  },
+  plugins: [
+    new DotenvPlugin({
+      sample: './.env.default',
+      path: './.env'
+    })
+  ]
 };

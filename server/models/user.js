@@ -6,14 +6,28 @@ var bcrypt   = require('bcrypt-nodejs');
 
 // define the schema for our user model
 var userSchema = new Schema({
-
-  local: {
-      name: { type: String },
-      email: { type: String,  },
-      password: { type: String },
-      zipcode: { type: String },
-      phonenumber: { type: String }
+  name: { type: String },
+  username: { type: String },
+  email: { type: String, index: { unique: true }},
+  password: { type: String },
+  zipcode: { type: String },
+  phone: { type: String },
+  admin: {
+    type: Boolean,
+    default: false,
   },
+  moderator: {
+    type: Boolean,
+    default: false,
+  },
+  isEmailVerified: {
+    type: Boolean,
+    default: false,
+  },
+  verifyEmailToken: String,
+  verifyEmailTokenExpires: Date,
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
   facebook         : {
       id           : String,
       token        : String,
@@ -38,9 +52,6 @@ var userSchema = new Schema({
       email        : String,
       name         : String
   },
-  resetPasswordToken: String,
-  resetPasswordExpires: Date,
-  status: { type: String, trim: true, required: true, default: "Basic"},
   // Role - Artist, Staff, Both(?)
   role: { type: String },
   // Either artist of staff id could be filled
@@ -72,6 +83,40 @@ userSchema.methods.generateHash = function(password) {
 userSchema.methods.comparePassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
+
+// NOT USED - RELYING ON INDEXES AT THE MOMENT.
+function isUserUnique(reqBody, cb) {
+  var username = reqBody.username ? reqBody.username.trim() : '';
+  var email = reqBody.email ? reqBody.email.trim() : '';
+
+  User.findOne({
+    $or: [{
+      'username': new RegExp(["^", username, "$"].join(""), "i")
+    }, {
+      'email': new RegExp(["^", email, "$"].join(""), "i")
+    }]
+  }, function(err, user) {
+    if (err)
+      throw err;
+
+    if (!user) {
+      cb();
+      return;
+    }
+
+    var err;
+    if (user.username === username) {
+      err = {};
+      err.username = '"' + username + '" is not unique';
+    }
+    if (user.email === email) {
+      err = err ? err : {};
+      err.email = '"' + email + '" is not unique';
+    }
+
+    cb(err);
+  });
+}
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);

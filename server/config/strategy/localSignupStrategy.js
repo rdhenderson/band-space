@@ -1,8 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy;
-const configAuth = require('../auth');
 const User = require('../../models/user.js');
 const jwt = require('jsonwebtoken');
-const config = require('../../../config');
+const helpers = require('../../helpers/users.js');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -23,7 +22,7 @@ module.exports = function(passport) {
       process.nextTick(function() {
       // find a user whose email is the same as the forms email
       // we are checking to see if the user trying to login already exists
-      User.findOne({ 'local.email' :  email }, function(err, user) {
+      User.findOne({ 'email' :  email }, function(err, user) {
           // if there are any errors, return the error
           if (err) {
             console.log("ERROR", err);
@@ -32,31 +31,32 @@ module.exports = function(passport) {
 
           // check to see if theres already a user with that email
           if (user) {
-            console.log('USER', user);
               return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
           } else {
             // if there is no user with that email
             // create the user
             var newUser = new User();
             // set the user's local credentials
-            newUser.local.name     = req.body.username
-            newUser.local.email    = email;
-            newUser.local.password = newUser.generateHash(password);
-            newUser.local.zipcode  = req.body.zipcode;
-            newUser.local.phonenumer = req.body.phonenumber;
+            newUser.name     = req.body.name;
+            newUser.username = req.body.name;
+            newUser.email    = email;
+            newUser.password = newUser.generateHash(password);
+            // newUser.local.zipcode  = req.body.zipcode;
+            // newUser.local.phonenumer = req.body.phonenumber;
 
-            console.log("Saving new user");
             // save the user
             newUser.save(function(err, user) {
               if (err) return done(err, null);
 
-              const payload = {
-                sub: user._id
-              };
-
+              // const payload = {
+              //   sub: user._id
+              // };
+              var token = helpers.generateToken(user);
+              user = helpers.getCleanUser(user);
                // create a token string
-              const token = jwt.sign(payload, config.jwtSecret);
-
+              // const token = jwt.sign(payload, config.jwtSecret);
+              console.log('USER', user);
+              console.log('TOKEN', token);
               return done(null, token, user);
               // return done(null, newUser);
           });
