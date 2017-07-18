@@ -1,0 +1,33 @@
+
+.queryHeader{
+  margin: 0;
+  width: 100%;
+  height: 100px;
+  padding-left: 110px;
+  background-color: #018BE4;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 40px;
+  box-shadow: 1px 1px 3px 0px black;
+
+
+  &__inputdiv > input{
+    height: 50px;
+    width: 700px;
+    line-height: 50px;
+    font-size: 45px;
+    background-color: transparent;
+    color: white;
+    border: 2px solid #0a9efc;
+  }
+
+  &__inputdiv > input::placeholder {
+    color: white;
+  }
+
+  &__submit > button{
+      height: 50px;
+      width: 50px;
+  }
+}

@@ -1,135 +1,116 @@
+//Vendor
 @import "./vendor/reset.scss";
+@import './vendor/oauth.scss';
+
+//Containers
 @import "./regions/home.scss";
 @import "./regions/signup.scss";
-@import "./regions/createband.scss";
 @import "./regions/profile.scss";
 @import './regions/search.scss';
+@import './regions/gigs.scss';
+@import './regions/createGroup.scss';
 
+//Components
+@import './regions/queryHeader.scss';
 
-body {
-  margin: 0;
-  background-color: #c5c3d2;
-}
-#main {
-  display: flex;
-  flex-direction: column;
-  background-color: #c5c3d2;
+*{
+  font-family: "acumin-pro-condensed";
 }
 
-#root {
-  background-color: #c5c3d2;
+html{
+  background-color: rgb(10, 158, 252);
 }
 
-h1 {
-  color: black;
-  font-size: 100px;
-  text-align: center;
-  color: #4d5e6d;
-  text-shadow: 1px 1px 1px black!important; 
-}
-
-#splash{
-  height: 60vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#searchbar > input {
-  height: 50px;
-  width: 500px;
-  line-height: 50px;
-  font-size: 40px;
-}
-
-#lheader{
-  text-align: center;
-}
-
-.mreview__body__item {
-  display: flex;
-  width: 300px;
-  padding: 25px;
-  margin: 25px;
-  border: 2px #4d5e6d solid;
-  background-color: white;
-}
-
-.flimg{
-  border-radius: 100px;
-  width: 100px;
-}
-
-.stars{
-  width: 100px;
-  height: 50px;
-}
-
-.imgdiv{
-  display:flex;
-  flex-direction: column;
-}
-
-.fltext{
-  text-align: center;
-}
-
-#flitems{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-left: 10vw;
-  margin-right: 10vw;
-}
-
-li, h2, h3, p {
-  color: #80b5bd;
-  text-shadow: 1px 1px 1px black!important;
-
-}
-
-input {
-  background-color: #c5c3d2; 
-}
-
-//Navbar styles
-.navbar{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
-  text-align: center;
-  border: 2px #4d5e6d solid;
-  width: 100%;
-  color: black;
-
-  &__links > ul{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-
-  &__links,
-  &__logo,
-  &__profile{
+html, body {
     width: 100%;
-  }
+    height: 100%;
 
+    margin: 0;
 }
 
-.profile__bottombody__botheader,
-.profile__topbody,
-.profile__bottombody,
-.profile__bottombody__botmain,
-.profile__bottombody__botmain__left,
-.profile__bottombody__botmain__right,
-.profile__bottombody__botmain__right__event,
-.profile__topbody__left__profblock,
-.profile__topbody__right__sliders {
-  border: 2px #4d5e6d solid;
+main{
+  display: flex;
+  flex-direction: column;
+}
+
+#root{
+  position: 'absolute';
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: 'hidden';
+  height: 100%;
+}
+
+#root,
+main{
+  height: 100%;
 }
 
 
+//Burger Menu
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: absolute;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #373a47;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #373a47;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0.8em;
+}
+
+.menu-item{
+  font-size: calc(1.5vw + 1.5vh + 1vmin);
+  padding-bottom: 20px;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+#page-wrap{
+  height: 100%;
+}
 
 /*
 ===================================

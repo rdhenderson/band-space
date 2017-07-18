@@ -7,6 +7,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const SpotifyStrategy = require('passport-spotify').Strategy;
 
+
 // load auth config data
 var configAuth = require('./auth');
 
@@ -46,6 +47,7 @@ module.exports = function(passport) {
       passwordField : 'Password',
       passReqToCallback : true // allows us to pass back the entire request to the callback
   }, function(req, email, password, done) {
+    console.log("beggining of function");
 
       // asynchronous
       // User.findOne wont fire unless data is sent back
@@ -60,9 +62,10 @@ module.exports = function(passport) {
 
           // check to see if theres already a user with that email
           if (user) {
+              console.log("user taken");
               return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
           } else {
-
+              console.log("new user");
               // if there is no user with that email
               // create the user
               var newUser            = new User();
@@ -96,12 +99,12 @@ module.exports = function(passport) {
 
      passport.use('local-login', new LocalStrategy({
          // by default, local strategy uses username and password, we will override with email
-         usernameField : 'email',
-         passwordField : 'password',
+         usernameField : 'Email',
+         passwordField : 'Password',
          passReqToCallback : true // allows us to pass back the entire request to the callback
      },
      function(req, email, password, done) { // callback with email and password from our form
-
+       console.log(email, "email", password, "password");
          // find a user whose email is the same as the forms email
          // we are checking to see if the user trying to login already exists
          User.findOne({ 'local.email' :  email }, function(err, user) {
