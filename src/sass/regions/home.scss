@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 10vh;
+  color: white;
 
       &__logo{
         display: flex;
@@ -63,9 +64,10 @@
 .mreview{
   margin-left: 5vw;
   margin-right: 5vw;
-  box-shadow: -1px 1px 5px 0.5px;
+  box-shadow: -1px 1px 5px 0.5px black;
   height: 100vh;
   margin-bottom: 20px;
+  color: white;
 
   &__header{
     text-align: center;
@@ -80,11 +82,16 @@
 
         &__container{
           width: 80%;
+          display: flex;
+          justify-content: center;
         }
 
         &__item{
           display: flex;
+          margin: 25px;
           padding: 25px;
+          width: 80%;
+          box-shadow: -1px 1px 3px black;
 
               &__imgdiv{
                 display:flex;

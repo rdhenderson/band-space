@@ -1,42 +1,35 @@
 import React, { Component } from 'react';
 
-class Map extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      blank: ""
-    }
+import canUseDOM from "can-use-dom";
+import raf from "raf";
 
-    this.loadMap = this.loadMap.bind(this);
-  }
-  componentDidMount() {
-    this.loadMap();
-  }
+import { withGoogleMap, GoogleMap, Marker, Circle, InfoWindow } from "react-google-maps";
 
-  loadMap() {
-    if (this.props && this.props.google) {
-      // google is available
-      const {google} = this.props;
-      const maps = google.maps;
+const GigMap = withGoogleMap(props => (
+  <GoogleMap
+    defaultZoom={12}
+    center={props.center}
+  >
+    {props.center && (
+      <InfoWindow position={props.center}>
+        <div>{props.content}</div>
+      </InfoWindow>
+    )}
+    {props.center && (
+      <Circle
+        center={props.center}
+        radius={props.radius}
+        options={{
+          fillColor: `red`,
+          fillOpacity: 0.20,
+          strokeColor: `red`,
+          strokeOpacity: 1,
+          strokeWeight: 1,
+        }}
+      />
+    )}
+  </GoogleMap>
+ ));
 
-      const mapRef = this.refs.map;
-      const node = ReactDOM.findDOMNode(mapRef);
 
-      let zoom = 14;
-      let lat = 37.774929;
-      let lng = -122.419416;
-      const center = new maps.LatLng(lat, lng);
-      const mapConfig = Object.assign({}, {
-        center: center,
-        zoom: zoom
-      })
-      this.map = new maps.Map(node, mapConfig);
-    }
-  }
-
-  render() {
-    // ...
-  }
-}
-
-export default Maps;
+export default GigMap;

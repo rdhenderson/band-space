@@ -8,6 +8,7 @@
 @import "./regions/createband.scss";
 @import "./regions/profile.scss";
 @import './regions/search.scss';
+@import './regions/gigs.scss';
 
 //Components
 @import './regions/queryHeader.scss';
@@ -105,6 +106,10 @@ main{
 ::-webkit-scrollbar {
     width: 0px;
     background: transparent; /* make scrollbar transparent */
+}
+
+#page-wrap{
+  height: 100%;
 }
 
 /*

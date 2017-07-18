@@ -2,19 +2,22 @@
   display: flex;
   flex-direction: row;
   text-align: center;
+  color: white;
+
 
   &__top{
     height: 100px;
     text-align: center;
     font-size: 40px;
     line-height: 100px;
+    color: white;
   }
 
   &__left{
     width: 100%;
     margin-left: 20vw;
     background-color: #018BE4;
-    box-shadow: -1px 1px 5px 0.5px;
+    box-shadow: -1px 1px 5px 0.5px black;
     padding: 20px;
 
     &__form{
@@ -27,6 +30,7 @@
       font-size: 25px;
       line-height: 30px;
       margin: 2px;
+      color: black;
     }
 
     &__oauth{
