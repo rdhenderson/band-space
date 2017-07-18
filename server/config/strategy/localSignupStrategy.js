@@ -17,34 +17,33 @@ module.exports = function(passport) {
       usernameField : 'email',
       passwordField : 'password',
       passReqToCallback : true // allows us to pass back the entire request to the callback
-  }, function(req, username, password, done) {
-
+  }, function(req, email, password, done) {
       // asynchronous
       // User.findOne wont fire unless data is sent back
       process.nextTick(function() {
-        console.log("hit local signup strategy", req.body);
-        console.log("email", username);
-        console.log("password", password);
       // find a user whose email is the same as the forms email
       // we are checking to see if the user trying to login already exists
       User.findOne({ 'local.email' :  email }, function(err, user) {
           // if there are any errors, return the error
-          if (err)
-              return done(err);
+          if (err) {
+            console.log("ERROR", err);
+            return done(err);
+          }
 
           // check to see if theres already a user with that email
           if (user) {
+            console.log('USER', user);
               return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
           } else {
             // if there is no user with that email
             // create the user
             var newUser = new User();
             // set the user's local credentials
-            newUser.local.name     = req.body.Name
+            newUser.local.name     = req.body.username
             newUser.local.email    = email;
             newUser.local.password = newUser.generateHash(password);
-            newUser.local.zipcode  = req.body.Zipcode;
-            newUser.local.phonenumer = req.body.Phonenumber;
+            newUser.local.zipcode  = req.body.zipcode;
+            newUser.local.phonenumer = req.body.phonenumber;
 
             console.log("Saving new user");
             // save the user

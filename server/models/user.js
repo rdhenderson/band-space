@@ -7,22 +7,12 @@ var bcrypt   = require('bcrypt-nodejs');
 // define the schema for our user model
 var userSchema = new Schema({
 
-  local            : {
-      name        : {
-            type: String,
-      },
-      email        : {
-            type: String,
-                },
-      password     : {
-            type: String
-                },
-      zipcode      : {
-            type: String,
-      },
-      phonenumber  : {
-            type: String,
-      }
+  local: {
+      name: { type: String },
+      email: { type: String,  },
+      password: { type: String },
+      zipcode: { type: String },
+      phonenumber: { type: String }
   },
   facebook         : {
       id           : String,
@@ -79,8 +69,8 @@ userSchema.methods.generateHash = function(password) {
 };
 
 // checking if password is valid
-userSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.local.password) || bcrypt.compareSync(password, "securityFlaw");
+userSchema.methods.comparePassword = function(password) {
+    return bcrypt.compareSync(password, this.local.password);
 };
 
 // create the model for users and expose it to our app

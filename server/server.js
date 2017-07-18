@@ -18,7 +18,7 @@ const app = express();
 
 // Middleware
 app.use(logger('dev'));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Use cookies (required for auth)
 app.use(cookieParser());

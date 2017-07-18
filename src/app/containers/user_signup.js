@@ -101,11 +101,11 @@ class Signup extends Component {
   runSignup(sN, sE, sPw, sZ, sPn){
     console.log(`Name: ${sN}, Email ${sE}, Password: ${sPw}, Zipcode: ${sZ}, Phone: ${sPn}`);
     axios.post('/signup', {
-      Name: sN,
-      Email: sE,
-      Password: sPw,
-      Zipcode: sZ,
-      Phonenumber: sPn
+      username: sN,
+      email: sE,
+      password: sPw,
+      zipcode: sZ,
+      phonenumber: sPn
     })
     .then(res => console.log(res))
     .catch(err => console.log(err));

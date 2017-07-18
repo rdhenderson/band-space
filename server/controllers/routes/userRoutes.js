@@ -13,10 +13,7 @@ module.exports = function(app, passport) {
 
   // process the signup form -- NOTE Change redirect to proper route once react connected.
   app.post('/signup', (req, res, next) => {
-    console.log("Hit signup route", req.body);
     return passport.authenticate('local-signup', (err, token, user) => {
-      console.log('token', token);
-      console.log('user', user);
       if (err) {
         if (err.name === 'MongoError' && err.code === 11000) {
           // the 11000 Mongo code is asdffor a duplication email error
@@ -75,12 +72,6 @@ module.exports = function(app, passport) {
       });
     })(req, res, next);
   });
-// {
-//       successRedirect : '/', // redirect to the secure profile section
-//       failureRedirect : '/login', // redirect back to the signup page if there is an error
-//       failureFlash : true // allow flash messages
-//   }));
-
 
   app.get('/auth/spotify',
     passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private'] }));
