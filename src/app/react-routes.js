@@ -110,13 +110,13 @@ class AppRoutes extends Component {
             </Link>
             <Link to="/creategroup">
               <div className="navLinks">
-                <img className="navLinks__icon" src="./img/group.svg" />
+                <img className="navLinks__icon" src="./img/addgroup.svg" />
                 <p id="createGroup" className="menu-item">Create a Group</p>
               </div>
             </Link>
             <Link to="/managegroup">
               <div className="navLinks">
-                <img className="navLinks__icon" src="./img/addgroup.svg" />
+                <img className="navLinks__icon" src="./img/group.svg" />
                 <p id="manageGroup" className="menu-item">Manage Groups</p>
               </div>
             </Link>
