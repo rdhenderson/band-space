@@ -1,7 +1,7 @@
 //Here we import our action types as constants from our actions folder.
 import {
   USER_LOGIN, USER_LOGOUT, ME_FROM_TOKEN,
-  ME_FROM_TOKEN_SUCCESS, ME_FROM_TOKEN_FAILURE } from '../actions/userActions';
+  ME_FROM_TOKEN_SUCCESS, ME_FROM_TOKEN_FAILURE } from './userActions';
 
 //It is best practice to define your initial state as a constant that gets passed as an argument to your reducer function
 const INITIAL_STATE = {
