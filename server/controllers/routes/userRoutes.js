@@ -36,8 +36,6 @@ module.exports = function(app, passport) {
           message: 'Could not process the form.'
         });
       }
-      console.log("TOKEN (signup):", token);
-
       return res.status(200).json({
         success: true,
         message: 'You have successfully signed up! Now you should be able to log in.',
@@ -49,7 +47,7 @@ module.exports = function(app, passport) {
 
   // process the login form
   app.post('/api/users/login', (req, res, next) => {
-    passport.authenticate('local-login',  (err, token, userData) => {
+    passport.authenticate('local-login',  (err, token, user) => {
       if (err) {
         if (err.name === 'IncorrectCredentialsError') {
           return res.status(400).json({
@@ -63,27 +61,26 @@ module.exports = function(app, passport) {
           message: 'Could not process the form.'
         });
       }
-      console.log("TOKEN:", token);
       return res.json({
         success: true,
         message: 'You have successfully logged in!',
         token,
-        user: userData
+        user
       });
     })(req, res, next);
   });
 
   //get current user from token
   app.get('/api/users/me/from/token', function(req, res, next) {
-
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
     if (!token) {
       return res.status(401).json({
         message: 'Must pass token'
       });
     }
-
+    console.log("Token", token);
     // decode token
     jwt.verify(token, jwtSecret, function(err, user) {
       if (err)
@@ -97,15 +94,13 @@ module.exports = function(app, passport) {
           throw err;
 
         user = getCleanUser(user); //dont pass password and stuff
-
         //note: you can renew token by creating new token(i.e. refresh it) w/ new expiration time at this point, but I'm passing the old token back.
         // var token = utils.generateToken(user);
-
+        console.log('returning user', user);
         res.json({
           user: user,
           token: token
         });
-
       });
     });
   });

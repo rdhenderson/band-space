@@ -42,6 +42,9 @@ class SignUpForm extends Component {
     //Save token to local storage for users return
     localStorage.setItem('jwtToken', token);
     this.props.loginUser(user, token);
+
+    //Redirect to /profile
+    this.props.history.push('/profile');
     //dispatch USER_LOGIN action to add user to store
   }
   // When a user submits...
@@ -58,7 +61,6 @@ class SignUpForm extends Component {
       phone: this.state.phone
     })
     .then(({ data }) => {
-      console.log("Signup Success.", data);
       this.saveUserDetails(data.user, data.token);
     })
     .catch(err => console.log("ERROR", err));
@@ -66,7 +68,10 @@ class SignUpForm extends Component {
 
   handleLoginSubmit(event) {
     event.preventDefault();
+    console.log("Email:", this.state.email);
+    console.log("Password:", this.state.password);
     axios.post('/api/users/login', {
+      username: this.state.email,
       email: this.state.email,
       password: this.state.password,
     })

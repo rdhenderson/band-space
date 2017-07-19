@@ -25,7 +25,6 @@ module.exports = function(passport) {
       User.findOne({ 'email' :  email }, function(err, user) {
           // if there are any errors, return the error
           if (err) {
-            console.log("ERROR", err);
             return done(err);
           }
 
@@ -35,7 +34,7 @@ module.exports = function(passport) {
           } else {
             // if there is no user with that email
             // create the user
-            var newUser = new User();
+            const newUser = new User();
             // set the user's local credentials
             newUser.name     = req.body.name;
             newUser.username = req.body.name;
@@ -48,17 +47,9 @@ module.exports = function(passport) {
             newUser.save(function(err, user) {
               if (err) return done(err, null);
 
-              // const payload = {
-              //   sub: user._id
-              // };
-              var token = helpers.generateToken(user);
+              const token = helpers.generateToken(user);
               user = helpers.getCleanUser(user);
-               // create a token string
-              // const token = jwt.sign(payload, config.jwtSecret);
-              console.log('USER', user);
-              console.log('TOKEN', token);
               return done(null, token, user);
-              // return done(null, newUser);
           });
         }
       });

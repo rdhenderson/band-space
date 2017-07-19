@@ -1,4 +1,4 @@
-import SignUpForm from '../components/user_signup.js';
+import SignUpForm from '../components/SignUpForm.js';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import { loginUser } from '../actions/userActions.js'
@@ -7,6 +7,7 @@ import { loginUser } from '../actions/userActions.js'
 function mapStateToProps(state) {
   return {
     user: state.user,
+    isAuth: state.user.isAuth,
   };
 }
 
