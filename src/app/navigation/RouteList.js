@@ -3,12 +3,10 @@ import { Route } from 'react-router-dom'
 
 import Main from '../containers/Main.js';
 import { SignUp, LogIn } from '../users'
-import GroupProfile from '../containers/GroupProfile.js';
+import { CreateGroup, ManageGroup, GroupProfile } from '../groups';
 import Profile from '../containers/profile.js';
 import Search from '../containers/Search.js';
 import Gigs from '../containers/Gigs.js';
-import CreateGroup from '../containers/CreateGroup.js';
-import ManageGroup from '../containers/ManageGroup.js';
 
 const RouteList = (props) => (
   <div id="page-wrap">

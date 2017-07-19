@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import {Collapse} from 'react-collapse';
+import { Collapse } from 'react-collapse';
 
 import HeadSearch from '../components/headSearch.js';
 import Review from '../components/Review.js';

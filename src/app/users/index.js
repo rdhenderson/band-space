@@ -3,6 +3,6 @@
 // e.g. "import { LogInPageContainer } from ./users"
 // or "import { loginUser } form './users'.actions"
 export { default as LogIn } from './login/LogInPageContainer'
-export { defaultç as SignUp } from './signup/SignUpPageContainer'
+export { default as SignUp } from './signup/SignUpPageContainer'
 export reducer from './redux/userReducer'
 export * as actions from './redux/userActions'

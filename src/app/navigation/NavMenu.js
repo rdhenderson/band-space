@@ -23,19 +23,20 @@ let NavMenu = (props) => (
     </Link>
 
     { !props.isAuth ? (
-    <Link to="/signup">
+
       <div className="navLinks">
         <img className="navLinks__icon" src="./img/login.svg" />
-        <p id="home" className="menu-item">Log In/Signup</p>
+        <p id="home" className="menu-item">
+          <Link to="/login">Log In</Link> /
+          <Link to="/signup">Signup</Link></p>
       </div>
-    </Link>
     ) : (
-    <Link to="/">
-      <div className="navLinks">
-        <img className="navLinks__icon" src="./img/logout.svg" />
-        <p className="menu-item" onClick={this.handleLogout}> Log Out </p>
-      </div>
-    </Link>
+      <Link exact to="/">
+        <div className="navLinks">
+          <img className="navLinks__icon" src="./img/logout.svg" />
+          <p className="menu-item" onClick={this.handleLogout}> Log Out </p>
+        </div>
+      </Link>
     )}
     <Link to="/gigs">
       <div className="navLinks">
