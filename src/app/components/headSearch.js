@@ -5,7 +5,8 @@ class HeadSearch extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      query: ""
+      query: "",
+      searchType: "artist"
     }
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -27,6 +28,13 @@ class HeadSearch extends Component {
       <div>
 
         <form onSubmit={this.Search} className="queryHeader">
+          <div className="queryHeader__searchtype">
+            <select name="searchType" value={this.state.searchType} onChange={this.handleInputChange}>
+              <option value="artist">Artist</option>
+              <option value="venue">Venue</option>
+              <option value="user">User</option>
+            </select>
+          </div>
           <div className="queryHeader__inputdiv">
             <input
               name="query"

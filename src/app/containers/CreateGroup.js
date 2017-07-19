@@ -8,7 +8,7 @@ class CreateGroup extends Component {
     super(props);
     this.state = {
       name: '',
-      shareholders: [{ name: '' }],
+      members: [{ name: '' }],
       address: "",
       phonenumber: "",
       description: "",
@@ -29,27 +29,30 @@ class CreateGroup extends Component {
   }
 
 
-  handleShareholderNameChange = (idx) => (evt) => {
-    evt.preventDefault();
-    const newShareholders = this.state.shareholders.map((shareholder, sidx) => {
-      if (idx !== sidx) return shareholder;
-      return { ...shareholder, name: evt.target.value };
-    });
+  handleMemberNameChange = (idx) =>
+    (evt) => {
+      evt.preventDefault();
+      const newMembers = this.state.members.map((member, sidx) => {
+        if (idx !== sidx) return member;
+        return { ...member, name: evt.target.value };
+      });
 
-    this.setState({ shareholders: newShareholders });
-  }
+      this.setState({ members: newMembers });
+    }
 
   handleSubmit = (evt) => {
-    const { name, shareholders } = this.state;
-    alert(`Incorporated: ${name} with ${shareholders.length} shareholders`);
+    const { name, members } = this.state;
+    alert(`Incorporated: ${name} with ${members.length} members`);
   }
 
-  handleAddShareholder = () => {
-    this.setState({ shareholders: this.state.shareholders.concat([{ name: '' }]) });
+  handleAddMember = (evt) => {
+    evt.preventDefault();
+    this.setState({ members: this.state.members.concat([{ name: '' }]) });
   }
 
-  handleRemoveShareholder = (idx) => () => {
-    this.setState({ shareholders: this.state.shareholders.filter((s, sidx) => idx !== sidx) });
+  handleRemoveMember = (idx) => (evt) => {
+    evt.preventDefault();
+    this.setState({ members: this.state.members.filter((s, sidx) => idx !== sidx) });
   }
 
   render() {
@@ -83,18 +86,18 @@ class CreateGroup extends Component {
 
 
 
-              {this.state.shareholders.map((shareholder, idx) => (
-                <div className="createGroup__body__left__members__item">
+              {this.state.members.map((member, idx) => (
+                <div key={idx} className="createGroup__body__left__members__item">
                   <input
                     type="text"
                     placeholder={`Member #${idx + 1} name`}
-                    value={shareholder.name}
-                    onChange={this.handleShareholderNameChange(idx)}
+                    value={member.name}
+                    onChange={this.handleMemberNameChange(idx)}
                   />
-                  <button type="button" onClick={this.handleRemoveShareholder(idx)} className="small">-</button>
+                  <button type="button" onClick={this.handleRemoveMember(idx)} className="small">-</button>
                 </div>
               ))}
-              <button type="button" onClick={this.handleAddShareholder} className="small">Add Member</button>
+              <button type="button" onClick={this.handleAddMember} className="small">Add Member</button>
             </div>
           </div>
 
