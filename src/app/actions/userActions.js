@@ -8,7 +8,7 @@ export const ME_FROM_TOKEN_FAILURE = 'ME_FROM_TOKEN_FAILURE';
 
 const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
 
-export function loginUser(user) {
+export function loginUser(user, token) {
   return {
     type: USER_LOGIN,
     payload: { user: user, isAuth: true }
@@ -38,6 +38,7 @@ export function meFromToken(tokenFromStorage) {
 }
 
 export function meFromTokenSuccess(currentUser) {
+  console.log('Called me from token success', currentUser);
   return {
     type: ME_FROM_TOKEN_SUCCESS,
     payload: currentUser

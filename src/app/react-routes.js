@@ -19,14 +19,14 @@ import Auth from '../../server/config/auth.js';
 import Main from './containers/Main.js';
 
 // import Signup from './containers/SignUpContainer.js';
-// import SignUpPage from './containers/SignUpPageContainer.js'
-// import LogInPage from './containers/LogInPageContainer.js'
-// import Profile from './containers/profile.js';
-// import Search from './containers/Search.js';
-// import Gigs from './containers/Gigs.js';
-// import CreateGroup from './containers/CreateGroup.js';
-// import ManageGroup from './containers/ManageGroup.js';
-// import GroupProfile from './containers/GroupProfile.js';
+import SignUpPage from './containers/SignUpPageContainer.js'
+import LogInPage from './containers/LogInPageContainer.js'
+import Profile from './containers/profile.js';
+import Search from './containers/Search.js';
+import Gigs from './containers/Gigs.js';
+import CreateGroup from './containers/CreateGroup.js';
+import ManageGroup from './containers/ManageGroup.js';
+import GroupProfile from './containers/GroupProfile.js';
 
 class AppRoutes extends Component {
   constructor(props) {
@@ -72,7 +72,7 @@ class AppRoutes extends Component {
     return(
       <Router>
         <main id="outer-container">
-          {/* <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
+          <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
             <div className="navUser">
               {this.props.isAuth ? <Link to="/profile"> <img className="navUser__icon" src="http://lorempixel.com/100/100" /> </Link> : <img className="navUser__icon" src="./img/user.svg" /> }
               <p className="navUser__userName">
@@ -121,9 +121,9 @@ class AppRoutes extends Component {
               </div>
             </Link>
             <Link to="/testgroup"> <p id="testGroup" className="menu-item">Group Profile</p> </Link>
-          </Menu> */}
+          </Menu>
           <div id="page-wrap">
-            {/* <Route exact path="/" component={Main} />
+            <Route exact path="/" component={Main} />
             <Route path="/profile" component={Profile} />
             <Route path="/search" component={Search} />
             <Route path="/gigs" component={Gigs} />
@@ -131,7 +131,7 @@ class AppRoutes extends Component {
             <Route path="/managegroup" component={ManageGroup} />
             <Route path="/signup" component={SignUpPage} />
             <Route path="/login" component={LogInPage} />
-            <Route path="/testgroup" component={GroupProfile} /> */}
+            <Route path="/testgroup" component={GroupProfile} />
           </div>
         </main>
       </Router>
