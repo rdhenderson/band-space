@@ -13,12 +13,12 @@ import Auth from '../../server/config/auth.js';
 
 import Main from './containers/Main.js';
 import Signup from './containers/user_signup.js';
-import Createband from './containers/createband.js';
 import Profile from './containers/profile.js';
 import Search from './containers/Search.js';
 import Gigs from './containers/Gigs.js';
 import CreateGroup from './containers/CreateGroup.js';
 import ManageGroup from './containers/ManageGroup.js';
+import GroupProfile from './containers/GroupProfile.js';
 
 
 // import SignUpPage from './containers/users/signup-page'
@@ -47,17 +47,18 @@ class AppRoutes extends Component {
             <Link to="/gigs"> <p id="gigFind" className="menu-item">Find Gigs</p> </Link>
             <Link to="/creategroup"> <p id="createGroup" className="menu-item">Create a Group</p> </Link>
             <Link to="/managegroup"> <p id="manageGroup" className="menu-item">Manage Groups</p> </Link>
+            <Link to="/testgroup"> <p id="testGroup" className="menu-item">Group Profile</p> </Link>
           </Menu>
         <div id="page-wrap">
 
           <Route exact path="/" component={Main}/>
-          <Route path="/bandcreate" component={Createband}/>
           <Route path="/signup" component={Signup}/>
           <Route path="/profile" component={Profile}/>
           <Route path="/search" component={Search}/>
           <Route path="/gigs" component={Gigs}/>
           <Route path="/creategroup" component={CreateGroup}/>
           <Route path="/managegroup" component={ManageGroup}/>
+          <Route path="/testgroup" component={GroupProfile}/>
         </div>
         </main>
       </Router>
