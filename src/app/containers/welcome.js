@@ -13,10 +13,18 @@ class Welcome extends Component {
     this.state = {
       querytype: "",
       query : "",
-      venues: []
+      venues: [],
+      searchType: "venue",
+      showDrop: false,
+      showDisplay: {
+        display:  'none'
+      },
+      icon: "./img/stage.svg"
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.showDropdown = this.showDropdown.bind(this);
+    this.searchSelect = this.searchSelect.bind(this);
   }
 
 
@@ -42,6 +50,45 @@ class Welcome extends Component {
     });
   }
 
+  showDropdown(){
+    if (this.state.showDrop === false){
+      this.setState({
+        showDrop: true
+      })
+    }
+    else{
+      this.setState({
+        showDrop: false
+      })
+    }
+
+  }
+
+  searchSelect(event) {
+    console.log('event', event.target);
+    if(event.target === "<a>Artist</a>"){
+      console.log("Artist;")
+      this.setState({
+        searchType: "Artist",
+        icon: "./img/microphone.svg"
+      })
+    }
+    else if(event.target === "<a>User</a>"){
+      console.log("User;")
+      this.setState({
+        searchType: "User",
+        icon: "./img/profile.svg"
+      })
+    }
+    else if(event.target === "<a>Venue</a>"){
+      console.log("Venue;")
+      this.setState({
+        searchType: "Venue",
+        icon: "./img/stage.svg"
+      })
+    }
+  }
+
 
   render() {
     return (
@@ -53,18 +100,13 @@ class Welcome extends Component {
               <h1 id="logotemplate"> BandSpace </h1>
             </div>
           }
-          {/* <div className="splash__logo" id="splashlogo">
-            <img src="./img/amplifier.svg"/>
-            <h1 id="logotemplate"> BandSpace </h1>
-          </div> */}
-
           <div className="splash__searchbar">
             <div className="splash__searchbar__icondiv">
-              <a className="splash__searchbar__icondiv_drop">
-                <img src="http://lorempixel.com/50/50" />
-              </a>
-
-
+              <select name="searchType" value={this.state.searchType} onChange={this.handleInputChange}>
+                <option value="artist">Artist</option>
+                <option value="venue">Venue</option>
+                <option value="user">User</option>
+              </select>
             </div>
             <div className="splash__searchbar__input">
               <input
@@ -106,106 +148,13 @@ class Welcome extends Component {
             ))}
           </Infinite>
 
-            {/* <div className="mreview__body__item">
-              <div className="mreview__body__item__imgdiv">
-                <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
-                <h3> Bill </h3>
-              </div>
-              <div className="mreview__body__item__text">
-                <img src="http://lorempixel.com/500/100" />
-                <ul>
-                  <li> Very Professional </li>
-                  <li> Drinks A Lot </li>
-                  <li> Cheap! </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="mreview__body__item">
-              <div className="mreview__body__item__imgdiv">
-                <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
-                <h3> Bill </h3>
-              </div>
-              <div className="mreview__body__item__text">
-                <img src="http://lorempixel.com/500/100" />
-                <ul>
-                  <li> Very Professional </li>
-                  <li> Drinks A Lot </li>
-                  <li> Cheap! </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="mreview__body__item">
-              <div className="mreview__body__item__imgdiv">
-                <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
-                <h3> Bill </h3>
-              </div>
-              <div className="mreview__body__item__text">
-                <img src="http://lorempixel.com/500/100" />
-                <ul>
-                  <li> Very Professional </li>
-                  <li> Drinks A Lot </li>
-                  <li> Cheap! </li>
-                </ul>
-              </div>
-            </div> */}
-
-
-
-
           </div>
         </div>}
       </div>
 
-
-      // <Row>
-      //   <Col md={8} offset={{ md: 2 }}>
-      //     <Card>
-      //       <CardText>
-      //         React-Redux Example!
-      //       </CardText>
-      //       <CardTitle
-      //         title={`Welcome ${this.props.user}!`}
-      //         subtitle={`The Count is ${this.props.count} and color is ${this.props.color}`}
-      //       />
-      //       <CardActions>
-      //         <RaisedButton
-      //           label="Increment Count!"
-      //           primary={true}
-      //           onClick={this.incrementCount}
-      //         />
-      //         <RaisedButton
-      //           label="Decrement Count!"
-      //           secondary={true}
-      //           onClick={this.decrementCount}
-      //         />
-      //         <RaisedButton
-      //           label="Change Color!"
-      //           secondary={true}
-      //           onClick={this.changeColor}
-      //         />
-      //       </CardActions>
-      //     </Card>
-      //   </Col>
-      // </Row>
     );
   }
 }
-
-
-// //REDUX MAGIC! This puts both of our functions into the Component's props and links them to dispatch
-// function mapDispatchToProps(dispatch){
-//   // return bindActionCreators({ incrementCount, decrementCount }, dispatch);
-// }
-//
-// //MORE REDUX MAGIC! This function takes in all of our Application State and takes pieces of it and maps it
-// //to the Component's props.
-// function mapStateToProps(state) {
-//   // return {
-//   //   count: state.counter.count,
-//   // };
-// }
 
 //We export our Component using connect so that we can connect our React with our Redux for an awesome app!
 export default Welcome

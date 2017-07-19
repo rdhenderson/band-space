@@ -11,6 +11,15 @@
   margin-bottom: 40px;
   box-shadow: 1px 1px 3px 0px black;
 
+  &__searchtype > select{
+    background-color: transparent;
+    height: 50px;
+    line-height: 50px;
+    font-size: 40px;
+    color: white;
+    border: 2px solid #0a9efc;
+  }
+
 
   &__inputdiv > input{
     height: 50px;

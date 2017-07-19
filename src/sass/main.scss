@@ -9,6 +9,7 @@
 @import './regions/search.scss';
 @import './regions/gigs.scss';
 @import './regions/createGroup.scss';
+@import './regions/groupProfile.scss';
 
 //Components
 @import './regions/queryHeader.scss';
@@ -94,7 +95,7 @@ main{
 }
 
 .menu-item{
-  font-size: calc(1.5vw + 1.5vh + 1vmin);
+  font-size: 30px;
 }
 
 /* Styling of overlay */
@@ -132,7 +133,7 @@ main{
   }
 
   &__userName{
-    font-size: 30px;
+    font-size: 40px;
   }
 }
 

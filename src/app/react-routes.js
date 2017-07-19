@@ -17,15 +17,16 @@ import Menu from './components/bMenu.js'
 import Auth from '../../server/config/auth.js';
 
 import Main from './containers/Main.js';
+
 // import Signup from './containers/SignUpContainer.js';
 import SignUpPage from './containers/SignUpPageContainer.js'
 import LogInPage from './containers/LogInPageContainer.js'
-import CreateBand from './containers/createband.js';
 import Profile from './containers/profile.js';
 import Search from './containers/Search.js';
 import Gigs from './containers/Gigs.js';
 import CreateGroup from './containers/CreateGroup.js';
 import ManageGroup from './containers/ManageGroup.js';
+import GroupProfile from './containers/GroupProfile.js';
 
 class AppRoutes extends Component {
   constructor(props) {
@@ -79,7 +80,6 @@ class AppRoutes extends Component {
               </p>
             </div>
             <br/>
-
             <Link to="/">
               <div className="navLinks">
                 <img className="navLinks__icon" src="./img/home.svg" />
@@ -110,20 +110,20 @@ class AppRoutes extends Component {
             </Link>
             <Link to="/creategroup">
               <div className="navLinks">
-                <img className="navLinks__icon" src="./img/group.svg" />
+                <img className="navLinks__icon" src="./img/addgroup.svg" />
                 <p id="createGroup" className="menu-item">Create a Group</p>
               </div>
             </Link>
             <Link to="/managegroup">
               <div className="navLinks">
-                <img className="navLinks__icon" src="./img/addgroup.svg" />
+                <img className="navLinks__icon" src="./img/group.svg" />
                 <p id="manageGroup" className="menu-item">Manage Groups</p>
               </div>
             </Link>
+            <Link to="/testgroup"> <p id="testGroup" className="menu-item">Group Profile</p> </Link>
           </Menu>
           <div id="page-wrap">
             <Route exact path="/" component={Main} />
-            <Route path="/bandcreate" component={CreateBand} />
             <Route path="/profile" component={Profile} />
             <Route path="/search" component={Search} />
             <Route path="/gigs" component={Gigs} />
@@ -131,6 +131,7 @@ class AppRoutes extends Component {
             <Route path="/managegroup" component={ManageGroup} />
             <Route path="/signup" component={SignUpPage} />
             <Route path="/login" component={LogInPage} />
+            <Route path="/testgroup" component={GroupProfile} />
           </div>
         </main>
       </Router>
