@@ -7,8 +7,8 @@ module.exports = function(passport) {
 
   passport.use(new TwitterStrategy({
       // pull in our app id and secret from our auth.js file
-      consumerKey        : configAuth.twitterAuth.consumerKey,
-      consumerSecret    : configAuth.twitterAuth.consumerSecret,
+      consumerKey     : configAuth.twitterAuth.consumerKey,
+      consumerSecret  : configAuth.twitterAuth.consumerSecret,
       callbackURL     : configAuth.twitterAuth.callbackURL,
       passReqToCallback : true,
   },

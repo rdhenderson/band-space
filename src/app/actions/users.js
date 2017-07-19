@@ -26,10 +26,8 @@ export const VALIDATE_EMAIL_FAILURE = 'VALIDATE_EMAIL_FAILURE';
 //called when email is updated in profile to update main user's email state
 export const UPDATE_USER_EMAIL = 'UPDATE_USER_EMAIL';
 
-
 //log out user
 export const LOGOUT_USER = 'LOGOUT_USER';
-
 
 const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
 

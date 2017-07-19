@@ -9,13 +9,13 @@ module.exports = function(app, passport) {
     User.find({}).then( (users) => res.send(users));
   });
 
-  app.get('/logout', function(req, res) {
+  app.get('/api/users/logout', function(req, res) {
       req.logout();
       res.redirect('/');
   });
 
   // process the signup form -- NOTE Change redirect to proper route once react connected.
-  app.post('/signup', (req, res, next) => {
+  app.post('/api/users/signup', (req, res, next) => {
     return passport.authenticate('local-signup', (err, token, user) => {
       if (err) {
         if (err.name === 'MongoError' && err.code === 11000) {
@@ -36,16 +36,19 @@ module.exports = function(app, passport) {
           message: 'Could not process the form.'
         });
       }
+      console.log("TOKEN (signup):", token);
 
       return res.status(200).json({
         success: true,
-        message: 'You have successfully signed up! Now you should be able to log in.'
+        message: 'You have successfully signed up! Now you should be able to log in.',
+        token,
+        user
       });
     })(req, res, next);
   });
 
   // process the login form
-  app.post('/login', (req, res, next) => {
+  app.post('/api/users/login', (req, res, next) => {
     passport.authenticate('local-login',  (err, token, userData) => {
       if (err) {
         if (err.name === 'IncorrectCredentialsError') {
@@ -60,7 +63,7 @@ module.exports = function(app, passport) {
           message: 'Could not process the form.'
         });
       }
-
+      console.log("TOKEN:", token);
       return res.json({
         success: true,
         message: 'You have successfully logged in!',
@@ -71,7 +74,7 @@ module.exports = function(app, passport) {
   });
 
   //get current user from token
-  app.get('/me/from/token', function(req, res, next) {
+  app.get('/api/users/me/from/token', function(req, res, next) {
 
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.query.token || req.headers['x-access-token'];

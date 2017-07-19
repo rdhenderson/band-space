@@ -6,14 +6,18 @@ import {
   ReactDOM
 } from 'react-router-dom'
 import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
+import { loginUser, logoutUser } from './actions/userActions'
+
 // import { elastic as Menu } from 'react-burger-menu'
 import Menu from './components/bMenu.js'
 
 import Auth from '../../server/config/auth.js';
 
 import Main from './containers/Main.js';
-import Signup from './containers/user_signup.js';
-import Createband from './containers/createband.js';
+// import Signup from './containers/SignUpContainer.js';
+import SignUpForm from './containers/SignUpFormContainer.js'
+import CreateBand from './containers/createband.js';
 import Profile from './containers/profile.js';
 import Search from './containers/Search.js';
 import Gigs from './containers/Gigs.js';
@@ -30,15 +34,15 @@ class AppRoutes extends Component {
 
   }
   showSettings (event) {
-  event.preventDefault();
-
-}
+    event.preventDefault();
+  }
 
   render(){
     return(
       <Router>
         <main id="outer-container">
           <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
+            <p> User: {JSON.stringify(this.props.user)} </p>
             <Link to="/profile"> <img src="http://lorempixel.com/100/100" /> </Link>
             <p> Jimmy Twotones </p>
             <br/>
@@ -48,35 +52,46 @@ class AppRoutes extends Component {
             <Link to="/creategroup"> <p id="createGroup" className="menu-item">Create a Group</p> </Link>
             <Link to="/managegroup"> <p id="manageGroup" className="menu-item">Manage Groups</p> </Link>
           </Menu>
-        <div id="page-wrap">
-
-          <Route exact path="/" component={Main}/>
-          <Route path="/bandcreate" component={Createband}/>
-          <Route path="/signup" component={Signup}/>
-          <Route path="/profile" component={Profile}/>
-          <Route path="/search" component={Search}/>
-          <Route path="/gigs" component={Gigs}/>
-          <Route path="/creategroup" component={CreateGroup}/>
-          <Route path="/managegroup" component={ManageGroup}/>
-        </div>
+          <div id="page-wrap">
+            <Route exact path="/" component={Main}/>
+            <Route path="/bandcreate" component={CreateBand}/>
+            <Route path="/signup" component={SignUpForm}/>
+            <Route path="/profile" component={Profile}/>
+            <Route path="/search" component={Search}/>
+            <Route path="/gigs" component={Gigs}/>
+            <Route path="/creategroup" component={CreateGroup}/>
+            <Route path="/managegroup" component={ManageGroup}/>
+          </div>
         </main>
       </Router>
   )
   }
 }
 
-//REDUX MAGIC! This puts both of our functions into the Component's props and links them to dispatch
-function mapDispatchToProps(dispatch){
-  // return bindActionCreators({ incrementCount, decrementCount }, dispatch);
-}
-
-//MORE REDUX MAGIC! This function takes in all of our Application State and takes pieces of it and maps it
-//to the Component's props.
 function mapStateToProps(state) {
   return {
-
-  };
+    	user: state.user
+    };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppRoutes)
-// export default AppRoutes
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ loginUser, logoutUser }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppRoutes);
+// export default AppRoutes;
+//REDUX MAGIC! This puts both of our functions into the Component's props and links them to dispatch
+// function mapDispatchToProps(dispatch){
+//   return bindActionCreators({ incrementCount, decrementCount }, dispatch);
+// }
+//
+// //MORE REDUX MAGIC! This function takes in all of our Application State and takes pieces of it and maps it
+// //to the Component's props.
+// function mapStateToProps(state) {
+//   return {
+//
+//   };
+// }
+//
+// export default connect(mapStateToProps, mapDispatchToProps)(AppRoutes)
+// // export default AppRoutes
