@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {Collapse} from 'react-collapse';
 
 import HeadSearch from '../components/headSearch.js';
-import GReview from '../components/GReview.js';
+import Review from '../components/Review.js';
 
 class GroupProfile extends Component{
     constructor(props) {
@@ -130,9 +130,11 @@ class GroupProfile extends Component{
             </div>
 
             <div className="groupProfile__bottombody__botmain__right">
-
+              <div className="groupProfile__bottombody__botmain__right__header">
+                <h1> Write a review? </h1> <img src="./img/edit.svg" />
+              </div>
               {this.state.reviews.map((item, index) => (
-                <GReview index={index} name={item.name} title={item.title} details={item.details} />
+                <Review index={index} cName="groupProfile__bottombody__botmain__right__event" name={item.name} title={item.title} details={item.details} />
               ))}
             </div>
           </div>
