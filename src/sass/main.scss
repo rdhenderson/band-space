@@ -95,7 +95,6 @@ main{
 
 .menu-item{
   font-size: calc(1.5vw + 1.5vh + 1vmin);
-  padding-bottom: 20px;
 }
 
 /* Styling of overlay */
@@ -111,6 +110,32 @@ main{
 #page-wrap{
   height: 100%;
 }
+
+.navLinks{
+  display: flex !important;
+  outline: none;
+  align-items: center;
+  padding-bottom: 20px;
+
+  &__icon{
+    width:50px;
+  }
+}
+
+.navUser{
+  display: flex !important;;
+  flex-direction: column;
+  justify-content: center;
+
+  &__icon{
+
+  }
+
+  &__userName{
+    font-size: 30px;
+  }
+}
+
 
 /*
 ===================================
