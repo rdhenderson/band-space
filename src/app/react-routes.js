@@ -28,6 +28,7 @@ import CreateGroup from './containers/CreateGroup.js';
 import ManageGroup from './containers/ManageGroup.js';
 import GroupProfile from './containers/GroupProfile.js';
 
+
 class AppRoutes extends Component {
   constructor(props) {
     super(props)
@@ -73,96 +74,100 @@ class AppRoutes extends Component {
       <Router>
         <main id="outer-container">
           <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
-            <div className="navUser">
+            {/* <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
+              <div className="navUser">
               {this.props.isAuth ? <Link to="/profile"> <img className="navUser__icon" src="http://lorempixel.com/100/100" /> </Link> : <img className="navUser__icon" src="./img/user.svg" /> }
               <p className="navUser__userName">
                 {this.props.isAuth ? this.props.user.email : "Guest User" }
               </p>
-            </div>
-            <br/>
-            <Link to="/">
+              </div>
+              <br/>
+              <Link to="/">
               <div className="navLinks">
                 <img className="navLinks__icon" src="./img/home.svg" />
                 <p id="home" className="menu-item">Home</p>
               </div>
-            </Link>
+              </Link>
 
-            { !this.props.isAuth ? (
-            <Link to="/signup">
+              { !this.props.isAuth ? (
+              <Link to="/signup">
               <div className="navLinks">
                 <img className="navLinks__icon" src="./img/login.svg" />
                 <p id="home" className="menu-item">Log In/Signup</p>
               </div>
-            </Link>
-            ) : (
-            <Link to="/">
+              </Link>
+              ) : (
+              <Link to="/">
               <div className="navLinks">
                 <img className="navLinks__icon" src="./img/logout.svg" />
                 <p className="menu-item" onClick={this.handleLogout}> Log Out </p>
               </div>
-            </Link>
-            )}
-            <Link to="/gigs">
+              </Link>
+              )}
+              <Link to="/gigs">
               <div className="navLinks">
                 <img className="navLinks__icon" src="./img/map.svg" />
                 <p id="gigFind" className="menu-item">Find Gigs</p>
               </div>
-            </Link>
-            <Link to="/creategroup">
+              </Link>
+              <Link to="/creategroup">
               <div className="navLinks">
                 <img className="navLinks__icon" src="./img/addgroup.svg" />
                 <p id="createGroup" className="menu-item">Create a Group</p>
               </div>
-            </Link>
-            <Link to="/managegroup">
+              </Link>
+              <Link to="/managegroup">
               <div className="navLinks">
                 <img className="navLinks__icon" src="./img/group.svg" />
                 <p id="manageGroup" className="menu-item">Manage Groups</p>
               </div>
-            </Link>
-            <Link to="/testgroup"> <p id="testGroup" className="menu-item">Group Profile</p> </Link>
-          </Menu>
-          <div id="page-wrap">
-            <Route exact path="/" component={Main} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/search" component={Search} />
-            <Route path="/gigs" component={Gigs} />
-            <Route path="/creategroup" component={CreateGroup} />
-            <Route path="/managegroup" component={ManageGroup} />
-            <Route path="/signup" component={SignUpPage} />
-            <Route path="/login" component={LogInPage} />
-            <Route path="/testgroup" component={GroupProfile} />
-          </div>
-        </main>
-      </Router>
-  )
-  }
-}
+              </Link>
+              <Link to="/testgroup"> <p id="testGroup" className="menu-item">Group Profile</p> </Link>
+              </Menu>
+              <div id="page-wrap">
+              <Route exact path="/" component={Main} />
+            </Menu> */}
+            <div id="page-wrap">
+              {/* <Route exact path="/" component={Main} />
+                <Route path="/profile" component={Profile} />
+                <Route path="/search" component={Search} />
+                <Route path="/gigs" component={Gigs} />
+                <Route path="/creategroup" component={CreateGroup} />
+                <Route path="/managegroup" component={ManageGroup} />
+                <Route path="/signup" component={SignUpPage} />
+                <Route path="/login" component={LogInPage} />
 
-function mapStateToProps(state) {
-  return {
-    	user: state.user.user,
-      isAuth: state.user.isAuth,
-      error: state.error,
-      loading: state.loading,
-    };
-}
+                </div>
+                </main>
+                </Router>
+                )
+                }
+                }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ loginUser, logoutUser, meFromToken, meFromTokenSuccess, meFromTokenFailure }, dispatch);
-}
+                function mapStateToProps(state) {
+                return {
+                user: state.user.user,
+                isAuth: state.user.isAuth,
+                error: state.error,
+                loading: state.loading,
+                };
+                }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppRoutes);
-// export default AppRoutes;
-//REDUX MAGIC! This puts both of our functions into the Component's props and links them to dispatch
-// function mapDispatchToProps(dispatch){
-//   return bindActionCreators({ incrementCount, decrementCount }, dispatch);
-// }
-//
-// //MORE REDUX MAGIC! This function takes in all of our Application State and takes pieces of it and maps it
-// //to the Component's props.
-// function mapStateToProps(state) {
-//   return {
+                function mapDispatchToProps(dispatch) {
+                return bindActionCreators({ loginUser, logoutUser, meFromToken, meFromTokenSuccess, meFromTokenFailure }, dispatch);
+                }
+
+                export default connect(mapStateToProps, mapDispatchToProps)(AppRoutes);
+                // export default AppRoutes;
+                //REDUX MAGIC! This puts both of our functions into the Component's props and links them to dispatch
+                // function mapDispatchToProps(dispatch){
+                //   return bindActionCreators({ incrementCount, decrementCount }, dispatch);
+                // }
+                //
+                // //MORE REDUX MAGIC! This function takes in all of our Application State and takes pieces of it and maps it
+                // //to the Component's props.
+                // function mapStateToProps(state) {
+                //   return {
 //
 //   };
 // }

@@ -139,12 +139,30 @@
             width: 67%;
             text-align: center;
 
+            &__header{
+              font-size: 50px;
+              display: flex;
+              flex-direction: row;
+              height: 80px;
+              align-items: center;
+            }
+
+            &__header > img {
+              width: 50px;
+              margin-left: 15px;
+            }
+
+            &__header > img:hover{
+              box-shadow: -3px 2px 3px black;
+            }
+
             &__event{
               text-align: left;
               box-shadow: -1px 1px 5px 0.5px black;
               margin-right: 5vw;
               margin-bottom: 20px;
               padding: 10px;
+              position: relative;
 
               &__stars{
                 width:100px;
