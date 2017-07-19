@@ -8,20 +8,54 @@ import Menu from './BurgerMenu.js'
 
 let NavMenu = (props) => (
   <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
-    <Link to="/profile"> <img src="http://lorempixel.com/100/100" /> </Link>
-    <p>
-      {props.isAuth ? props.user.email : "Jimmy Twotones" }
-    </p>
+    <div className="navUser">
+      {props.isAuth ? <Link to="/profile"> <img className="navUser__icon" src="http://lorempixel.com/100/100" /> </Link> : <img className="navUser__icon" src="./img/user.svg" /> }
+      <p className="navUser__userName">
+        {props.isAuth ? props.user.email : "Guest User" }
+      </p>
+    </div>
     <br/>
-    <Link to="/"> <p id="home" className="menu-item">Home</p> </Link>
+    <Link to="/">
+      <div className="navLinks">
+        <img className="navLinks__icon" src="./img/home.svg" />
+        <p id="home" className="menu-item">Home</p>
+      </div>
+    </Link>
+
     { !props.isAuth ? (
-      <Link to="/signup"> <p id="home" className="menu-item">Signup</p> </Link>
+    <Link to="/signup">
+      <div className="navLinks">
+        <img className="navLinks__icon" src="./img/login.svg" />
+        <p id="home" className="menu-item">Log In/Signup</p>
+      </div>
+    </Link>
     ) : (
-      <Link to="/"><p className="menu-item" onClick={props.handleLogout}> Log Out </p></Link>
+    <Link to="/">
+      <div className="navLinks">
+        <img className="navLinks__icon" src="./img/logout.svg" />
+        <p className="menu-item" onClick={this.handleLogout}> Log Out </p>
+      </div>
+    </Link>
     )}
-    <Link to="/gigs"> <p id="gigFind" className="menu-item">Find Gigs</p> </Link>
-    <Link to="/creategroup"> <p id="createGroup" className="menu-item">Create a Group</p> </Link>
-    <Link to="/managegroup"> <p id="manageGroup" className="menu-item">Manage Groups</p> </Link>
+    <Link to="/gigs">
+      <div className="navLinks">
+        <img className="navLinks__icon" src="./img/map.svg" />
+        <p id="gigFind" className="menu-item">Find Gigs</p>
+      </div>
+    </Link>
+    <Link to="/creategroup">
+      <div className="navLinks">
+        <img className="navLinks__icon" src="./img/addgroup.svg" />
+        <p id="createGroup" className="menu-item">Create a Group</p>
+      </div>
+    </Link>
+    <Link to="/managegroup">
+      <div className="navLinks">
+        <img className="navLinks__icon" src="./img/group.svg" />
+        <p id="manageGroup" className="menu-item">Manage Groups</p>
+      </div>
+    </Link>
+    <Link to="/testgroup"> <p id="testGroup" className="menu-item">Group Profile</p> </Link>
   </Menu>
 );
 

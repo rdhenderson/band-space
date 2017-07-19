@@ -1,0 +1,213 @@
+.groupProfile{
+  color: white;
+
+
+  &__topbody{
+    display: flex;
+    flex-direction: row;
+
+
+    &__left{
+        margin-left: 5vw;
+
+        &__profblock{
+          width: 400px;
+          background-color: #018BE4;
+          box-shadow: -1px 1px 5px 0.5px black;
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 20px;
+
+              &__imgdiv{
+                margin: 20px;
+                width: 400px;
+                display: flex;
+                flex-direction: column;
+
+                    &__pic{
+                        width: 250px;
+
+                    }
+
+                    &__stars{
+                        width: 100px;
+                    }
+              }
+
+              &__proftext{
+                  margin-left: 30px;
+
+                  &__header{
+                    font-size: calc(2vh + 2vw + 1vmin);
+                    margin-bottom: 20px;
+                  }
+
+                  &__members{
+                    font-size: calc(1vh + 1vw + .5vmin);
+                    display: flex;
+                    flex-direction: column;
+
+                    &__member{
+                      display: flex;
+                      align-items: center;
+
+                    }
+
+                    &__member > img{
+                      border-radius: 100px;
+                      margin-right: 20px;
+                      margin-bottom: 10px;
+                    }
+                  }
+
+              }
+
+          }
+
+          &__details{
+              background-color: #018BE4;
+              box-shadow: -1px 1px 5px 0.5px black;
+              padding: 10px;
+
+
+          }
+
+    }
+
+    &__right{
+      width: 100%;
+      margin-right: 5vw;
+
+      &__sliders{
+        width: 100%;
+        background-color: #018BE4;
+        box-shadow: -1px 1px 5px 0.5px black;
+
+
+        &__sliderItem{
+          text-align: center;
+          margin: 0;
+
+          &__slider{
+            width: 500px;
+            height: 100px;
+
+          }
+
+        }
+
+      }
+
+    }
+  }
+
+  &__bottombody{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-right: 5vw;
+    margin-left: 5vw;
+    background-color: #0B9AF6;
+    box-shadow: -1px 1px 5px 0.5px black;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+
+      &__botheader{
+        text-align: center;
+        background-color: #014C7D;
+        margin-bottom: 20px;
+        height: 50px;
+        font-size: 40px;
+      }
+
+      &__botmain{
+        display: flex;
+        flex-direction: row;
+
+        margin-right: 5vw;
+        margin-left: 5vw;
+
+          &__left{
+            width: 33%;
+            text-align: center;
+            box-shadow: -1px 1px 5px 0.5px black;
+
+          }
+
+          &__right{
+            margin-left: 5vw;
+            width: 67%;
+            text-align: center;
+
+            &__header{
+              font-size: 50px;
+              display: flex;
+              flex-direction: row;
+              height: 80px;
+              align-items: center;
+            }
+
+            &__header > img {
+              width: 50px;
+              margin-left: 15px;
+            }
+
+            &__header > img:hover{
+              box-shadow: -3px 2px 3px black;
+            }
+
+            &__event{
+              text-align: left;
+              box-shadow: -1px 1px 5px 0.5px black;
+              margin-right: 5vw;
+              margin-bottom: 20px;
+              padding: 10px;
+              position: relative;
+
+              &__stars{
+                width:100px;
+              }
+            }
+
+          }
+
+      }
+
+
+  }
+}
+
+#skillheader{
+  font-size: 75px;
+  text-align: center;
+  margin: 10px;
+}
+
+
+/*
+===================================
+    MEDIA QUERIES
+===================================
+*/
+
+@media (max-width: 1200px) {
+
+
+
+}
+
+@media (max-width: 960px) {
+
+
+
+}
+
+@media (max-width: 760px) {
+
+
+}
+
+@media (max-width: 480px) {
+
+
+}
