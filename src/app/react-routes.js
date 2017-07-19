@@ -18,7 +18,7 @@ import Auth from '../../server/config/auth.js';
 
 import Main from './containers/Main.js';
 // import Signup from './containers/SignUpContainer.js';
-import SignUpForm from './containers/SignUpFormContainer.js'
+import SignUpPage from './containers/SignUpPageContainer.js'
 import LogInPage from './containers/LogInPageContainer.js'
 import CreateBand from './containers/createband.js';
 import Profile from './containers/profile.js';
@@ -26,10 +26,6 @@ import Search from './containers/Search.js';
 import Gigs from './containers/Gigs.js';
 import CreateGroup from './containers/CreateGroup.js';
 import ManageGroup from './containers/ManageGroup.js';
-
-
-// import SignUpPage from './containers/users/signup-page'
-
 
 class AppRoutes extends Component {
   constructor(props) {
@@ -99,7 +95,7 @@ class AppRoutes extends Component {
             <Route path="/gigs" component={Gigs} />
             <Route path="/creategroup" component={CreateGroup} />
             <Route path="/managegroup" component={ManageGroup} />
-            <Route path="/signup" component={SignUpForm} />
+            <Route path="/signup" component={SignUpPage} />
             <Route path="/login" component={LogInPage} />
           </div>
         </main>
