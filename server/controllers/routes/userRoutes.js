@@ -1,35 +1,112 @@
 const path = require('path');
+const { getCleanUser } = require('../../helpers/users.js')
 const User = require('../../models/user.js');
+const jwt = require('jsonwebtoken');
+const jwtSecret = process.env.JWT_SECRET;
 
 module.exports = function(app, passport) {
   app.get('/api/users', (req, res) => {
     User.find({}).then( (users) => res.send(users));
   });
 
-  app.get('/logout', function(req, res) {
+  app.get('/api/users/logout', function(req, res) {
       req.logout();
       res.redirect('/');
   });
 
   // process the signup form -- NOTE Change redirect to proper route once react connected.
-  app.post('/signup', passport.authenticate('local-signup', {
-      successRedirect : '/api/users', // redirect to the secure profile section
-      failureRedirect : '/test/signup', // redirect back to the signup page if there is an error
-      failureFlash : true // allow flash messages
-  }));
+  app.post('/api/users/signup', (req, res, next) => {
+    return passport.authenticate('local-signup', (err, token, user) => {
+      if (err) {
+        if (err.name === 'MongoError' && err.code === 11000) {
+          // the 11000 Mongo code is asdffor a duplication email error
+          // the 409 HTTP status code is for conflict error
+          console.log('Hit mongo error');
+          return res.status(409).json({
+            success: false,
+            message: 'Check the form for errors.',
+            errors: {
+              email: 'This email is already taken.'
+            }
+          });
+        }
+
+        return res.status(400).json({
+          success: false,
+          message: 'Could not process the form.'
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        message: 'You have successfully signed up! Now you should be able to log in.',
+        token,
+        user
+      });
+    })(req, res, next);
+  });
 
   // process the login form
-  app.post('/login', passport.authenticate('local-login', {
-      successRedirect : '/api/users', // redirect to the secure profile section
-      failureRedirect : '/test/login', // redirect back to the signup page if there is an error
-      failureFlash : true // allow flash messages
-  }));
+  app.post('/api/users/login', (req, res, next) => {
+    passport.authenticate('local-login',  (err, token, user) => {
+      if (err) {
+        if (err.name === 'IncorrectCredentialsError') {
+          return res.status(400).json({
+            success: false,
+            message: err.message
+          });
+        }
 
-  app.get('/auth/spotify', passport.authenticate('spotify'),
-    function(req, res){
-      // The request will be redirected to spotify for authentication, so this
-      // function will not be called.
+        return res.status(400).json({
+          success: false,
+          message: 'Could not process the form.'
+        });
+      }
+      return res.json({
+        success: true,
+        message: 'You have successfully logged in!',
+        token,
+        user
+      });
+    })(req, res, next);
+  });
+
+  //get current user from token
+  app.get('/api/users/me/from/token', function(req, res, next) {
+    // check header or url parameters or post parameters for token
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+    if (!token) {
+      return res.status(401).json({
+        message: 'Must pass token'
+      });
+    }
+    console.log("Token", token);
+    // decode token
+    jwt.verify(token, jwtSecret, function(err, user) {
+      if (err)
+        throw err;
+
+      //return user using the id from w/in JWTToken
+      User.findById({
+        '_id': user._id
+      }, function(err, user) {
+        if (err)
+          throw err;
+
+        user = getCleanUser(user); //dont pass password and stuff
+        //note: you can renew token by creating new token(i.e. refresh it) w/ new expiration time at this point, but I'm passing the old token back.
+        // var token = utils.generateToken(user);
+        console.log('returning user', user);
+        res.json({
+          user: user,
+          token: token
+        });
+      });
     });
+  });
+
+  app.get('/auth/spotify',
+    passport.authenticate('spotify', {scope: ['user-read-email', 'user-read-private'] }));
 
   app.get('/auth/spotify/callback',
     passport.authenticate('spotify', { failureRedirect: '/login' }),
@@ -39,7 +116,7 @@ module.exports = function(app, passport) {
     });
 
     app.get('/auth/google',
-      passport.authenticate('google', { scope: ['profile'] }));
+      passport.authenticate('google', { scope: ['profile', 'email'] }));
 
     app.get('/auth/google/callback',
       passport.authenticate('google', { failureRedirect: '/login' }),
@@ -48,13 +125,98 @@ module.exports = function(app, passport) {
         res.redirect('/');
       });
 
-    // app.get('/auth/google/callback', (req, res) => console.log("google response", req.query));
-      // passport.authenticate('google', { failureRedirect: '/login' }),
-      // function(req, res) {
-      //   // Successful authentication, redirect home.
-      //   res.redirect('/');
-      // });
+      app.get('/auth/twitter',
+        passport.authenticate('twitter'));
 
+      app.get('/auth/twitter/callback',
+        passport.authenticate('twitter', { failureRedirect: '/login' }),
+        function(req, res) {
+          // Successful authentication, redirect home.
+          res.redirect('/');
+        });
+
+    // route for facebook authentication and login
+    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+    // handle the callback after facebook has authenticated the user
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect : '/',
+            failureRedirect : '/'
+        }));
+// CONNECT ACCOUNTS TO USER PROFILE
+  // Google
+  app.get('/auth/connect/google', passport.authorize('google', { scope : ['profile', 'email'] }));
+  // the callback after google has authorized the user
+  app.get('/auth/connect/google/callback',
+    passport.authorize('google', {
+      successRedirect : '/',
+      failureRedirect : '/'
+  }));
+
+  app.get('/auth/connect/facebook', passport.authorize('facebook', { scope : 'email' }));
+  // handle the callback after facebook has authorized the user
+  app.get('/auth/connect/facebook/callback',
+      passport.authorize('facebook', {
+          successRedirect : '/',
+          failureRedirect : '/'
+  }));
+
+  app.get('/auth/connect/local', function(req, res) {
+    // res.render('connect-local.ejs', { message: req.flash('loginMessage') });
+    // FIXME: Need to add a view for connecting a local email/password
+  });
+
+  app.post('/auth/connect/local', passport.authenticate('local-signup', {
+      successRedirect : '/', // redirect to the secure profile section
+      failureRedirect : '/auth/connect/local', // redirect back to the signup page if there is an error
+      failureFlash : true // allow flash messages
+  }));
+
+// UNLINK ACCOUNTS FROM USER PROFILE
+  app.get('/auth/unlink/local', function(req, res) {
+    const user = req.user;
+    user.local.email    = undefined;
+    user.local.password = undefined;
+    user.save(function(err) {
+        res.redirect('/');
+    });
+  });
+
+  // facebook -------------------------------
+  app.get('/auth/unlink/facebook', function(req, res) {
+    const user = req.user;
+    user.facebook.token = undefined;
+    user.save(function(err) {
+        res.redirect('/profile');
+    });
+  });
+
+  app.get('/auth/unlink/twitter', function(req, res) {
+    const user = req.user;
+    user.twitter.token = undefined;
+    user.save(function(err) {
+        res.redirect('/profile');
+    });
+  });
+
+  // google -------------------------------
+  app.get('/auth/unlink/google', function(req, res) {
+    const user = req.user;
+    user.google.token = undefined;
+    user.save(function(err) {
+        res.redirect('/profile');
+    });
+  });
+
+  // spotify -------------------------------
+  app.get('/auth/unlink/spotify', function(req, res) {
+    const user = req.user;
+    user.spotify.token = undefined;
+    user.save(function(err) {
+        res.redirect('/profile');
+    });
+  });
   // app.get('/forgot', (req, res) => res.sendFile(path.resolve(`${__dirname}/../../public/test-forgot.html`)));
 
   // app.post('/forgot', async function(req, res, next) {

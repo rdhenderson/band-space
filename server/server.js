@@ -5,29 +5,31 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const routes = require('./controllers/routes');
-
+const dotenv = require('dotenv-safe');
 const passport = require('passport');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
-
+// Initialize process.env from .env file
+dotenv.config();
 // Express Port/App Declaration
 const PORT = process.env.PORT || 3000;
 const app = express();
 
 // Middleware
 app.use(logger('dev'));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Use cookies (required for auth)
 app.use(cookieParser());
 // required for passport
 app.use(session({
-  secret: 'ilovescotchscotchyscotchscotch',
+  secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true,
 })); // session secret
+
 require('./config/passport.js')(passport); // pass passport for configuration
 
 app.use(passport.initialize());
@@ -51,7 +53,6 @@ const db = mongoose.connection;
 db.on('error', (error) => {
   console.error('Database Error:', error);
 });
-
 // Connect to database and set the app to listen on port 3000
 db.once('open', () => {
   console.log('Connected to database');

@@ -1,9 +1,12 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
+const DotenvPlugin = require('webpack-dotenv-plugin');
 
 module.exports = {
   devtool: 'inline-sourcemap',
-  entry: './src/entry.js',
+  entry: [
+    './src/entry.js'
+  ],
   output: {
       path: path.join(__dirname, 'public'),
       filename: 'bundle.js'
@@ -24,4 +27,10 @@ module.exports = {
       },
     ]
   },
+  plugins: [
+    new DotenvPlugin({
+      sample: './.env.example',
+      path: './.env'
+    })
+  ]
 };

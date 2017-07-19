@@ -5,7 +5,7 @@ import {
   Link
 } from 'react-router-dom'
 
-class Createband extends Component {
+class CreateBand extends Component {
 
   // addbutton(){
   //     var max_fields      = 10; //maximum input boxes allowed
@@ -71,4 +71,4 @@ class Createband extends Component {
   }
 }
 
-export default Createband;
+export default CreateBand;
