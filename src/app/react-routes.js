@@ -19,6 +19,7 @@ import Auth from '../../server/config/auth.js';
 import Main from './containers/Main.js';
 // import Signup from './containers/SignUpContainer.js';
 import SignUpForm from './containers/SignUpFormContainer.js'
+import LogInPage from './containers/LogInPageContainer.js'
 import CreateBand from './containers/createband.js';
 import Profile from './containers/profile.js';
 import Search from './containers/Search.js';
@@ -91,14 +92,15 @@ class AppRoutes extends Component {
             <Link to="/managegroup"> <p id="manageGroup" className="menu-item">Manage Groups</p> </Link>
           </Menu>
           <div id="page-wrap">
-            <Route exact path="/" component={Main}/>
-            <Route path="/bandcreate" component={CreateBand}/>
-            <Route path="/profile" component={Profile}/>
-            <Route path="/search" component={Search}/>
-            <Route path="/gigs" component={Gigs}/>
-            <Route path="/creategroup" component={CreateGroup}/>
-            <Route path="/managegroup" component={ManageGroup}/>
-            <Route path="/signup" component={SignUpForm}/>
+            <Route exact path="/" component={Main} />
+            <Route path="/bandcreate" component={CreateBand} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/search" component={Search} />
+            <Route path="/gigs" component={Gigs} />
+            <Route path="/creategroup" component={CreateGroup} />
+            <Route path="/managegroup" component={ManageGroup} />
+            <Route path="/signup" component={SignUpForm} />
+            <Route path="/login" component={LogInPage} />
           </div>
         </main>
       </Router>
