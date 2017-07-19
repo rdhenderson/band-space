@@ -3,9 +3,9 @@ import axios from "axios";
 import { Link } from 'react-router-dom'
 
 // import components
-import ThirdPartyAuth from './ThirdPartyAuth.js'
+import ThirdPartyAuth from '../common/ThirdPartyAuth.js'
 import LogInForm from './LogInForm.js'
-import GuitarFloat from '../components/GuitarFloat.js'
+import GuitarFloat from '../../components/GuitarFloat.js'
 
 class LogInPage extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class LogInPage extends Component {
     })
     .then( ({ data }) => {
       localStorage.setItem('jwtToken', data.token);
-      this.props.loginUser(data.user, data.token);
+      this.props.loginUser(data.user);
       this.props.history.push('/profile');
     }).catch(err => console.log(err));
   }

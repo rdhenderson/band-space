@@ -4,8 +4,8 @@ import axios from "axios";
 import { Link } from 'react-router-dom'
 
 import SignUpForm from './SignUpForm.js'
-import ThirdPartyAuth from './ThirdPartyAuth.js'
-import GuitarFloat from '../components/GuitarFloat.js'
+import ThirdPartyAuth from '../common/ThirdPartyAuth.js'
+import GuitarFloat from '../../components/GuitarFloat.js'
 
 class SignUpPage extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class SignUpPage extends Component {
     .then( ({ data }) => {
       //Save token to local storage for users return
       localStorage.setItem('jwtToken', data.token);
-      this.props.loginUser(data.user, data.token);
+      this.props.loginUser(data.user);
       //Redirect to /profile
       this.props.history.push('/profile');
       //dispatch USER_LOGIN action to add user to store

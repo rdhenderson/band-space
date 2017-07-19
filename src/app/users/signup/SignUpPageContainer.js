@@ -1,8 +1,7 @@
-import LogInPage from '../components/LogInPage.js';
+import SignUpPage from './SignUpPage.js';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { loginUser } from '../actions/userActions.js'
-
+import { loginUser } from '../redux/userActions.js'
 
 function mapStateToProps(state) {
   return {
@@ -15,4 +14,4 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({ loginUser }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogInPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage);
