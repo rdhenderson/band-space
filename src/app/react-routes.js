@@ -77,11 +77,11 @@ class AppRoutes extends Component {
           <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
             <Link to="/profile"> <img src="http://lorempixel.com/100/100" /> </Link>
             <p>
-              {this.props.user.isAuth ? this.props.user.user.email : "Jimmy Twotones" }
+              {this.props.isAuth ? this.props.user.email : "Jimmy Twotones" }
             </p>
             <br/>
             <Link to="/"> <p id="home" className="menu-item">Home</p> </Link>
-            { !this.props.user.isAuth ? (
+            { !this.props.isAuth ? (
               <Link to="/signup"> <p id="home" className="menu-item">Signup</p> </Link>
             ) : (
               <Link to="/"><p className="menu-item" onClick={this.handleLogout}> Log Out </p></Link>
@@ -108,8 +108,8 @@ class AppRoutes extends Component {
 
 function mapStateToProps(state) {
   return {
-    	user: state.user,
-      isAuth: state.isAuth,
+    	user: state.user.user,
+      isAuth: state.user.isAuth,
       error: state.error,
       loading: state.loading,
     };
