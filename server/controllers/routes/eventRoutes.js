@@ -28,6 +28,21 @@ module.exports = function(app) {
       res.redirect(`/api/events/`);
     });
   });
+
+  //TODO: CONFIRM THAT UPDATE PROPERLY AFFECTS ARRAYS
+  app.update('/api/users/:id', (req, res) => {
+    const options = { upsert: true, new: true };
+    const query = { _id: req.params.id };
+    Event.findOneAndUpdate(query, req.body.event, options, (err, event) => {
+      if (err) {
+        console.log("ERROR", err);
+        res.json(err);
+      } else {
+        console.log("result", event);
+        res.status(200).json(event);
+      }
+    })
+  });
   // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
   // server/helpers/auth_check
   app.delete('api/events/:id', (req, res) => {

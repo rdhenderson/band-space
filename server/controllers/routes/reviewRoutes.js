@@ -28,7 +28,20 @@ module.exports = function(app) {
       res.redirect(`/api/reviews/`);
     });
   });
-
+  //TODO: CONFIRM THAT UPDATE PROPERLY AFFECTS ARRAYS
+  app.update('/api/users/:id', (req, res) => {
+    const options = { upsert: true, new: true };
+    const query = { _id: req.params.id };
+    Review.findOneAndUpdate(query, req.body.review, options, (err, review) => {
+      if (err) {
+        console.log("ERROR", err);
+        res.json(err);
+      } else {
+        console.log("result", review);
+        res.status(200).json(review);
+      }
+    })
+  });
   // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
   // server/helpers/auth_check
   app.delete('api/reviews/:id', (req, res) => {

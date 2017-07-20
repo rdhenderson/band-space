@@ -45,7 +45,7 @@ module.exports = function(app) {
   app.post('/api/venues', (req, res) => {
     console.log("Posting a new venue", req.body.venue);
     const query = { name: req.body.venue.name };
-    User.findOrCreate(query, req.body.venue, (err, venue) => {
+    Venue.findOrCreate(query, req.body.venue, (err, venue) => {
       // my new or existing model is loaded as result
       if (err) console.error('ERROR', err);
       // Send to favorites route to populate favorites for return
@@ -53,6 +53,20 @@ module.exports = function(app) {
     });
   });
 
+  app.update('/api/venues/:id', (req, res) => {
+    const options = { upsert: true, new: true };
+    const query = { _id: req.params.id };
+    Venue.findOneAndUpdate(query, req.body.venue, options, (err, venue) => {
+      if (err) {
+        console.log("ERROR", err);
+        res.json(err);
+      } else {
+        console.log("result", venue);
+        res.status(200).json(venue);
+      }
+    })
+  });
+  
   // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
   // server/helpers/auth_check
   app.delete('api/venues/:id', (req, res) => {
