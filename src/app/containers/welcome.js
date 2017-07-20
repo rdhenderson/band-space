@@ -116,40 +116,40 @@ class Welcome extends Component {
                 type="text"
                 id="query"
                 onChange={this.handleInputChange}
-               />
-           </div>
+              />
+            </div>
           </div>
 
         </div>
 
         {this.state.query.length !== 0 &&
           <div className="mreview">
-          <div className="mreview__header">
-            <h2> Reviews in Washington D.C. </h2>
-          </div>
-          <div className="mreview__body">
-          <Infinite className="mreview__body__container" containerHeight={550} width={'100%'} elementHeight={200}>
+            <div className="mreview__header">
+              <h2> Reviews in Washington D.C. </h2>
+            </div>
+            <div className="mreview__body">
+              <Infinite className="mreview__body__container" containerHeight={550} width={'100%'} elementHeight={200}>
 
-            {this.state.venues.map((item, index) => (
-              <div key={index} className="mreview__body__item" id={item.id}>
-                <div className="mreview__body__item__imgdiv">
-                  <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
-                  <h3> {item.name} </h3>
-                </div>
-                <div className="mreview__body__item__text">
-                  <img src="http://lorempixel.com/500/100" />
-                  <ul>
-                    <li> Very Professional </li>
-                    <li> Drinks A Lot </li>
-                    <li> Cheap! </li>
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </Infinite>
+                {this.state.venues.map((item, index) => (
+                  <div key={index} className="mreview__body__item" id={item.id}>
+                    <div className="mreview__body__item__imgdiv">
+                      <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
+                      <h3> {item.name} </h3>
+                    </div>
+                    <div className="mreview__body__item__text">
+                      <img src="http://lorempixel.com/500/100" />
+                      <ul>
+                        <li> Very Professional </li>
+                        <li> Drinks A Lot </li>
+                        <li> Cheap! </li>
+                      </ul>
+                    </div>
+                  </div>
+                ))}
+              </Infinite>
 
-          </div>
-        </div>}
+            </div>
+          </div>}
       </div>
 
     );
