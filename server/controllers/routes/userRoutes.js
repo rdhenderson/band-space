@@ -14,6 +14,23 @@ module.exports = function(app, passport) {
       res.redirect('/');
   });
 
+  app.post('/api/users/:id', (req, res) => {
+    console.log("ERROR: Implement user update route");
+  });
+
+  // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
+  // server/helpers/auth_check
+  app.delete('api/users/:id', (req, res) => {
+    if (req.body.token ) {
+      User.findByIdAndRemove(req.params.id, function (err, user) {
+        res.send({
+          message: "User successfully deleted",
+          id: user._id
+        })
+      })
+    }
+  });
+
   // process the signup form -- NOTE Change redirect to proper route once react connected.
   app.post('/api/users/signup', (req, res, next) => {
     return passport.authenticate('local-signup', (err, token, user) => {
@@ -76,16 +93,19 @@ module.exports = function(app, passport) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
     if (!token) {
+      console.log("No Token found, throwing error");
       return res.status(401).json({
         message: 'Must pass token'
       });
     }
+
     console.log("Token", token);
     // decode token
     jwt.verify(token, jwtSecret, function(err, user) {
-      if (err)
+      if (err) {
+        console.log("ERROR", err);
         throw err;
-
+      }
       //return user using the id from w/in JWTToken
       User.findById({
         '_id': user._id

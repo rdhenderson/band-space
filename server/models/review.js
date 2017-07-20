@@ -9,7 +9,7 @@ const ReviewSchema = new Schema({
     required: true,
   },
   // #TODO: Decide how to structure review data and whether its a single field or multiple
-  review_data: {type: String, trim: true, required: true},
+  review_data: { type: String, trim: true, required: true},
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },
 });

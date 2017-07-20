@@ -30,14 +30,20 @@ module.exports = function(passport) {
 
           // check to see if theres already a user with that email
           if (user) {
-              return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+            return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+          } else if (
+            (!req.body.name || req.body.name === "") ||
+            (!req.body.email || req.body.email === "") ||
+            (!req.body.password || req.body.password === ""))
+          {
+            return done(new Error("Invalid user parameters."), false, req.flash('signupMessage', 'Invalid Form Values: Please re-enter your signup information.'));
+
           } else {
             // if there is no user with that email
             // create the user
             const newUser = new User();
             // set the user's local credentials
             newUser.name     = req.body.name;
-            newUser.username = req.body.name;
             newUser.email    = email;
             newUser.password = newUser.generateHash(password);
             // newUser.local.zipcode  = req.body.zipcode;
