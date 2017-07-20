@@ -33,6 +33,20 @@ module.exports = function(app) {
     });
   });
 
+  //TODO: CONFIRM THAT UPDATE PROPERLY AFFECTS ARRAYS
+  app.put('/api/bands/:id', (req, res) => {
+    const options = { upsert: true, new: true };
+    const query = { _id: req.params.id };
+    Venue.findOneAndUpdate(query, req.body.band, options, (err, band) => {
+      if (err) {
+        console.log("ERROR", err);
+        res.json(err);
+      } else {
+        console.log("result", band);
+        res.status(200).json(band);
+      }
+    })
+  });
   // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
   // server/helpers/auth_check
   app.delete('api/bands/:id', (req, res) => {
