@@ -5,34 +5,38 @@ const Schema = mongoose.Schema;
 
 const VenueSchema = new Schema({
   name: { type: String, trim: true, required: true },
-  address: { type: String, trim: true },
-  city: { type: String, trim: true },
-  state: { type: String, trim: true },
-  zipcode: { type: String, trim: true },
-  image: { type: String, trim: true },
+  images: [{ type: String, trim: true }],
   description: { type: String, trim: true },
-  capacity: { type: Number },
-  //TODO: Make profile a separate model and link here instead of String
-  profile: {
-    type: Schema.Types.ObjectId,
-    ref: 'Profile',
+  capacity: { type: Number, trim: true },
+  url: { type : String, trim: true },
+  eventful_id: { type : String },
+  address: {
+    street: { type: String, trim: true },
+    city: { type: String, trim: true },
+    state: { type: String, trim: true },
+    zipcode: { type: String, trim: true },
+    longitude: { type: String, trim: true },
+    latitude: { type: String, trim: true },
   },
+  reviews: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Review',
+  }],
+  event_count: { type: Number, trim: true },
+  events: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Event',
+  }],
+  staff: [{
+    user_id: { type: Schema.Types.ObjectId, ref: 'User' },
+    reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }],
+    email: { type: String },
+    name: String,
+    phone: String,
+    role: String,
+  }],
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },
-  events: {
-      // Store ObjectIds in the array
-      type: Schema.Types.ObjectId,
-      // The ObjectIds will refer to the ids in the Comment model
-      ref: 'Event',
-  },
-  staff: [
-    {
-      // Store ObjectIds in the array
-      type: Schema.Types.ObjectId,
-      // The ObjectIds will refer to the ids in the Comment model
-      ref: 'User',
-    },
-  ],
 });
 
 VenueSchema.plugin(findOrCreate);

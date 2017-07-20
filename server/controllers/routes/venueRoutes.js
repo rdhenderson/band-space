@@ -1,9 +1,11 @@
 const Venue = require('../../models/venue.js');
+const getEventfulVenues = require('../../api/event-search.js');
 
 module.exports = function(app) {
   // Initialize route to populate database
-  app.get('/api/venues/updateFromEventful', (req, res) => {
-    API.getEventfulVenues()
+  app.get('/api/venues/scrapeFromEventful', (req, res) => {
+    console.log("Scraping data, this may take a while");
+    getEventfulVenues()
     .then( () => res.redirect('/api/venues'))
     .catch( (err) => {
       console.log("ERROR", err);
@@ -17,11 +19,31 @@ module.exports = function(app) {
 
   app.get('api/venues/:id', (req,res) => {
    Venue.findOne({"_id": req.params._id})
-    .then( (results) => res.send(results) )
+   .populate('reviews')
+   .populate('events')
+   .populate({
+     path: 'staff',
+     populate: {
+       path: 'user_id',
+       model: 'User'
+     }
+   })
+   .populate({
+     path: 'staff',
+     populate: {
+       path: 'reviews',
+       model: 'Review'
+     }
+   })
+    .then( (results) => {
+      console.log("Population Control?", results[0]);
+      return res.send(results)
+    });
   });
 
   //Add a new venue
   app.post('/api/venues', (req, res) => {
+    console.log("Posting a new venue", req.body.venue);
     const query = { name: req.body.venue.name };
     User.findOrCreate(query, req.body.venue, (err, venue) => {
       // my new or existing model is loaded as result

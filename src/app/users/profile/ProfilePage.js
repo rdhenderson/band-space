@@ -54,7 +54,7 @@ class ProfilePage extends Component {
       </div>
       <button onClick={this.toggleEdit}>Edit Profile</button>
       {this.state.makeEdit && (
-        <ProfileForm user={user} />
+        <ProfileForm user={user} onSubmit={this.handleSubmit}/>
       )}
       <button onClick={this.toggleConnect}>Connect Services</button>
       {this.state.showConnect && (

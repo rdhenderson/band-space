@@ -14,12 +14,16 @@ module.exports = function(app) {
   // Add a new venue
   // FIXME: Add proper fields to query for bands
   app.post('/api/bands', (req, res) => {
-    const query = { name: req.body.name };
+    const query = { name: req.body.groupName };
     const band = {
-      name: req.body.name,
-      profile: req.body.profile,
-      genres: req.body.genres,
-    }
+      name: req.body.groupName,
+      address: {
+        street: req.body.address
+      },
+      phone: req.body.phonenumber,
+      description: req.body.description,
+      members: req.body.members,
+    };
 
     Band.findOrCreate(query, band, (err, venue) => {
       // my new or existing model is loaded as result
