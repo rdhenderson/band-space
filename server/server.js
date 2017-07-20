@@ -13,7 +13,7 @@ const session = require('express-session');
 
 // Initialize process.env from .env file
 // for development
-if (!process.env.HEROKU_ENV) dotenv.config();
+if (!process.env.ENV_HEROKU) dotenv.config();
 // Express Port/App Declaration
 
 const PORT = process.env.PORT || 3000;
