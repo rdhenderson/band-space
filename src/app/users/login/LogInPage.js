@@ -39,7 +39,7 @@ class LogInPage extends Component {
           <p> See if you have any new reviews </p>
           <hr/>
           <LogInForm onSubmit={this.handleSubmit} />
-          <ThirdPartyAuth />
+          <ThirdPartyAuth connect={false} />
           <Link to="/signup"> <p>Not a member?  Sign Up here </p></Link>
         </div>
         <div className="uSignup__right">

@@ -31,10 +31,10 @@ let NavMenu = (props) => (
           <Link to="/signup">Signup</Link></p>
       </div>
     ) : (
-      <Link exact to="/">
+      <Link to="/">
         <div className="navLinks">
           <img className="navLinks__icon" src="./img/logout.svg" />
-          <p className="menu-item" onClick={this.handleLogout}> Log Out </p>
+          <p className="menu-item" onClick={props.handleLogout}> Log Out </p>
         </div>
       </Link>
     )}
