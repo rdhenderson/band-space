@@ -48,9 +48,21 @@ module.exports = function(app) {
     User.findOrCreate(query, req.body.venue, (err, venue) => {
       // my new or existing model is loaded as result
       if (err) console.error('ERROR', err);
-
       // Send to favorites route to populate favorites for return
       res.redirect(`/api/venue/`);
     });
+  });
+
+  // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
+  // server/helpers/auth_check
+  app.delete('api/venues/:id', (req, res) => {
+    if (req.body.token) {
+      Venue.findByIdAndRemove(req.params.id, function (err, venue) {
+        res.send({
+          message: "Venue successfully deleted",
+          id: venue._id
+        })
+      })
+    }
   });
 };

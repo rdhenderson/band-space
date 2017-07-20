@@ -28,4 +28,17 @@ module.exports = function(app) {
       res.redirect(`/api/reviews/`);
     });
   });
+
+  // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
+  // server/helpers/auth_check
+  app.delete('api/reviews/:id', (req, res) => {
+    if (req.body.token) {
+      Review.findByIdAndRemove(req.params.id, function (err, review) {
+        res.send({
+          message: "Review successfully deleted",
+          id: review._id
+        })
+      })
+    }
+  });
 }

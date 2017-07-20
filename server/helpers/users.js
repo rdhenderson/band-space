@@ -5,7 +5,6 @@ function generateToken(user) {
   //Use fields that are useful in other parts of the app/collections/models
   var u = {
     name: user.name,
-    username: user.username,
     admin: user.admin,
     moderator: user.moderator,
     email: user.email,
@@ -13,7 +12,7 @@ function generateToken(user) {
     google: user.google,
     facebook: user.facebook,
     spotify: user.spotify,
-    // image: user.image,
+    profile_image: user.profile_image,
     // isEmailVerified: user.isEmailVerified //used to prevent creating posts w/o verifying emails
   };
 
@@ -31,7 +30,6 @@ function getCleanUser(user) {
   return {
     _id: u._id,
     name: u.name,
-    username: u.username,
     email: u.email,
     admin: u.admin,
     moderator: u.moderator,
@@ -40,7 +38,7 @@ function getCleanUser(user) {
     spotify: user.spotify,
     // createdAt: u.createdAt,
     // updatedAt: u.updatedAt,
-    // image: u.image,
+    profile_image: u.profile_image,
     isEmailVerified: u.isEmailVerified
   }
 }

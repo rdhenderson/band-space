@@ -16,18 +16,24 @@ class SignUpPage extends Component {
 
   handleSubmit(values) {
     event.preventDefault();
+    console.log("Values", values);
     axios.post('/api/users/signup', {
       name: values.name,
       email: values.email,
       password: values.password,
     })
     .then( ({ data }) => {
-      //Save token to local storage for users return
-      localStorage.setItem('jwtToken', data.token);
-      this.props.loginUser(data.user);
-      //Redirect to /profile
-      this.props.history.push('/profile');
-      //dispatch USER_LOGIN action to add user to store
+      console.log("DATA:", data);
+      if (!data.success) {
+        console.log("DATA:", data);
+      } else {
+        //Save token to local storage for users return
+        localStorage.setItem('jwtToken', data.token);
+        this.props.loginUser(data.user);
+        //Redirect to /profile
+        this.props.history.push('/profile');
+        //dispatch USER_LOGIN action to add user to store
+      }
     })
     .catch(err => console.log(err));
   }
@@ -48,7 +54,6 @@ class SignUpPage extends Component {
             <SignUpForm onSubmit={this.handleSubmit} />
             <ThirdPartyAuth />
             <Link to="/login"> <p>Already a member? Log in here </p></Link>
-
           </div>
         </div>
         <div className="uSignup__right">
