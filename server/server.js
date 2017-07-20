@@ -12,7 +12,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 // Initialize process.env from .env file
- dotenv.config();
+// for development
+if (!process.env.HEROKU_ENV) dotenv.config();
 // Express Port/App Declaration
 
 const PORT = process.env.PORT || 3000;
