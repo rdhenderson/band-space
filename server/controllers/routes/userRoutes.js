@@ -148,6 +148,7 @@ module.exports = function(app, passport) {
   // Google
   app.get('/auth/connect/google', passport.authorize('google', { scope : ['profile', 'email'] }));
   // the callback after google has authorized the user
+
   app.get('/auth/connect/google/callback',
     passport.authorize('google', {
       successRedirect : '/',

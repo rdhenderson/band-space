@@ -18,7 +18,7 @@ let ProfileForm = props => {
           component="input"
           type="textarea"
           className="uSignup__left__input"
-          placeholder="Password"
+          placeholder="Password"ç
         />
       </div>
       <button type="submit">Submit</button>
