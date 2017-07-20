@@ -12,11 +12,11 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 // Initialize process.env from .env file
-dotenv.config();
+ dotenv.config();
 // Express Port/App Declaration
+
 const PORT = process.env.PORT || 3000;
 const app = express();
-
 // Middleware
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
