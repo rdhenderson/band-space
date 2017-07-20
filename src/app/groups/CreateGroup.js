@@ -1,149 +1,136 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-
+import { Field, FieldArray, reduxForm } from 'redux-form'
+import BandMemberValidate from './BandMemberValidate';
 import Dropzone from 'react-dropzone';
 
-class CreateGroup extends Component {
-    constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      members: [{ name: '' }],
-      address: "",
-      phonenumber: "",
-      description: "",
-      accepted: [],
-      rejected: []
-    };
-  }
+const renderMembers = ({ fields, meta: { touched, error } }) => (
+  <ul className="createGroup__body__left__members">
+    {fields.map((member, index) =>
+      <div className="createGroup__body__left__members__item">
+      <li  key={index}>
+        <h4>Member #{index + 1}</h4>
+        <Field
+          name={`${member}.name`}
+          type="text"
+          className="createGroup__body__left__members__item__field"
+          component="input"
+          label="Name"
+          placeholder="Name"
+        />
 
-  handleInputChange(event){
-  const target = event.target;
-  const value = target.type === 'checkbox' ? target.checked : target.value;
-  const name = target.name
+        <Field
+          name={`${member}.instrument`}
+          type="text"
+          className="createGroup__body__left__members__item__field"
+          component="input"
+          label="Instrument"
+          placeholder="Instrument"
+        />
+      </li>
+      <img
+        className="createGroup__body__left__members__item__remove"
+        src="./img/remove.svg"
+        onClick={() => fields.remove(index)}
+      />
+      {/* <button
+        type="button"
+        title="Remove Member"
+        onClick={() => fields.remove(index)}/> */}
+      </div>
+    )}
+    <li className="createGroup__body__left__members__item__adddiv">
+      <img
+        className="createGroup__body__left__members__item__adddiv__add"
+        src="./img/add.svg"
+        onClick={() => fields.push({})}
+      />
+      <p>Add Member</p>
+      {touched && error && <span>{error}</span>}
+    </li>
+  </ul>
+)
 
-  this.setState({
-    [name]: value
-  })
+const CreateGroup = (props) => {
+   const { handleSubmit, pristine, reset, submitting } = props
+   return (
+     <div className="createGroup">
+       <div className="createGroup__header">
+         <h1> Time to Rock the World </h1>
+       </div>
 
-  }
+       <form className="createGroup__body" onSubmit={handleSubmit}>
 
-
-  handleMemberNameChange = (idx) =>
-    (evt) => {
-      evt.preventDefault();
-      const newMembers = this.state.members.map((member, sidx) => {
-        if (idx !== sidx) return member;
-        return { ...member, name: evt.target.value };
-      });
-
-      this.setState({ members: newMembers });
-    }
-
-  handleSubmit = (evt) => {
-    const { name, members } = this.state;
-    alert(`Incorporated: ${name} with ${members.length} members`);
-  }
-
-  handleAddMember = (evt) => {
-    evt.preventDefault();
-    this.setState({ members: this.state.members.concat([{ name: '' }]) });
-  }
-
-  handleRemoveMember = (idx) => (evt) => {
-    evt.preventDefault();
-    this.setState({ members: this.state.members.filter((s, sidx) => idx !== sidx) });
-  }
-
-  render() {
-    return (
-      <div className="createGroup">
-        <div className="createGroup__header">
-          <h1> Time to Rock the World </h1>
-        </div>
-          <form className="createGroup__body" onSubmit={this.handleSubmit}>
-
-          <div className="createGroup__body__left">
-            <div className="createGroup__body__left__img">
-              {this.state.accepted.length === 0 && <img src="http://lorempixel.com/200/200" />}
+        <div className="createGroup__body__left">
+          <div className="createGroup__body__left__header">
+            <h1> The Rockstars </h1>
+          </div>
+            {/* <div className="createGroup__body__left__img">
+              <img src="http://lorempixel.com/200/200" />
+               {this.state.accepted.length === 0 && <img src="http://lorempixel.com/200/200" />}
               {this.state.accepted.length !==0 && <img src={this.state.accepted.name} /> }
               <Dropzone
-            accept="image/jpeg, image/png"
-            onDrop={(accepted, rejected) => { this.setState({ accepted, rejected }); }}
-          >
-            <p>Drop your Band's Profile Picture Here</p>
-          </Dropzone>
+                accept="image/jpeg, image/png"
+                onDrop={(accepted, rejected) => { this.setState({ accepted, rejected }); }}
+                >
+                  <p>Drop your Band's Profile Picture Here</p>
+                </Dropzone>
+              </div> */}
+          <div className="createGroup__body__left__name">
+            <Field className="createGroup__body__left__name__field" name="groupName" type="text" component="input" placeholder="What's Your Groups Name?"/>
+          </div>
+          <div className="createGroup__body__left__members">
+            <FieldArray name="members" component={renderMembers}/>
+          </div>
+        </div>
+
+        <div className="createGroup__body__right">
+          <div className="createGroup__body__right__content">
+            <div className="createGroup__body__right__content__header">
+              <h1> Boring Stuff </h1>
             </div>
-            <div className="createGroup__body__left__name">
-              <input
+            <div className="createGroup__body__right__content__address">
+              <Field
+                name="address"
+                component="input"
                 type="text"
-                placeholder="What's Your Groups Name?"
-                value={this.state.name}
-                onChange={this.handleInputChange}
+                placeholder="Address"
               />
             </div>
-            <div className="createGroup__body__left__members">
 
-
-
-              {this.state.members.map((member, idx) => (
-                <div key={idx} className="createGroup__body__left__members__item">
-                  <input
-                    type="text"
-                    placeholder={`Member #${idx + 1} name`}
-                    value={member.name}
-                    onChange={this.handleMemberNameChange(idx)}
-                  />
-                  <button type="button" onClick={this.handleRemoveMember(idx)} className="small">-</button>
-                </div>
-              ))}
-              <button type="button" onClick={this.handleAddMember} className="small">Add Member</button>
-            </div>
-          </div>
-
-          <div className="createGroup__body__right">
-            <div className="createGroup__body__right__content">
-              <div className="createGroup__body__right__content__header">
-                <h1> Boring Stuff </h1>
-              </div>
-              <div className="createGroup__body__right__content__address">
-                <input
-                  type="text"
-                  placeholder="Address"
-                  value={this.state.address}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-
-              <div className="createGroup__body__right__content__phone">
-                <input
-                  type="text"
-                  placeholder="Can I have your number?...Can I have it"
-                  value={this.state.phonenumber}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-
-              <div className="createGroup__body__right__content__description">
-                <textarea
-                  type="text"
-                  placeholder="Tell me about yourself...not too much though...maybe just the cool bits"
-                  value={this.state.description}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-              <button type="button"> Submit> </button>
+            <div className="createGroup__body__right__content__phone">
+              <Field
+                name="phonenumber"
+                component="input"
+                type="text"
+                placeholder="Can I have your number?...Can I have it"
+              />
             </div>
 
+            <div className="createGroup__body__right__content__description">
+              <Field
+                name="description"
+                component="textarea"
+                type="text"
+                placeholder="Tell me about yourself...not too much though...maybe just the cool bits"
+              />
+            </div>
+            <div>
+              <button type="submit" disabled={submitting}>Submit</button>
+              <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+            </div>
 
           </div>
+        </div>
 
-          </form>
-      </div>
-
-
-    )
-  }
+       </form>
+     </div>
+  )
 }
 
-export default CreateGroup;
+
+export default reduxForm({
+  form: 'createGroup',     // a unique identifier for this form
+  BandMemberValidate
+})(CreateGroup)
+{/* export default CreateGroup; */}
