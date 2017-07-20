@@ -20,7 +20,7 @@ height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 100%;
+    min-height: 100%;
     margin-bottom: 20px;
 
     &__left{
@@ -28,6 +28,13 @@ height: 100%;
       margin-left: 120px;
       background-color: #018BE4;
       box-shadow: -1px 1px 5px 0.5px black;
+
+      &__header{
+        color: white;
+        font-size: 70px;
+        margin: 20px;
+        text-align: center;
+      }
 
       &__img{
         margin: 20px;
@@ -39,30 +46,56 @@ height: 100%;
         margin-left: 10%;
         margin-right: 10%;
         margin-bottom: 20px;
-      }
 
-      &__name > input{
-        width: 100%;
-        height: 50px;
-        font-size: 40px;
-        line-height: 50px;
-      }
+          &__field{
+            width: 100%;
+            height: 50px;
+            font-size: 40px;
+            line-height: 50px;
+          }
+
+        }
 
       &__members{
         margin-left: 10%;
 
-        &__item >input{
-          width: 300px;
-          height: 40px;
-          font-size: 30px;
-          line-height: 40px;
-          margin-bottom: 10px;
+        &__item{
+          color: white;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          &__field{
+            width: 300px;
+            height: 30px;
+            font-size: 25px;
+            line-height: 30px;
+            margin-bottom: 10px;
+          }
+
+          &__remove{
+            width: 45px;
+          }
+
+          &__adddiv{
+            color: white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+              &__add{
+                width:50px
+              }
+          }
         }
+
+        &__item >li {
+          width: 320px;
+        }
+
+
       }
 
-      &__members > input{
-
-      }
     }
 
     &__right{
