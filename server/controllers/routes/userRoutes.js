@@ -15,7 +15,7 @@ module.exports = function(app, passport) {
   });
 
   //TODO: CONFIRM THAT UPDATE PROPERLY AFFECTS ARRAYS
-  app.update('/api/users/:id', (req, res) => {
+  app.put('/api/users/:id', (req, res) => {
     const options = { upsert: true, new: true };
     const query = { _id: req.params.id };
     User.findOneAndUpdate(query, req.body.user, options, (err, user) => {

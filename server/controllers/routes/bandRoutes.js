@@ -32,9 +32,9 @@ module.exports = function(app) {
       res.redirect(`/api/bands/`);
     });
   });
-  
+
   //TODO: CONFIRM THAT UPDATE PROPERLY AFFECTS ARRAYS
-  app.update('/api/bands/:id', (req, res) => {
+  app.put('/api/bands/:id', (req, res) => {
     const options = { upsert: true, new: true };
     const query = { _id: req.params.id };
     Venue.findOneAndUpdate(query, req.body.band, options, (err, band) => {

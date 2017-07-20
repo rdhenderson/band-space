@@ -53,7 +53,7 @@ module.exports = function(app) {
     });
   });
 
-  app.update('/api/venues/:id', (req, res) => {
+  app.put('/api/venues/:id', (req, res) => {
     const options = { upsert: true, new: true };
     const query = { _id: req.params.id };
     Venue.findOneAndUpdate(query, req.body.venue, options, (err, venue) => {
@@ -66,7 +66,7 @@ module.exports = function(app) {
       }
     })
   });
-  
+
   // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
   // server/helpers/auth_check
   app.delete('api/venues/:id', (req, res) => {
