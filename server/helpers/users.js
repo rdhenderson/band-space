@@ -10,6 +10,9 @@ function generateToken(user) {
     moderator: user.moderator,
     email: user.email,
     _id: user._id.toString(),
+    google: user.google,
+    facebook: user.facebook,
+    spotify: user.spotify,
     // image: user.image,
     // isEmailVerified: user.isEmailVerified //used to prevent creating posts w/o verifying emails
   };
@@ -32,6 +35,9 @@ function getCleanUser(user) {
     email: u.email,
     admin: u.admin,
     moderator: u.moderator,
+    google: user.google,
+    facebook: user.facebook,
+    spotify: user.spotify,
     // createdAt: u.createdAt,
     // updatedAt: u.updatedAt,
     // image: u.image,

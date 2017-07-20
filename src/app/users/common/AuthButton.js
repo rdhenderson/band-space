@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-const AuthButton = ({imgLink, serviceName }) => (
-  <div className="google-btn">
+const AuthButton = ({imgLink, serviceName, onClick }) => (
+  <div onClick={onClick} className="google-btn">
     <div className="google-icon-wrapper">
       <img className="google-icon-svg" src={imgLink}/>
     </div>
