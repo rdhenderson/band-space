@@ -4,6 +4,8 @@ import { Field, FieldArray, reduxForm } from 'redux-form'
 import BandMemberValidate from './BandMemberValidate';
 import Dropzone from 'react-dropzone';
 import axios from 'axios'
+import helpers from '../helpers'
+
 const renderMembers = ({ fields, meta: { touched, error } }) => (
   <ul className="createGroup__body__left__members">
     {fields.map((member, index) =>
@@ -12,6 +14,14 @@ const renderMembers = ({ fields, meta: { touched, error } }) => (
           <h4>Member #{index + 1}</h4>
           <Field
             name={`${member}.name`}
+            type="text"
+            className="createGroup__body__left__members__item__field"
+            component="input"
+            label="Name"
+            placeholder="Name"
+          />
+          <Field
+            name={`${member}.email`}
             type="text"
             className="createGroup__body__left__members__item__field"
             component="input"
@@ -60,9 +70,9 @@ const CreateGroup = (props) => {
        </div>
 
        <form className="createGroup__body" onSubmit={handleSubmit( (values) => {
-         console.log("internal values", values);
-         axios.post('/api/bands', values)
-         .then( (results) => console.log('Results', results))
+         console.log("new group values", values);
+         helpers.group.add(values)
+         .then( (results) => console.log('group added to mongo', results))
        })
        }>
 
@@ -82,7 +92,7 @@ const CreateGroup = (props) => {
              </Dropzone>
            </div> */}
            <div className="createGroup__body__left__name">
-             <Field className="createGroup__body__left__name__field" name="groupName" type="text" component="input" placeholder="What's Your Groups Name?"/>
+             <Field className="createGroup__body__left__name__field" name="name" type="text" component="input" placeholder="What's Your Groups Name?"/>
            </div>
            <div className="createGroup__body__left__members">
              <FieldArray name="members" component={renderMembers}/>
@@ -96,7 +106,7 @@ const CreateGroup = (props) => {
              </div>
              <div className="createGroup__body__right__content__address">
                <Field
-                 name="address"
+                 name="address.street"
                  component="input"
                  type="text"
                  placeholder="Address"
@@ -105,7 +115,7 @@ const CreateGroup = (props) => {
 
              <div className="createGroup__body__right__content__phone">
                <Field
-                 name="phonenumber"
+                 name="phone"
                  component="input"
                  type="text"
                  placeholder="Can I have your number?...Can I have it"
@@ -124,7 +134,7 @@ const CreateGroup = (props) => {
                <button className="normal-btn" type="submit" disabled={submitting}>Submit</button>
                <button className="normal-btn" type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
              </div>
-             
+
           </div>
         </div>
 

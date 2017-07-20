@@ -9,6 +9,7 @@ const BandSchema = new Schema({
     city: { type: String, trim: true, defaultValue: "Washington"},
     state: { type: String, trim: true, defaultValue: "DC" },
   },
+  description: { type: String, trim: true },
   phone: { type: String, trim: true },
   members: [{
     user_id: {type: Schema.Types.ObjectId, ref: 'User'},
@@ -18,15 +19,6 @@ const BandSchema = new Schema({
   }],
   images: [{ type: String, trim: true }],
   spotify: { type: String, trim: true },
-  artist_id: [{
-     type: Schema.Types.ObjectId,
-      ref: 'Artist',
-  }],
-  profile: {
-    type: Schema.Types.ObjectId,
-    trim: true,
-    ref: 'Profile',
-  },
 
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },

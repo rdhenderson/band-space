@@ -115,7 +115,10 @@ module.exports = function(app, passport) {
     jwt.verify(token, jwtSecret, function(err, user) {
       if (err) {
         console.log("ERROR", err);
-        throw err;
+        console.log("Token Invalid.");
+        return res.status(401).json({
+          message: 'Must pass valid token'
+        });
       }
       //return user using the id from w/in JWTToken
       User.findById({

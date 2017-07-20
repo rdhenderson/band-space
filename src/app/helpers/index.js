@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const BASE_QUERY_VENUE = '/api/venues/'
 const BASE_QUERY_USER = '/api/users/'
-const BASE_QUERY_GROUP = '/api/groups/'
+const BASE_QUERY_GROUP = '/api/bands/'
 const BASE_QUERY_REVIEW = '/api/reviews/'
 
 const handleErrors = ( err ) => {
@@ -28,7 +28,15 @@ export async function addVenue(venue) {
 
 export async function updateVenue(venue) {
   const query = (venue._id) ? `${BASE_QUERY_VENUE}/${venue._id}` : BASE_QUERY_VENUE;
-  axios.update(query, venue).then( (err, results) => results );
+  axios.put(query, venue).then( (err, results) => results );
+}
+
+export async function removeVenue(venueId, token) {
+  if (!venueId) throw new Error("Must supply id to remove user");
+  const query = `${BASE_QUERY_VENUE}/${venueId}`
+  axios.delete(query, {venueId, token})
+  .then( (err, results) => results )
+  .catch(handleErrors);
 }
 
 export async function getUser(userId) {
@@ -36,7 +44,15 @@ export async function getUser(userId) {
   axios.get(query).then( (err, results) => results );
 }
 
-export async function getUserLists(userId) {
+export async function findUserByEmail(email) {
+  const query = `${BASE_QUERY_USER}/email/${email}`;
+  axios.get(query).then( (err, user) => {
+    if (!user) return new Error('No user matches your request');
+    return user;
+  })
+}
+
+export async function getUserList(userId) {
   const query = BASE_QUERY_USER;
   axios.get(query).then( (err, results) => results.map( (user) => {
     return { name: user.name, _id: user._id } ;
@@ -50,13 +66,13 @@ export async function addUser(user) {
 
 export async function updateUser(user) {
   const query = (user._id) ? `${BASE_QUERY_USER}/${user._id}` : BASE_QUERY_USER;
-  axios.update(query, user).then( (err, results) => results );
+  axios.put(query, user).then( (err, results) => results );
 }
 
 export async function removeUser(userId, token) {
   if (!userId) throw new Error("Must supply id to remove user");
-  const query = (user._id) ? `${BASE_QUERY_USER}/${user._id}` : BASE_QUERY_USER;
-  axios.delete(query, {user, token})
+  const query = `${BASE_QUERY_USER}/${userId}`;
+  axios.delete(query, {userId, token})
   .then( (err, results) => results )
   .catch(handleErrors);
 }
@@ -78,15 +94,46 @@ export async function addGroup(group) {
   axios.post(query, group).then( (err, results) => results );
 }
 
-export async function updateGroup(group) {
-  const query = (group._id) ? `${BASE_QUERY_GROUP}/${group._id}` : BASE_QUERY_GROUP;
-  axios.update(query, group).then( (err, results) => results );
+export async function addGroupMember(groupId, member) {
+  let member_id;
+  if (member._id) {
+    member_id = user._id;
+  } else if (user.email && user.email.length > 0) {
+    const user = await findUserByEmail(member.email);
+    member_id = user._id;
+  } else {
+    return new Error("Must provide valid email or user id.");
+  }
+  const groupQuery = `${BASE_QUERY_GROUP}/member/${member_id}`;
+  const userQuery = `${BASE_QUERY_USER}/group/${groupId}`;
+  axios.put(userQuery);
+  axios.put(query).then( (err, results) => results );
 }
 
-export async function removegroup(groupId, token) {
+export async function removeGroupMember(groupId, member) {
+  let member_id;
+  if (member._id) {
+    member_id = user._id;
+  } else if (user.email && user.email.length > 0) {
+    const user = await findUserByEmail(member.email);
+    member_id = user._id;
+  } else {
+    return new Error("Must provide valid email or user id.");
+  }
+  const groupQuery = `${BASE_QUERY_GROUP}/${groupId}/member/${member_id}`;
+  const userQuery = `${BASE_QUERY_USER}/${memberId}/group/${groupId}`;
+  axios.delete(userQuery);
+  axios.delete(groupQuery).then( (err, results) => results );
+}
+export async function updateGroup(group) {
+  const query = (group._id) ? `${BASE_QUERY_GROUP}/${group._id}` : BASE_QUERY_GROUP;
+  axios.put(query, group).then( (err, results) => results );
+}
+
+export async function removeGroup(groupId, token) {
   if (!groupId) throw new Error("Must supply id to remove group");
-  const query = (group._id) ? `${BASE_QUERY_group}/${group._id}` : BASE_QUERY_GROUP;
-  axios.delete(query, {group, token})
+  const query = `${BASE_QUERY_group}/${groupId}`;
+  axios.delete(query, {groupId, token})
   .then( (err, results) => results )
   .catch(handleErrors);
 }
@@ -110,13 +157,13 @@ export async function addReview(review, token) {
 
 export async function updateReview(review, token) {
   const query = (review._id) ? `${BASE_QUERY_REVIEW}/${review._id}` : BASE_QUERY_REVIEW;
-  axios.post(query, {review, token}).then( (err, results) => results );
+  axios.put(query, {review, token}).then( (err, results) => results );
 }
 
 export async function removeReview(reviewId, token) {
   if (!reviewId) throw new Error("Must supply id to remove review");
-  const query = (review._id) ? `${BASE_QUERY_REVIEW}/${review._id}` : BASE_QUERY_REVIEW;
-  axios.delete(query, {review, token})
+  const query = `${BASE_QUERY_REVIEW}/${reviewId}`;
+  axios.delete(query, {reviewId, token})
   .then( (err, results) => results )
   .catch(handleErrors);
 }
@@ -133,6 +180,7 @@ const helper = {
     get : getUser,
     list : getUserList,
     add : addUser,
+    findByEmail : findUserByEmail,
     update : updateUser,
     remove : removeUser,
   },
