@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form'
 let LogInForm = props => {
   const { handleSubmit } = props
   return (
-    <form onSubmit={ handleSubmit }>
+    <form className="uSignup__left__form" onSubmit={ handleSubmit }>
       <div>
         <Field
           name="email"
@@ -21,7 +21,7 @@ let LogInForm = props => {
           placeholder="Password"
         />
       </div>
-      <button type="submit">Submit</button>
+      <button className="normal-btn" type="submit">Submit</button>
     </form>
   )
 }
