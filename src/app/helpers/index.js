@@ -28,7 +28,7 @@ export async function addVenue(venue) {
 
 export async function updateVenue(venue) {
   const query = (venue._id) ? `${BASE_QUERY_VENUE}/${venue._id}` : BASE_QUERY_VENUE;
-  axios.post(query, venue).then( (err, results) => results );
+  axios.update(query, venue).then( (err, results) => results );
 }
 
 export async function getUser(userId) {
@@ -50,7 +50,7 @@ export async function addUser(user) {
 
 export async function updateUser(user) {
   const query = (user._id) ? `${BASE_QUERY_USER}/${user._id}` : BASE_QUERY_USER;
-  axios.post(query, user).then( (err, results) => results );
+  axios.update(query, user).then( (err, results) => results );
 }
 
 export async function removeUser(userId, token) {
@@ -80,7 +80,7 @@ export async function addGroup(group) {
 
 export async function updateGroup(group) {
   const query = (group._id) ? `${BASE_QUERY_GROUP}/${group._id}` : BASE_QUERY_GROUP;
-  axios.post(query, group).then( (err, results) => results );
+  axios.update(query, group).then( (err, results) => results );
 }
 
 export async function removegroup(groupId, token) {
