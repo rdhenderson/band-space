@@ -30,7 +30,7 @@ const sampleReviews = [{
     image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
   }];
 
-class ProfilePage extends Component {
+class UserPrivateProfile extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -154,31 +154,18 @@ class ProfilePage extends Component {
         </div>
         <UserReview reviews={sampleReviews} />
 
-      <button onClick={this.toggleEdit}>Edit Profile</button>
-      {this.state.makeEdit && (
-        <ProfileForm user={user} onSubmit={this.handleSubmit}/>
-      )}
-      <button onClick={this.toggleConnect}>Connect Services</button>
-      {this.state.showConnect && (
-        <ThirdPartyAuth connect={true} />
-      )}
-    </div>
+        <button onClick={this.toggleEdit}>Edit Profile</button>
+        {this.state.makeEdit && (
+          <ProfileForm user={user} onSubmit={this.handleSubmit}/>
+        )}
+        <button onClick={this.toggleConnect}>Connect Services</button>
+        {this.state.showConnect && (
+          <ThirdPartyAuth connect={true} />
+        )}
+      </div>
 
     )
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    user: state.user.user,
-    isAuth: state.user.isAuth,
-  };
-}
-
-function mapDispatchToProps(dispatch){
-  // return bindActionCreators({ loginUser }, dispatch);
-}
-
-export default connect(mapStateToProps)(ProfilePage);
-
-// export default ProfilePage;
+export default UserPrivateProfile

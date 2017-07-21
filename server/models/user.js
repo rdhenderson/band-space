@@ -13,7 +13,7 @@ var userSchema = new Schema({
   admin: { type: Boolean, default: false },
   moderator: { type: Boolean, default: false },
   profile_image: {
-    img: String,
+    img: { type: String, default: './img/user.svg'},
     position: {
       x: Number,
       y: Number

@@ -51,7 +51,7 @@ class UProfDiv extends Component {
             <ImageEditor class="profile__topbody__left__profblock__imgdiv" type="user" user={this.props.user} editChange={this.editChange.bind(this)} />
           </div>
 
-          :
+        :
 
           <div>
             <div className="profile__topbody__left__profblock__imgdiv">
@@ -60,17 +60,17 @@ class UProfDiv extends Component {
                 {/* {this.props.user ?
 
                    <img
-                     className="profile__topbody__left__profblock__imgdiv__pic"
-                     src={this.props.user.profile_image.img}
-                     style={{
-                       width: `${200 * this.props.user.profile_image.scale}px`,
-                       height: `${200 * this.props.user.profile_image.scale}px`,
-                       "marginLeft": `${(this.props.user.profile_image.position.x * 100) - 50}%`,
-                       "marginTop": `${(this.props.user.profile_image.position.y * 100) - 50}%`,
-                       "transform": `rotate(${this.props.user.profile_image.rotate}deg)` }}
-                     />
+                  className="profile__topbody__left__profblock__imgdiv__pic"
+                  src={this.props.user.profile_image.img}
+                  style={{
+                  width: `${200 * this.props.user.profile_image.scale}px`,
+                  height: `${200 * this.props.user.profile_image.scale}px`,
+                  "marginLeft": `${(this.props.user.profile_image.position.x * 100) - 50}%`,
+                  "marginTop": `${(this.props.user.profile_image.position.y * 100) - 50}%`,
+                  "transform": `rotate(${this.props.user.profile_image.rotate}deg)` }}
+                  />
 
-                 :
+                  :
 
                    <img className="profile__topbody__left__profblock__imgdiv__pic" src='./img/user.svg'  />
 

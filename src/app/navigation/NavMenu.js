@@ -12,38 +12,33 @@ class NavMenu extends Component {
   }
 
   render(){
+    const user = this.props.user.user;
 
     return(
       <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
         <div className="navUser">
           {this.props.isAuth ?
-             <Link to={`/profile/${this.props.user._id}`}>
-              {this.props.user.profile_image ?
-                <div style={{borderRadius: 60, width:200, height: 200, overflow: "hidden" }}>
-                  <img
-                    className="profile__topbody__left__profblock__imgdiv__pic"
-                    src={this.props.user.profile_image.img}
-                    style={{
-                      width: `${200 * this.props.user.profile_image.scale}px`,
-                      height: `${200 * this.props.user.profile_image.scale}px`,
-                      "marginLeft": `${(this.props.user.profile_image.position.x * 100) - 50}%`,
-                      "marginTop": `${(this.props.user.profile_image.position.y * 100) - 50}%`,
-                      "transform": `rotate(${this.props.user.profile_image.rotate}deg)` }}
-                    />
-                </div>
-                :
-                <div>
-                 <img className="navUser__icon" src="./img/user.svg" />
-                </div>
+            <Link to="/profile">
+              <div style={{borderRadius: 60, width:200, height: 200, overflow: "hidden" }}>
+                <img
+                  className="profile__topbody__left__profblock__imgdiv__pic"
+                  src={user.profile_image.img}
+                  // style={{
+                  //   width: `${200 * this.props.user.profile_image.scale}px`,
+                  //   height: `${200 * this.props.user.profile_image.scale}px`,
+                  //   "marginLeft": `${(this.props.user.profile_image.position.x * 100) - 50}%`,
+                  //   "marginTop": `${(this.props.user.profile_image.position.y * 100) - 50}%`,
+                  //   "transform": `rotate(${this.props.user.profile_image.rotate}deg)` }}
+                />
+              </div>
+            </Link>
+          :
+            <Link to="/profile">
+              <img className="navUser__icon" src="./img/profile.svg" />
+            </Link>
             }
-          </Link>
-              :
-              <Link to="/profile">
-                <img className="navUser__icon" src="./img/profile.svg" />
-              </Link>
-             }
-          <p className="navUser__userName">
-            {this.props.isAuth ? this.props.user.email : "Guest User" }
+            <p className="navUser__userName">
+            {this.props.isAuth ? user.email : "Guest User" }
           </p>
         </div>
         <br/>
@@ -100,7 +95,7 @@ class NavMenu extends Component {
 
 function mapStateToProps(state) {
   return {
-    	user: state.user.user,
+    	user: state.user,
       isAuth: state.user.isAuth,
       error: state.error,
       loading: state.loading,
@@ -111,5 +106,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ ...userActions }, dispatch);
 }
 
-NavMenu = connect(mapStateToProps, mapDispatchToProps)(NavMenu);
-export default NavMenu;
+export default connect(mapStateToProps, mapDispatchToProps)(NavMenu);
