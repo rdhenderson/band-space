@@ -14,11 +14,6 @@ module.exports = function(app, passport) {
   app.put('/api/users/:id', isAuthenticated, (req, res) => {
     const options = { upsert: true, new: true };
     const query = { _id:req.params.id };
-    // console.log(options, "options", query, "query");
-    // User.findOne().exec((err, results) => {
-    //   if (err) return console.log(err)
-    //   console.log(results);
-    // })
     User.findOneAndUpdate(query, req.body, options, (err, user) => {
       if (err) {
         console.log("ERROR", err);
