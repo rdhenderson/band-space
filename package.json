@@ -47,6 +47,7 @@
     "passport-twitter": "^1.0.4",
     "raf": "^3.3.2",
     "react": "^15.6.1",
+    "react-avatar-editor": "^10.0.3",
     "react-burger-menu": "^2.1.4",
     "react-collapse": "^4.0.2",
     "react-display-name": "^0.2.0",
