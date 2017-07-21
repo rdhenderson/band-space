@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import ImageEditor from './ImageEditor';
+import ImageEditor from '../../../components/ImageEditor';
 
 
 class UProfDiv extends Component {
@@ -33,19 +33,21 @@ class UProfDiv extends Component {
       <div className="profile__topbody__left__profblock">
         {this.state.editActive ?
           <div>
-            <ImageEditor class="profile__topbody__left__profblock__imgdiv" type="user" />
+            <h1>  </h1>
+            <ImageEditor class="profile__topbody__left__profblock__imgdiv" type="user" user={this.props.user} />
             <button onClick={this.editChange}> Edit Profile Picture </button>
           </div>
           :
           <div>
             <div className="profile__topbody__left__profblock__imgdiv">
-              <div style={{borderRadius: 60, width:200, height: 200, overflow: "hidden" }}>
+              {/* <div style={{borderRadius: 60, width:200, height: 200, overflow: "hidden" }}>
                 {this.props.user.profile_image ?(
                    <img className="profile__topbody__left__profblock__imgdiv__pic" src={this.props.user.profile_image.img}  />
                  ):(
                    <img className="profile__topbody__left__profblock__imgdiv__pic" src='./img/user.svg'  />
                 )}
-              </div>
+              </div> */}
+              <img className="profile__topbody__left__profblock__imgdiv__pic" src='./img/user.svg'  />
               <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
             </div>
             <div className="profile__topbody__left__profblock__proftext">

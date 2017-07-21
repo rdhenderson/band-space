@@ -13,8 +13,13 @@ module.exports = function(app, passport) {
   //TODO: CONFIRM THAT UPDATE PROPERLY AFFECTS ARRAYS
   app.put('/api/users/:id', isAuthenticated, (req, res) => {
     const options = { upsert: true, new: true };
-    const query = { _id: req.params.id };
-    User.findOneAndUpdate(query, req.body.user, options, (err, user) => {
+    const query = { _id:req.params.id };
+    // console.log(options, "options", query, "query");
+    // User.findOne().exec((err, results) => {
+    //   if (err) return console.log(err)
+    //   console.log(results);
+    // })
+    User.findOneAndUpdate(query, req.body, options, (err, user) => {
       if (err) {
         console.log("ERROR", err);
         res.json(err);
@@ -27,6 +32,7 @@ module.exports = function(app, passport) {
 
   // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
   // server/helpers/auth_check
+
   app.delete('api/users/:id', isAuthenticated, (req, res) => {
       User.findByIdAndRemove(req.params.id, function (err, user) {
         res.send({

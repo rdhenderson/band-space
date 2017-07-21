@@ -51,12 +51,12 @@ class ImageEditor extends Component{
   }
 
   savePicture = (e) => {
+    e.preventDefault()
     if (this.props.type === "user"){
       this.props.user.profile_image = {...this.state};
-      console.log("user", this.props.user);
       updateUser(this.props.user)
     }
-    e.preventDefault()
+
   }
 
   render () {
@@ -121,14 +121,6 @@ class ImageEditor extends Component{
   }
 }
 
-
-function mapStateToProps(state) {
-  return {
-    user: state.user.user,
-    isAuth: state.user.isAuth,
-  };
-}
-
-export default connect(mapStateToProps)(ImageEditor);
+export default ImageEditor;
 
 // export default ImageEditor;
