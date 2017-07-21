@@ -1,12 +1,12 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-// import UserList from './UserList'
+import UserList from './UserList'
 
-import ProfilePage from './profile/ProfilePageContainer.js'
+import { ProfilePage as UserProfile } from './profile/ProfilePageContainer.js'
 const User = (props) => (
   <Switch>
-    <Route exact path='/users' component={ProfilePage}/>
-    <Route path='/users/:id' component={ProfilePage}/>
+    <Route exact path='/users' component={UserList}/>
+    <Route path='/users/:id' component={UserProfile}/>
   </Switch>
 )
 export default User;

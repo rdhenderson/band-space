@@ -1,4 +1,5 @@
 const Event = require('../../models/event.js');
+const isAuthenticated = require('../../helpers/auth_check.js');
 
 module.exports = function(app) {
   app.get('/api/events', (req, res) => {
@@ -11,26 +12,15 @@ module.exports = function(app) {
     .catch( (err) => res.send("ERROR", err));
   });
 
-  //Add a new venue
-  app.post('/api/events/', (req, res) => {
-    const query = { name: req.body.name };
-
-    const event = {
-      user_id: req.params.id,
-      name: req.body.name,
-      profile: req.body.profile,
-      genres: req.body.genres,
-    }
-    Event.findOrCreate(query, event, (err, venue) => {
-      // my new or existing model is loaded as result
+  app.post('/api/events/', isAuthenticated, (req, res) => {
+    Event.create(event, (err, event) => {
       if (err) console.error('ERROR', err);
-      // Send to favorites route to populate favorites for return
-      res.redirect(`/api/events/`);
+      res.json(event)
     });
   });
 
   //TODO: CONFIRM THAT UPDATE PROPERLY AFFECTS ARRAYS
-  app.put('/api/users/:id', (req, res) => {
+  app.put('/api/users/:id', isAuthenticated, (req, res) => {
     const options = { upsert: true, new: true };
     const query = { _id: req.params.id };
     Event.findOneAndUpdate(query, req.body.event, options, (err, event) => {
@@ -45,7 +35,7 @@ module.exports = function(app) {
   });
   // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
   // server/helpers/auth_check
-  app.delete('api/events/:id', (req, res) => {
+  app.delete('api/events/:id', isAuthenticated, (req, res) => {
     if (req.body.token) {
       Event.findByIdAndRemove(req.params.id, function (err, event) {
         res.send({

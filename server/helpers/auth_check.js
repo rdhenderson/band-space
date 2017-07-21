@@ -5,7 +5,8 @@ const jwtSecret = process.env.JWT_SECRET;
 /**
  *  The Auth Checker middleware function.
  */
-module.exports = (req, res, next) => {
+
+const isAuthenticated = (req, res, next) => {
   if (!req.headers.authorization) {
     return res.status(401).end();
   }
@@ -15,19 +16,21 @@ module.exports = (req, res, next) => {
   return jwt.verify(token, jwtSecret, (err, decoded) => {
     // the 401 code is for unauthorized status
     if (err) { return res.status(401).end(); }
-
-    const userId = decoded.sub;
+    console.log("Decoded user", decoded);
+    const userId = decoded._id;
 
     // check if a user exists
     return User.findById(userId, (userErr, user) => {
       if (userErr || !user) {
         return res.status(401).end();
       }
-
       return next();
     });
   });
 };
+
+module.exports = isAuthenticated;
+
 // app.use(function(req, res, next) {
 //   // check header or url parameters or post parameters for token
 //   var token = req.headers['authorization'];
