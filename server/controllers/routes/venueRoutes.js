@@ -15,7 +15,11 @@ module.exports = function(app) {
   });
 
   app.get('/api/venues', (req, res) => {
-    Venue.find({}).then( (results) => res.send(results));
+    console.log("hit venue routes");
+    return Venue.find({}).then( (results) => {
+      console.log("venue results", results);
+      return res.send(results)
+    })
   });
 
   app.get('api/venues/:id', (req,res) => {
