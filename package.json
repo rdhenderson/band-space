@@ -10,8 +10,8 @@
   "scripts": {
     "prestart": "npm run lint",
     "heroku-postbuild": "npm install --only=dev && npm run build",
-    "build": "webpack",
-    "build-watch": "webpack -w",
+    "build": "webpack --optimize-minimize",
+    "build-watch": "webpack --optimize-minimize -w",
     "dev-client": "webpack-dev-server --progress --inline --hot",
     "dev-server": "nodemon server/server.js",
     "start": "node server/server.js",
@@ -64,6 +64,7 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.7.1",
     "redux-burger-menu": "^0.2.1",
+    "redux-devtools-extension": "^2.13.2",
     "redux-form": "^7.0.1",
     "redux-logger": "^3.0.6",
     "redux-promise": "^0.5.3",
