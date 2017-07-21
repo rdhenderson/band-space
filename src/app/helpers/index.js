@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-const BASE_QUERY_VENUE = '/api/venues/'
-const BASE_QUERY_USER = '/api/users/'
-const BASE_QUERY_GROUP = '/api/bands/'
-const BASE_QUERY_REVIEW = '/api/reviews/'
+const BASE_QUERY_VENUE = '/api/venues'
+const BASE_QUERY_USER = '/api/users'
+const BASE_QUERY_GROUP = '/api/bands'
+const BASE_QUERY_REVIEW = '/api/reviews'
 
 const handleErrors = ( err ) => {
   console.log("ERROR", err);
@@ -28,7 +28,9 @@ export async function addVenue(venue) {
 
 export async function updateVenue(venue) {
   const query = (venue._id) ? `${BASE_QUERY_VENUE}/${venue._id}` : BASE_QUERY_VENUE;
-  axios.put(query, venue).then( (err, results) => results );
+  axios.put(query, venue)
+  .then( (results) => results )
+  .catch( (err) => console.log(err))
 }
 
 export async function removeVenue(venueId, token) {
@@ -41,7 +43,9 @@ export async function removeVenue(venueId, token) {
 
 export async function getUser(userId) {
   const query = (userId) ? `${BASE_QUERY_USER}/${userId}` : BASE_QUERY_USER;
-  axios.get(query).then( (err, results) => results );
+  axios.get(query)
+  .then( (results) => results )
+  .catch( (err) => console.log(err))
 }
 
 export async function findUserByEmail(email) {
@@ -61,12 +65,17 @@ export async function getUserList(userId) {
 
 export async function addUser(user) {
   const query = BASE_QUERY_USER;
-  axios.post(query, user).then( (err, results) => results );
+  axios.post(query, user)
+  .then( ( results) => results )
+  .catch( (err) => err)
 }
 
 export async function updateUser(user) {
+
   const query = (user._id) ? `${BASE_QUERY_USER}/${user._id}` : BASE_QUERY_USER;
-  axios.put(query, user).then( (err, results) => results );
+  axios.put(query, user)
+  .then( (results) => results )
+  .catch( (err) => console.log(err))
 }
 
 export async function removeUser(userId, token) {

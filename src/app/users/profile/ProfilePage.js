@@ -1,12 +1,32 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import { Link } from 'react-router-dom'
 
 // import components
-import ProfileForm from './ProfileForm'
+import ProfileForm from './components/ProfileForm'
 import ThirdPartyAuth from '../common/ThirdPartyAuth'
-import GuitarFloat from '../../components/GuitarFloat'
 import helpers from '../../helpers'
+import HeadSearch from '../../components/headSearch.js'
+import UserReview from './components/userReview.js'
+import UProfDiv from './components/UProfDiv.js'
+
+const sampleReviews = [{
+    event : "The Reusable Code @ 930 Club 09/06/17",
+    title: "The Guitarist was amazing",
+    body: "This is the descrption",
+    image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
+  },
+  {
+    event : "The Who Needs Sleep @ 930 Club 07/19/17",
+    title: "Well, you're never gonna get it",
+    body: "This is the descrption",
+    image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
+  },
+  {
+    event : "The Fartz @ 930 Club 09/09/16",
+    title: "The Guitarist was amazing",
+    body: "This is the descrption",
+    image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
+  }];
 
 class ProfilePage extends Component {
   constructor(props) {
@@ -14,6 +34,11 @@ class ProfilePage extends Component {
     this.state = {
       makeEdit : false,
       showConnect: false,
+      query: "",
+      uName: "",
+      skill: {},
+      bands: {},
+      events: {}
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
@@ -39,17 +64,83 @@ class ProfilePage extends Component {
     this.setState(newState);
   }
 
+  componentDidMount(){
+  }
+
   render(){
     let user = this.props.user.user;
+    var sampleReviews = [{
+        event : "The Reusable Code @ 930 Club 09/06/17",
+        title: "The Guitarist was amazing",
+        body: "This is the descrption",
+        image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
+      },
+      {
+        event : "The Who Needs Sleep @ 930 Club 07/19/17",
+        title: "Well, you're never gonna get it",
+        body: "This is the descrption",
+        image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
+      },
+      {
+        event : "The Fartz @ 930 Club 09/09/16",
+        title: "The Guitarist was amazing",
+        body: "This is the descrption",
+        image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
+      }];
 
     return (
-    <div>
-      <div>
-        <div><h4>Name:</h4> {user && user.name}</div>
-        <div><h4>Username:</h4> {user && user.username}</div>
-        <div><h4>Email:</h4> {user && user.email}</div>
-        <br/><br/>
-      </div>
+      <div className="profile">
+        <HeadSearch />
+        <div className="profile__topbody">
+
+          <div className="profile__topbody__left">
+            <h1> </h1>
+            <UProfDiv user={user} />
+
+            <div className="profile__topbody__left__details">
+              <div id="bands">
+                <h3> Bands </h3>
+                <ul>
+                  <li> The Fartz </li>
+                  <li> Paid Against the Machine </li>
+                  <li> Migos </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+          <div className="profile__topbody__right">
+
+            <div className="profile__topbody__right__sliders">
+              <div id="Header">
+                <h1 id="skillheader"> Skills </h1>
+              </div>
+              <div id="slidSkills">
+                <div className="profile__topbody__right__sliders__sliderItem">
+                  <h3> Professionalism </h3>
+                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
+                </div>
+                <div className="profile__topbody__right__sliders__sliderItem">
+                  <h3> Professionalism </h3>
+                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
+                </div>
+                <div className="profile__topbody__right__sliders__sliderItem">
+                  <h3> Professionalism </h3>
+                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
+                </div>
+                <div className="profile__topbody__right__sliders__sliderItem">
+                  <h3> Professionalism </h3>
+                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        <UserReview reviews={sampleReviews} />
+
       <button onClick={this.toggleEdit}>Edit Profile</button>
       {this.state.makeEdit && (
         <ProfileForm user={user} onSubmit={this.handleSubmit}/>

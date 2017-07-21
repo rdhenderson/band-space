@@ -9,7 +9,7 @@ import Menu from './BurgerMenu.js'
 let NavMenu = (props) => (
   <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
     <div className="navUser">
-      {props.isAuth ? <Link to="/profile"> <img className="navUser__icon" src="http://lorempixel.com/100/100" /> </Link> : <img className="navUser__icon" src="./img/profile.svg" /> }
+      {props.isAuth ? <Link to="/userprofile"> <img className="navUser__icon" src="http://lorempixel.com/100/100" /> </Link> : <img className="navUser__icon" src="./img/profile.svg" /> }
       <p className="navUser__userName">
         {props.isAuth ? props.user.email : "Guest User" }
       </p>
