@@ -1,5 +1,5 @@
 const path = require('path');
-const { getCleanUser } = require('../../helpers/users.js')
+const { getCleanUser, generateToken } = require('../../helpers/users.js')
 const User = require('../../models/user.js');
 const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_SECRET;
@@ -97,6 +97,16 @@ module.exports = function(app, passport) {
       res.redirect('/');
   });
 
+  app.get('/api/users/refreshtoken', isAuthenticated, function(req, res, next) {
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (!token) {
+      console.log("No Token found, throwing error");
+      return res.status(401).json({
+        message: 'Must pass token'
+      });
+    }
+
+  })
   //get current user from token
   app.get('/api/users/me/from/token', function(req, res, next) {
     // check header or url parameters or post parameters for token
@@ -108,7 +118,6 @@ module.exports = function(app, passport) {
         message: 'Must pass token'
       });
     }
-
     console.log("Token", token);
     // decode token
     jwt.verify(token, jwtSecret, function(err, user) {
@@ -126,9 +135,9 @@ module.exports = function(app, passport) {
         if (err)
           throw err;
 
-        user = getCleanUser(user); //dont pass password and stuff
+        user = getCleanUser(user);
+        token = generateToken(user); //dont pass password and stuff
         //note: you can renew token by creating new token(i.e. refresh it) w/ new expiration time at this point, but I'm passing the old token back.
-        // var token = utils.generateToken(user);
         console.log('returning user', user);
         res.json({
           user: user,
