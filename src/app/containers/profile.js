@@ -7,7 +7,7 @@ import {
 
 import HeadSearch from '../components/headSearch.js';
 import { Item, ItemContainer } from './Item';
-import UProfDiv from '../components/UProfDiv.js';
+import UProfDiv from '../components/UProfDiv';
 
 const sampleReviews = [{
     title : "The Reusable Code @ 930 Club 09/06/17",
