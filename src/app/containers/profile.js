@@ -6,7 +6,8 @@ import {
 } from 'react-router-dom'
 
 import HeadSearch from '../components/headSearch.js';
-import { Item, ItemContainer } from './Item'
+import { Item, ItemContainer } from './Item';
+import UProfDiv from '../components/UProfDiv';
 
 const sampleReviews = [{
     title : "The Reusable Code @ 930 Club 09/06/17",
@@ -46,7 +47,8 @@ class Profile extends Component {
 
               <div className="profile__topbody__left">
 
-                <div className="profile__topbody__left__profblock">
+                <UProfDiv />
+                {/* <div className="profile__topbody__left__profblock">
                   <div className="profile__topbody__left__profblock__imgdiv">
                     <img className="profile__topbody__left__profblock__imgdiv__pic" src="http://lorempixel.com/250/250" />
                     <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
@@ -55,7 +57,7 @@ class Profile extends Component {
                     <h1> John Doe </h1>
                     <h3> Guitarist/Singer </h3>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="profile__topbody__left__details">
                   <div id="bands">
