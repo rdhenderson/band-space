@@ -1,7 +1,7 @@
 const BandMemberValidate = values => {
   const errors = {}
-  if(!values.clubName) {
-    errors.clubName = 'Required'
+  if(!values.name) {
+    errors.name = 'Required'
   }
   if (!values.members || !values.members.length) {
     errors.members = { _error: 'At least one member must be entered' }
@@ -9,15 +9,15 @@ const BandMemberValidate = values => {
     const membersArrayErrors = []
     values.members.forEach((member, memberIndex) => {
       const memberErrors = {}
-      if (!member || !member.firstName) {
+      if (!member || !member.name) {
         memberErrors.firstName = 'Required'
         membersArrayErrors[memberIndex] = memberErrors
       }
-      if (!member || !member.lastName) {
+      if (!member || !member.email) {
         memberErrors.lastName = 'Required'
         membersArrayErrors[memberIndex] = memberErrors
       }
-      if (member && member.hobbies && member.hobbies.length) {
+      if (member && member.instrument && member.hobbies.length) {
         const hobbyArrayErrors = []
         member.hobbies.forEach((hobby, hobbyIndex) => {
           if (!hobby || !hobby.length) {

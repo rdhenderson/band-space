@@ -10,7 +10,7 @@
   "scripts": {
     "prestart": "npm run lint",
     "heroku-postbuild": "npm install --only=dev && npm run build",
-    "build": "webpack -w",
+    "build": "webpack",
     "dev-client": "webpack-dev-server --progress --inline --hot",
     "dev-server": "nodemon server/server.js",
     "start": "node server/server.js",
@@ -22,6 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.16.2",
+    "babel-polyfill": "^6.23.0",
     "babel-runtime": "^6.23.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",

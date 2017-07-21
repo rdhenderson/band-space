@@ -1,11 +1,13 @@
 const webpack = require('webpack');
 const path = require('path');
 const DotenvPlugin = require('webpack-dotenv-plugin');
+require("babel-polyfill");
 
 module.exports = {
   devtool: 'inline-sourcemap',
   entry: [
-    './src/entry.js'
+    'babel-polyfill',
+    './src/entry.js',
   ],
   output: {
       path: path.join(__dirname, 'public'),
