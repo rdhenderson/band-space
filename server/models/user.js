@@ -13,9 +13,13 @@ var userSchema = new Schema({
   admin: { type: Boolean, default: false },
   moderator: { type: Boolean, default: false },
   profile_image: {
-    src: String,
-    crop_x: Number,
-    crop_y: Number,
+    img: String,
+    position: {
+      x: Number,
+      y: Number
+    },
+    rotate: Number,
+    scale: Number
   },
   bands: [{
     type: Schema.Types.ObjectId,
