@@ -3,19 +3,15 @@ const { getCleanUser } = require('../../helpers/users.js')
 const User = require('../../models/user.js');
 const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_SECRET;
+const isAuthenticated = require('../../helpers/auth_check.js');
 
 module.exports = function(app, passport) {
   app.get('/api/users', (req, res) => {
     User.find({}).then( (users) => res.send(users));
   });
 
-  app.get('/api/users/logout', function(req, res) {
-      req.logout();
-      res.redirect('/');
-  });
-
   //TODO: CONFIRM THAT UPDATE PROPERLY AFFECTS ARRAYS
-  app.put('/api/users/:id', (req, res) => {
+  app.put('/api/users/:id', isAuthenticated, (req, res) => {
     const options = { upsert: true, new: true };
     const query = { _id: req.params.id };
     User.findOneAndUpdate(query, req.body.user, options, (err, user) => {
@@ -31,15 +27,13 @@ module.exports = function(app, passport) {
 
   // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
   // server/helpers/auth_check
-  app.delete('api/users/:id', (req, res) => {
-    if (req.body.token ) {
+  app.delete('api/users/:id', isAuthenticated, (req, res) => {
       User.findByIdAndRemove(req.params.id, function (err, user) {
         res.send({
           message: "User successfully deleted",
           id: user._id
         })
       })
-    }
   });
 
   // process the signup form -- NOTE Change redirect to proper route once react connected.
@@ -96,6 +90,11 @@ module.exports = function(app, passport) {
         user
       });
     })(req, res, next);
+  });
+
+  app.get('/api/users/logout', function(req, res) {
+      req.logout();
+      res.redirect('/');
   });
 
   //get current user from token

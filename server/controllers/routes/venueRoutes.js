@@ -1,5 +1,6 @@
 const Venue = require('../../models/venue.js');
 const getEventfulVenues = require('../../api/event-search.js');
+const isAuthenticated = require('../../helpers/auth_check.js');
 
 module.exports = function(app) {
   // Initialize route to populate database
@@ -53,7 +54,7 @@ module.exports = function(app) {
     });
   });
 
-  app.put('/api/venues/:id', (req, res) => {
+  app.put('/api/venues/:id', isAuthenticated, (req, res) => {
     const options = { upsert: true, new: true };
     const query = { _id: req.params.id };
     Venue.findOneAndUpdate(query, req.body.venue, options, (err, venue) => {
@@ -69,7 +70,7 @@ module.exports = function(app) {
 
   // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
   // server/helpers/auth_check
-  app.delete('api/venues/:id', (req, res) => {
+  app.delete('api/venues/:id', isAuthenticated, (req, res) => {
     if (req.body.token) {
       Venue.findByIdAndRemove(req.params.id, function (err, venue) {
         res.send({
