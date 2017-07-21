@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import ProfileForm from './ProfileForm'
 import ThirdPartyAuth from '../common/ThirdPartyAuth'
 import GuitarFloat from '../../components/GuitarFloat'
+import helpers from '../../helpers'
 
 class ProfilePage extends Component {
   constructor(props) {
@@ -22,13 +23,10 @@ class ProfilePage extends Component {
   handleSubmit(values) {
     event.preventDefault();
     console.log("Edited Profile", values);
-    // axios.post('/api/users/profile', {
-    //   email: values.email,
-    //   password: values.password,
-    // })
-    // .then( ({ data }) => {
-    //   // this.props.history.push('/profile');
-    // }).catch(err => console.log(err));
+    helpers.user.update({_id: this.props.user.user._id, ...values})
+    .then( ({ data }) => {
+      this.props.history.push('/profile');
+    }).catch(err => console.log(err));
   }
 
   toggleEdit(){

@@ -5,7 +5,6 @@ import Main from '../containers/Main.js';
 import { SignUp, LogIn, UserProfile } from '../users'
 import { CreateGroup, ManageGroup, GroupProfile } from '../groups';
 import Venue from '../venue/Venue.js';
-import Profile from '../containers/profile.js';
 import Search from '../containers/Search.js';
 import Gigs from '../containers/Gigs.js';
 
