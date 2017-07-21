@@ -56,7 +56,18 @@ class ImageEditor extends Component{
       this.props.user.profile_image = {...this.state};
       updateUser(this.props.user)
     }
+    this.props.editChange();
+  }
 
+  componentWillMount(){
+    if (this.props.user.profile_image){
+      this.setState({
+        position: this.props.user.profile_image.position,
+        scale: this.props.user.profile_image.scale,
+        rotate: this.props.user.profile_image.rotate,
+        img: this.props.user.profile_image.img
+      })
+    }
   }
 
   render () {

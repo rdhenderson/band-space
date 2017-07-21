@@ -84,7 +84,9 @@ export async function updateUser(user, token=false) {
     url: `${query}?token=${token}`,
     data: user,
     headers: {'Authorization': `Bearer ${token}`}
-  }).then( (results) => results );
+  }).then( (results) => refreshToken(token)
+
+ )
 }
 
 export async function removeUser(userId, token=false) {
