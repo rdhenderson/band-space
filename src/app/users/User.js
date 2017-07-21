@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import UserList from './UserList'
+import UserList from './profile/UserList'
 
 import { ProfilePage as UserProfile } from './profile/ProfilePageContainer.js'
 const User = (props) => (

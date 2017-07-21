@@ -8,7 +8,19 @@ const BASE_QUERY_REVIEW = '/api/reviews'
 const handleErrors = ( err ) => {
   console.log("ERROR", err);
 }
+export async function refreshToken(token){
+  if (!token) token = localStorage.getItem('jwtToken');
+  return axios({
+    method: 'get',
+    url: `/api/users/refreshtoken?token=${token}`,
+    headers: {'Authorization': `Bearer ${token}`}
+  }).then( ({token}) => {
+    localStorage.setItem('jwtToken', token);
+    return results;
+  });
 
+
+}
 export async function getVenue(venueId, cb) {
     const query = (venueId) ? `${BASE_QUERY_VENUE}/${venueId}` : BASE_QUERY_VENUE;
     return axios.get(query).then( (results) => results );
