@@ -52,7 +52,9 @@ export async function removeVenue(venueId, token) {
 
 export async function getUser(userId) {
   const query = (userId) ? `${BASE_QUERY_USER}/${userId}` : BASE_QUERY_USER;
-  return axios.get(query).then( (results) => results );
+  return axios.get(query)
+  .then( (results) => results)
+  .catch((err) => console.log(err));
 }
 
 export async function findUserByEmail(email) {

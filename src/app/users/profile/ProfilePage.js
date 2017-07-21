@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import { connect } from "react-redux";
+import {getUser} from '../../helpers/index.js'
 
 // import components
 import ProfileForm from './components/ProfileForm'
@@ -34,11 +36,6 @@ class ProfilePage extends Component {
     this.state = {
       makeEdit : false,
       showConnect: false,
-      query: "",
-      uName: "",
-      skill: {},
-      bands: {},
-      events: {}
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
@@ -64,11 +61,27 @@ class ProfilePage extends Component {
     this.setState(newState);
   }
 
+  componentWillMount(){
+    var userId = this.props.match.url.substring(9)
+    getUser(userId).then(pageUser => {
+      this.setState({
+        name: pageUser.data.name,
+        id: pageUser.data._id,
+        profile_image: pageUser.data.profile_image,
+        bands: pageUser.data.bands,
+        reviews: pageUser.data.reviews,
+        tags: pageUser.data.tags,
+        venues: pageUser.data.venues
+      });
+    });
+
+  }
+
   componentDidMount(){
   }
 
   render(){
-    let user = this.props.user.user;
+    let user = this.props.user;
     var sampleReviews = [{
         event : "The Reusable Code @ 930 Club 09/06/17",
         title: "The Guitarist was amazing",
@@ -94,9 +107,9 @@ class ProfilePage extends Component {
         <div className="profile__topbody">
 
           <div className="profile__topbody__left">
-            <h1> </h1>
-            <UProfDiv user={user} />
 
+            <UProfDiv profilePic={this.state.profile_image} uId={this.state.id} />
+            <h1>{this.state.name} </h1>
             <div className="profile__topbody__left__details">
               <div id="bands">
                 <h3> Bands </h3>
@@ -155,4 +168,17 @@ class ProfilePage extends Component {
   }
 }
 
-export default ProfilePage;
+function mapStateToProps(state) {
+  return {
+    user: state.user.user,
+    isAuth: state.user.isAuth,
+  };
+}
+
+function mapDispatchToProps(dispatch){
+  // return bindActionCreators({ loginUser }, dispatch);
+}
+
+export default connect(mapStateToProps)(ProfilePage);
+
+// export default ProfilePage;

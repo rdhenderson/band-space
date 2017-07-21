@@ -10,6 +10,20 @@ module.exports = function(app, passport) {
     User.find({}).then( (users) => res.send(users));
   });
 
+
+  app.get('/api/users/:id', (req, res) => {
+    const query = { _id:req.params.id };
+    User.findOne(query, (err, user) => {
+      if (err){
+        console.log("ERROR", err);
+        res.json(err);
+      } else {
+        console.log("result", user);
+        res.status(200).json(user);
+      }
+    })
+  });
+
   //TODO: CONFIRM THAT UPDATE PROPERLY AFFECTS ARRAYS
   app.put('/api/users/:id', isAuthenticated, (req, res) => {
     const options = { upsert: true, new: true };

@@ -76,7 +76,13 @@ class ImageEditor extends Component{
           <div style={{borderRadius: 60, width:200, height: 200, overflow: "hidden" }}>
           <img
             src={this.state.img}
-            style={{ width: `${200 * this.state.scale}px`, height: `${200 * this.state.scale}px`, "marginLeft": `${(this.state.position.x * 100) - 50}%`, "marginTop": `${(this.state.position.y * 100) - 50}%`, "transform": `rotate(${this.state.rotate}deg)` }}
+            style={{
+              width: `${200 * this.state.scale}px`,
+              height: `${200 * this.state.scale}px`,
+              "marginLeft": `${(this.state.position.x * 100) - 50}%`,
+              "marginTop": `${(this.state.position.y * 100) - 50}%`,
+              "transform": `rotate(${this.state.rotate}deg)`
+            }}
           />
           </div>
         <br />
