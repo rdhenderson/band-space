@@ -29,7 +29,7 @@ var userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Review',
   }],
-  genres: [{ type: String, trim: true }],
+  tags: [{ type: String, trim: true }],
   isEmailVerified: { type: Boolean, default: false },
   verifyEmailToken: String,
   verifyEmailTokenExpires: Date,

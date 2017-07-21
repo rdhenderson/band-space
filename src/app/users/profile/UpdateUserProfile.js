@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Field, FieldArray, reduxForm } from 'redux-form'
-import BandMemberValidate from './BandMemberValidate';
-import Dropzone from 'react-dropzone';
-import axios from 'axios'
+import UserProfileValidate from './UserProfileValidate';
 import helpers from '../helpers'
 
 const renderMembers = ({ fields, meta: { touched, error } }) => (
@@ -135,8 +133,8 @@ const CreateGroup = (props) => {
                <button className="normal-btn" type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
              </div>
 
-           </div>
-         </div>
+          </div>
+        </div>
 
        </form>
      </div>
@@ -145,7 +143,6 @@ const CreateGroup = (props) => {
 
 
 export default reduxForm({
-  form: 'createGroup',     // a unique identifier for this form
-  BandMemberValidate
-})(CreateGroup)
-{/* export default CreateGroup; */}
+  form: 'UpdateUserProfile',     // a unique identifier for this form
+  UserProfileValidate
+})(UpdateUserProfile)
