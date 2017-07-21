@@ -7,25 +7,10 @@
 //
 // export default createStore(reducer);//, middleware);
 import redux, { createStore, applyMiddleware, compose } from 'redux';
+import logger from 'redux-logger'
 import promise from 'redux-promise';
 import reducer from './reducers';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-
-export default function configureStore(initialState) {
-  const finalCreateStore = compose(
-    applyMiddleware(promise),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )(createStore);
-
-  const store = finalCreateStore(reducer, initialState);
-
-  if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./reducers', () => {
-      const nextReducer = require('./reducers');
-      store.replaceReducer(nextReducer);
-    });
-  }
-
-  return store;
-}
+const middleware = applyMiddleware(promise, logger);
+export default createStore(reducer, composeWithDevTools(...middleware));

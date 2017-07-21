@@ -11,9 +11,8 @@ import Gigs from '../containers/Gigs.js';
 const RouteList = (props) => (
   <div id="page-wrap">
     <Route exact path="/" component={Main} />
-    <Route path="/profile" component={Profile} />
+    <Route path="/profile" component={UserProfile} />
     <Route path="/venues" component={Venue} />
-    <Route path="/userprofile" component={UserProfile} />
     <Route path="/search" component={Search} />
     <Route path="/gigs" component={Gigs} />
     <Route path="/creategroup" component={CreateGroup} />
