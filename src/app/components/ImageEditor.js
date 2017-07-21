@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
+import { connect } from "react-redux";
+
+import {updateUser, updateGroup} from '../helpers/index.js'
 
 class ImageEditor extends Component{
   constructor(props){
@@ -48,6 +51,11 @@ class ImageEditor extends Component{
   }
 
   savePicture = (e) => {
+    if (this.props.type === "user"){
+      this.props.user.profile_image = {...this.state};
+      console.log("user", this.props.user);
+      updateUser(this.props.user)
+    }
     e.preventDefault()
   }
 
@@ -113,4 +121,14 @@ class ImageEditor extends Component{
   }
 }
 
-export default ImageEditor;
+
+function mapStateToProps(state) {
+  return {
+    user: state.user.user,
+    isAuth: state.user.isAuth,
+  };
+}
+
+export default connect(mapStateToProps)(ImageEditor);
+
+// export default ImageEditor;
