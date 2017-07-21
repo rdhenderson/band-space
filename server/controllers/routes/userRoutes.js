@@ -119,7 +119,6 @@ module.exports = function(app, passport) {
         message: 'Must pass token'
       });
     }
-    console.log("Token", token);
     // decode token
     jwt.verify(token, jwtSecret, function(err, user) {
       if (err) {
@@ -136,10 +135,11 @@ module.exports = function(app, passport) {
         if (err)
           throw err;
 
+        // Strip sensitive/irrelevant data before return
         user = getCleanUser(user);
-        token = generateToken(user); //dont pass password and stuff
-        //note: you can renew token by creating new token(i.e. refresh it) w/ new expiration time at this point, but I'm passing the old token back.
-        console.log('returning user', user);
+        // refresh the token before returning it.
+        token = generateToken(user);
+
         res.json({
           user: user,
           token: token
