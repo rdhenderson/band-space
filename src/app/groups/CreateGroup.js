@@ -124,7 +124,7 @@ const CreateGroup = (props) => {
                <button className="normal-btn" type="submit" disabled={submitting}>Submit</button>
                <button className="normal-btn" type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
              </div>
-             
+
           </div>
         </div>
 

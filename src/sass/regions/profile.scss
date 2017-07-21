@@ -11,11 +11,12 @@
         margin-left: 5vw;
 
         &__profblock{
-          width: 400px;
+          width: 100%;
+          min-width: 400px;
           background-color: #018BE4;
           box-shadow: -1px 1px 5px 0.5px black;
           display: flex;
-          height: 400px;
+          min-height: 400px;
           flex-direction: column;
           margin-bottom: 20px;
 
