@@ -16,7 +16,7 @@ export async function refreshToken(token){
     headers: {'Authorization': `Bearer ${token}`}
   }).then( ({token}) => {
     localStorage.setItem('jwtToken', token);
-    return results
+    return results;
   });
 
 
