@@ -72,10 +72,10 @@ class ImageEditor extends Component{
         },
         imageStyle: JSON.stringify(imageStyle),
       };
-      
+
       this.props.onSave({profile_image: {...this.state}});
     }
-    this.props.editChange();
+    this.props.toggleEdit();
   }
 
   componentWillMount(){
