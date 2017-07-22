@@ -37,6 +37,7 @@ class UserPrivateProfile extends Component {
       makeEdit : false,
       showConnect: false,
     }
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
     this.toggleConnect = this.toggleConnect.bind(this);
@@ -77,7 +78,8 @@ class UserPrivateProfile extends Component {
 
   }
 
-  componentDidMount(){
+  componentWillMount(){
+
   }
 
   render(){
@@ -108,8 +110,9 @@ class UserPrivateProfile extends Component {
 
           <div className="profile__topbody__left">
 
-            <UProfDiv profilePic={this.state.profile_image} uId={this.state.id} />
-            <h1>{this.state.name} </h1>
+            <UProfDiv />
+
+            <h1>{user.name} </h1>
             <div className="profile__topbody__left__details">
               <div id="bands">
                 <h3> Bands </h3>
