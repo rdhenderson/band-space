@@ -156,6 +156,21 @@
               box-shadow: -3px 2px 3px black;
             }
 
+            &__writeReview{
+              display: flex;
+              flex-direction: column;
+
+              &__input{
+                height: 30px;
+                margin-bottom: 10px;
+              }
+
+              &__review{
+
+                height: 60px;
+              }
+            }
+
             &__event{
               text-align: left;
               box-shadow: -1px 1px 5px 0.5px black;
