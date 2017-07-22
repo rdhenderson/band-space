@@ -165,6 +165,7 @@ class GroupProfile extends Component{
           </div>
         </div>
       </div>
+    </div>
 
       )
     }
