@@ -5,6 +5,7 @@ const Band = require('../../models/band.js');
 const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_SECRET;
 const isAuthenticated = require('../../helpers/auth_check.js');
+var mongoose = require('mongoose');
 
 module.exports = function(app, passport) {
   app.get('/api/users', (req, res) => {
@@ -14,6 +15,8 @@ module.exports = function(app, passport) {
 
   app.get('/api/users/:id', (req, res) => {
     User.findById(req.params.id)
+    .populate('bands')
+    .populate('reviews')
     .exec( (err, user) => {
       if (err){
         console.log("ERROR", err);
@@ -24,6 +27,22 @@ module.exports = function(app, passport) {
     })
   });
 
+  // app.get('/api/users/:id/bands', (req, res) => {
+  //   User.findById(req.params.id, (err, user) => {
+  //     console.log('User bands', user.bands);
+  //     const bandPromises = user.bands.map( (id) => Band.find({_id: id}));
+  //     Promise.all(bandPromises).then( (bands) => {
+  //       console.log('Bands', bands);
+  //       if (err){
+  //         console.log("ERROR", err);
+  //         res.json(err);
+  //       } else {
+  //         res.status(200).json(bands);
+  //       }
+  //     });
+  //   });
+  // });
+
   //TODO: CONFIRM THAT UPDATE PROPERLY AFFECTS ARRAYS
   app.put('/api/users/:id', isAuthenticated, (req, res) => {
     const options = { upsert: true, new: true };
@@ -33,7 +52,7 @@ module.exports = function(app, passport) {
         console.log("ERROR", err);
         res.json(err);
       } else {
-        res.redirect(301, `/api/users/${user._id}`);
+        res.redirect(303, `/api/users/${user._id}`);
       }
     })
   });
@@ -52,9 +71,12 @@ module.exports = function(app, passport) {
 
   app.post('/api/users/:id/groups', isAuthenticated, (req, res) => {
     // console.log("Request Body:", req.body);
+    console.log("req.body", req.body);
     const options = {appendToArray: true, upsert:true, new:true};
-    const query = {name: req.body.name }
-    Band.findOrCreate(query, req.body, options, (err, group) => {
+    const query = { name: req.body.name }
+    Band.create(query, req.body, options, (err, group) => {
+      if (err) console.log("ERROR CREATING BAND", err);
+      console.log('group');
       User.findOrCreate({_id:req.params.id}, { bands: group }, options, (err, user) => {
         if (err) {
           res.json({
@@ -162,12 +184,12 @@ module.exports = function(app, passport) {
         });
       }
       //return user using the id from w/in JWTToken
-      User.findById({
-        '_id': user._id
-      }, function(err, user) {
+      User.findById({'_id': user._id})
+      .populate('bands')
+      .populate('reviews')
+      .exec( (err, user) => {
         if (err)
           throw err;
-
         // Strip sensitive/irrelevant data before return
         user = getCleanUser(user);
         // refresh the token before returning it.

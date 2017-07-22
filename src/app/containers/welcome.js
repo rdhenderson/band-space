@@ -10,7 +10,7 @@ import amp from '../../../public/img/amplifier.svg';
 import helpers from '../helpers'
 import { getVenue } from '../helpers'
 import { withRouter } from 'react-router'
-
+import { VenueScrollItem, UserScrollItem, GroupScrollItem } from '../components/ScrollItem.js'
 class Welcome extends Component {
 
   constructor(props) {
@@ -126,22 +126,36 @@ class Welcome extends Component {
             <div className="mreview__body">
               <Infinite className="mreview__body__container" containerHeight={550} width={'100%'} elementHeight={200}>
 
-                {this.state[this.state.searchType].map( (item, index) => (
-                  <div key={index} className="mreview__body__item" onClick={this.handleReviewClick(item._id)}>
-                    <div className="mreview__body__item__imgdiv">
-                      <img className="mreview__body__item__imgdiv__img" src="http://lorempixel.com/100/100" />
-                      <h3> {item.name} </h3>
-                    </div>
-                    <div className="mreview__body__item__text">
-                      <img src="http://lorempixel.com/500/100" />
-                      <ul>
-                        <li> Very Professional </li>
-                        <li> Drinks A Lot </li>
-                        <li> Cheap! </li>
-                      </ul>
-                    </div>
-                  </div>
-                ))}
+                {this.state.searchType === 'venue' &&
+                  this.state.venue.map( (venue, index) => (
+                    <VenueScrollItem
+                      venue={venue}
+                      key={index}
+                      history={this.props.history}
+                      
+                    />
+                  ))
+                }
+                {this.state.searchType === 'artist' &&
+                  this.state.user.map( (user, index) => (
+                    <UserScrollItem
+                      user={user}
+                      key={index}
+                      history={this.props.history}
+
+                    />
+                  ))
+                }
+                {this.state.searchType === 'group' &&
+                  this.state.group.map( (group, index) => (
+                    <GroupScrollItem
+                      group={group}
+                      key={index}
+                      history={this.props.history}
+                    />
+                  ))
+                }
+
               </Infinite>
 
             </div>
