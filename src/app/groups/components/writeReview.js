@@ -111,3 +111,4 @@ export default connect(mapStateToProps, mapDispatchToProps)(WriteReview);
 // ))(WriteReview);
 //
 // // export default WriteReview;
+// export default WriteReview;
