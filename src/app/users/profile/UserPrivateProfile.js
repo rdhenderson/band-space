@@ -125,7 +125,7 @@ class UserPrivateProfile extends Component {
             <UProfDiv onSave={this.handleUserUpdate.bind(this)} />
 
             <div className="profile__topbody__left__details">
-              
+
               <div id="bands">
                 <h3> Your Groups </h3>
                 <ul>

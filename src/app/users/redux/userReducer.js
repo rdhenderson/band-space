@@ -4,6 +4,7 @@ import {
   ME_FROM_TOKEN, ME_FROM_TOKEN_SUCCESS, ME_FROM_TOKEN_FAILURE,
   UPDATE_USER, UPDATE_USER_SUCCESS, UPDATE_USER_FAILURE,
   ADD_USER_GROUP, ADD_USER_GROUP_FAILURE, ADD_USER_GROUP_SUCCESS,
+  ADD_REVIEW, ADD_REVIEW_FAILURE, ADD_REVIEW_SUCCESS,
 } from './userActions';
 
 //It is best practice to define your initial state as a constant that gets passed as an argument to your reducer function
@@ -46,6 +47,13 @@ export default function reducer(state = INITIAL_STATE, action){
       case ADD_USER_GROUP_FAILURE:// return error and make loading = false
         error = action.payload.data || { message: action.payload.message};//2nd one is network or server down errors
         return { ...state, user: null, isAuth: false, error: error, loading: false};
+        case ADD_REVIEW:// loading currentUser("me") from jwttoken in local/session storage storage,
+          return { ...state, error: null, loading: true};
+        case ADD_REVIEW_SUCCESS://return user, status = authenticated and make loading = false
+          return { ...state, user: action.payload.data, isAuth: true, error:null, loading: false}; //<-- authenticated
+        case ADD_REVIEW_FAILURE:// return error and make loading = false
+          error = action.payload.data || { message: action.payload.message};//2nd one is network or server down errors
+          return { ...state, user: null, isAuth: false, error: error, loading: false};
       default:
         return state;
     }

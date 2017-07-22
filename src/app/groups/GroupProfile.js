@@ -15,33 +15,12 @@ class GroupProfile extends Component{
         isLoading: true,
         comment: "",
         activeReview: false,
-        reviews:[
-          {
-          name: "The Fartz @ 930 Club 09/09/16",
-          title: "The Guitarist was amazing",
-          details: "Bullshit"
-        },
-        {
-          name: "The Fartz @ 930 Club 09/09/16",
-          title: "The Guitarist was amazing",
-          details: "Bullshit"
-        },
-        {
-          name: "The Fartz @ 930 Club 09/09/16",
-          title: "The Guitarist was amazing",
-          details: "Bullshit"
-        },
-        {
-          name: "The Fartz @ 930 Club 09/09/16",
-          title: "The Guitarist was amazing",
-          details: "Bullshit"
-        }
-      ]
     }
 
 
       this.handleInputChange = this.handleInputChange.bind(this);
       this.writeReview = this.writeReview.bind(this);
+      this.onUpdate = this.onUpdate.bind(this);
     }
 
     handleInputChange(event){
@@ -63,7 +42,19 @@ class GroupProfile extends Component{
         this.setState = { group: data, loading: false };
       });
     }
-
+    onUpdate(){
+      this.setState({loading:true});
+      getGroup(id).then( ({data}) => {
+        this.setState = { group: data, loading: false };
+      });
+    }
+  // handleSubmit(values) {
+  //   values.user_id = props.user_id;
+  //   console.log("review", values);
+  //   addReview(values)
+  //   .then( (results) => console.log('group added to mongo', results))
+  //
+  // }
     writeReview(e){
       e.preventDefault();
       if (this.state.activeReview === true){
@@ -99,7 +90,7 @@ class GroupProfile extends Component{
                     <h1> {!isLoading && group.name }</h1>
                   </div>
                   <div className="groupProfile__topbody__left__profblock__proftext__members">
-                    {!isLoading && group.members.map( (member, index) =>
+                    {!isLoading && group.members && group.members.map( (member, index) =>
                       <div key={index} className="groupProfile__topbody__left__profblock__proftext__members__member">
                         <img src="http://lorempixel.com/50/50" />
                         <a href={`/users/${member.user_id}`}> {member.name} : {member.instrument || "spoons"} </a>
@@ -112,52 +103,55 @@ class GroupProfile extends Component{
 
             </div>
 
-          <div className="groupProfile__topbody__right">
+            <div className="groupProfile__topbody__right">
 
-            <div className="groupProfile__topbody__right__sliders">
-              <div id="Header">
-                <h1 id="skillheader"> Skills </h1>
+              <div className="groupProfile__topbody__right__sliders">
+                <div id="Header">
+                  <h1 id="skillheader"> Skills </h1>
+                </div>
+                <div id="slidSkills">
+                  <div className="groupProfile__topbody__right__sliders__sliderItem">
+                    <h3> Professionalism </h3>
+                    <img className="groupProfile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
+                  </div>
+                  <div className="groupProfile__topbody__right__sliders__sliderItem">
+                    <h3> Professionalism </h3>
+                    <img className="groupProfile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
+                  </div>
+                  <div className="groupProfile__topbody__right__sliders__sliderItem">
+                    <h3> Professionalism </h3>
+                    <img className="groupProfile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
+                  </div>
+                  <div className="groupProfile__topbody__right__sliders__sliderItem">
+                    <h3> Professionalism </h3>
+                    <img className="groupProfile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
+                  </div>
+                </div>
               </div>
-              <div id="slidSkills">
-                  <div className="groupProfile__topbody__right__sliders__sliderItem">
-                    <h3> Professionalism </h3>
-                    <img className="groupProfile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
-                  </div>
-                  <div className="groupProfile__topbody__right__sliders__sliderItem">
-                    <h3> Professionalism </h3>
-                    <img className="groupProfile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
-                  </div>
-                  <div className="groupProfile__topbody__right__sliders__sliderItem">
-                    <h3> Professionalism </h3>
-                    <img className="groupProfile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
-                  </div>
-                  <div className="groupProfile__topbody__right__sliders__sliderItem">
-                    <h3> Professionalism </h3>
-                    <img className="groupProfile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
-                  </div>
-              </div>
+
             </div>
 
           </div>
 
-        </div>
-
-        <div className="groupProfile__bottombody">
-          <div className="groupProfile__bottombody__botheader">
-            <h1> Reviews </h1>
-          </div>
-          <div className="groupProfile__bottombody__botmain">
-            <div className="groupProfile__bottombody__botmain__left">
-              <p> test </p>
+          <div className="groupProfile__bottombody">
+            <div className="groupProfile__bottombody__botheader">
+              <h1> Reviews </h1>
             </div>
-
-            <div className="groupProfile__bottombody__botmain__right">
-              <div className="groupProfile__bottombody__botmain__right__header">
-                <h1> Write a review? </h1> <img src="./img/edit.svg" onClick={this.writeReview} />
-
+            <div className="groupProfile__bottombody__botmain">
+              <div className="groupProfile__bottombody__botmain__left">
+                <p> test </p>
               </div>
-              {this.state.activeReview &&
-                <WriteReview />
+
+              <div className="groupProfile__bottombody__botmain__right">
+                <div className="groupProfile__bottombody__botmain__right__header">
+                  <h1> Write a review? </h1> <img src="./img/edit.svg" onClick={this.writeReview} />
+
+                </div>
+                {this.state.activeReview &&
+                  <WriteReview
+                    reviewType='group_id'
+                    reviewSub={group._id}
+                  />
               }
               {this.state.reviews.map((item, index) => (
                 <Review index={index} cName="groupProfile__bottombody__botmain__right__event" name={item.name} title={item.title} details={item.details} />

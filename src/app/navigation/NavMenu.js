@@ -20,17 +20,19 @@ class NavMenu extends Component {
           {this.props.isAuth ?
             <Link to="/profile">
               <div className="navUser__profileborder">
-                <img
-                  className="profile__topbody__left__profblock__imgdiv__pic"
-                  src={user.profile_image.img}
-                  style={{
+                {user.profile_img !== undefined &&
+                  (<img
+                    className="profile__topbody__left__profblock__imgdiv__pic"
+                    src={ user.profile_image.img}
+                    style={{
                     width: `${180 * user.profile_image.scale}px`,
                     height: `${180 * user.profile_image.scale}px`,
                     "marginLeft": `${(user.profile_image.xpos * 100) - 150}%`,
                     "marginTop": `${(user.profile_image.ypos * 100) - 100}%`,
                     "transform": `rotate(${user.profile_image.rotate}deg)`
-                  }}
-                />
+                    }}
+                   />)
+                }
               </div>
             </Link>
           :

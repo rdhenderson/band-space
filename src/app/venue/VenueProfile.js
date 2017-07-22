@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import VenueSummary from './VenueSummary'
 import VenueProfileEditArrays from './VenueProfileEditArrays'
+import WriteReview from '../groups/components/WriteReview.js'
 
 class VenueProfile extends Component {
 
@@ -16,6 +17,7 @@ class VenueProfile extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
+    this.writeReview = this.writeReview.bind(this);
   }
 
   // Pull id from route parameters and get that venue from database
@@ -50,8 +52,24 @@ class VenueProfile extends Component {
     this.setState(newState);
   }
 
+  writeReview(e){
+    e.preventDefault();
+    if (this.state.activeReview === true){
+      this.setState({
+        activeReview: false
+      })
+    }
+    else {
+      this.setState({
+        activeReview: true
+      })
+    }
+  }
+
   render() {
     const venue = this.state.venue;
+    const review = this.state.venue.reviews;
+
     return (
       <div className="profile">
         <div className="profile__topbody">
@@ -106,35 +124,26 @@ class VenueProfile extends Component {
           <div className="profile__bottombody__botheader">
             <h1> Reviews </h1>
           </div>
+
           <div className="profile__bottombody__botmain">
             <div className="profile__bottombody__botmain__left">
               <p> test </p>
             </div>
 
-            <div className="profile__bottombody__botmain__right">
-              <div className="profile__bottombody__botmain__right__event">
-                <h3> The Fartz @ 930 Club 09/09/16 </h3>
-                <p> The Guitarist was amazing </p>
-                <img className="profile__bottombody__botmain__right__event__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+            <div className="groupProfile__bottombody__botmain__right">
+              <div className="groupProfile__bottombody__botmain__right__header">
+                <h1> Write a review? </h1> <img src="./img/edit.svg" onClick={this.writeReview} />
               </div>
+              {this.state.activeReview &&
+                <WriteReview
+                  reviewType='venue_id'
+                  reviewSub={venue._id}
+                />
+              }
+              {this.state.review !== undefined && this.state.reviews.map((item, index) => (
+                <Review index={index} cName="groupProfile__bottombody__botmain__right__event" name={item.name} title={item.title} details={item.details} />
+              ))}
 
-              <div className="profile__bottombody__botmain__right__event">
-                <h3> The Fartz @ 930 Club 09/09/16 </h3>
-                <p> The Guitarist was amazing </p>
-                <img className="profile__bottombody__botmain__right__event__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
-              </div>
-
-              <div className="profile__bottombody__botmain__right__event">
-                <h3> The Fartz @ 930 Club 09/09/16 </h3>
-                <p> The Guitarist was amazing </p>
-                <img className="profile__bottombody__botmain__right__event__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
-              </div>
-
-              <div className="profile__bottombody__botmain__right__event">
-                <h3> The Fartz @ 930 Club 09/09/16 </h3>
-                <p> The Guitarist was amazing </p>
-                <img className="profile__bottombody__botmain__right__event__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
-              </div>
             </div>
           </div>
 

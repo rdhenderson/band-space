@@ -11,6 +11,10 @@ export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
 export const ADD_USER_GROUP = 'ADD_USER_GROUP';
 export const ADD_USER_GROUP_SUCCESS = 'ADD_USER_GROUP_SUCCESS';
 export const ADD_USER_GROUP_FAILURE = 'ADD_USER_GROUP_FAILURE';
+export const ADD_REVIEW = 'ADD_REVIEW';
+export const ADD_REVIEW_SUCCESS = 'ADD_REVIEW_SUCCESS';
+export const ADD_REVIEW_FAILURE = 'ADD_REVIEW_FAILURE';
+
 
 // const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
 const ROOT_URL = '/api';
@@ -109,7 +113,6 @@ export function addUserGroup(group, id) {
 }
 
 export function addUserGroupSuccess(group) {
-  console.log('USER update success', group);
   return {
     type: ADD_USER_GROUP_SUCCESS,
     payload: group
@@ -119,6 +122,38 @@ export function addUserGroupSuccess(group) {
 export function addUserGroupFailure(error) {
   return {
     type: ADD_USER_GROUP_FAILURE,
+    payload: error
+  };
+}
+
+export function addReview(review, id) {
+  const token = localStorage.getItem('jwtToken');
+  //check if the token is still valid, if so, get me from the server
+  const request = axios({
+    method: 'post',
+    url: `${ROOT_URL}/reviews/${id}`,
+    data: review,
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  return {
+    type: ADD_REVIEW,
+    payload: request
+  };
+}
+
+export function addReviewSuccess(review) {
+  return {
+    type: ADD_REVIEW_SUCCESS,
+    payload: review
+  };
+}
+
+export function addReviewFailure(error) {
+  return {
+    type: ADD_REVIEW_FAILURE,
     payload: error
   };
 }
