@@ -80,16 +80,16 @@ class NavMenu extends Component {
             </div>
           </Link>
         }
-        {this.props.isAuth &&
+        {/* {this.props.isAuth &&
           <Link to="/managegroup">
             <div className="navLinks">
               <img className="navLinks__icon" src="/img/group.svg" />
               <p id="manageGroup" className="menu-item">Manage Groups</p>
             </div>
           </Link>
-        }
+        } */}
 
-        <Link to="/testgroup"> <p id="testGroup" className="menu-item">Group Profile</p> </Link>
+        {/* <Link to="/testgroup"> <p id="testGroup" className="menu-item">Group Profile</p> </Link> */}
       </Menu>
     )
   }

@@ -129,7 +129,7 @@ export class Gigs extends Component {
       <div className="gigs">
         <div className="gigs__nav">
           <div className="gigs__nav__iInput">
-            <img src="http://lorempixel.com/50/50" />
+            {/* <img src="http://lorempixel.com/50/50" /> */}
           </div>
           <div className="gigs__nav__aInput">
             <input
@@ -141,7 +141,7 @@ export class Gigs extends Component {
               onChange={this.handleInputChange}
              />
            </div>
-           <div className="gigs__nav__pInput">
+           {/* <div className="gigs__nav__pInput">
              <input
                name="minPrice"
                value={this.state.minPrice}
@@ -150,7 +150,7 @@ export class Gigs extends Component {
                id="minPrice"
                onChange={this.handleInputChange}
               />
-           </div>
+           </div> */}
            <div className="gigs__nav__dInput">
 
            </div>

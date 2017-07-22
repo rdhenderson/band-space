@@ -77,7 +77,7 @@ class UserPublicProfile extends Component {
                       <img className="profile__topbody__left__profblock__imgdiv__pic" src='/img/user.svg'/>
                     )}
                   </div>
-                  <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+                  {/* <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" /> */}
                 </div>
                 <div className="profile__topbody__left__profblock__proftext">
                   <h1> {user.name} </h1>
@@ -110,19 +110,23 @@ class UserPublicProfile extends Component {
               <div id="slidSkills">
                 <div className="profile__topbody__right__sliders__sliderItem">
                   <h3> Professionalism </h3>
-                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" />
+                  <h3 style={{'font-size': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
                 </div>
                 <div className="profile__topbody__right__sliders__sliderItem">
-                  <h3> Professionalism </h3>
-                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" />
+                  <h3> Musicality </h3>
+                  <h3 style={{'font-size': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
                 </div>
                 <div className="profile__topbody__right__sliders__sliderItem">
-                  <h3> Professionalism </h3>
-                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" />
+                  <h3> Showmanship </h3>
+                  <h3 style={{'font-size': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
                 </div>
                 <div className="profile__topbody__right__sliders__sliderItem">
-                  <h3> Professionalism </h3>
-                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" />
+                  <h3> Value </h3>
+                  <h3 style={{'font-size': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
                 </div>
               </div>
             </div>

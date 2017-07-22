@@ -136,7 +136,7 @@ class UserPrivateProfile extends Component {
                   ))}
 
                 </ul>
-                <button onClick={this.toggleAddGroup}>Add Group</button>
+                <button className="normal-btn" onClick={this.toggleAddGroup}>Add Group</button>
                 {this.state.isAddGroup &&
                   <SimpleForm onSubmit={this.userAddGroup}/>
                 }
@@ -154,19 +154,23 @@ class UserPrivateProfile extends Component {
               <div id="slidSkills">
                 <div className="profile__topbody__right__sliders__sliderItem">
                   <h3> Professionalism </h3>
-                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
+                  <h3 style={{'font-size': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" /> */}
                 </div>
                 <div className="profile__topbody__right__sliders__sliderItem">
-                  <h3> Professionalism </h3>
-                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
+                  <h3> Musicality </h3>
+                  <h3 style={{'font-size': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" /> */}
                 </div>
                 <div className="profile__topbody__right__sliders__sliderItem">
-                  <h3> Professionalism </h3>
-                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
+                  <h3> Showmanship </h3>
+                  <h3 style={{'font-size': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" /> */}
                 </div>
                 <div className="profile__topbody__right__sliders__sliderItem">
-                  <h3> Professionalism </h3>
-                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
+                  <h3> Value </h3>
+                  <h3 style={{'font-size': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" /> */}
                 </div>
               </div>
             </div>
@@ -176,14 +180,14 @@ class UserPrivateProfile extends Component {
         </div>
         <UserReview reviews={sampleReviews} />
 
-        <button onClick={this.toggleEdit}>Edit Profile</button>
+        <button className="normal-btn" onClick={this.toggleEdit}>Edit Profile</button>
         {this.state.makeEdit && (
           <ProfileForm user={user} onSubmit={this.handleUserUpdate}/>
         )}
-        <button onClick={this.toggleConnect}>Connect Services</button>
+        {/* <button className="normal-btn" onClick={this.toggleConnect}>Connect Services</button>
         {this.state.showConnect && (
           <ThirdPartyAuth connect={true} />
-        )}
+        )} */}
       </div>
 
     )
