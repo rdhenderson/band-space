@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-
+import { connect } from "react-redux";
 import ImageEditor from '../../../components/ImageEditor';
+
+import {getUser} from '../../../helpers/index.js'
 
 
 class UProfDiv extends Component {
@@ -15,55 +17,52 @@ class UProfDiv extends Component {
   }
 
   editChange(){
-    if (this.state.editActive === true){
-      this.setState({
-        editActive: false
-      })
-    }
-    else{
-      this.setState({
-        editActive: true
-      })
-    }
+    this.setState({editActive: !this.state.editActive });
+
   }
 
   render(){
+    const user = this.props.user;
+    console.log(this.props);
 
-    return(
-      <div className="profile__topbody__left__profblock">
-        {this.state.editActive ?
-          <div>
-            <h1>  </h1>
+      return (
+        <div className="profile__topbody__left__profblock">
+          {(this.state.editActive) ? (
             <ImageEditor class="profile__topbody__left__profblock__imgdiv" type="user" user={this.props.user} editChange={this.editChange.bind(this)} />
-            {/* <button onClick={this.editChange}> Edit Profile Picture </button> */}
-          </div>
-          :
-          <div>
-            <div className="profile__topbody__left__profblock__imgdiv">
-              <div style={{borderRadius: 60, width:200, height: 200, overflow: "hidden" }}>
-                {this.props.user ?(
-                   <img
-                     className="profile__topbody__left__profblock__imgdiv__pic"
-                     src={this.props.user.profile_image.img}
-                     style={{ width: `${200 * this.props.user.profile_image.scale}px`, height: `${200 * this.props.user.profile_image.scale}px`, "marginLeft": `${(this.props.user.profile_image.position.x * 100) - 50}%`, "marginTop": `${(this.props.user.profile_image.position.y * 100) - 50}%`, "transform": `rotate(${this.props.user.profile_image.rotate}deg)` }}
-                     />
-                 ):(
-                   <img className="profile__topbody__left__profblock__imgdiv__pic" src='./img/user.svg'  />
-                )}
+          ):(
+            <div>
+              <div className="profile__topbody__left__profblock__imgdiv">
+                <img className="profile__topbody__left__profblock__imgdiv__pic"
+                  src={user.profile_image.img}
+                  style={JSON.parse(user.profile_image.imageStyle)}
+                />
+                <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
               </div>
-              {/* <img className="profile__topbody__left__profblock__imgdiv__pic" src='./img/user.svg'  /> */}
-              <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+              <div className="profile__topbody__left__profblock__proftext">
+                <h1> </h1>
+                <h3> Guitarist/Singer </h3>
+              </div>
+              <button onClick={this.editChange}> Edit Profile Picture </button>
             </div>
-            <div className="profile__topbody__left__profblock__proftext">
-              <h1> John Doe </h1>
-              <h3> Guitarist/Singer </h3>
-            </div>
-            <button onClick={this.editChange}> Edit Profile Picture </button>
-          </div>
-        }
-      </div>
+          )}
+        </div>
     )
   }
 }
 
-export default UProfDiv;
+
+function mapStateToProps(state) {
+  return {
+    isAuth: state.user.isAuth,
+    user: state.user.user,
+    // id: state.user.user
+  };
+}
+
+function mapDispatchToProps(dispatch){
+  // return bindActionCreators({ loginUser }, dispatch);
+}
+
+export default connect(mapStateToProps)(UProfDiv);
+
+// export default ProfilePage;

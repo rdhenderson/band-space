@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import { connect } from "react-redux";
+import {getUser} from '../../helpers/index.js'
 
 // import components
 import ProfileForm from './components/ProfileForm'
@@ -28,18 +30,14 @@ const sampleReviews = [{
     image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
   }];
 
-class ProfilePage extends Component {
+class UserPrivateProfile extends Component {
   constructor(props) {
     super(props)
     this.state = {
       makeEdit : false,
       showConnect: false,
-      query: "",
-      uName: "",
-      skill: {},
-      bands: {},
-      events: {}
     }
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
     this.toggleConnect = this.toggleConnect.bind(this);
@@ -64,11 +62,28 @@ class ProfilePage extends Component {
     this.setState(newState);
   }
 
-  componentDidMount(){
+  componentWillMount(){
+    var userId = this.props.match.url.substring(9)
+    getUser(userId).then(pageUser => {
+      this.setState({
+        name: pageUser.data.name,
+        id: pageUser.data._id,
+        profile_image: pageUser.data.profile_image,
+        bands: pageUser.data.bands,
+        reviews: pageUser.data.reviews,
+        tags: pageUser.data.tags,
+        venues: pageUser.data.venues
+      });
+    });
+
+  }
+
+  componentWillMount(){
+
   }
 
   render(){
-    let user = this.props.user.user;
+    let user = this.props.user;
     var sampleReviews = [{
         event : "The Reusable Code @ 930 Club 09/06/17",
         title: "The Guitarist was amazing",
@@ -94,9 +109,10 @@ class ProfilePage extends Component {
         <div className="profile__topbody">
 
           <div className="profile__topbody__left">
-            <h1> </h1>
-            <UProfDiv user={user} />
 
+            <UProfDiv />
+
+            <h1>{user.name} </h1>
             <div className="profile__topbody__left__details">
               <div id="bands">
                 <h3> Bands </h3>
@@ -141,18 +157,18 @@ class ProfilePage extends Component {
         </div>
         <UserReview reviews={sampleReviews} />
 
-      <button onClick={this.toggleEdit}>Edit Profile</button>
-      {this.state.makeEdit && (
-        <ProfileForm user={user} onSubmit={this.handleSubmit}/>
-      )}
-      <button onClick={this.toggleConnect}>Connect Services</button>
-      {this.state.showConnect && (
-        <ThirdPartyAuth connect={true} />
-      )}
-    </div>
+        <button onClick={this.toggleEdit}>Edit Profile</button>
+        {this.state.makeEdit && (
+          <ProfileForm user={user} onSubmit={this.handleSubmit}/>
+        )}
+        <button onClick={this.toggleConnect}>Connect Services</button>
+        {this.state.showConnect && (
+          <ThirdPartyAuth connect={true} />
+        )}
+      </div>
 
     )
   }
 }
 
-export default ProfilePage;
+export default UserPrivateProfile

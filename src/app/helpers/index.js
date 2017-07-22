@@ -16,7 +16,7 @@ export async function refreshToken(token){
     headers: {'Authorization': `Bearer ${token}`}
   }).then( ({token}) => {
     localStorage.setItem('jwtToken', token);
-    return results;
+    return token;
   });
 }
 
@@ -52,7 +52,9 @@ export async function removeVenue(venueId, token) {
 
 export async function getUser(userId) {
   const query = (userId) ? `${BASE_QUERY_USER}/${userId}` : BASE_QUERY_USER;
-  return axios.get(query).then( (results) => results );
+  return axios.get(query)
+  .then( (results) => results)
+  .catch((err) => console.log(err));
 }
 
 export async function findUserByEmail(email) {
@@ -77,6 +79,7 @@ export async function addUser(user) {
 
 export async function updateUser(user, token=false) {
   if (!token) token = localStorage.getItem('jwtToken');
+  console.log("users ID", user._id);
   const query = (user._id) ? `${BASE_QUERY_USER}/${user._id}` : BASE_QUERY_USER;
   return axios({
     method: 'put',
