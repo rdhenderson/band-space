@@ -153,14 +153,12 @@ class ImageEditor extends Component{
           step='0.01'
           value={this.state.ypos}
         />
-        <br />
-        Rotate:
-        <button onClick={this.rotateLeft}>Left</button>
-        <button onClick={this.rotateRight}>Right</button>
-        <br />
-        <br />
-        <button onClick={this.savePicture}> Save Profile Picture </button>
-        <br />
+        <div className="profile__topbody__left__profblock__imgdiv__buttons">
+          Rotate:
+          <button className="normal-btn" onClick={this.rotateLeft}>Left</button>
+          <button className="normal-btn" onClick={this.rotateRight}>Right</button>
+          <button className="normal-btn" onClick={this.savePicture}> Save Profile Picture </button>
+        </div>
       </div>
     )
   }
