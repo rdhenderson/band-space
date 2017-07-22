@@ -32,10 +32,12 @@ class UProfDiv extends Component {
           ):(
             <div>
               <div className="profile__topbody__left__profblock__imgdiv">
-                <img className="profile__topbody__left__profblock__imgdiv__pic"
-                  src={user.profile_image.img}
-                  style={JSON.parse(user.profile_image.imageStyle)}
-                />
+                <div className="profile__topbody__left__profblock__imgdiv__imgborder">
+                  <img className="profile__topbody__left__profblock__imgdiv__imgborder__pic"
+                    src={user.profile_image.img}
+                    style={JSON.parse(user.profile_image.imageStyle)}
+                  />
+                </div>
                 <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
               </div>
               <div className="profile__topbody__left__profblock__proftext">

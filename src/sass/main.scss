@@ -128,8 +128,11 @@ main{
   flex-direction: column;
   justify-content: center;
 
-  &__icon{
-
+  &__profileborder{
+    border-radius: 30px;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
   }
 
   &__userName{
