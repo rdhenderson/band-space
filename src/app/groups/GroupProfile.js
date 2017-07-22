@@ -106,59 +106,59 @@ class GroupProfile extends Component{
             <div className="groupProfile__topbody__right">
 
 
-            <div className="groupProfile__topbody__right__sliders">
-              <div id="Header">
-                <h1 id="skillheader"> Skills </h1>
-              </div>
-              <div id="slidSkills">
-                <div className="profile__topbody__right__sliders__sliderItem">
-                  <h3> Professionalism </h3>
-                  <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
-                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
+              <div className="groupProfile__topbody__right__sliders">
+                <div id="Header">
+                  <h1 id="skillheader"> Skills </h1>
                 </div>
-                <div className="profile__topbody__right__sliders__sliderItem">
-                  <h3> Musicality </h3>
-                  <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
-                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
-                </div>
-                <div className="profile__topbody__right__sliders__sliderItem">
-                  <h3> Showmanship </h3>
-                  <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
-                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
-                </div>
-                <div className="profile__topbody__right__sliders__sliderItem">
-                  <h3> Value </h3>
-                  <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
-                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
+                <div id="slidSkills">
+                  <div className="profile__topbody__right__sliders__sliderItem">
+                    <h3> Professionalism </h3>
+                    <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                    {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
+                  </div>
+                  <div className="profile__topbody__right__sliders__sliderItem">
+                    <h3> Musicality </h3>
+                    <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                    {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
+                  </div>
+                  <div className="profile__topbody__right__sliders__sliderItem">
+                    <h3> Showmanship </h3>
+                    <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                    {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
+                  </div>
+                  <div className="profile__topbody__right__sliders__sliderItem">
+                    <h3> Value </h3>
+                    <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                    {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
 
+                  </div>
                 </div>
+
               </div>
 
             </div>
 
-          </div>
-
-          <div className="groupProfile__bottombody">
-            <div className="groupProfile__bottombody__botheader">
-              <h1> Reviews </h1>
-            </div>
-            <div className="groupProfile__bottombody__botmain">
-              <div className="groupProfile__bottombody__botmain__left">
-                <p> test </p>
+            <div className="groupProfile__bottombody">
+              <div className="groupProfile__bottombody__botheader">
+                <h1> Reviews </h1>
               </div>
-
-              <div className="groupProfile__bottombody__botmain__right">
-                <div className="groupProfile__bottombody__botmain__right__header">
-                  <h1> Write a review? </h1> <img src="./img/edit.svg" onClick={this.writeReview} />
-
+              <div className="groupProfile__bottombody__botmain">
+                <div className="groupProfile__bottombody__botmain__left">
+                  <p> test </p>
                 </div>
-                {this.state.activeReview &&
-                  <WriteReview
-                    reviewType='group_id'
-                    reviewSub={group._id}
-                  />
-              }
-              {this.state.reviews.map((item, index) => (
+
+                <div className="groupProfile__bottombody__botmain__right">
+                  <div className="groupProfile__bottombody__botmain__right__header">
+                    <h1> Write a review? </h1> <img src="/img/edit.svg" onClick={this.writeReview} />
+
+                  </div>
+                  {this.state.activeReview &&
+                    <WriteReview
+                      reviewType='group_id'
+                      reviewSub={group._id}
+                    />
+                  }
+                  {this.state.review !== undefined && this.state.reviews.map((item, index) => (
                 <Review index={index} cName="groupProfile__bottombody__botmain__right__event" name={item.name} title={item.title} details={item.details} />
               ))}
             </div>

@@ -6,7 +6,7 @@ import WriteReview from '../groups/components/writeReview.js'
 
 import HeadSearch from '../components/headSearch.js'
 
-import UserReview from '../users/profile/components/userReview.js'
+import UserReview from '../users/profile/components/UserReview.js'
 
 const sampleReviews = [{
     event : "The Reusable Code @ 930 Club 09/06/17",
@@ -102,24 +102,24 @@ class VenueProfile extends Component {
               <div className="profile__topbody__left__profblock__imgdiv">
                 <img className="profile__topbody__left__profblock__imgdiv__pic" src="http://lorempixel.com/250/250" />
                 {/* <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
-              </div> */}
-              <div className="profile__topbody__left__profblock__proftext">
-                <h1 style={{"fontSize" : 50}}> {venue.name} </h1>
-                <h3 style={{"fontSize" : 20}}> {venue.address} </h3>
-                <h4 style={{"fontSize" : 20}}> {venue.description} </h4>
+                </div> */}
+                <div className="profile__topbody__left__profblock__proftext">
+                  <h1 style={{"fontSize" : 50}}> {venue.name} </h1>
+                  <h3 style={{"fontSize" : 20}}> {venue.address} </h3>
+                  <h4 style={{"fontSize" : 20}}> {venue.description} </h4>
+                </div>
               </div>
-            </div>
 
-            <div className="profile__topbody__left__details">
-              <h3> Events </h3>
-              <ul>
-                <li> List Venue Events </li>
-              </ul>
+              <div className="profile__topbody__left__details">
+                <h3> Events </h3>
+                <ul>
+                  <li> List Venue Events </li>
+                </ul>
+              </div>
+
             </div>
 
           </div>
-
-        </div>
 
           <div className="profile__topbody__right">
             <div style={{ paddingBottom: 20}} className="profile__topbody__right__sliders">
@@ -146,10 +146,30 @@ class VenueProfile extends Component {
 
         </div>
 
-        <UserReview reviews={sampleReviews} />
 
 
+
+        {(this.state.review !== undefined) ? (
+          <UserReview reviews={this.state.reviews} />
+        ):(
+          <UserReview reviews={sampleReviews} />
+        )
+          // this.state.reviews.map((item, index) => (
+          // {/* <Review index={index} cName="groupProfile__bottombody__botmain__right__event" name={item.name} title={item.title} details={item.details} /> */}  ))
+        }
+        <div style={{display: "flex", justifyContent: "center"}} className="groupProfile__bottombody__botmain__right__header">
+          <h1> Write a review? </h1> <img src="/img/edit.svg" onClick={this.writeReview} />
+          {(this.state.activeReview)  &&
+            <WriteReview
+              reviewType='venue_id'
+              reviewSub={venue._id}
+              toggleEdit={this.writeReview}
+            />
+          }
+
+        </div>
       </div>
+
     )
 
   }

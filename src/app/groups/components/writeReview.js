@@ -34,6 +34,8 @@ class WriteReview extends Component {
       if (!response.error) {
         this.props.addReviewSuccess(response.payload);
         // Get last band added to users band array
+        if (this.props.toggleEdit !== undefined) this.props.toggleEdit();
+        
       } else {
         this.props.addReviewFailure(response.payload);
         // this.props.history.push(`/createband`)

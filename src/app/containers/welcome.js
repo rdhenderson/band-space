@@ -26,7 +26,7 @@ class Welcome extends Component {
       showDisplay: {
         display:  'none'
       },
-      icon: "./img/stage.svg"
+      icon: "/img/stage.svg"
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -68,18 +68,18 @@ class Welcome extends Component {
     if(event.target === "<a>Artist</a>"){
       this.setState({
         searchType: "artist",
-        icon: "./img/microphone.svg"
+        icon: "/img/microphone.svg"
       })
     } else if (event.target === "<a>User</a>") {
       this.setState({
         searchType: "user",
-        icon: "./img/profile.svg"
+        icon: "/img/profile.svg"
       })
     }
     else if(event.target === "<a>Venue</a>"){
       this.setState({
         searchType: "venue",
-        icon: "./img/stage.svg"
+        icon: "/img/stage.svg"
       })
     }
   }
@@ -132,7 +132,7 @@ class Welcome extends Component {
                       venue={venue}
                       key={index}
                       history={this.props.history}
-                      
+
                     />
                   ))
                 }

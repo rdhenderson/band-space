@@ -42,7 +42,7 @@ const renderMembers = ({fields, meta: { touched, error } }) => {
           </li>
           <img
             className="createGroup__body__left__members__item__remove"
-            src="./img/remove.svg"
+            src="/img/remove.svg"
             onClick={() => fields.remove(index)}
           />
           {/* <button
@@ -54,7 +54,7 @@ const renderMembers = ({fields, meta: { touched, error } }) => {
       <li className="createGroup__body__left__members__item__adddiv">
         <img
           className="createGroup__body__left__members__item__adddiv__add"
-          src="./img/add.svg"
+          src="/img/add.svg"
           onClick={() => fields.push({})}
         />
         <p>Add Member</p>

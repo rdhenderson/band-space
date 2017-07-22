@@ -132,9 +132,23 @@ class UserPublicProfile extends Component {
             </div>
 
           </div>
-
+          {this.state.activeReview &&
+            <WriteReview
+              reviewType='venue_id'
+              reviewSub={venue._id}
+            />
+          }
         </div>
-        <UserReview reviews={sampleReviews} />
+        {(this.state.review !== undefined) ? (
+          <UserReview reviews={this.state.reviews} />
+        ):(
+          <UserReview reviews={sampleReviews} />
+        )
+            // this.state.reviews.map((item, index) => (
+          // {/* <Review index={index} cName="groupProfile__bottombody__botmain__right__event" name={item.name} title={item.title} details={item.details} /> */}  ))
+        }
+
+
       </div>
     )
   }
