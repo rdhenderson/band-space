@@ -1,8 +1,9 @@
 
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const Schema = require('mongoose').Schema;
-var bcrypt   = require('bcrypt-nodejs');
-
+const bcrypt   = require('bcrypt-nodejs');
+const findOrCreate = require('mongoose-find-or-create');
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 // define the schema for our user model
 var userSchema = new Schema({
   name: { type: String, required: true },
@@ -81,6 +82,9 @@ userSchema.methods.generateHash = function(password) {
 userSchema.methods.comparePassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
+
+userSchema.plugin(findOrCreate);
+userSchema.plugin(deepPopulate); 
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);

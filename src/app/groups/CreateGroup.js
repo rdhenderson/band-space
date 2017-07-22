@@ -143,9 +143,7 @@ const CreateGroup = (props) => {
   )
 }
 
-
 export default reduxForm({
   form: 'createGroup',     // a unique identifier for this form
   BandMemberValidate
 })(CreateGroup)
-{/* export default CreateGroup; */}

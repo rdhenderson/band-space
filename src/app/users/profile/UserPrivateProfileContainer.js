@@ -3,7 +3,7 @@ import UserPrivateProfile from './UserPrivateProfile';
 
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import {updateUser, updateUserSuccess, updateUserFailure} from '../redux/userActions.js'
+import * as userActions from '../redux/userActions.js'
 // import actions from '../redux/userActions.js'
 
 function mapStateToProps(state) {
@@ -16,7 +16,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({updateUser, updateUserSuccess, updateUserFailure}, dispatch);
+  return bindActionCreators({...userActions}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPrivateProfile);

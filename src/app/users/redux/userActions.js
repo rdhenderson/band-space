@@ -8,6 +8,9 @@ export const ME_FROM_TOKEN_FAILURE = 'ME_FROM_TOKEN_FAILURE';
 export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
 export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
+export const ADD_USER_GROUP = 'ADD_USER_GROUP';
+export const ADD_USER_GROUP_SUCCESS = 'ADD_USER_GROUP_SUCCESS';
+export const ADD_USER_GROUP_FAILURE = 'ADD_USER_GROUP_FAILURE';
 
 // const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
 const ROOT_URL = '/api';
@@ -83,6 +86,39 @@ export function updateUserSuccess(user) {
 export function updateUserFailure(error) {
   return {
     type: UPDATE_USER_FAILURE,
+    payload: error
+  };
+}
+
+export function addUserGroup(group, id) {
+  const token = localStorage.getItem('jwtToken');
+  //check if the token is still valid, if so, get me from the server
+  const request = axios({
+    method: 'post',
+    url: `${ROOT_URL}/users/${id}/groups`,
+    data: group,
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  return {
+    type: ADD_USER_GROUP,
+    payload: request
+  };
+}
+
+export function addUserGroupSuccess(group) {
+  console.log('USER update success', group);
+  return {
+    type: ADD_USER_GROUP_SUCCESS,
+    payload: group
+  };
+}
+
+export function addUserGroupFailure(error) {
+  return {
+    type: ADD_USER_GROUP_FAILURE,
     payload: error
   };
 }

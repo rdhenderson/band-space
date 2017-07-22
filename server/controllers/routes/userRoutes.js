@@ -1,6 +1,7 @@
 const path = require('path');
 const { getCleanUser, generateToken } = require('../../helpers/users.js')
 const User = require('../../models/user.js');
+const Band = require('../../models/band.js');
 const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_SECRET;
 const isAuthenticated = require('../../helpers/auth_check.js');
@@ -12,13 +13,12 @@ module.exports = function(app, passport) {
 
 
   app.get('/api/users/:id', (req, res) => {
-    const query = { _id:req.params.id };
-    User.findOne(query, (err, user) => {
+    User.findById(req.params.id)
+    .exec( (err, user) => {
       if (err){
         console.log("ERROR", err);
         res.json(err);
       } else {
-        console.log("result", user);
         res.status(200).json(user);
       }
     })
@@ -33,8 +33,7 @@ module.exports = function(app, passport) {
         console.log("ERROR", err);
         res.json(err);
       } else {
-        console.log("result", user);
-        res.status(200).json(user);
+        res.redirect(301, `/api/users/${user._id}`);
       }
     })
   });
@@ -42,7 +41,7 @@ module.exports = function(app, passport) {
   // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
   // server/helpers/auth_check
 
-  app.delete('api/users/:id', isAuthenticated, (req, res) => {
+  app.delete('/api/users/:id', isAuthenticated, (req, res) => {
       User.findByIdAndRemove(req.params.id, function (err, user) {
         res.send({
           message: "User successfully deleted",
@@ -50,6 +49,26 @@ module.exports = function(app, passport) {
         })
       })
   });
+
+  app.post('/api/users/:id/groups', isAuthenticated, (req, res) => {
+    // console.log("Request Body:", req.body);
+    const options = {appendToArray: true, upsert:true, new:true};
+    const query = {name: req.body.name }
+    Band.findOrCreate(query, req.body, options, (err, group) => {
+      User.findOrCreate({_id:req.params.id}, { bands: group }, options, (err, user) => {
+        if (err) {
+          res.json({
+            success: false,
+            message: 'Check the form for errors.',
+            error: err,
+          });
+        } else {
+          // res.json(user);
+          res.redirect(301, `/api/users/${user._id}`);
+        }
+      })
+    })
+  })
 
   // process the signup form -- NOTE Change redirect to proper route once react connected.
   app.post('/api/users/signup', (req, res, next) => {
