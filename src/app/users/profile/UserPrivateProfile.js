@@ -63,13 +63,19 @@ class UserPrivateProfile extends Component {
   }
   userAddGroup(values) {
     event.preventDefault();
-    const id = this.props.user.user._id
-    const newGroup = { members:[id], ...values };
+    const user = this.props.user.user
+    const newGroup = {
+      members: {
+        user_id: [user._id],
+        name: user.name,
+        email: user.email
+      }, ...values };
     console.log("New Group", newGroup);
-    this.props.addUserGroup(newGroup, id)
+    this.props.addUserGroup(newGroup, user._id)
     .then( (response) => {
       if (!response.error) {
         this.props.addUserGroupSuccess(response.payload);
+        this.props.history.push('/profile');
       } else {
         this.props.addUserGroupFailure(response.payload);
       }
@@ -107,7 +113,7 @@ class UserPrivateProfile extends Component {
 
 
   render(){
-    let user = this.props.user;
+    let user = this.props.user.user;
 
     return (
       <div className="profile">
@@ -118,16 +124,14 @@ class UserPrivateProfile extends Component {
 
             <UProfDiv onSave={this.handleUserUpdate.bind(this)} />
 
-            <h1>{user.email} </h1>
             <div className="profile__topbody__left__details">
+              
               <div id="bands">
                 <h3> Your Groups </h3>
                 <ul>
-                  {user.groups && user.groups.map( (group, index) =>(
-                    <li
-                      onClick={this.props.history.push(`/groups/${group._id}`)}
-                      key={index}>
-                      {group.name}
+                  {user.bands.map( (band, index) =>(
+                    <li key={index} onClick={() => this.props.history.push(`/groups/${band._id}`)}>
+                      #{index+1}: {band.name}
                     </li>
                   ))}
 
