@@ -10,13 +10,17 @@
         flex-direction: column;
         align-items: center;
         margin-top: 10vh;
+
+        &__svg{
+          width: 20vw;
+          height: 40vh;
+          margin-bottom: 5vh;
+          
+        }
+
       }
 
-      &__logo > img{
-        width: 20vw;
-        height: 40vh;
-        margin-bottom: 5vh;
-      }
+
 
       &__searchbar{
         width: 80%;
