@@ -16,7 +16,7 @@ export async function refreshToken(token){
     headers: {'Authorization': `Bearer ${token}`}
   }).then( ({token}) => {
     localStorage.setItem('jwtToken', token);
-    return results;
+    return token;
   });
 }
 
@@ -79,6 +79,7 @@ export async function addUser(user) {
 
 export async function updateUser(user, token=false) {
   if (!token) token = localStorage.getItem('jwtToken');
+  console.log("users ID", user._id);
   const query = (user._id) ? `${BASE_QUERY_USER}/${user._id}` : BASE_QUERY_USER;
   return axios({
     method: 'put',

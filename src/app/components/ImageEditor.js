@@ -8,10 +8,11 @@ class ImageEditor extends Component{
   constructor(props){
     super(props)
     this.state = {
-      position: { x: 0.5, y: 0.5 },
+      xpos: 0.5,
+      ypos: 0.5,
       scale: 1,
       rotate: 0,
-      img: './img/user.svg'
+      img: '/img/user.svg'
     }
   }
 
@@ -42,49 +43,76 @@ class ImageEditor extends Component{
 
   handleXPosition = (e) => {
     const x = parseFloat(e.target.value)
-    this.setState({ position: { ...this.state.position, x } })
+    this.setState({ xpos: x })
   }
 
   handleYPosition = (e) => {
     const y = parseFloat(e.target.value)
-    this.setState({ position: { ...this.state.position, y } })
+    this.setState({ ypos: y })
   }
 
   savePicture = (e) => {
     e.preventDefault()
     if (this.props.type === "user"){
-      this.props.user.profile_image = {...this.state};
-      updateUser(this.props.user)
+      // this.props.user.profile_image = {...this.state};
+      const imageStyle = {
+        "width": `${200 * this.state.scale}px`,
+        "height": `${200 * this.state.scale}px`,
+        "marginLeft": `${(this.state.xpos * 100) - 50}%`,
+        "marginTop": `${(this.state.ypos * 100) - 50}%`,
+        "transform": `rotate(${this.state.rotate}deg)`
+      };
+      const profile_image = {
+        img: this.state.img,
+        scale: this.state.scale,
+        rotate: this.state.rotate,
+        position: {
+          x: this.state.xpos,
+          y: this.state.ypos,
+        },
+        imageStyle: JSON.stringify(imageStyle),
+      };
+
+      updateUser({_id: this.props.user._id, profile_image: {...this.state}});
     }
     this.props.editChange();
   }
 
   componentWillMount(){
     if (this.props.user.profile_image){
-      this.setState({
-        position: this.props.user.profile_image.position,
+      let newState = {
         scale: this.props.user.profile_image.scale,
         rotate: this.props.user.profile_image.rotate,
-        img: this.props.user.profile_image.img
-      })
+        img: this.props.user.profile_image.img,
+        xpos: this.props.user.profile_image.xpos,
+        ypos: this.props.user.profile_image.ypos,
+      };
+    this.setState(newState);
     }
   }
 
   render () {
+    let imageStyle = {
+      "width": `${200 * this.state.scale}px`,
+      "height": `${200 * this.state.scale}px`,
+      "marginLeft": `${(this.state.xpos * 100) - 50}%`,
+      "marginTop": `${(this.state.ypos * 100) - 50}%`,
+      "transform": `rotate(${this.state.rotate}deg)`
+    };
     return (
       <div className={this.props.class}>
-          <div style={{borderRadius: 60, width:200, height: 200, overflow: "hidden" }}>
+        <div style={{borderRadius: 60, width:200, height: 200, overflow: "hidden" }}>
           <img
             src={this.state.img}
             style={{
               width: `${200 * this.state.scale}px`,
               height: `${200 * this.state.scale}px`,
-              "marginLeft": `${(this.state.position.x * 100) - 50}%`,
-              "marginTop": `${(this.state.position.y * 100) - 50}%`,
+              "marginLeft": `${(this.state.xpos * 100) - 50}%`,
+              "marginTop": `${(this.state.ypos * 100) - 50}%`,
               "transform": `rotate(${this.state.rotate}deg)`
             }}
           />
-          </div>
+        </div>
         <br />
         Copy and Paste Image URL:
         <input
@@ -112,7 +140,7 @@ class ImageEditor extends Component{
           min='0'
           max='1'
           step='0.01'
-          value={this.state.position.x}
+          value={this.state.xpos}
         />
         <br />
         Y Position:
@@ -123,7 +151,7 @@ class ImageEditor extends Component{
           min='0'
           max='1'
           step='0.01'
-          value={this.state.position.y}
+          value={this.state.ypos}
         />
         <br />
         Rotate:

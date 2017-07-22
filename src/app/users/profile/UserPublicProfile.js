@@ -32,64 +32,30 @@ const sampleReviews = [{
 class UserPublicProfile extends Component {
   constructor(props) {
     super(props)
-    var userId = this.props.match.url.substring(9)
+    this.state = {
+      name: '',
+      id: '',
+      profile_image: {} ,
+      bands: [],
+      reviews: [],
+      tags: [],
+      venues: [],
+      displayUser: {},
+    };
+  }
+
+  componentWillMount() {
+    const userId = this.props.match.params.id;
     getUser(userId).then( ({data}) => {
-      this.state = {
-        displayUser: data
-      };
+      this.setState = { ...data, displayUser: data };
       console.log("Data: ", data);
     });
   }
 
-  // componentWillMount(){
-  //   // var userId = this.props.match.url.substring(9)
-  //   // getUser(userId).then( ({data}) => {
-  //     // this.setState({
-  //     //   name: data.name,
-  //     //   id: data._id,
-  //     //   profile_image: data.profile_image ,
-  //     //   bands: data.bands,
-  //     //   reviews: data.reviews,
-  //     //   tags: data.tags,
-  //     //   venues: data.venues
-  //     // });
-  //     this.setState({ displayUser: data })
-  //     console.log("Data: ", data);
-  //   });
-// }
 
   render(){
-    if (!(this.state && this.state.displayUser))
-      return ( <h1> LOADING... </h1> );
-      
-    const user = this.state.displayUser;
+    const user = this.state.displayUser || {};
     let imageStyle;
-    // if (user.profile_image.scale)
-    //   imageStyle =  {
-    //     width: `${200 * user.profile_image.scale}px`,
-    //     height: `${200 * user.profile_image.scale}px`,
-    //     "marginLeft": `${(user.profile_image.position.x * 100) - 50}%`,
-    //     "marginTop": `${(user.profile_image.position.y * 100) - 50}%`,
-    //     "transform": `rotate(${user.profile_image.rotate}deg)`
-    //   };
-    var sampleReviews = [{
-        event : "The Reusable Code @ 930 Club 09/06/17",
-        title: "The Guitarist was amazing",
-        body: "This is the descrption",
-        image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
-      },
-      {
-        event : "The Who Needs Sleep @ 930 Club 07/19/17",
-        title: "Well, you're never gonna get it",
-        body: "This is the descrption",
-        image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
-      },
-      {
-        event : "The Fartz @ 930 Club 09/09/16",
-        title: "The Guitarist was amazing",
-        body: "This is the descrption",
-        image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
-      }];
 
     return (
       <div className="profile">
@@ -100,14 +66,16 @@ class UserPublicProfile extends Component {
 
               <div>
                 <div className="profile__topbody__left__profblock__imgdiv">
-                  <div style={{borderRadius: 60, width:200, height: 200, overflow: "hidden" }}>
-                    <img
-                      className="profile__topbody__left__profblock__imgdiv__pic"
-                      src={user.profile_image.img}
-                      // style={imageCSS}
-                    />
-                    {/* <img className="profile__topbody__left__profblock__imgdiv__pic" src='./img/user.svg'  /> */}
-
+                  {/* <div style={{borderRadius: 60, width:200, height: 200, overflow: "hidden" }}> */}
+                  <div>
+                    {(user.profile_image && user.profile_image.img) ? (
+                      <img className="profile__topbody__left__profblock__imgdiv__pic"
+                        src={user.profile_image.img}
+                        style={JSON.parse(user.profile_image.imageStyle)}
+                      />
+                    ):(
+                      <img className="profile__topbody__left__profblock__imgdiv__pic" src='/img/user.svg'/>
+                    )}
                   </div>
                   <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
                 </div>
@@ -142,19 +110,19 @@ class UserPublicProfile extends Component {
               <div id="slidSkills">
                 <div className="profile__topbody__right__sliders__sliderItem">
                   <h3> Professionalism </h3>
-                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
+                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" />
                 </div>
                 <div className="profile__topbody__right__sliders__sliderItem">
                   <h3> Professionalism </h3>
-                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
+                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" />
                 </div>
                 <div className="profile__topbody__right__sliders__sliderItem">
                   <h3> Professionalism </h3>
-                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
+                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" />
                 </div>
                 <div className="profile__topbody__right__sliders__sliderItem">
                   <h3> Professionalism </h3>
-                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
+                  <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" />
                 </div>
               </div>
             </div>
