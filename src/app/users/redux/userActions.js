@@ -5,8 +5,12 @@ export const USER_LOGOUT = 'USER_LOGOUT';
 export const ME_FROM_TOKEN = 'ME_FROM_TOKEN';
 export const ME_FROM_TOKEN_SUCCESS = 'ME_FROM_TOKEN_SUCCESS';
 export const ME_FROM_TOKEN_FAILURE = 'ME_FROM_TOKEN_FAILURE';
+export const UPDATE_USER = 'UPDATE_USER';
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
+export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
 
-const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+// const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+const ROOT_URL = '/api';
 
 export function loginUser(user) {
   return {
@@ -47,6 +51,38 @@ export function meFromTokenSuccess(currentUser) {
 export function meFromTokenFailure(error) {
   return {
     type: ME_FROM_TOKEN_FAILURE,
+    payload: error
+  };
+}
+export function updateUser(updates, id) {
+  const token = localStorage.getItem('jwtToken');
+  //check if the token is still valid, if so, get me from the server
+  const request = axios({
+    method: 'put',
+    url: `${ROOT_URL}/users/${id}?token=${token}`,
+    data: updates,
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  return {
+    type: UPDATE_USER,
+    payload: request
+  };
+}
+
+export function updateUserSuccess(user) {
+  console.log('USER update success', user);
+  return {
+    type: UPDATE_USER_SUCCESS,
+    payload: user
+  };
+}
+
+export function updateUserFailure(error) {
+  return {
+    type: UPDATE_USER_FAILURE,
     payload: error
   };
 }

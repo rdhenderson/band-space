@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom'
 import UserPrivateProfile from './UserPrivateProfile';
-import Main from '../../containers/Main';
 
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
+import {updateUser, updateUserSuccess, updateUserFailure} from '../redux/userActions.js'
+// import actions from '../redux/userActions.js'
 
 function mapStateToProps(state) {
   return {
     user: state.user,
     isAuth: state.user.isAuth,
+    error: state.user.error,
+    loading: state.user.loading,
   };
 }
 
 function mapDispatchToProps(dispatch){
-  // return bindActionCreators({ loginUser }, dispatch);
+  return bindActionCreators({updateUser, updateUserSuccess, updateUserFailure}, dispatch);
 }
 
-export default connect(mapStateToProps)(UserPrivateProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(UserPrivateProfile);
