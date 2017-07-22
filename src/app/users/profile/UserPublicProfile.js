@@ -7,7 +7,7 @@ import {getUser} from '../../helpers/index.js'
 // import ThirdPartyAuth from '../common/ThirdPartyAuth'
 import helpers from '../../helpers'
 import HeadSearch from '../../components/headSearch.js'
-import UserReview from './components/userReview.js'
+import UserReview from './components/UserReview.js'
 // import UProfDiv from './components/UProfDiv.js'
 
 const sampleReviews = [{
