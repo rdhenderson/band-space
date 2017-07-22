@@ -19,23 +19,22 @@ class NavMenu extends Component {
         <div className="navUser">
           {this.props.isAuth ?
             <Link to="/profile">
-              <div style={{borderRadius: 60, width:200, height: 200, overflow: "hidden" }}>
+              <div className="navUser__profileborder">
                 <img
                   className="profile__topbody__left__profblock__imgdiv__pic"
                   src={user.profile_image.img}
-                  // style={{
-                  //   width: `${200 * this.props.user.profile_image.scale}px`,
-                  //   height: `${200 * this.props.user.profile_image.scale}px`,
-                  //   "marginLeft": `${(this.props.user.profile_image.position.x * 100) - 50}%`,
-                  //   "marginTop": `${(this.props.user.profile_image.position.y * 100) - 50}%`,
-                  //   "transform": `rotate(${this.props.user.profile_image.rotate}deg)` }}
+                  style={{
+                    width: `${180 * user.profile_image.scale}px`,
+                    height: `${180 * user.profile_image.scale}px`,
+                    "marginLeft": `${(user.profile_image.xpos * 100) - 150}%`,
+                    "marginTop": `${(user.profile_image.ypos * 100) - 100}%`,
+                    "transform": `rotate(${user.profile_image.rotate}deg)`
+                  }}
                 />
               </div>
             </Link>
           :
-          <Link to="/profile">
             <img className="navUser__icon" src="/img/profile.svg" />
-          </Link>
           }
           <p className="navUser__userName">
             {this.props.isAuth ? user.email : "Guest User" }
