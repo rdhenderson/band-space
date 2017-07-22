@@ -73,7 +73,9 @@ class ImageEditor extends Component{
         imageStyle: JSON.stringify(imageStyle),
       };
 
-      updateUser({_id: this.props.user._id, profile_image: {...this.state}});
+      console.log(profile_image.imageStyle);
+
+      updateUser({_id: this.props.user._id, profile_image: profile_image});
     }
     this.props.editChange();
   }
