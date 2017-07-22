@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Collapse } from 'react-collapse';
 
+import WriteReview from './components/WriteReview.js';
 import HeadSearch from '../components/headSearch.js';
 import Review from '../components/Review.js';
 import { getGroup } from '../helpers'
@@ -12,9 +13,35 @@ class GroupProfile extends Component{
       this.state = {
         group: {},
         isLoading: true,
-      };
+        comment: "",
+        activeReview: false,
+        reviews:[
+          {
+          name: "The Fartz @ 930 Club 09/09/16",
+          title: "The Guitarist was amazing",
+          details: "Bullshit"
+        },
+        {
+          name: "The Fartz @ 930 Club 09/09/16",
+          title: "The Guitarist was amazing",
+          details: "Bullshit"
+        },
+        {
+          name: "The Fartz @ 930 Club 09/09/16",
+          title: "The Guitarist was amazing",
+          details: "Bullshit"
+        },
+        {
+          name: "The Fartz @ 930 Club 09/09/16",
+          title: "The Guitarist was amazing",
+          details: "Bullshit"
+        }
+      ]
+    }
+
 
       this.handleInputChange = this.handleInputChange.bind(this);
+      this.writeReview = this.writeReview.bind(this);
     }
 
     handleInputChange(event){
@@ -28,11 +55,27 @@ class GroupProfile extends Component{
 
     }
 
+
+
     componentWillMount() {
       const id = this.props.match.params.id;
       getGroup(id).then( ({data}) => {
         this.setState = { group: data, loading: false };
       });
+    }
+
+    writeReview(e){
+      e.preventDefault();
+      if (this.state.activeReview === true){
+        this.setState({
+          activeReview: false
+        })
+      }
+      else {
+        this.setState({
+          activeReview: true
+        })
+      }
     }
 
     render(){
@@ -110,8 +153,12 @@ class GroupProfile extends Component{
 
             <div className="groupProfile__bottombody__botmain__right">
               <div className="groupProfile__bottombody__botmain__right__header">
-                <h1> Write a review? </h1> <img src="./img/edit.svg" />
+                <h1> Write a review? </h1> <img src="./img/edit.svg" onClick={this.writeReview} />
+
               </div>
+              {this.state.activeReview &&
+                <WriteReview />
+              }
               {this.state.reviews.map((item, index) => (
                 <Review index={index} cName="groupProfile__bottombody__botmain__right__event" name={item.name} title={item.title} details={item.details} />
               ))}

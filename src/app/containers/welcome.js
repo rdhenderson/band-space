@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 
 import axios from 'axios';
 import Infinite from 'react-infinite';
+import SVGInline from 'react-svg-inline';
+import amp from '../../../public/img/amplifier.svg';
 
 import helpers from '../helpers'
 import { getVenue } from '../helpers'
@@ -89,7 +91,8 @@ class Welcome extends Component {
         <div className="splash">
           {this.state.query.length === 0 &&
             <div className="splash__logo" id="splashlogo">
-              <img src="./img/amplifier.svg"/>
+
+              <SVGInline className="splash__logo__svg" svg={amp} />
               <h1 id="logotemplate"> BandSpace </h1>
             </div>
           }
