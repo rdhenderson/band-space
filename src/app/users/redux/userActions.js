@@ -55,7 +55,6 @@ export function meFromTokenFailure(error) {
   };
 }
 export function updateUser(updates, id) {
-  console.log(updates);
   const token = localStorage.getItem('jwtToken');
   //check if the token is still valid, if so, get me from the server
   const request = axios({
