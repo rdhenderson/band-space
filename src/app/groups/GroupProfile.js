@@ -5,11 +5,14 @@ import { Collapse } from 'react-collapse';
 import WriteReview from './components/WriteReview.js';
 import HeadSearch from '../components/headSearch.js';
 import Review from '../components/Review.js';
+import { getGroup } from '../helpers'
 
 class GroupProfile extends Component{
     constructor(props) {
       super(props);
       this.state = {
+        group: {},
+        isLoading: true,
         comment: "",
         activeReview: false,
         reviews:[
@@ -52,6 +55,15 @@ class GroupProfile extends Component{
 
     }
 
+
+
+    componentWillMount() {
+      const id = this.props.match.params.id;
+      getGroup(id).then( ({data}) => {
+        this.setState = { group: data, loading: false };
+      });
+    }
+
     writeReview(e){
       e.preventDefault();
       if (this.state.activeReview === true){
@@ -67,45 +79,38 @@ class GroupProfile extends Component{
     }
 
     render(){
+      const isLoading = this.state.isLoading;
+      const group = this.state.group;
+
       return(
         <div className="groupProfile">
           <HeadSearch />
-        <div className="groupProfile__topbody">
+          <div className="groupProfile__topbody">
 
-          <div className="groupProfile__topbody__left">
+            <div className="groupProfile__topbody__left">
 
-            <div className="groupProfile__topbody__left__profblock">
-              <div className="groupProfile__topbody__left__profblock__imgdiv">
-                <img className="groupProfile__topbody__left__profblock__imgdiv__pic" src="http://lorempixel.com/250/250" />
-                <img className="groupProfile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
-              </div>
-              <div className="groupProfile__topbody__left__profblock__proftext">
-                <div className="groupProfile__topbody__left__profblock__proftext__header">
-                  <h1> The Fartz </h1>
+              <div className="groupProfile__topbody__left__profblock">
+                <div className="groupProfile__topbody__left__profblock__imgdiv">
+                  <img className="groupProfile__topbody__left__profblock__imgdiv__pic" src="http://lorempixel.com/250/250" />
+                  <img className="groupProfile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
                 </div>
-                <div className="groupProfile__topbody__left__profblock__proftext__members">
-                    <div className="groupProfile__topbody__left__profblock__proftext__members__member">
-                      <img src="http://lorempixel.com/50/50" />
-                      <a href="#"> John Doe: Guitar </a>
-                    </div>
-                    <div className="groupProfile__topbody__left__profblock__proftext__members__member">
-                      <img src="http://lorempixel.com/50/50" />
-                      <a href="#"> John Doe: Guitar </a>
-                    </div>
-                    <div className="groupProfile__topbody__left__profblock__proftext__members__member">
-                      <img src="http://lorempixel.com/50/50" />
-                      <a href="#"> John Doe: Guitar </a>
-                    </div>
-                    <div className="groupProfile__topbody__left__profblock__proftext__members__member">
-                      <img src="http://lorempixel.com/50/50" />
-                      <a href="#"> John Doe: Guitar </a>
-                    </div>
+                <div className="groupProfile__topbody__left__profblock__proftext">
+                  <div className="groupProfile__topbody__left__profblock__proftext__header">
+                    <h1> {!isLoading && group.name }</h1>
+                  </div>
+                  <div className="groupProfile__topbody__left__profblock__proftext__members">
+                    {!isLoading && group.members.map( (member, index) =>
+                      <div key={index} className="groupProfile__topbody__left__profblock__proftext__members__member">
+                        <img src="http://lorempixel.com/50/50" />
+                        <a href={`/users/${member.user_id}`}> {member.name} : {member.instrument || "spoons"} </a>
+                      </div>
+                    )}
 
+                  </div>
                 </div>
               </div>
+
             </div>
-
-          </div>
 
           <div className="groupProfile__topbody__right">
 

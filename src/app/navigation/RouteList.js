@@ -20,6 +20,8 @@ const RouteList = (props) => (
     <Route path="/gigs" component={Gigs} />
     <Route path="/creategroup" component={CreateGroup} />
     <Route path="/managegroup" component={ManageGroup} />
+    <Route exact path="/group" component={CreateGroup} />
+    <Route exact path="/group/:id" component={GroupProfile} />
     <Route path="/signup" component={SignUp} />
     <Route path="/login" component={LogIn} />
     <Route path="/testgroup" component={GroupProfile} />
