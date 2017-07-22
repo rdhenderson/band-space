@@ -8,7 +8,7 @@ import ProfileForm from './components/ProfileForm'
 import ThirdPartyAuth from '../common/ThirdPartyAuth'
 import helpers from '../../helpers'
 import HeadSearch from '../../components/headSearch.js'
-import UserReview from './components/userReview.js'
+import UserReview from './components/UserReview.js'
 import UProfDiv from './components/UProfDiv.js'
 import SimpleForm from './components/SimpleForm'
 

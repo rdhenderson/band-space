@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import VenueSummary from './VenueSummary'
 import VenueProfileEditArrays from './VenueProfileEditArrays'
+import WriteReview from '../groups/components/writeReview.js'
 
 import HeadSearch from '../components/headSearch.js'
 
@@ -39,6 +40,7 @@ class VenueProfile extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
+    this.writeReview = this.writeReview.bind(this);
   }
 
   // Pull id from route parameters and get that venue from database
@@ -73,8 +75,24 @@ class VenueProfile extends Component {
     this.setState(newState);
   }
 
+  writeReview(e){
+    e.preventDefault();
+    if (this.state.activeReview === true){
+      this.setState({
+        activeReview: false
+      })
+    }
+    else {
+      this.setState({
+        activeReview: true
+      })
+    }
+  }
+
   render() {
     const venue = this.state.venue;
+    const review = this.state.venue.reviews;
+
     return (
       <div className="profile">
         <HeadSearch />
@@ -129,6 +147,7 @@ class VenueProfile extends Component {
         </div>
 
         <UserReview reviews={sampleReviews} />
+
 
       </div>
     )

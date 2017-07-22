@@ -13,13 +13,8 @@ module.exports = function(app) {
   });
 
   app.post('/api/reviews/:id', isAuthenticated, (req, res) => {
-    const review = {
-      user_id: req.params.id,
-      venue: req.body.venue,
-      event: req.body.event,
-      review_data: JSON.stringify(req.body.review),
-    }
-    Review.create(review, (err, review) => {
+    
+    Review.create(req.body, (err, review) => {
       if (err) console.error('ERROR', err);
       // Send to favorites route to populate favorites for return
       res.json(review);
