@@ -34,7 +34,7 @@ class Review extends Component {
       <Collapse isOpened={this.state.isOpened}>
         <div><p> {this.props.body} </p> </div>
       </Collapse>
-      <img className="reviewExpand" src="./img/add.svg" onClick={this.openClose} />
+      <img className="reviewExpand" src="/img/add.svg" onClick={this.openClose} />
     </div>
   )
   }
