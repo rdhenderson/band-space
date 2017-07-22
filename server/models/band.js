@@ -4,11 +4,6 @@ const findOrCreate = require('mongoose-find-or-create');
 
 const BandSchema = new Schema({
   name: { type: String, trim: true, required: true },
-  address: {
-    street: { type: String, trim: true },
-    city: { type: String, trim: true, defaultValue: "Washington"},
-    state: { type: String, trim: true, defaultValue: "DC" },
-  },
   description: { type: String, trim: true },
   phone: { type: String, trim: true },
   members: [{

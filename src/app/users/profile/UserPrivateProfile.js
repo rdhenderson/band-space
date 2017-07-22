@@ -10,6 +10,7 @@ import helpers from '../../helpers'
 import HeadSearch from '../../components/headSearch.js'
 import UserReview from './components/userReview.js'
 import UProfDiv from './components/UProfDiv.js'
+import SimpleForm from './components/SimpleForm'
 
 const sampleReviews = [{
     event : "The Reusable Code @ 930 Club 09/06/17",
@@ -37,10 +38,13 @@ class UserPrivateProfile extends Component {
     this.state = {
       makeEdit : false,
       showConnect: false,
+      isAddGroup: false,
     }
 
     this.handleUserUpdate = this.handleUserUpdate.bind(this);
+    this.userAddGroup = this.userAddGroup.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
+    this.toggleAddGroup = this.toggleAddGroup.bind(this);
     this.toggleConnect = this.toggleConnect.bind(this);
   }
 
@@ -57,7 +61,25 @@ class UserPrivateProfile extends Component {
       }
     });
   }
+  userAddGroup(values) {
+    event.preventDefault();
+    const id = this.props.user.user._id
+    const newGroup = { members:[id], ...values };
+    console.log("New Group", newGroup);
+    this.props.addUserGroup(newGroup, id)
+    .then( (response) => {
+      if (!response.error) {
+        this.props.addUserGroupSuccess(response.payload);
+      } else {
+        this.props.addUserGroupFailure(response.payload);
+      }
+      this.toggleAddGroup();
+    });
+  }
 
+  toggleAddGroup(){
+    this.setState({isAddGroup: !this.state.isAddGroup});
+  }
   toggleEdit(){
     const newState = { makeEdit: !this.state.makeEdit }
     this.setState(newState);
@@ -99,12 +121,21 @@ class UserPrivateProfile extends Component {
             <h1>{user.email} </h1>
             <div className="profile__topbody__left__details">
               <div id="bands">
-                <h3> Bands </h3>
+                <h3> Your Groups </h3>
                 <ul>
-                  <li> The Fartz </li>
-                  <li> Paid Against the Machine </li>
-                  <li> Migos </li>
+                  {user.groups && user.groups.map( (group, index) =>(
+                    <li
+                      onClick={this.props.history.push(`/groups/${group._id}`)}
+                      key={index}>
+                      {group.name}
+                    </li>
+                  ))}
+
                 </ul>
+                <button onClick={this.toggleAddGroup}>Add Group</button>
+                {this.state.isAddGroup &&
+                  <SimpleForm onSubmit={this.userAddGroup}/>
+                }
               </div>
             </div>
 
