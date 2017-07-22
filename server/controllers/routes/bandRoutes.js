@@ -8,6 +8,7 @@ module.exports = function(app) {
 
   app.get('/api/bands/:id', (req, res) => {
     Band.findOne({_id: req.params.id})
+    .populate('reviews')
     .then( (results) => res.send(results))
     .catch( (err) => res.send("ERROR", err));
   });
