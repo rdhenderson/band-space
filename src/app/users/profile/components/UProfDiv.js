@@ -11,24 +11,28 @@ class UProfDiv extends Component {
     super(props)
     this.state = {
       editActive: false
-
     }
-    this.editChange = this.editChange.bind(this)
+    this.toggleEdit = this.toggleEdit.bind(this)
   }
 
-  editChange(){
+  toggleEdit(){
     this.setState({editActive: !this.state.editActive });
-
   }
 
   render(){
     const user = this.props.user;
     console.log(this.props);
 
+    if (this.props.loading) return (<h1> Loading... </h1>);
       return (
         <div className="profile__topbody__left__profblock">
           {(this.state.editActive) ? (
-            <ImageEditor class="profile__topbody__left__profblock__imgdiv" type="user" user={this.props.user} editChange={this.editChange.bind(this)} />
+            <ImageEditor
+              onSave={this.props.onSave}
+              user={this.props.user}
+              class="profile__topbody__left__profblock__imgdiv"
+              type="user"
+              toggleEdit={this.toggleEdit} />
           ):(
             <div>
               <div className="profile__topbody__left__profblock__imgdiv">
@@ -44,7 +48,7 @@ class UProfDiv extends Component {
                 <h1> </h1>
                 <h3> Guitarist/Singer </h3>
               </div>
-              <button onClick={this.editChange}> Edit Profile Picture </button>
+              <button onClick={this.toggleEdit}> Edit Profile Picture </button>
             </div>
           )}
         </div>
@@ -57,6 +61,8 @@ function mapStateToProps(state) {
   return {
     isAuth: state.user.isAuth,
     user: state.user.user,
+    error: state.user.error,
+    loading: state.user.loading,
     // id: state.user.user
   };
 }
