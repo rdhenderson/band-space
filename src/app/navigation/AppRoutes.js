@@ -56,7 +56,7 @@ class AppRoutes extends Component {
       <Router>
         <main id="outer-container">
           <NavMenu handleLogout={this.handleLogout} />
-          <RouteList />
+          <RouteList user={this.props.user} />
         </main>
       </Router>
   )
