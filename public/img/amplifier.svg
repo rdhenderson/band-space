@@ -61,17 +61,18 @@
 	C37.227,0,38.5,1.273,38.5,2.837V6C38.5,6.552,38.052,7,37.5,7z"/>
 
 <rect x="23.5" y="52" style="fill:#ECF0F1;" width="12" height="3"/>
-<g className="rightSpeaker">
-<circle style="fill:#343B4C;" cx="42.5" cy="39" r="11"/>
+<g class="rightSpeaker">
+<circle class="outerCircle" style="fill:#343B4C;" cx="42.5" cy="39" r="11"/>
 <path style="fill:#232833;" d="M42.5,32c-3.866,0-7,3.134-7,7c0,3.866,3.134,7,7,7s7-3.134,7-7C49.5,35.134,46.366,32,42.5,32z
 	 M44.5,40l-1,1h-2l-1-1v-2l1-1h2l1,1V40z"/>
-<circle style="fill:#F3D55B;" cx="42.5" cy="39" r="3"/>
+<circle class="innerCircle" style="fill:#F3D55B;" cx="42.5" cy="39" r="3"/>
 </g>
-<g className="leftSpeaker">
-<circle style="fill:#343B4C;" cx="16.5" cy="39" r="11"/>
+
+<g class="leftSpeaker">
+<circle class="outerCircle" style="fill:#343B4C;" cx="16.5" cy="39" r="11"/>
 <path style="fill:#232833;" d="M16.5,32c-3.866,0-7,3.134-7,7c0,3.866,3.134,7,7,7s7-3.134,7-7C23.5,35.134,20.366,32,16.5,32z
 	 M18.5,40l-1,1h-2l-1-1v-2l1-1h2l1,1V40z"/>
-<circle style="fill:#F3D55B;" cx="16.5" cy="39" r="3"/>
+<circle class="innerCircle" style="fill:#F3D55B;" cx="16.5" cy="39" r="3"/>
 </g>
 <g>
 </g>
