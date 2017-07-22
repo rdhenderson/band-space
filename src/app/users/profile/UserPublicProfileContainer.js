@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserPublicProfile from './UserPUblicProfile';
+import UserPublicProfile from './UserPublicProfile';
 
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';

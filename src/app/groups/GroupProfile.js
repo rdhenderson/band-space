@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Collapse } from 'react-collapse';
 
-import WriteReview from './components/WriteReview.js';
+import WriteReview from './components/writeReview.js';
 import HeadSearch from '../components/headSearch.js';
 import Review from '../components/Review.js';
 import { getGroup } from '../helpers'

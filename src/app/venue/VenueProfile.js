@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import VenueSummary from './VenueSummary'
 import VenueProfileEditArrays from './VenueProfileEditArrays'
-import WriteReview from '../groups/components/WriteReview.js'
+import WriteReview from '../groups/components/writeReview.js'
 
 class VenueProfile extends Component {
 

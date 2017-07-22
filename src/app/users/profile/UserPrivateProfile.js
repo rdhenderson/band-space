@@ -174,7 +174,7 @@ class UserPrivateProfile extends Component {
                 </div>
               </div>
             </div>
-
+            
           </div>
 
         </div>
