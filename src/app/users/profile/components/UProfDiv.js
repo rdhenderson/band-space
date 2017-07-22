@@ -42,13 +42,13 @@ class UProfDiv extends Component {
                     style={JSON.parse(user.profile_image.imageStyle)}
                   />
                 </div>
-                <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+                {/* <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" /> */}
               </div>
               <div className="profile__topbody__left__profblock__proftext">
-                <h1> </h1>
+                <h1>{user.name}</h1>
                 <h3> Guitarist/Singer </h3>
               </div>
-              <button onClick={this.toggleEdit}> Edit Profile Picture </button>
+              <button className="normal-btn" onClick={this.toggleEdit}> Edit Profile Picture </button>
             </div>
           )}
         </div>
