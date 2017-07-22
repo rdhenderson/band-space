@@ -6,7 +6,7 @@ import WriteReview from '../groups/components/writeReview.js'
 
 import HeadSearch from '../components/headSearch.js'
 
-import UserReview from '../users/profile/components/userReview.js'
+import UserReview from '../users/profile/components/UserReview.js'
 
 const sampleReviews = [{
     event : "The Reusable Code @ 930 Club 09/06/17",
