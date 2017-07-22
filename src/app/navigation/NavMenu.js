@@ -12,7 +12,7 @@ class NavMenu extends Component {
   }
 
   render(){
-    const user = this.props.user.user;
+    const user = this.props.user;
 
     return(
       <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
@@ -70,18 +70,23 @@ class NavMenu extends Component {
             <p id="gigFind" className="menu-item">Find Gigs</p>
           </div>
         </Link>
-        <Link to="/creategroup">
-          <div className="navLinks">
-            <img className="navLinks__icon" src="/img/addgroup.svg" />
-            <p id="createGroup" className="menu-item">Create a Group</p>
-          </div>
-        </Link>
-        <Link to="/managegroup">
-          <div className="navLinks">
-            <img className="navLinks__icon" src="/img/group.svg" />
-            <p id="manageGroup" className="menu-item">Manage Groups</p>
-          </div>
-        </Link>
+        {this.props.isAuth &&
+          <Link to="/creategroup">
+            <div className="navLinks">
+              <img className="navLinks__icon" src="/img/addgroup.svg" />
+              <p id="createGroup" className="menu-item">Create a Group</p>
+            </div>
+          </Link>
+        }
+        {this.props.isAuth &&
+          <Link to="/managegroup">
+            <div className="navLinks">
+              <img className="navLinks__icon" src="/img/group.svg" />
+              <p id="manageGroup" className="menu-item">Manage Groups</p>
+            </div>
+          </Link>
+        }
+
         <Link to="/testgroup"> <p id="testGroup" className="menu-item">Group Profile</p> </Link>
       </Menu>
     )
@@ -94,7 +99,7 @@ class NavMenu extends Component {
 
 function mapStateToProps(state) {
   return {
-    	user: state.user,
+    	user: state.user.user,
       isAuth: state.user.isAuth,
       error: state.error,
       loading: state.loading,

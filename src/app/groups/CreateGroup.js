@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import BandMemberValidate from './BandMemberValidate';
 import Dropzone from 'react-dropzone';
@@ -25,8 +26,8 @@ const renderMembers = ({ fields, meta: { touched, error } }) => (
             type="text"
             className="createGroup__body__left__members__item__field"
             component="input"
-            label="Name"
-            placeholder="Name"
+            label="Email"
+            placeholder="Email"
           />
 
           <Field
@@ -61,7 +62,7 @@ const renderMembers = ({ fields, meta: { touched, error } }) => (
   </ul>
 )
 
-const CreateGroup = (props) => {
+var CreateGroup = (props) => {
    const { handleSubmit, pristine, reset, submitting } = props;
    return (
      <div className="createGroup">
@@ -70,6 +71,7 @@ const CreateGroup = (props) => {
        </div>
 
        <form className="createGroup__body" onSubmit={handleSubmit( (values) => {
+         values.members[0].user_id = props.userId
          console.log("new group values", values);
          helpers.group.add(values)
          .then( (results) => console.log('group added to mongo', results))
@@ -143,7 +145,36 @@ const CreateGroup = (props) => {
   )
 }
 
-export default reduxForm({
-  form: 'createGroup',     // a unique identifier for this form
+function mapStateToProps(state) {
+  return {
+    	user: state.user.user,
+      error: state.error,
+      loading: state.loading,
+    };
+}
+
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ ...userActions }, dispatch);
+// }
+
+CreateGroup = reduxForm({
+  form: 'initializeFromState',  // a unique identifier for this form
   BandMemberValidate
 })(CreateGroup)
+
+export default connect(
+  state => ({
+    initialValues : {
+      members: [{name: state.user.user.name, email: state.user.user.email, instrument: ""}]
+    },
+    userId: state.user.user._id
+}))(CreateGroup);
+
+// export default reduxForm({
+//   form: 'createGroup',     // a unique identifier for this form
+//   BandMemberValidate,
+//   // initialValues : {
+//   //   members: [{name: this.props.user.name, email: this.props.user.email, instrument: ""}]
+//   // }
+// })(CreateGroup)
+// {/* export default CreateGroup; */}
