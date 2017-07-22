@@ -3,6 +3,29 @@ import axios from 'axios'
 import VenueSummary from './VenueSummary'
 import VenueProfileEditArrays from './VenueProfileEditArrays'
 
+import HeadSearch from '../components/headSearch.js'
+
+import UserReview from '../users/profile/components/userReview.js'
+
+const sampleReviews = [{
+    event : "The Reusable Code @ 930 Club 09/06/17",
+    title: "The Guitarist was amazing",
+    body: "This is the descrption",
+    image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
+  },
+  {
+    event : "The Who Needs Sleep @ 930 Club 07/19/17",
+    title: "Well, you're never gonna get it",
+    body: "This is the descrption",
+    image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
+  },
+  {
+    event : "The Fartz @ 930 Club 09/09/16",
+    title: "The Guitarist was amazing",
+    body: "This is the descrption",
+    image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
+  }];
+
 class VenueProfile extends Component {
 
   constructor(props) {
@@ -54,17 +77,18 @@ class VenueProfile extends Component {
     const venue = this.state.venue;
     return (
       <div className="profile">
+        <HeadSearch />
         <div className="profile__topbody">
           <div className="profile__topbody__left">
             <div className="profile__topbody__left__profblock">
               <div className="profile__topbody__left__profblock__imgdiv">
                 <img className="profile__topbody__left__profblock__imgdiv__pic" src="http://lorempixel.com/250/250" />
-                <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
-              </div>
+                {/* <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+              </div> */}
               <div className="profile__topbody__left__profblock__proftext">
-                <h1> {venue.name} </h1>
-                <h3> {venue.address} </h3>
-                <p> {venue.description} </p>
+                <h1 style={{"fontSize" : 50}}> {venue.name} </h1>
+                <h3 style={{"fontSize" : 20}}> {venue.address} </h3>
+                <h4 style={{"fontSize" : 20}}> {venue.description} </h4>
               </div>
             </div>
 
@@ -77,8 +101,10 @@ class VenueProfile extends Component {
 
           </div>
 
+        </div>
+
           <div className="profile__topbody__right">
-            <div className="profile__topbody__right__sliders">
+            <div style={{ paddingBottom: 20}} className="profile__topbody__right__sliders">
               <button onClick={this.toggleEdit}>
                 {(!this.state.makeEdit) ? "Edit Profile" : "View Summary" }
               </button>
@@ -102,43 +128,7 @@ class VenueProfile extends Component {
 
         </div>
 
-        <div className="profile__bottombody">
-          <div className="profile__bottombody__botheader">
-            <h1> Reviews </h1>
-          </div>
-          <div className="profile__bottombody__botmain">
-            <div className="profile__bottombody__botmain__left">
-              <p> test </p>
-            </div>
-
-            <div className="profile__bottombody__botmain__right">
-              <div className="profile__bottombody__botmain__right__event">
-                <h3> The Fartz @ 930 Club 09/09/16 </h3>
-                <p> The Guitarist was amazing </p>
-                <img className="profile__bottombody__botmain__right__event__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
-              </div>
-
-              <div className="profile__bottombody__botmain__right__event">
-                <h3> The Fartz @ 930 Club 09/09/16 </h3>
-                <p> The Guitarist was amazing </p>
-                <img className="profile__bottombody__botmain__right__event__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
-              </div>
-
-              <div className="profile__bottombody__botmain__right__event">
-                <h3> The Fartz @ 930 Club 09/09/16 </h3>
-                <p> The Guitarist was amazing </p>
-                <img className="profile__bottombody__botmain__right__event__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
-              </div>
-
-              <div className="profile__bottombody__botmain__right__event">
-                <h3> The Fartz @ 930 Club 09/09/16 </h3>
-                <p> The Guitarist was amazing </p>
-                <img className="profile__bottombody__botmain__right__event__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
-              </div>
-            </div>
-          </div>
-
-        </div>
+        <UserReview reviews={sampleReviews} />
 
       </div>
     )

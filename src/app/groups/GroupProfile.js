@@ -92,11 +92,11 @@ class GroupProfile extends Component{
               <div className="groupProfile__topbody__left__profblock">
                 <div className="groupProfile__topbody__left__profblock__imgdiv">
                   <img className="groupProfile__topbody__left__profblock__imgdiv__pic" src="http://lorempixel.com/250/250" />
-                  <img className="groupProfile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
+                  {/* <img className="groupProfile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" /> */}
                 </div>
                 <div className="groupProfile__topbody__left__profblock__proftext">
                   <div className="groupProfile__topbody__left__profblock__proftext__header">
-                    <h1> {!isLoading && group.name }</h1>
+                    <h1 style={{"fontSize" : 50}}> {!isLoading && group.name }</h1>
                   </div>
                   <div className="groupProfile__topbody__left__profblock__proftext__members">
                     {!isLoading && group.members.map( (member, index) =>
@@ -119,22 +119,26 @@ class GroupProfile extends Component{
                 <h1 id="skillheader"> Skills </h1>
               </div>
               <div id="slidSkills">
-                  <div className="groupProfile__topbody__right__sliders__sliderItem">
-                    <h3> Professionalism </h3>
-                    <img className="groupProfile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
-                  </div>
-                  <div className="groupProfile__topbody__right__sliders__sliderItem">
-                    <h3> Professionalism </h3>
-                    <img className="groupProfile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
-                  </div>
-                  <div className="groupProfile__topbody__right__sliders__sliderItem">
-                    <h3> Professionalism </h3>
-                    <img className="groupProfile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
-                  </div>
-                  <div className="groupProfile__topbody__right__sliders__sliderItem">
-                    <h3> Professionalism </h3>
-                    <img className="groupProfile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" />
-                  </div>
+                <div className="profile__topbody__right__sliders__sliderItem">
+                  <h3> Professionalism </h3>
+                  <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
+                </div>
+                <div className="profile__topbody__right__sliders__sliderItem">
+                  <h3> Musicality </h3>
+                  <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
+                </div>
+                <div className="profile__topbody__right__sliders__sliderItem">
+                  <h3> Showmanship </h3>
+                  <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
+                </div>
+                <div className="profile__topbody__right__sliders__sliderItem">
+                  <h3> Value </h3>
+                  <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
+                </div>
               </div>
             </div>
 
