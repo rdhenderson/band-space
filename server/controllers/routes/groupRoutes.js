@@ -1,21 +1,21 @@
-const Band = require('../../models/band.js');
+const Group = require('../../models/group.js');
 const { isAuthenticated } = require('../../helpers/auth_check.js');
 
 module.exports = function(app) {
-  app.get('/api/bands', (req, res) => {
-    Band.find({}).then( (results) => res.send(results));
+  app.get('/api/groups', (req, res) => {
+    Group.find({}).then( (results) => res.send(results));
   });
 
-  app.get('/api/bands/:id', (req, res) => {
-    Band.findOne({_id: req.params.id})
+  app.get('/api/groups/:id', (req, res) => {
+    Group.findOne({_id: req.params.id})
     .populate('reviews')
     .then( (results) => res.send(results))
     .catch( (err) => res.send("ERROR", err));
   });
 
-  app.post('/api/bands', isAuthenticated, (req, res) => {
+  app.post('/api/groups', isAuthenticated, (req, res) => {
     const query = { name: req.body.groupName };
-    const band = {
+    const group = {
       name: req.body.groupName,
       address: {
         street: req.body.address
@@ -25,7 +25,7 @@ module.exports = function(app) {
       members: req.body.members,
     };
 
-    Band.findOrCreate(query, band, (err, group) => {
+    Group.findOrCreate(query, group, (err, group) => {
       if (err) console.error('ERROR', err);
       // Render not found error
       res.json(group);
@@ -33,39 +33,38 @@ module.exports = function(app) {
   });
 
   //TODO: CONFIRM THAT UPDATE PROPERLY AFFECTS ARRAYS
-  app.put('/api/bands/:id', isAuthenticated, (req, res) => {
+  app.put('/api/groups/:id', isAuthenticated, (req, res) => {
     const options = { upsert: true, new: true };
     const query = { _id: req.params.id };
-    Venue.findOneAndUpdate(query, req.body.band, options, (err, band) => {
+    Venue.findOneAndUpdate(query, req.body.group, options, (err, group) => {
       if (err) {
         console.log("ERROR", err);
         res.json(err);
       } else {
-        console.log("result", band);
+        console.log("result", group);
         // Render not found error
-        if(!band) {
+        if(!group) {
           return res.status(404).json({
-            message: 'Band with id ' + req.params.id + ' can not be found.'
+            message: 'Group with id ' + req.params.id + ' can not be found.'
           });
         }
-        res.status(200).json(band);
+        res.status(200).json(group);
       }
     })
   });
-  // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
-  // server/helpers/auth_check
-  app.delete('api/bands/:id', isAuthenticated, (req, res) => {
+
+  app.delete('api/groups/:id', isAuthenticated, (req, res) => {
     if (req.body.token) {
-      Band.findByIdAndRemove(req.params.id, function (err, band) {
+      Group.findByIdAndRemove(req.params.id, function (err, group) {
         // Render not found error
-        if(!band) {
+        if(!group) {
           return res.status(404).json({
-            message: 'Band with id ' + id + ' can not be found.'
+            message: 'Group with id ' + id + ' can not be found.'
           });
         }
         res.send({
-          message: "Band successfully deleted",
-          id: band._id
+          message: "Group successfully deleted",
+          id: group._id
         })
       })
     }

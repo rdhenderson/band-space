@@ -1,5 +1,5 @@
 const Event = require('../../models/event.js');
-const isAuthenticated = require('../../helpers/auth_check.js');
+const { isAuthenticated } = require('../../helpers/auth_check.js');
 
 module.exports = function(app) {
   app.get('/api/events', (req, res) => {

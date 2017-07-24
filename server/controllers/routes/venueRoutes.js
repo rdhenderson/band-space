@@ -1,6 +1,6 @@
 const Venue = require('../../models/venue.js');
 const getEventfulVenues = require('../../api/event-search.js');
-const isAuthenticated = require('../../helpers/auth_check.js');
+const { isAuthenticated } = require('../../helpers/auth_check.js');
 
 module.exports = function(app) {
   // Initialize route to populate database

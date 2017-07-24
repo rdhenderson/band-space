@@ -3,6 +3,9 @@ const path = require('path');
 const DotenvPlugin = require('webpack-dotenv-plugin');
 require("babel-polyfill");
 
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+
 module.exports = {
   devtool: 'inline-sourcemap',
   entry: [
@@ -35,9 +38,11 @@ module.exports = {
     ]
   },
   plugins: [
+    // new BundleAnalyzerPlugin(),
     new DotenvPlugin({
       sample: './.env.example',
       path: './.env'
-    })
+    }),
+    // new webpack.DefinePlugin({'process.env.NODE_ENV': '"production"'}),
   ]
 };

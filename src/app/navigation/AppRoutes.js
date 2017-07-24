@@ -9,15 +9,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 // import user actions and destructure
 import { actions as userActions } from '../users';
-import NavMenu from './NavMenu'
+import NavMenu from './NavMenuContainer'
 import RouteList from './RouteList'
 
 class AppRoutes extends Component {
-  constructor(props) {
-    super(props)
-
-    this.handleLogout = this.handleLogout.bind(this);
-  }
 
   showSettings (event) {
     event.preventDefault();
@@ -56,7 +51,7 @@ class AppRoutes extends Component {
       <Router>
         <main id="outer-container">
           <NavMenu handleLogout={this.handleLogout} />
-          <RouteList user={this.props.user} />
+          <RouteList />
         </main>
       </Router>
   )

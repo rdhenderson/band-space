@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom'
 
 import Main from '../containers/Main.js';
 import { SignUp, LogIn, UserPrivateProfile, UserList, UserPublicProfile } from '../users'
-import { CreateGroup, ManageGroup, GroupProfile } from '../groups';
+import { CreateGroup, GroupProfile } from '../groups';
 import Venue from '../venue/Venue.js';
 import Search from '../containers/Search.js';
 import Gigs from '../containers/Gigs.js';
@@ -19,7 +19,6 @@ const RouteList = (props) => (
     <Route path="/search" component={Search} />
     <Route path="/gigs" component={Gigs} />
     <Route path="/creategroup" component={CreateGroup} />
-    <Route path="/managegroup" component={ManageGroup} />
     <Route exact path="/group" component={CreateGroup} />
     <Route exact path="/group/:id" component={GroupProfile} />
     <Route path="/signup" component={SignUp} />
