@@ -7,10 +7,11 @@ import { CreateGroup, GroupProfile } from '../groups';
 import Venue from '../venue/Venue.js';
 import Search from '../containers/Search.js';
 import Gigs from '../containers/Gigs.js';
+import Welcome from '../pages/WelcomePage/Welcome'
 
 const RouteList = (props) => (
   <div id="page-wrap">
-    <Route exact path="/" component={Main} />
+    <Route exact path="/" component={Welcome} />
     <Route path="/profile" component={UserPrivateProfile} />
     {/* <Route path="/user" component={User} /> */}
     <Route exact path='/users' component={UserList}/>

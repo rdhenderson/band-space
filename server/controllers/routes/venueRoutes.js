@@ -15,34 +15,19 @@ module.exports = function(app) {
   });
 
   app.get('/api/venues', (req, res) => {
-    console.log("hit venue routes");
     return Venue.find({}).then( (results) => {
-      console.log("venue results", results);
       return res.send(results)
     })
   });
 
   app.get('/api/venues/:id', (req,res) => {
-   Venue.findOne({"_id": req.params._id})
+   Venue.findById(req.params.id)
    .populate('reviews')
    .populate('events')
-   .populate({
-     path: 'staff',
-     populate: {
-       path: 'user_id',
-       model: 'User'
-     }
-   })
-   .populate({
-     path: 'staff',
-     populate: {
-       path: 'reviews',
-       model: 'Review'
-     }
-   })
-    .then( (results) => {
-      console.log("Population Control?", results[0]);
-      return res.send(results)
+  //  .populate('staff')
+   .then( (result) => {
+     console.log("Venue find", result);
+      return res.send(result)
     });
   });
 
