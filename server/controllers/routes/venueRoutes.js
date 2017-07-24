@@ -22,7 +22,7 @@ module.exports = function(app) {
     })
   });
 
-  app.get('api/venues/:id', (req,res) => {
+  app.get('/api/venues/:id', (req,res) => {
    Venue.findOne({"_id": req.params._id})
    .populate('reviews')
    .populate('events')
