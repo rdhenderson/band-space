@@ -27,7 +27,6 @@ class Welcome extends Component {
   }
 
   handleInputChange({ target }) {
-    console.log("handling input change", target);
     this.setState({
       [target.name]: (target.type === 'checkbox') ? target.checked : target.value
     })
