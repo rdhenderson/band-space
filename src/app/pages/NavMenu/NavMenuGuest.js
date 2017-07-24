@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom'
 
 const NavMenuGuest = () => (
   <div>
-    <div className="navUser">
-      <img className="navUser__icon" src="/img/profile.svg" />
-      <p className="navUser__userName">
-        Guest User
-      </p>
-    </div>
+    <Link to="/login">
+      <div className="navUser">
+        <img className="navUser__icon" src="/img/profile.svg" />
+        <p className="navUser__userName">
+          Guest User
+        </p>
+      </div>
+    </Link>
     <br/>
 
     <Link to="/">

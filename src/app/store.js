@@ -9,7 +9,7 @@
 import redux, { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger'
 import promise from 'redux-promise';
-import reducer from './reducers';
+import reducer from './modules/reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const middleware = applyMiddleware(promise);

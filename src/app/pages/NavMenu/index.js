@@ -1,1 +1,1 @@
-export NavMenu from './NavMenuContainer'
+export { default as NavMenu } from './NavMenuContainer'
