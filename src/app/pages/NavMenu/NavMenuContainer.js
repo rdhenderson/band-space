@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { bindActionCreators } from 'redux';
-import { actions as userActions } from '../users';
+// import { bindActionCreators } from 'redux';
+// import { actions as userActions } from '../../users';
 
 import Menu from './BurgerMenu.js'
 import NavMenuGuest from './NavMenuGuest'
@@ -17,6 +17,7 @@ class NavMenuContainer extends Component {
         {this.props.isAuth ? (
           <NavMenuAuth
             userName={user.email}
+            handleLogout={this.props.handleLogout}
             profileImage={user.profile_image.img}
             profileImageStyle={{
           width: `${180 * user.profile_image.scale}px`,
@@ -42,8 +43,8 @@ function mapStateToProps(state) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ ...userActions }, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ ...userActions }, dispatch);
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavMenuContainer);
+export default connect(mapStateToProps)(NavMenuContainer);

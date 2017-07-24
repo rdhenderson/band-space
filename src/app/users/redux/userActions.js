@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 export const USER_LOGIN = 'USER_LOGIN';
+export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';
+export const USER_LOGIN_FAILURE = 'USER_LOGIN_FAILURE';
 export const USER_LOGOUT = 'USER_LOGOUT';
 export const ME_FROM_TOKEN = 'ME_FROM_TOKEN';
 export const ME_FROM_TOKEN_SUCCESS = 'ME_FROM_TOKEN_SUCCESS';
@@ -25,7 +27,10 @@ export function loginUser(user) {
     payload: { user: user, isAuth: true }
   }
 }
+
+// NOTE: Not a pure function -- removes JWT
 export function logoutUser() {
+  localStorage.removeItem('jwtToken');
   return {
     type: USER_LOGOUT,
     payload: {user: null, token: null, isAuth: false}
@@ -48,7 +53,8 @@ export function meFromToken(tokenFromStorage) {
   };
 }
 
-export function meFromTokenSuccess(currentUser) {
+export function meFromTokenSuccess(currentUser, token) {
+  localStorage.setItem('jwtToken', token)
   return {
     type: ME_FROM_TOKEN_SUCCESS,
     payload: currentUser
@@ -56,6 +62,7 @@ export function meFromTokenSuccess(currentUser) {
 }
 
 export function meFromTokenFailure(error) {
+  localStorage.removeItem('jwtToken');
   return {
     type: ME_FROM_TOKEN_FAILURE,
     payload: error
@@ -63,7 +70,7 @@ export function meFromTokenFailure(error) {
 }
 export function updateUser(updates, id) {
   const token = localStorage.getItem('jwtToken');
-  //check if the token is still valid, if so, get me from the server
+
   const request = axios({
     method: 'put',
     url: `${ROOT_URL}/users/${id}?token=${token}`,
