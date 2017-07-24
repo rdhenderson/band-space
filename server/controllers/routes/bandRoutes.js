@@ -54,7 +54,7 @@ module.exports = function(app) {
   });
   // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
   // server/helpers/auth_check
-  app.delete('api/bands/:id', isAuthenticated, (req, res) => {
+  app.delete('/api/bands/:id', isAuthenticated, (req, res) => {
     if (req.body.token) {
       Band.findByIdAndRemove(req.params.id, function (err, band) {
         // Render not found error

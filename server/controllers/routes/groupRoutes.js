@@ -53,7 +53,7 @@ module.exports = function(app) {
     })
   });
 
-  app.delete('api/groups/:id', isAuthenticated, (req, res) => {
+  app.delete('/api/groups/:id', isAuthenticated, (req, res) => {
     if (req.body.token) {
       Group.findByIdAndRemove(req.params.id, function (err, group) {
         // Render not found error

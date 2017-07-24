@@ -35,7 +35,7 @@ module.exports = function(app) {
   });
   // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
   // server/helpers/auth_check
-  app.delete('api/events/:id', isAuthenticated, (req, res) => {
+  app.delete('/api/events/:id', isAuthenticated, (req, res) => {
     if (req.body.token) {
       Event.findByIdAndRemove(req.params.id, function (err, event) {
         res.send({
