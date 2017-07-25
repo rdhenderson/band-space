@@ -1,6 +1,6 @@
 const Venue = require('../../models/venue.js');
 const getEventfulVenues = require('../../api/event-search.js');
-const isAuthenticated = require('../../helpers/auth_check.js');
+const { isAuthenticated } = require('../../helpers/auth_check.js');
 
 module.exports = function(app) {
   // Initialize route to populate database
@@ -15,34 +15,19 @@ module.exports = function(app) {
   });
 
   app.get('/api/venues', (req, res) => {
-    console.log("hit venue routes");
     return Venue.find({}).then( (results) => {
-      console.log("venue results", results);
       return res.send(results)
     })
   });
 
-  app.get('api/venues/:id', (req,res) => {
-   Venue.findOne({"_id": req.params._id})
+  app.get('/api/venues/:id', (req,res) => {
+   Venue.findById(req.params.id)
    .populate('reviews')
    .populate('events')
-   .populate({
-     path: 'staff',
-     populate: {
-       path: 'user_id',
-       model: 'User'
-     }
-   })
-   .populate({
-     path: 'staff',
-     populate: {
-       path: 'reviews',
-       model: 'Review'
-     }
-   })
-    .then( (results) => {
-      console.log("Population Control?", results[0]);
-      return res.send(results)
+  //  .populate('staff')
+   .then( (result) => {
+     console.log("Venue find", result);
+      return res.send(result)
     });
   });
 
@@ -74,7 +59,7 @@ module.exports = function(app) {
 
   // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
   // server/helpers/auth_check
-  app.delete('api/venues/:id', isAuthenticated, (req, res) => {
+  app.delete('/api/venues/:id', isAuthenticated, (req, res) => {
     if (req.body.token) {
       Venue.findByIdAndRemove(req.params.id, function (err, venue) {
         res.send({

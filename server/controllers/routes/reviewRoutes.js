@@ -1,5 +1,5 @@
 const Review = require('../../models/review.js');
-const isAuthenticated = require('../../helpers/auth_check.js');
+const { isAuthenticated } = require('../../helpers/auth_check.js');
 
 module.exports = function(app) {
   app.get('/api/reviews', (req, res) => {
@@ -13,7 +13,7 @@ module.exports = function(app) {
   });
 
   app.post('/api/reviews/:id', isAuthenticated, (req, res) => {
-    
+
     Review.create(req.body, (err, review) => {
       if (err) console.error('ERROR', err);
       // Send to favorites route to populate favorites for return
@@ -37,7 +37,7 @@ module.exports = function(app) {
   });
   // FIXME: SET UP AUTH CHECKER MIDDLE WARE FOR PROTECTED routes
   // server/helpers/auth_check
-  app.delete('api/reviews/:id', isAuthenticated, (req, res) => {
+  app.delete('/api/reviews/:id', isAuthenticated, (req, res) => {
     if (req.body.token) {
       Review.findByIdAndRemove(req.params.id, function (err, review) {
         res.send({

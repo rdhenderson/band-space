@@ -10,6 +10,7 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const helmet = require('helmet');
 
 // Initialize process.env from .env file
 // for development
@@ -19,6 +20,11 @@ if (!process.env.ENV_HEROKU) dotenv.config();
 const PORT = process.env.PORT || 3000;
 const app = express();
 // Middleware
+
+// Helmet will enforce HTTPS and enable other logical security measures
+// TODO: Uncomment helmet and test application/api/auth
+// app.use(helmet());
+
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
