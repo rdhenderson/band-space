@@ -1,27 +1,37 @@
 {
-  "name": "bandspace",
+  "name": "BandSpace",
+  "version": "0.1.0",
   "engines": {
     "node": "8.1.0",
     "npm": "5.1.0"
   },
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/js/entry.js",
-  "scripts": {
-    "heroku-postbuild": "npm install --only=dev && npm run build",
-    "build": "webpack",
-    "build-watch": "webpack -w",
-    "dev-client": "webpack-dev-server --progress --inline --hot",
-    "dev-server": "nodemon server/server.js",
-    "start": "node server/server.js",
-    "dev-start": "concurrently \"npm run dev-server\" \"webpack -w\"",
-    "lint": "eslint ./src/**/*.{js, jsx} --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "MIT",
+  "private": true,
   "dependencies": {
     "axios": "^0.16.2",
+    "can-use-dom": "^0.1.0",
+    "node-sass-chokidar": "0.0.3",
+    "raf": "^3.3.2",
+    "react": "^15.6.1",
+    "react-burger-menu": "^2.1.4",
+    "react-collapse": "^4.0.2",
+    "react-dom": "^15.6.1",
+    "react-google-maps": "^7.1.0",
+    "react-infinite": "^0.11.0",
+    "react-inlinesvg": "^0.6.2",
+    "react-motion": "^0.5.0",
+    "react-redux": "^4.4.8",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
+    "react-router-redux": "^4.0.8",
+    "react-svg-inline": "^2.0.0",
+    "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.7.1",
+    "redux-burger-menu": "^0.2.1",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-form": "^7.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-promise": "^0.5.3",
+    "redux-thunk": "^2.2.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
     "connect-flash": "^0.1.1",
@@ -46,8 +56,19 @@
     "passport-twitter": "^1.0.4"
   },
   "devDependencies": {
-    "concurrently": "^3.5.0",
-    "node-sass": "^3.11.2",
-    "nodemon": "^1.11.0"
-  }
+    "react-scripts": "1.0.10"
+  },
+  "scripts": {
+    "build-css": "node-sass-chokidar src/styles/sass -o src/styles/css",
+    "watch-css": "npm run build-css && node-sass-chokidar src/styles/sass -o src/src/styles/css --watch --recursive",
+    "build-js": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "start-js": "react-scripts start",
+    "start-client": "npm-run-all -p watch-css start-js",
+    "start-server": "nodemon server/server.js",
+    "start": "npm-run-all --parallel start-server start-client",
+    "build": "npm run build-css && react-scripts build"
+  },
+  "proxy": "http://localhost:3001"
 }

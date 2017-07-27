@@ -34,12 +34,10 @@ class Home extends Component {
 
   componentDidMount() {
     this.props.getVenueList();
-
   }
 
   componentWillUnmount(){
     // this.props.resetMe();
-
   }
 
   render() {
