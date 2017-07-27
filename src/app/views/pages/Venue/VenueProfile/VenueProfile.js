@@ -160,7 +160,7 @@ class VenueProfile extends Component {
           {(this.state.activeReview)  &&
             <AddReview
               reviewType='venue_id'
-              reviewSub={venue._id}
+              reviewSub={venue._id || venue.id}
               toggleEdit={this.writeReview}
             />
           }

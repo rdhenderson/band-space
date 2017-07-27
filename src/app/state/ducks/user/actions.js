@@ -1,6 +1,67 @@
 import axios from 'axios'
 import * as types from './types'
 
+const ROOT_URL = '/api/venues';
+
+export function getUser(id) {
+  return dispatch => {
+    const request = axios.get(`${ROOT_URL}/${id}`)
+    dispatch({type: types.GET_USER, payload: request})
+    request.then(
+        ({ data }) => dispatch({ type: types.GET_USER_SUCCESS, payload: data }),
+        ({ err })  => dispatch({ type: types.GET_USER_FAILURE, payload: err })
+      );
+    }
+}
+
+export function getVenueList() {
+  return dispatch => {
+    dispatch({type: types.GET_USER_LIST})
+    axios.get(`${ROOT_URL}`)
+    .then(
+        ({ data }) => dispatch({ type: types.GET_USER_LIST_SUCCESS, payload: data }),
+        ({ err })  => dispatch({ type: types.GET_USER_LIST_FAILURE, payload: err })
+      );
+    }
+}
+
+export function updateUser(user) {
+  return dispatch => {
+    dispatch({type: types.UPDATE_USER})
+    const token = localStorage.get('jwtToken');
+    axios({
+      method: 'put',
+      url: `${ROOT_URL}/${user._id || user.id}`,
+      data: user,
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(
+        ({ data }) => dispatch({ type: types.UPDATE_USER_SUCCESS, payload: data }),
+        ({ err })  => dispatch({ type: types.UPDATE_USER_FAILURE, payload: err })
+      );
+  }
+}
+export function addUser(user) {
+  return dispatch => {
+    dispatch({type: types.ADD_USER})
+    const token = localStorage.get('jwtToken');
+
+    axios({
+      method: 'post',
+      url: ROOT_URL,
+      data: user,
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(
+        ({ data }) => dispatch({ type: types.ADD_USER_SUCCESS, payload: data }),
+        ({ err })  => dispatch({ type: types.ADD_USER_FAILURE, payload: err })
+      );
+  }
+}
 // export function updateUser(updates, id) {
 //   const token = localStorage.getItem('jwtToken');
 //

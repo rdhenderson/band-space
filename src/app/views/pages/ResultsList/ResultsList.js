@@ -1,12 +1,20 @@
 import React from 'react'
 import Infinite from 'react-infinite';
-import { VenueScrollItem, UserScrollItem, GroupScrollItem } from './ScrollItems.js'
+import { VenueItem, UserItem, GroupItem } from './ScrollItems.js'
+
+const displaySelector = {
+  'venues': VenueItem,
+  'users': UserItem,
+  'groups': GroupItem
+}
 
 const ResultsList = ({searchType, items, clickHandler}) => {
   const titleCaseSearchType = searchType.charAt(0).toUpperCase() + searchType.slice(1)
   if (!items || !(items.length > 0)) return (
     <h1> "ERROR, Please give us data" </h1>
   );
+  // Set DisplayItem to proper element for group/venue/user
+  const DisplayItem = displaySelector[searchType];
 
   return (
     <div className="mreview">
@@ -16,33 +24,14 @@ const ResultsList = ({searchType, items, clickHandler}) => {
       <div className="mreview__body">
         <Infinite className="mreview__body__container" containerHeight={550} width={'100%'} elementHeight={200}>
 
-          {searchType === 'venues' &&
-            items.map( (item, index) => (
-              <VenueScrollItem
-                item={item}
-                key={index}
-                clickHandler={clickHandler}
-              />
-            ))
+          {items.map( (item, index) => (
+            <DisplayItem
+              key={item._id}
+              item={item}
+            />
+          ))
           }
-          {searchType === 'artist' &&
-            items.map( (item, index) => (
-              <UserScrollItem
-                item={item}
-                key={index}
-                clickHandler={clickHandler}
-              />
-            ))
-          }
-          {searchType === 'groups' &&
-            items.map( (item, index) => (
-              <GroupScrollItem
-                item={item}
-                key={index}
-                clickHandler={clickHandler}
-              />
-            ))
-          }
+
         </Infinite>
       </div>
     </div>

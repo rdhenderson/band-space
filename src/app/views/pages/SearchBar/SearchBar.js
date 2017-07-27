@@ -14,7 +14,7 @@ const SearchBar = (props) => (
       <input
         name="searchQuery"
         value={props.searchQuery}
-        placeholder="Search for a venue or artist!"
+        placeholder="Search for a venue, group or user!"
         type="text"
         onChange={props.handleInputChange}
       />

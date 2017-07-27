@@ -9,6 +9,10 @@ import UserList from './UserList';
 function mapStateToProps(state) {
   return {
     users: state.user.userList,
+    isLoading: state.user.loading,
+    error: state.user.error,
+    
+    currUser: state.auth.user,
     isAuth: state.auth.isAuth,
   };
 }

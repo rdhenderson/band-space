@@ -1,1 +1,4 @@
-export { default as ResultsList } from './ResultsList'
+import ResultsList from './ResultsList'
+
+export { ResultsList }
+export default ResultsList

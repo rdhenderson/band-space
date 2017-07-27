@@ -26,7 +26,44 @@ export function getVenueList() {
     }
 }
 
+export function addVenue(venue) {
+  return dispatch => {
+    dispatch({type: types.ADD_VENUE})
 
+    const token = localStorage.get('jwtToken');
+    axios({
+      method: 'post',
+      url: ROOT_URL,
+      data: venue,
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(
+        ({ data }) => dispatch({ type: types.ADD_VENUE_SUCCESS, payload: data }),
+        ({ err })  => dispatch({ type: types.ADD_VENUE_FAILURE, payload: err })
+      );
+  }
+}
+export function updateVenue(venue) {
+  return dispatch => {
+    dispatch({type: types.UPDATE_VENUE})
+
+    const token = localStorage.get('jwtToken');
+    axios({
+      method: 'post',
+      url: `${ROOT_URL}/${venue._id || venue.id}`,
+      data: venue,
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(
+        ({ data }) => dispatch({ type: types.ADD_VENUE_SUCCESS, payload: data }),
+        ({ err })  => dispatch({ type: types.ADD_VENUE_FAILURE, payload: err })
+      );
+  }
+}
 // export function addUserGroup(group, id) {
 //   const token = localStorage.getItem('jwtToken');
 //   //check if the token is still valid, if so, get me from the server

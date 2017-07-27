@@ -9,6 +9,9 @@ function mapStateToProps(state) {
   return {
     	user: state.auth.user,
       isAuth: state.auth.isAuth,
+      
+      isLoading: state.venue.loading,
+      error: state.venue.error,
       venues: state.venue.venueList,
     };
 }

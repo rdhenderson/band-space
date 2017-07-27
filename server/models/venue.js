@@ -18,6 +18,17 @@ const VenueSchema = new Schema({
     longitude: { type: String, trim: true },
     latitude: { type: String, trim: true },
   },
+  profile_image: {
+    img: { type: String, default: '/img/venue.svg'},
+    xpos: { type: Number, default: 0.5 },
+    ypos:  { type: Number, default: 0.5 },
+    scale:  { type: Number, default: 1 },
+    rotate: { type: Number, default: 0 },
+    imageStyle: {
+      type: String,
+      default: "{}",
+    }
+  },
   reviews: [{
     type: Schema.Types.ObjectId,
     ref: 'Review',
@@ -29,7 +40,6 @@ const VenueSchema = new Schema({
   }],
   staff: [{
     user_id: { type: Schema.Types.ObjectId, ref: 'User' },
-    reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }],
     email: { type: String },
     name: String,
     phone: String,

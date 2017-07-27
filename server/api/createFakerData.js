@@ -1,10 +1,9 @@
-var jsf = require('json-schema-faker');
 const faker = require('faker');
 const _ = require('lodash');
 const User = require('../models/user.js');
 const Group = require('../models/group.js');
 const Venue = require('../models/venue.js');
-const Review = require('../models/Review.js');
+const Review = require('../models/review.js');
 
 const getFakeUser = () => ({
   name: faker.name.findName(),
@@ -46,7 +45,7 @@ const getFakeGroup = () => ({
 
 
 function generateUser() {
-  const newUser = getFakeUser());
+  const newUser = getFakeUser();
   return new Promise( (resolve, reject) => {
     User.create(newUser, (err, result) => {
       if (err) reject(err);
@@ -55,7 +54,7 @@ function generateUser() {
   });
 }
 function generateVenue() {
-  const newVenue = getFakeVenue());
+  const newVenue = getFakeVenue();
   return new Promise( (resolve, reject) => {
     Venue.create(newVenue, (err, result) => {
       if (err) reject(err);
@@ -65,7 +64,7 @@ function generateVenue() {
 }
 
 function generateReview(venueId, userId) {
-  const newReview = getFakeVenue());
+  const newReview = getFakeVenue();
   _.set(newReview, "venue_id", venueId);
   _.set(newReview, "user_id", userId);
   return new Promise( (resolve, reject) => {
@@ -77,7 +76,7 @@ function generateReview(venueId, userId) {
 }
 
 function generateGroup(userId) {
-  const newGroup = getFakeGroup());
+  const newGroup = getFakeGroup();
   _.set(newGroup, "members[0].user_id", userId);
   return new Promise( (resolve, reject) => {
     Group.create(newGroup, (err, result) => {
@@ -90,54 +89,8 @@ function generateGroup(userId) {
 
 
 module.exports = {
-  generateUsers,
-  generateVenues,
-  generateGroups,
-  generateReviews
+  generateUser,
+  generateVenue,
+  generateGroup,
+  generateReview,
 };
-
-// console.log(getFakeUser());
-// console.log(getFakeVenue());
-// console.log(getFakeReview());
-
-// var randomName = faker.name.findName(); // Rowan Nikolaus
-// var randomEmail = faker.internet.email(); // Kassandra.Haley@erich.biz
-// var randomCard = faker.helpers.createCard(); // random contact card containing many properties
-// var schema = {
-//   type: 'object',
-//   properties: {
-//     user: {
-//       type: 'object',
-//       properties: {
-//         id: {
-//           $ref: '#/definitions/positiveInt'
-//         },
-//         name: {
-//           type: 'string',
-//           faker: 'name.findName'
-//         },
-//         email: {
-//           type: 'string',
-//           format: 'email',
-//           faker: 'internet.email'
-//         }
-//       },
-//       required: ['id', 'name', 'email']
-//     }
-//   },
-//   required: ['user'],
-//   definitions: {
-//     positiveInt: {
-//       type: 'integer',
-//       minimum: 0,
-//       exclusiveMinimum: true
-//     }
-//   }
-// };
-
-// const sample = jsf(schema); //.then(function(sample) {
-//   console.log(sample);
-//   // "[object Object]"
-//
-//   console.log(sample.user.name);
-//   // "John Doe"

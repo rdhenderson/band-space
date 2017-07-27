@@ -60,6 +60,7 @@ const db = mongoose.connection;
 db.on('error', (error) => {
   console.error('Database Error:', error);
 });
+
 // Connect to database and set the app to listen on port 3000
 db.once('open', () => {
   console.log('Connected to database');

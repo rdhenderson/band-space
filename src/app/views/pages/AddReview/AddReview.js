@@ -1,8 +1,7 @@
 /*global event*/
 
 import React, { Component } from 'react';
-import { connect } from "react-redux";
-import { bindActionCreators } from 'redux';
+
 import { Field, reduxForm } from 'redux-form'
 
 class AddReview extends Component {
@@ -15,8 +14,8 @@ class AddReview extends Component {
 
   initializeMembers(){
     const initData = {
-        name: this.props.auth.user.name,
-        user_id: this.props.auth.user._id
+        name: this.props.user.name,
+        user_id: this.props.user._id
     };
     this.props.initialize(initData);
   }
@@ -26,7 +25,9 @@ class AddReview extends Component {
     console.log('Add Review Values', values);
     const review = {...values};
     review[this.props.reviewType] = this.props.reviewSub;
-    const id = this.props.auth.user._id;
+    const id = this.props.user._id;
+    console.log("Set up add review action in redux!", review);
+    // this.props.addVenueReview(review);
 
 
     // this.props.addReview(review, id)

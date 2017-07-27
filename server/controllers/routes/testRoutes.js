@@ -1,7 +1,7 @@
 const dummyApi = require('../../api/createFakerData.js');
 
 module.exports = function(app) {
-  app.get('/api/generateUser', (req, res) => {
+  app.get('/api/generate/user', (req, res) => {
     dummyApi.generateUser().then( (user) => res.json(user));
   });
   app.get('/api/generate/venue', (req, res) => {

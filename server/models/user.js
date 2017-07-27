@@ -24,6 +24,7 @@ var userSchema = new Schema({
       default: "{}",
     }
   },
+  images: [{ type: String, trim: true }],
   bands: [{
     type: Schema.Types.ObjectId,
     ref: 'Band',
@@ -84,7 +85,7 @@ userSchema.methods.comparePassword = function(password) {
 };
 
 userSchema.plugin(findOrCreate);
-userSchema.plugin(deepPopulate); 
+userSchema.plugin(deepPopulate);
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);
