@@ -17,7 +17,7 @@ const helmet = require('helmet');
 if (!process.env.ENV_HEROKU) dotenv.config();
 // Express Port/App Declaration
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const app = express();
 // Middleware
 
