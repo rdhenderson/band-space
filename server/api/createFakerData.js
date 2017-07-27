@@ -1,7 +1,10 @@
 var jsf = require('json-schema-faker');
 const faker = require('faker');
-
+const _ = require('lodash');
 const User = require('../models/user.js');
+const Group = require('../models/group.js');
+const Venue = require('../models/venue.js');
+const Review = require('../models/Review.js');
 
 const getFakeUser = () => ({
   name: faker.name.findName(),
@@ -29,23 +32,69 @@ const getFakeVenue = () => ({
 
 const getFakeReview = () => ({
   title: faker.lorem.slug(),
-  description: faker.lorem.paragraph()
-})
+  description: faker.lorem.paragraph(),
 
-function generateUsers(n=10) {
-  let userArray = []
-  for (let i = 0; i < n; i++) {
-    userArray.push(getFakeUser());
-  }
-  const dbPromise = userArray.map( (user) => User.create(user));
-  return Promise.all(dbPromise).then( (err, results) => {
-    console.log("Error", err);
-    console.log("Results", results);
-    return results;
+})
+const getFakeGroup = () => ({
+  name: faker.company.productName(),
+  description: faker.lorem.paragraph(),
+  profile_image: { img: faker.image.imageUrl(200,200)},
+  phone: faker.phone.phoneNumber(),
+  email: faker.internet.email(),
+  zipCode: faker.address.zipcode(),
+});
+
+
+function generateUser() {
+  const newUser = getFakeUser());
+  return new Promise( (resolve, reject) => {
+    User.create(newUser, (err, result) => {
+      if (err) reject(err);
+      return resolve(result);
+    });
+  });
+}
+function generateVenue() {
+  const newVenue = getFakeVenue());
+  return new Promise( (resolve, reject) => {
+    Venue.create(newVenue, (err, result) => {
+      if (err) reject(err);
+      return resolve(result);
+    });
   });
 }
 
-module.exports = generateUsers
+function generateReview(venueId, userId) {
+  const newReview = getFakeVenue());
+  _.set(newReview, "venue_id", venueId);
+  _.set(newReview, "user_id", userId);
+  return new Promise( (resolve, reject) => {
+    Review.create(newReview, (err, result) => {
+      if (err) reject(err);
+      return resolve(result);
+    });
+  });
+}
+
+function generateGroup(userId) {
+  const newGroup = getFakeGroup());
+  _.set(newGroup, "members[0].user_id", userId);
+  return new Promise( (resolve, reject) => {
+    Group.create(newGroup, (err, result) => {
+      if (err) reject(err);
+      return resolve(result);
+    });
+  });
+}
+
+
+
+module.exports = {
+  generateUsers,
+  generateVenues,
+  generateGroups,
+  generateReviews
+};
 
 // console.log(getFakeUser());
 // console.log(getFakeVenue());
