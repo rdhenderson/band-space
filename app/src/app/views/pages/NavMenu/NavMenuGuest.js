@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const NavMenuGuest = () => (
   <div>
-    <Link to="/login">
+    <Link to="/auth/login">
       <div className="navUser">
         <img className="navUser__icon" src="/img/profile.svg" />
         <p className="navUser__userName">
@@ -23,8 +23,8 @@ const NavMenuGuest = () => (
     <div className="navLinks">
       <img className="navLinks__icon" src="/img/login.svg" />
       <p id="home" className="menu-item">
-        <Link to="/login">Log In</Link> /
-        <Link to="/signup">Signup</Link></p>
+        <Link to="/auth/login">Log In</Link> /
+        <Link to="/auth/signup">Signup</Link></p>
     </div>
 
     <Link to="/gigs">

@@ -1,19 +1,21 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
-import { authOps, venueOps } from '../../../state/ducks';
+import { actions as authActions } from '../../../state/ducks/auth'
+import { actions as venueActions } from '../../../state/ducks/venue'
+
 import Home from './Home'
 
 function mapStateToProps(state) {
   return {
-    	user: state.user.currUser,
-      isAuth: state.user.isAuth,
+    	user: state.auth.user,
+      isAuth: state.auth.isAuth,
       venues: state.venue.venueList,
     };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ ...authOps, ...venueOps }, dispatch);
+  return bindActionCreators({ ...authActions, ...venueActions }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

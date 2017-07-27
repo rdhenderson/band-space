@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 // import components
 import LoginForm from './LoginForm.js'
@@ -10,19 +10,24 @@ import GuitarFloat from '../GuitarFloat'
 class Login extends Component {
   constructor(props) {
     super(props)
-
+    this.state = {
+      redirect: false,
+    }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit({ email, password }) {
     // event.preventDefault();
     this.props.loginUser({email, password});
-
     //FIXME: Make this an automatic redirect if user is authenticated in store.
-    this.props.history.push('/profile');
+    // this.props.history.push('/profile');
+    this.setState({redirect: true});
   }
 
   render(){
+
+    if ( this.state.redirect ) return (<Redirect to='/profile'/>);
+
     return (
     <div>
       <div className="uSignup__top">
@@ -35,7 +40,7 @@ class Login extends Component {
           <hr/>
           <LoginForm onSubmit={this.handleSubmit} />
           <ThirdPartyAuth connect={false} />
-          <Link to="/signup"> <p>Not a member?  Sign Up here </p></Link>
+          <Link to="/auth/signup"> <p>Not a member?  Sign Up here </p></Link>
         </div>
         <div className="uSignup__right">
           <GuitarFloat />

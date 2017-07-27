@@ -5,16 +5,13 @@ import NavMenu from '../NavMenu'
 class Main extends Component {
 
   componentWillMount() {
-    console.log("This.props", this.props);
     // If user is not already authenticated
     if (this.props.isAuth) return;
-    // Get token from local storage, quit if its null
     let token = localStorage.getItem('jwtToken');
-    // if(!token || token === '') return;
 
+    if(!token || token === '') return;
     // fetch user from token (if server deems it's valid token)
     this.props.meFromToken(token);
-    // .then( (result) => console.log('Result', result));
 
   }
 

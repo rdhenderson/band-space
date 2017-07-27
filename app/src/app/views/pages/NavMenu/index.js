@@ -5,8 +5,9 @@ import NavMenu from './NavMenu'
 
 function mapStateToProps(state) {
   return {
-    	user: state.user.currUser,
-      isAuth: state.user.isAuth,
+    	user: state.auth.user,
+      isAuth: state.auth.isAuth,
+      isLoading: state.auth.isLoading,
     };
 }
 

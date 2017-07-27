@@ -1,12 +1,12 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
-import { VenueList } from './VenueList'
-import { VenueProfile } from './VenueProfile'
+import { Route } from 'react-router-dom'
+import VenueList from './VenueList'
+import VenueProfile from './VenueProfile'
 
-const Venue = (props) => (
-  <Switch>
-    <Route exact path='/venues' component={VenueList}/>
-    <Route path='/venues/:id' component={VenueProfile}/>
-  </Switch>
+const Venue = ({match}) => (
+  <div>
+    <Route exact path={`${match.url}`} component={VenueList}/>
+    <Route path={`${match.url}/:id`} component={VenueProfile}/>
+  </div>
 )
 export default Venue;

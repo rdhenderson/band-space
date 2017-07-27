@@ -5,8 +5,10 @@ import { bindActionCreators } from 'redux';
 import Menu from './BurgerMenu.js'
 import NavMenuGuest from './NavMenuGuest'
 import NavMenuAuth from './NavMenuAuth'
+import Spinner from '../Common/Spinner'
 
-const NavMenu = ({user, isAuth, handleLogout}) => {
+const NavMenu = ({user, isAuth, handleLogout, isLoading}) => {
+  if (isLoading) return <Spinner />
   return (
     <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
       {isAuth ? (

@@ -6,13 +6,13 @@
 // // const middleware = applyMiddleware(logger);
 //
 // export default createStore(reducer);//, middleware);
-import ReduxThunk from 'redux-thunk'
-import redux, { createStore, applyMiddleware } from 'redux';
-import logger from 'redux-logger'
-import promise from 'redux-promise';
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-// import { apiService } from './middleware'
+// import logger from 'redux-logger'
+import promise from 'redux-promise';
+import ReduxThunk from 'redux-thunk'
+
 import reducer from './reducers';
 
 const middleware = applyMiddleware(promise, ReduxThunk);

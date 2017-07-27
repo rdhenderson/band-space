@@ -1,18 +1,20 @@
-import SignUpPage from './SignUpPage.js';
-import { connect } from "react-redux";
-import { bindActionCreators } from 'redux';
-import { authOps } from '../../../../state/ducks/'
+import Signup from './Signup.js'
+import { connect } from "react-redux"
+import { bindActionCreators } from 'redux'
+import { withRouter } from 'react-router-dom'
+
+import { actions as authActions } from '../../../../state/ducks/auth'
 
 function mapStateToProps(state) {
   return {
-    user: state.user,
-    isAuth: state.user.isAuth,
+    user: state.auth.user,
+    isAuth: state.auth.isAuth,
   };
 }
 
 function mapDispatchToProps(dispatch){
-  const { loginUser } = authOps;
+  const { loginUser } = authActions;
   return bindActionCreators({ loginUser }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Signup));

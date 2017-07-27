@@ -1,18 +1,19 @@
 import Login from './Login.js';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { authOps } from '../../../../state/ducks/'
+
+import { actions as authActions } from '../../../../state/ducks/auth'
 
 function mapStateToProps(state) {
   return {
-    user: state.user,
-    isAuth: state.user.isAuth,
+    user: state.auth,
+    isAuth: state.auth.isAuth,
   };
 }
 
 function mapDispatchToProps(dispatch){
-  const { loginUser } = authOps;
-  return bindActionCreators(loginUser, dispatch);
+  // const { loginUser } = authActions;
+  return bindActionCreators({...authActions}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

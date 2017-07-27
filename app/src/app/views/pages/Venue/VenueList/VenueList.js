@@ -4,7 +4,7 @@ import axios from 'axios'
 import Infinite from 'react-infinite';
 
 import VenueItem from './VenueItem'
-import VenueProfileEditArrays from './VenueProfileEditArrays'
+
 class VenueList extends Component {
   constructor(props) {
     super(props);

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import axios from "axios";
 
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
-import SignUpForm from './SignUpForm.js'
+import SignupForm from './SignupForm'
 import { ThirdPartyAuth } from '../ThirdPartyAuth'
 import GuitarFloat from '../GuitarFloat'
 
-class SignUpPage extends Component {
+class Signup extends Component {
   constructor(props) {
     super(props)
 
@@ -34,7 +34,7 @@ class SignUpPage extends Component {
             <p> Get connecting with other working musicians and venues in your area </p>
             <hr />
 
-            <SignUpForm onSubmit={this.handleSubmit} />
+            <SignupForm onSubmit={this.handleSubmit} />
             <ThirdPartyAuth />
             <Link to="/login"> <p>Already a member? Log in here </p></Link>
           </div>
@@ -48,4 +48,4 @@ class SignUpPage extends Component {
   }
 }
 
-export default SignUpPage;
+export default Signup;

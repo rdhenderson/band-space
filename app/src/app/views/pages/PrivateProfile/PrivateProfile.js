@@ -1,39 +1,14 @@
-/*global event*/
-
 import React, { Component } from 'react';
-import axios from "axios";
-import { connect } from "react-redux";
-import { getUser } from '../../helpers/index.js'
 
 // import components
 import ProfileForm from './components/ProfileForm'
 import ThirdPartyAuth from '../common/ThirdPartyAuth'
-import helpers from '../../helpers'
 import HeadSearch from '../../pages/Common/HeadSearch.js'
 import UserReview from './components/UserReview.js'
 import UProfDiv from './components/UProfDiv.js'
 import SimpleForm from './components/SimpleForm'
 
-const sampleReviews = [{
-    event : "The Reusable Code @ 930 Club 09/06/17",
-    title: "The Guitarist was amazing",
-    body: "This is the descrption",
-    image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
-  },
-  {
-    event : "The Who Needs Sleep @ 930 Club 07/19/17",
-    title: "Well, you're never gonna get it",
-    body: "This is the descrption",
-    image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
-  },
-  {
-    event : "The Fartz @ 930 Club 09/09/16",
-    title: "The Guitarist was amazing",
-    body: "This is the descrption",
-    image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
-  }];
-
-class UserPrivateProfile extends Component {
+class PrivateProfile extends Component {
   constructor(props) {
     super(props);
 
@@ -41,6 +16,7 @@ class UserPrivateProfile extends Component {
       makeEdit : false,
       showConnect: false,
       isAddGroup: false,
+      redirect: false,
     }
 
     this.handleUserUpdate = this.handleUserUpdate.bind(this);
@@ -52,17 +28,10 @@ class UserPrivateProfile extends Component {
 
   handleUserUpdate(updates) {
     // event.preventDefault();
-
-    this.props.updateUser(updates, this.props.user.user._id)
-    .then( (response) => {
-      if (!response.error) {
-        this.props.updateUserSuccess(response.payload);
-        this.toggleEdit();
-      } else {
-        this.props.updateUserFailure(response.payload);
-      }
-    });
+    this.props.updateUser(updates, this.props.user.user._id);
+    this.setState({redirect: true});
   }
+
   userAddGroup(values) {
     // event.preventDefault();
     const user = this.props.user.user
@@ -196,4 +165,4 @@ class UserPrivateProfile extends Component {
   }
 }
 
-export default UserPrivateProfile
+export default PrivateProfile

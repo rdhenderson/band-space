@@ -7,10 +7,10 @@ import Main from './Main'
 
 function mapStateToProps(state) {
   return {
-    	user: state.user.currUser,
-      isAuth: state.user.isAuth,
-      error: state.user.error,
-      loading: state.user.loading,
+    	user: state.auth.user,
+      isAuth: state.auth.isAuth,
+      error: state.auth.error,
+      loading: state.auth.loading,
     };
 }
 

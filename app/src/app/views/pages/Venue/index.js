@@ -1,1 +1,2 @@
-export { default as Venue } from './Venue'
+import Venue from './Venue'
+export default Venue

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import VenueSummary from './VenueSummary'
 import VenueProfileEditArrays from './VenueProfileEditArrays'
-import WriteReview from '../../Common/WriteReview.js'
+import AddReview from '../../AddReview'
 import HeadSearch from '../../Common/HeadSearch.js'
 import UserReview from '../../Common/UserReview.js'
 
@@ -158,7 +158,7 @@ class VenueProfile extends Component {
         <div style={{display: "flex", justifyContent: "center"}} className="groupProfile__bottombody__botmain__right__header">
           <h1> Write a review? </h1> <img src="/img/edit.svg" onClick={this.writeReview} />
           {(this.state.activeReview)  &&
-            <WriteReview
+            <AddReview
               reviewType='venue_id'
               reviewSub={venue._id}
               toggleEdit={this.writeReview}

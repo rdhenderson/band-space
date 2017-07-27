@@ -5,9 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form'
 
-import { userActions } from '../../modules'
-
-class WriteReview extends Component {
+class AddReview extends Component {
   constructor(props) {
     super(props);
 
@@ -17,31 +15,33 @@ class WriteReview extends Component {
 
   initializeMembers(){
     const initData = {
-        name: this.props.user.user.name,
-        user_id: this.props.user.user._id,
+        name: this.props.auth.user.name,
+        user_id: this.props.auth.user._id
     };
     this.props.initialize(initData);
   }
 
   handleSubmit(values) {
     // event.preventDefault();
+    console.log('Add Review Values', values);
     const review = {...values};
     review[this.props.reviewType] = this.props.reviewSub;
-    const id = this.props.user.user._id;
+    const id = this.props.auth.user._id;
 
-    this.props.addReview(review, id)
-    .then( (response) => {
-      if (!response.error) {
-        this.props.addReviewSuccess(response.payload);
-        // Get last band added to users band array
-        if (this.props.toggleEdit !== undefined) this.props.toggleEdit();
 
-      } else {
-        this.props.addReviewFailure(response.payload);
-        // this.props.history.push(`/createband`)
-      }
-      // this.toggleAddGroup();
-    });
+    // this.props.addReview(review, id)
+    // .then( (response) => {
+    //   if (!response.error) {
+    //     this.props.addReviewSuccess(response.payload);
+    //     // Get last band added to users band array
+    //     if (this.props.toggleEdit !== undefined) this.props.toggleEdit();
+    //
+    //   } else {
+    //     this.props.addReviewFailure(response.payload);
+    //     // this.props.history.push(`/createband`)
+    //   }
+    //   // this.toggleAddGroup();
+    // });
   }
 
   componentDidMount(){
@@ -85,32 +85,6 @@ class WriteReview extends Component {
   }
 }
 
-WriteReview = reduxForm({
-  form: 'writeReview'  // a unique identifier for this form
-})(WriteReview)
-
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-    isAuth: state.user.isAuth,
-    error: state.user.error,
-    loading: state.user.loading,
-  };
-}
-
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({...userActions}, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(WriteReview);
-
-// export  connect(
-//   // state => ({
-//   //   // initialValues : {
-//   //   //   // members: [{name: state.user.user.name, email: state.user.user.email, instrument: ""}]
-//   //   // },
-//   //   userId: state.user.user._id
-// ))(WriteReview);
-//
-// // export default WriteReview;
-// export default WriteReview;
+export default reduxForm({
+  form: 'addReview'  // a unique identifier for this form
+})(AddReview)
