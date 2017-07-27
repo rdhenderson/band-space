@@ -10,6 +10,8 @@ module.exports = function routes (app, passport) {
   require('./routes/eventRoutes.js')(app);
   require('./routes/groupRoutes.js')(app);
   require('./routes/reviewRoutes.js')(app);
+  
+  require('./routes/testRoutes.js')(app);
 
   //Catch-all directs everything else to react front end/index.html
   app.get('*', (req, res) => {
