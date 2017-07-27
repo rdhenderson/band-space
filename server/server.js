@@ -63,6 +63,7 @@ db.on('error', (error) => {
 // Connect to database and set the app to listen on port 3000
 db.once('open', () => {
   console.log('Connected to database');
+
   app.listen(PORT, () => {
     console.log('App running on port', PORT);
   });
