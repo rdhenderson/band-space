@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom'
 // import components
 import ProfileForm from './components/ProfileForm'
-import ThirdPartyAuth from '../common/ThirdPartyAuth'
-import HeadSearch from '../../pages/Common/HeadSearch.js'
-import UserReview from './components/UserReview.js'
-import UProfDiv from './components/UProfDiv.js'
 import SimpleForm from './components/SimpleForm'
+
+import UserReview from '../Common/UserReview.js'
+import HeadSearch from '../Common/HeadSearch.js'
+import Spinner from '../Common/Spinner.js'
+
+import ImageDisplay from '../ImageDisplay'
+import ThirdPartyAuth from '../ThirdPartyAuth'
+
+import { sampleReviews } from '../../../utilities/dummyData'
 
 class PrivateProfile extends Component {
   constructor(props) {
@@ -28,13 +33,13 @@ class PrivateProfile extends Component {
 
   handleUserUpdate(updates) {
     // event.preventDefault();
-    this.props.updateUser(updates, this.props.user.user._id);
+    this.props.updateUser(updates, this.props.user._id);
     this.setState({redirect: true});
   }
 
   userAddGroup(values) {
     // event.preventDefault();
-    const user = this.props.user.user
+    const user = this.props.user
     const newGroup = {
       members: {
         user_id: [user._id],
@@ -42,16 +47,7 @@ class PrivateProfile extends Component {
         email: user.email
       }, ...values };
     console.log("New Group", newGroup);
-    this.props.addUserGroup(newGroup, user._id)
-    .then( (response) => {
-      if (!response.error) {
-        this.props.addUserGroupSuccess(response.payload);
-        this.props.history.push('/profile');
-      } else {
-        this.props.addUserGroupFailure(response.payload);
-      }
-      this.toggleAddGroup();
-    });
+    this.props.addUserGroup(newGroup, user._id);
   }
 
   toggleAddGroup(){
@@ -84,26 +80,27 @@ class PrivateProfile extends Component {
 
 
   render(){
-    let user = this.props.user.user;
+    if (this.props.isLoading) return (<Spinner />);
 
+    let user = this.props.user;
+    console.log("User", user);
     return (
       <div className="profile">
         <HeadSearch />
         <div className="profile__topbody">
-
           <div className="profile__topbody__left">
 
-            <UProfDiv onSave={this.handleUserUpdate.bind(this)} />
+            <ImageDisplay onSave={this.handleUserUpdate.bind(this)} />
 
             <div className="profile__topbody__left__details">
 
               <div id="bands">
                 <h3> Your Groups </h3>
                 <ul>
-                  {user.bands.map( (band, index) =>(
-                    <li key={index} onClick={() => this.props.history.push(`/groups/${band._id}`)}>
-                      #{index+1}: {band.name}
-                    </li>
+                  {user.groups && user.groups.map( (group, index) =>(
+                    <Link key={group.id} to={`/groups/${group._id}`}>
+                      <li>#{index+1}: {group.name} </li>
+                    </Link>
                   ))}
 
                 </ul>

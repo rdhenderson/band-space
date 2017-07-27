@@ -1,49 +1,25 @@
 //Here we grab React, and peel component out of the library using ES6 syntax.
 import React, { Component } from 'react'
-import axios from 'axios'
 import Infinite from 'react-infinite';
 
-import VenueItem from '../venues/VenueItem'
-import VenueProfileEditArrays from './VenueProfileEditArrays'
+import UserItem from './UserItem'
+
 class UserList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users : [],
       showAddUser: false,
     };
-
-    this.handleClick = this.handleClick.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   // Get list of venues from database when component is mounting
   // Draw list of components
   componentDidMount() {
-    axios.get('/api/users')
-    .then( ({ data }) => {
-      console.log("Users retrieved: ", data);
-      this.setState({ users : data });
-    });
-  }
-
-  handleSubmit(values) {
-    console.log("added venue", values);
-    const token = localStorage.get('jwtToken');
-    axios({
-      method: 'post',
-      url: `/api/users`,
-      data: values,
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-    // axios.post('/api/venues/', {data: values})
-    .then( (result) => console.log("Added a venue!", result) )
+    this.props.getUserList();
   }
 
   handleClick(id) {
-    return () => this.props.history.push(`venues/${id}`);
+    return () => this.props.history.push(`users/${id}`);
   }
 
   render() {
@@ -71,7 +47,7 @@ class UserList extends Component {
             ) : (
               <Infinite className="mreview__body__container" containerHeight={550} width={'100%'} elementHeight={200}>
                 {this.state.venues.map( (item, index) => (
-                  <VenueItem
+                  <UserItem
                     key={ index }
                     venue={ item }
                     handleClick={ this.handleClick(item._id)}

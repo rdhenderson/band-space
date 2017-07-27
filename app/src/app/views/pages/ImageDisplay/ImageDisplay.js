@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import ImageEditor from '../../../components/ImageEditor';
 
-import {getUser} from '../../../helpers/index.js'
+import ImageEditor from './ImageEditor';
 
 
-class UProfDiv extends Component {
+class ImageDisplay extends Component {
 
   constructor(props){
     super(props)
@@ -21,7 +20,6 @@ class UProfDiv extends Component {
 
   render(){
     const user = this.props.user;
-    console.log(this.props);
 
     if (this.props.loading) return (<h1> Loading... </h1>);
       return (
@@ -59,11 +57,10 @@ class UProfDiv extends Component {
 
 function mapStateToProps(state) {
   return {
-    isAuth: state.user.isAuth,
-    user: state.user.user,
-    error: state.user.error,
-    loading: state.user.loading,
-    // id: state.user.user
+    isAuth: state.auth.isAuth,
+    user: state.auth.user,
+    error: state.auth.error,
+    loading: state.auth.loading,
   };
 }
 
@@ -71,6 +68,6 @@ function mapDispatchToProps(dispatch){
   // return bindActionCreators({ loginUser }, dispatch);
 }
 
-export default connect(mapStateToProps)(UProfDiv);
+export default connect(mapStateToProps)(ImageDisplay);
 
 // export default ProfilePage;

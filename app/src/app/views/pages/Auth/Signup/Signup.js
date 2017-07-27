@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link, Redirect } from 'react-router-dom'
 
 import SignupForm from './SignupForm'
-import { ThirdPartyAuth } from '../ThirdPartyAuth'
+import { ThirdPartyAuth } from '../../ThirdPartyAuth'
 import GuitarFloat from '../GuitarFloat'
 
 class Signup extends Component {

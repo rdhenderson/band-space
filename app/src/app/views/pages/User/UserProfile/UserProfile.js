@@ -1,36 +1,13 @@
 import React, { Component } from 'react';
-import axios from "axios";
-import {getUser} from '../../helpers/index.js'
 
-// import components
-// import ProfileForm from './components/ProfileForm'
-// import ThirdPartyAuth from '../common/ThirdPartyAuth'
-import helpers from '../../helpers'
-import HeadSearch from '../../pages/Common/HeadSearch.js'
-import UserReview from './components/UserReview.js'
+import HeadSearch from '../../Common/HeadSearch.js'
+import UserReview from '../../Common/UserReview.js'
+import { sampleReviews } from '../../../../utilities/dummyData'
+import Spinner from '../../Common/Spinner'
 // import AddReview from '..'
 // import UProfDiv from './components/UProfDiv.js'
 
-const sampleReviews = [{
-    event : "The Reusable Code @ 930 Club 09/06/17",
-    title: "The Guitarist was amazing",
-    body: "This is the descrption",
-    image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
-  },
-  {
-    event : "The Who Needs Sleep @ 930 Club 07/19/17",
-    title: "Well, you're never gonna get it",
-    body: "This is the descrption",
-    image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
-  },
-  {
-    event : "The Fartz @ 930 Club 09/09/16",
-    title: "The Guitarist was amazing",
-    body: "This is the descrption",
-    image: "http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png",
-  }];
-
-class UserPublicProfile extends Component {
+class UserProfile extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -47,15 +24,15 @@ class UserPublicProfile extends Component {
 
   componentWillMount() {
     const userId = this.props.match.params.id;
-    getUser(userId).then( ({data}) => {
-      this.setState = { ...data, displayUser: data };
-      console.log("Data: ", data);
-    });
+    this.props.getUser(userId);
   }
 
 
   render(){
-    const user = this.state.displayUser || {};
+    if (this.props.isLoading) return (<Spinner />);
+
+    const reviews = this.props.user.reviews || sampleReviews;
+    const user = this.props.user;
     let imageStyle;
 
     return (
@@ -140,13 +117,10 @@ class UserPublicProfile extends Component {
             />
           } */}
         </div>
-        {(this.state.review !== undefined) ? (
-          <UserReview reviews={this.state.reviews} />
-        ):(
-          <UserReview reviews={sampleReviews} />
-        )
-            // this.state.reviews.map((item, index) => (
-          // {/* <Review index={index} cName="groupProfile__bottombody__botmain__right__event" name={item.name} title={item.title} details={item.details} /> */}  ))
+        <UserReview reviews={reviews} />
+
+        // this.state.reviews.map((item, index) => (
+        // {/* <Review index={index} cName="groupProfile__bottombody__botmain__right__event" name={item.name} title={item.title} details={item.details} /> */}  ))
         }
 
 
@@ -155,4 +129,4 @@ class UserPublicProfile extends Component {
   }
 }
 
-export default UserPublicProfile;
+export default UserProfile;

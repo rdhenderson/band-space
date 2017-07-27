@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { actions as userActions } from '../../../state/ducks/user'
+import { actions as userActions } from '../../../../state/ducks/user'
 
 import UserProfile from './UserProfile';
 

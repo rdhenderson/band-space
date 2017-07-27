@@ -4,14 +4,15 @@ import { bindActionCreators } from 'redux';
 
 import { actions as authActions } from '../../../state/ducks/auth'
 import { actions as userActions } from '../../../state/ducks/user'
+
 import PrivateProfile from './PrivateProfile'
 
 function mapStateToProps(state) {
   return {
     user: state.auth.user,
     isAuth: state.auth.isAuth,
-    error: state.user.error,
-    loading: state.user.loading,
+    error: state.auth.error,
+    isLoading: state.auth.loading,
   };
 }
 
