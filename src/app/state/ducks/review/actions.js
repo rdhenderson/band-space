@@ -2,65 +2,65 @@ import axios from 'axios';
 import * as types from './types'
 
 // const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
-const ROOT_URL = '/api/venues';
+const ROOT_URL = '/api/reviews';
 
-export function getVenue(id) {
+export function getReview(id) {
   return dispatch => {
-    dispatch({type: types.GET_VENUE})
+    dispatch({type: types.GET_REVIEW})
     axios.get(`${ROOT_URL}/${id}`)
     .then(
-        ({ data }) => dispatch({ type: types.GET_VENUE_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.GET_VENUE_FAILURE, payload: err })
+        ({ data }) => dispatch({ type: types.GET_REVIEW_SUCCESS, payload: data }),
+        ({ err })  => dispatch({ type: types.GET_REVIEW_FAILURE, payload: err })
       );
     }
 }
 
-export function getVenueList() {
+export function getReviewList(id) {
   return dispatch => {
-    dispatch({type: types.GET_VENUE_LIST})
-    axios.get(`${ROOT_URL}`)
+    dispatch({type: types.GET_REVIEW_LIST})
+    axios.get(`${ROOT_URL}/${id}`)
     .then(
-        ({ data }) => dispatch({ type: types.GET_VENUE_LIST_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.GET_VENUE_LIST_FAILURE, payload: err })
+        ({ data }) => dispatch({ type: types.GET_REVIEW_LIST_SUCCESS, payload: data }),
+        ({ err })  => dispatch({ type: types.GET_REVIEW_LIST_FAILURE, payload: err })
       );
     }
 }
 
-export function addVenue(venue) {
+export function addReview(review) {
   return dispatch => {
-    dispatch({type: types.ADD_VENUE})
+    dispatch({type: types.ADD_REVIEW})
 
     const token = localStorage.get('jwtToken');
     axios({
       method: 'post',
       url: ROOT_URL,
-      data: venue,
+      data: review,
       headers: {
         'Authorization': `Bearer ${token}`
       }
     })
     .then(
-        ({ data }) => dispatch({ type: types.ADD_VENUE_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.ADD_VENUE_FAILURE, payload: err })
+        ({ data }) => dispatch({ type: types.ADD_REVIEW_SUCCESS, payload: data }),
+        ({ err })  => dispatch({ type: types.ADD_REVIEW_FAILURE, payload: err })
       );
   }
 }
-export function updateVenue(venue) {
+export function updateReview(review) {
   return dispatch => {
-    dispatch({type: types.UPDATE_VENUE})
+    dispatch({type: types.UPDATE_REVIEW})
 
     const token = localStorage.get('jwtToken');
     axios({
       method: 'post',
-      url: `${ROOT_URL}/${venue._id || venue.id}`,
-      data: venue,
+      url: `${ROOT_URL}/${review._id}`,
+      data: review,
       headers: {
         'Authorization': `Bearer ${token}`
       }
     })
     .then(
-        ({ data }) => dispatch({ type: types.UPDATE_VENUE_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.UPDATE_VENUE_FAILURE, payload: err })
+        ({ data }) => dispatch({ type: types.UPDATE_REVIEW_SUCCESS, payload: data }),
+        ({ err })  => dispatch({ type: types.UPDATE_REVIEW_FAILURE, payload: err })
       );
   }
 }

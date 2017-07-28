@@ -35,6 +35,13 @@ export default function reducer(state = INITIAL_STATE, action){
     case types.ADD_VENUE_FAILURE:// return error and make loading = false
       return { ...state, venue: null, error: action.payload, loading: false};
 
+    case types.UPDATE_VENUE:// loading currentUser("me") from jwttoken in local/session storage storage,
+      return { ...state, venue: null, error: null, loading: true};
+    case types.UPDATE_VENUE_SUCCESS://return user, status = authenticated and make loading = false
+      return { ...state, venue: action.payload, error:null, loading: false}; //<-- authenticated
+    case types.UPDATE_VENUE_FAILURE:// return error and make loading = false
+      return { ...state, venue: null, error: action.payload, loading: false};
+
     // case ADD_VENUE_REVIEW:// loading currentUser("me") from jwttoken in local/session storage storage,
     //   return { ...state, error: null, loading: true};
     // case ADD_VENUE_REVIEW_SUCCESS://return user, status = authenticated and make loading = false
