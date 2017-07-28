@@ -3,22 +3,16 @@ import SVGInline from 'react-inlinesvg';
 
 import { SearchBar, ResultsList } from '../../components'
 
-
 class Home extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      query : "",
-      artists : [],
-      venues : [],
-      groups : [],
       searchType: "venues",
       searchQuery: '',
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.resultsClickHandler = this.resultsClickHandler.bind(this);
   }
 
   handleInputChange({ target }) {
@@ -27,12 +21,10 @@ class Home extends Component {
     })
   }
 
-  resultsClickHandler(id) {
-    return () => this.props.history.push(`${this.state.searchType}/${id}`);
-  }
-
   componentDidMount() {
     this.props.getVenueList();
+    this.props.getUserList();
+    this.props.getGroupList();
   }
 
   componentWillUnmount(){
@@ -60,9 +52,7 @@ class Home extends Component {
         {this.state.searchQuery.length !== 0 &&
           <ResultsList
             searchType={this.state.searchType}
-            items={this.props.venues}
-            clickHandler={this.resultsClickHandler}
-            // [this.state.searchType]}
+            items={this.props[this.state.searchType]}
           />
         }
       </div>

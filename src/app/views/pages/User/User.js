@@ -1,14 +1,14 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import UserList from './UserList'
 import UserProfile from './UserProfile'
 
 const User = ({match}) => (
-  <div>
+  <Switch>
     <Route exact path={`${match.url}`} component={UserList}/>
     <Route path={`${match.url}/:id`} component={UserProfile}/>
-  </div>
+  </Switch>
 )
 
 export default User;

@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   user: null,
   userList: null,
   error: null,
-  loading: false,
+  loading: true,
 };
 
 export default function reducer(state = INITIAL_STATE, action){

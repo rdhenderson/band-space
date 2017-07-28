@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+
 import VenueSummary from './VenueSummary'
 import VenueProfileEditArrays from './VenueProfileEditArrays'
-import { AddReview, HeadSearch, UserReview } from '../../../components'
+import { Spinner, AddReview, HeadSearch, UserReview } from '../../../components'
 
 import { sampleReviews } from '../../../../utilities/dummyData.js'
 
@@ -12,9 +12,9 @@ class VenueProfile extends Component {
     super(props)
 
     this.state = {
-      venue: {},
       makeEdit : false,
       showConnect: false,
+      data: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,14 +22,17 @@ class VenueProfile extends Component {
     this.writeReview = this.writeReview.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+      if (nextProps) {
+          this.setState({
+              data: true
+          });
+      }
+  }
   // Pull id from route parameters and get that venue from database
-  componentWillMount() {
+  componentDidMount() {
     const id = this.props.match.params.id;
-    axios.get(`/api/venues/${id}`)
-    .then( venue => {
-      console.log('VENUE:', venue);
-      this.setState({ venue });
-    });
+    this.props.getVenue(id);
   }
 
   handleSubmit(values) {
@@ -69,8 +72,12 @@ class VenueProfile extends Component {
   }
 
   render() {
-    const venue = this.state.venue;
-    const review = this.state.venue.reviews;
+    if (this.props.isLoading || !this.state.data ) return (<Spinner />);
+
+    if (this.props.error === true) return (<h1> "Error!"</h1>);
+
+    const venue = this.props.venue;
+    const reviews = sampleReviews;
 
     return (
       <div className="profile">
@@ -79,12 +86,12 @@ class VenueProfile extends Component {
           <div className="profile__topbody__left">
             <div className="profile__topbody__left__profblock">
               <div className="profile__topbody__left__profblock__imgdiv">
-                <img className="profile__topbody__left__profblock__imgdiv__pic" src="http://lorempixel.com/250/250" />
-                {/* <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" />
-                </div> */}
+                <img className="profile__topbody__left__profblock__imgdiv__pic"
+                  src="http://lorempixel.com/250/250"
+                />
                 <div className="profile__topbody__left__profblock__proftext">
                   <h1 style={{"fontSize" : 50}}> {venue.name} </h1>
-                  <h3 style={{"fontSize" : 20}}> {venue.address} </h3>
+                  <h3 style={{"fontSize" : 20}}> {venue.address.street} </h3>
                   <h4 style={{"fontSize" : 20}}> {venue.description} </h4>
                 </div>
               </div>
@@ -122,20 +129,10 @@ class VenueProfile extends Component {
               )}
             </div>
           </div>
-
         </div>
 
+        <UserReview reviews={reviews} />
 
-
-
-        {(this.state.review !== undefined) ? (
-          <UserReview reviews={this.state.reviews} />
-        ):(
-          <UserReview reviews={sampleReviews} />
-        )
-          // this.state.reviews.map((item, index) => (
-          // {/* <Review index={index} cName="groupProfile__bottombody__botmain__right__event" name={item.name} title={item.title} details={item.details} /> */}  ))
-        }
         <div style={{display: "flex", justifyContent: "center"}} className="groupProfile__bottombody__botmain__right__header">
           <h1> Write a review? </h1> <img src="/img/edit.svg" onClick={this.writeReview} />
           {(this.state.activeReview)  &&
@@ -143,15 +140,14 @@ class VenueProfile extends Component {
               reviewType='venue_id'
               reviewSub={venue._id || venue.id}
               toggleEdit={this.writeReview}
+              author={this.props.user}
             />
           }
-
         </div>
       </div>
-
     )
-
   }
 }
+
 
 export default VenueProfile;

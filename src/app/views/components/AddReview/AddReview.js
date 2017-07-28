@@ -14,8 +14,8 @@ class AddReview extends Component {
 
   initializeMembers(){
     const initData = {
-        name: this.props.user.name,
-        user_id: this.props.user._id,
+      name: this.props.user.name,
+      user_id: this.props.user._id,
     };
     this.props.initialize(initData);
   }
@@ -23,9 +23,9 @@ class AddReview extends Component {
   handleSubmit(values) {
     // event.preventDefault();
     console.log('Add Review Values', values);
-    const review = {...values};
+    const review = {...values };
     review[this.props.reviewType] = this.props.reviewSub;
-    const id = this.props.user._id;
+    review.user_id = this.props.user._id;
     console.log("Set up add review action in redux!", review);
     // this.props.addVenueReview(review);
 
@@ -46,14 +46,11 @@ class AddReview extends Component {
   }
 
   componentDidMount(){
-
     this.initializeMembers();
-
   }
 
   render() {
     const { handleSubmit, pristine, reset, submitting } = this.props;
-
     return (
       <form className="groupProfile__bottombody__botmain__right__writeReview" onSubmit={handleSubmit(this.handleSubmit)}>
         <Field

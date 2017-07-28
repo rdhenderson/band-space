@@ -6,6 +6,10 @@ const INITIAL_STATE = {
   error: null,
   loading: false,
 };
+function cloneVenue(venue){
+  return
+}
+
 
 export default function reducer(state = INITIAL_STATE, action){
   let error;

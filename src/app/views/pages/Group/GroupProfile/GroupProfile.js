@@ -9,9 +9,9 @@ import {
 
 import { sampleReviews } from '../../../../utilities/dummyData.js'
 import getImageStyle from '../../../../utilities/getImageStyle'
-import UserSkills from './UserSkills'
+import GroupSkills from './GroupSkills'
 
-class UserProfile extends Component {
+class GroupProfile extends Component {
   constructor(props) {
     super(props);
 
@@ -22,6 +22,7 @@ class UserProfile extends Component {
 
     this.writeReview = this.writeReview.bind(this);
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps) {
       this.setState({ data: true });
@@ -29,21 +30,22 @@ class UserProfile extends Component {
   }
 
   componentDidMount() {
-    const userId = this.props.match.params.id;
-    this.props.getUser(userId);
+    const groupId = this.props.match.params.id;
+    this.props.getGroup(groupId);
   }
 
   writeReview(){
     const newState = { activeReview: !this.state.activeReview }
     this.setState(newState);
   }
+
   render(){
     if (this.props.isLoading || !this.state.data ) return (<Spinner />);
 
     if (this.props.error === true) return (<h1> "Error!"</h1>);
 
-    const { user } = this.props;
-    const reviews = user.reviews ||  sampleReviews;
+    const { group } = this.props;
+    const reviews = group.reviews ||  sampleReviews;
 
     return (
 
@@ -56,23 +58,23 @@ class UserProfile extends Component {
               <div>
                 <div className="profile__topbody__left__profblock__imgdiv">
                   <div>
-                    {(user.profile_image && user.profile_image.img) &&
+                    {(group.profile_image && group.profile_image.img) &&
                       <img className="profile__topbody__left__profblock__imgdiv__pic"
-                        src={user.profile_image.img}
-                        style={getImageStyle(user.profile_image)}
+                        src={group.profile_image.img}
+                        style={getImageStyle(group.profile_image)}
                       />
                     }
                   </div>
                 </div>
                 <div className="profile__topbody__left__profblock__proftext">
-                  <h1 style={{"fontSize" : 50}}> {user.name} </h1>
+                  <h1 style={{"fontSize" : 50}}> {group.name} </h1>
                   <h3 style={{"fontSize" : 20}}> Guitarist/Singer </h3>
                 </div>
               </div>
               }
             </div>
 
-            <h1>{user.name} </h1>
+            <h1>{group.name} </h1>
             <div className="profile__topbody__left__details">
               <div id="bands">
                 <h3> Bands </h3>
@@ -88,15 +90,9 @@ class UserProfile extends Component {
 
           <div className="profile__topbody__right">
 
-            <UserSkills />
+            <GroupSkills />
 
           </div>
-          {/* {this.state.activeReview &&
-            <AddReview
-              reviewType='venue_id'
-              reviewSub={venue._id}
-            />
-          } */}
         </div>
         <UserReview reviews={reviews} />
 
@@ -104,8 +100,8 @@ class UserProfile extends Component {
           <h1> Write a review? </h1> <img src="/img/edit.svg" onClick={this.writeReview} />
           {(this.state.activeReview)  &&
             <AddReview
-              reviewType='venue_id'
-              reviewSub={user._id}
+              reviewType='group_id'
+              reviewSub={group._id}
               toggleEdit={this.writeReview}
               author={this.props.currentUser}
             />
@@ -116,4 +112,4 @@ class UserProfile extends Component {
   }
 }
 
-export default UserProfile;
+export default GroupProfile;

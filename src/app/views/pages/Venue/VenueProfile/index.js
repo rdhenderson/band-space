@@ -7,9 +7,12 @@ import VenueProfile from './VenueProfile'
 
 function mapStateToProps(state) {
   return {
-    	user: state.auth.user,
+    	currUser: state.auth.user,
       isAuth: state.auth.isAuth,
       venues: state.venue.venueList,
+      venue: state.venue.venue,
+      error: state.venue.error,
+      isLoading: state.venue.loading,
     };
 }
 

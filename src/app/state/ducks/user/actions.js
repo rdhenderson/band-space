@@ -5,9 +5,9 @@ const ROOT_URL = '/api/users';
 
 export function getUser(id) {
   return dispatch => {
-    const request = axios.get(`${ROOT_URL}/${id}`)
-    dispatch({type: types.GET_USER, payload: request})
-    request.then(
+    dispatch({type: types.GET_USER})
+    axios.get(`${ROOT_URL}/${id}`)
+    .then(
       ({ data }) => dispatch({ type: types.GET_USER_SUCCESS, payload: data }),
       ({ err })  => dispatch({ type: types.GET_USER_FAILURE, payload: err })
     );

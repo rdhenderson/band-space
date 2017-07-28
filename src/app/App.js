@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 
-import { Auth, Home, Venue, User, PrivateProfile } from './views/pages';
+import { Auth, Home, Venue, User, Group, PrivateProfile } from './views/pages';
 import { Main } from './views/layouts'
 
 // Remove tap delay for material-ui
@@ -17,6 +17,7 @@ class App extends Component {
         <Route path="/auth" component={Auth} />
         <Route path="/venues" component={Venue} />
         <Route path="/users" component={User} />
+        <Route path="/groups" component={Group} />
         <Route path="/profile" component={PrivateProfile} />
 
         {/* <Route path="/profile" component={UserPrivateProfile} /> */}
