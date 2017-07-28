@@ -12,6 +12,17 @@ const GroupSchema = new Schema({
     email: { type: String, trim: true },
     instrument: { type: String, trim: true },
   }],
+  profile_image: {
+    img: { type: String, default: '/img/group.svg'},
+    xpos: { type: Number, default: 0.5 },
+    ypos:  { type: Number, default: 0.5 },
+    scale:  { type: Number, default: 1 },
+    rotate: { type: Number, default: 0 },
+    imageStyle: {
+      type: String,
+      default: "{}",
+    }
+  },
   images: [{ type: String, trim: true }],
   spotify: { type: String, trim: true },
 

@@ -17,7 +17,7 @@ const helmet = require('helmet');
 if (!process.env.ENV_HEROKU) dotenv.config();
 // Express Port/App Declaration
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const app = express();
 // Middleware
 
@@ -60,9 +60,11 @@ const db = mongoose.connection;
 db.on('error', (error) => {
   console.error('Database Error:', error);
 });
+
 // Connect to database and set the app to listen on port 3000
 db.once('open', () => {
   console.log('Connected to database');
+
   app.listen(PORT, () => {
     console.log('App running on port', PORT);
   });
