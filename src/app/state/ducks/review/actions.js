@@ -15,17 +15,6 @@ export function getReview(id) {
     }
 }
 
-export function getReviewList(id) {
-  return dispatch => {
-    dispatch({type: types.GET_REVIEW_LIST})
-    axios.get(`${ROOT_URL}/${id}`)
-    .then(
-        ({ data }) => dispatch({ type: types.GET_REVIEW_LIST_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.GET_REVIEW_LIST_FAILURE, payload: err })
-      );
-    }
-}
-
 export function addReview(review) {
   return dispatch => {
     dispatch({type: types.ADD_REVIEW})
@@ -64,20 +53,3 @@ export function updateReview(review) {
       );
   }
 }
-// export function addUserGroup(group, id) {
-//   const token = localStorage.getItem('jwtToken');
-//   //check if the token is still valid, if so, get me from the server
-//   const request = axios({
-//     method: 'post',
-//     url: `${ROOT_URL}/users/${id}/groups`,
-//     data: group,
-//     headers: {
-//       'Authorization': `Bearer ${token}`
-//     }
-//   });
-//
-//   return {
-//     type: ADD_USER_GROUP,
-//     payload: request
-//   };
-// }
