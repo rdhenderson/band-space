@@ -33,6 +33,7 @@ bower_components
 build/Release
 dist/
 public/bundle.js
+src/styles/css
 
 # Dependency directories
 node_modules/
