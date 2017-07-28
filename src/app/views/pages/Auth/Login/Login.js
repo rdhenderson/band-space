@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom'
 
 // import components
 import LoginForm from './LoginForm.js'
-import ThirdPartyAuth from '../../ThirdPartyAuth'
+import { ThirdPartyAuth } from '../../../components'
 import GuitarFloat from '../GuitarFloat'
 
 class Login extends Component {

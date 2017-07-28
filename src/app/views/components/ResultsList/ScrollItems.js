@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import getImageStyle from '../../../utilities/getImageStyle'
+
 export const VenueItem = ({ item }) => (
   <Link to={`/venues/${item._id}`}>
     <div className="mreview__body__item">
@@ -28,8 +30,11 @@ export const UserItem = ({ item }) => (
   <Link to={`/users/${item._id}`}>
     <div className="mreview__body__item">
       <div className="mreview__body__item__imgdiv">
-        <img className="mreview__body__item__imgdiv__img" src={item.profile_image.img} style={item.profile_image.imageStyle}/>
-        <h3> {item.name} </h3>
+        <img className="mreview__body__item__imgdiv__img"
+          src={item.profile_image.img}
+          // style={getImageStyle(item.profile_image)}
+        />
+          <h3> {item.name} </h3>
 
       </div>
       <div className="mreview__body__item__text">

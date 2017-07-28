@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-
 import SVGInline from 'react-inlinesvg';
 
-import { SearchBar } from '../SearchBar'
-import { ResultsList } from '../ResultsList'
+import { SearchBar, ResultsList } from '../../components'
+
 
 class Home extends Component {
 

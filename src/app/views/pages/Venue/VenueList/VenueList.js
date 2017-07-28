@@ -1,8 +1,7 @@
 //Here we grab React, and peel component out of the library using ES6 syntax.
 import React, { Component } from 'react'
 
-import ResultsList from '../../ResultsList'
-import Spinner from '../../Common/Spinner'
+import { Spinner, ResultsList } from '../../../components'
 
 class VenueList extends Component {
   constructor(props) {

@@ -1,23 +1,23 @@
 import axios from 'axios'
 import * as types from './types'
 
-const ROOT_URL = '/api/venues';
+const ROOT_URL = '/api/users';
 
 export function getUser(id) {
   return dispatch => {
     const request = axios.get(`${ROOT_URL}/${id}`)
     dispatch({type: types.GET_USER, payload: request})
     request.then(
-        ({ data }) => dispatch({ type: types.GET_USER_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.GET_USER_FAILURE, payload: err })
-      );
-    }
+      ({ data }) => dispatch({ type: types.GET_USER_SUCCESS, payload: data }),
+      ({ err })  => dispatch({ type: types.GET_USER_FAILURE, payload: err })
+    );
+  }
 }
 
-export function getVenueList() {
+export function getUserList() {
   return dispatch => {
     dispatch({type: types.GET_USER_LIST})
-    axios.get(`${ROOT_URL}`)
+    axios.get(ROOT_URL)
     .then(
         ({ data }) => dispatch({ type: types.GET_USER_LIST_SUCCESS, payload: data }),
         ({ err })  => dispatch({ type: types.GET_USER_LIST_FAILURE, payload: err })
@@ -43,6 +43,7 @@ export function updateUser(user) {
       );
   }
 }
+
 export function addUser(user) {
   return dispatch => {
     dispatch({type: types.ADD_USER})

@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 
-import HeadSearch from '../../Common/HeadSearch.js'
-import UserReview from '../../Common/UserReview.js'
-import { sampleReviews } from '../../../../utilities/dummyData'
-import Spinner from '../../Common/Spinner'
-// import AddReview from '..'
-// import UProfDiv from './components/UProfDiv.js'
+import {
+  AddReview,
+  UserReview,
+  HeadSearch,
+  Spinner,
+  ResultsList } from '../../../components'
+
+import { sampleReviews } from '../../../../utilities/dummyData.js'
+import getImageStyle from '../../../../utilities/getImageStyle'
 
 class UserProfile extends Component {
   constructor(props) {
@@ -30,9 +33,10 @@ class UserProfile extends Component {
 
   render(){
     if (this.props.isLoading) return (<Spinner />);
+    if (this.props.error) return (<h1> "Error!"{this.props.error}</h1>);
 
-    const reviews = this.props.user.reviews || sampleReviews;
     const user = this.props.user;
+    const reviews = (user && user.reviews) ? user.reviews : sampleReviews;
     let imageStyle;
 
     return (
@@ -49,7 +53,7 @@ class UserProfile extends Component {
                     {(user.profile_image && user.profile_image.img) ? (
                       <img className="profile__topbody__left__profblock__imgdiv__pic"
                         src={user.profile_image.img}
-                        style={JSON.parse(user.profile_image.imageStyle)}
+                        style={getImageStyle(user.profile_image)}
                       />
                     ):(
                       <img className="profile__topbody__left__profblock__imgdiv__pic" src='/img/user.svg'/>

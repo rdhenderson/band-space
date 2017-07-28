@@ -11,7 +11,6 @@ function mapStateToProps(state) {
     users: state.user.userList,
     isLoading: state.user.loading,
     error: state.user.error,
-    
     currUser: state.auth.user,
     isAuth: state.auth.isAuth,
   };
@@ -21,4 +20,4 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators( { ...userActions }, dispatch);
 }
 
-export default connect(mapStateToProps)(UserList);
+export default connect(mapStateToProps, mapDispatchToProps)(UserList);

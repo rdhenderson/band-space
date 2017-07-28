@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 
-import { Main, Auth, Home, Venue, User, PrivateProfile } from './views/pages';
+import { Auth, Home, Venue, User, PrivateProfile } from './views/pages';
+import { Main } from './views/layouts'
 
 // Remove tap delay for material-ui
 import injectTapEventPlugin from 'react-tap-event-plugin'

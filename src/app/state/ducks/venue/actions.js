@@ -6,8 +6,8 @@ const ROOT_URL = '/api/venues';
 
 export function getVenue(id) {
   return dispatch => {
+    dispatch({type: types.GET_VENUE})
     const request = axios.get(`${ROOT_URL}/${id}`)
-    dispatch({type: types.GET_VENUE, payload: request})
     request.then(
         ({ data }) => dispatch({ type: types.GET_VENUE_SUCCESS, payload: data }),
         ({ err })  => dispatch({ type: types.GET_VENUE_FAILURE, payload: err })

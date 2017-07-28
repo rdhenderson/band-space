@@ -31,7 +31,7 @@ const ResultsList = ({searchType, items, clickHandler}) => {
             />
           ))
           }
-
+          
         </Infinite>
       </div>
     </div>

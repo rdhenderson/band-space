@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom'
 import ProfileForm from './components/ProfileForm'
 import SimpleForm from './components/SimpleForm'
 
-import UserReview from '../Common/UserReview.js'
-import HeadSearch from '../Common/HeadSearch.js'
-import Spinner from '../Common/Spinner.js'
-
-import ImageDisplay from '../ImageDisplay'
-import ThirdPartyAuth from '../ThirdPartyAuth'
+import {
+  ThirdPartyAuth,
+  ImageDisplay,
+  Spinner,
+  HeadSearch,
+  UserReview, } from '../../components'
 
 import { sampleReviews } from '../../../utilities/dummyData'
 
@@ -153,7 +153,7 @@ class PrivateProfile extends Component {
           <ProfileForm user={user} onSubmit={this.handleUserUpdate}/>
         )}
         {/* <button className="normal-btn" onClick={this.toggleConnect}>Connect Services</button>
-        {this.state.showConnect && (
+          {this.state.showConnect && (
           <ThirdPartyAuth connect={true} />
         )} */}
       </div>

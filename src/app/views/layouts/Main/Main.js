@@ -1,6 +1,6 @@
 //Here we grab React, and peel component out of the library using ES6 syntax.
 import React, { Component } from 'react'
-import NavMenu from '../NavMenu'
+import { NavMenu } from '../../components'
 
 class Main extends Component {
 

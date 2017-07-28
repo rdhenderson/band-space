@@ -15,7 +15,7 @@ class AddReview extends Component {
   initializeMembers(){
     const initData = {
         name: this.props.user.name,
-        user_id: this.props.user._id
+        user_id: this.props.user._id,
     };
     this.props.initialize(initData);
   }
