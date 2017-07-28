@@ -28,7 +28,7 @@ export function getUserList() {
 export function updateUser(user) {
   return dispatch => {
     dispatch({type: types.UPDATE_USER})
-    const token = localStorage.get('jwtToken');
+    const token = localStorage.getItem('jwtToken');
     axios({
       method: 'put',
       url: `${ROOT_URL}/${user._id || user.id}`,
@@ -47,7 +47,7 @@ export function updateUser(user) {
 export function addUser(user) {
   return dispatch => {
     dispatch({type: types.ADD_USER})
-    const token = localStorage.get('jwtToken');
+    const token = localStorage.getItem('jwtToken');
 
     axios({
       method: 'post',

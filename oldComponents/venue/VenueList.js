@@ -29,7 +29,7 @@ class VenueList extends Component {
 
   handleSubmit(values) {
     console.log("added venue", values);
-    const token = localStorage.get('jwtToken');
+    const token = localStorage.getItem('jwtToken');
     axios({
       method: 'post',
       url: `/api/venues`,

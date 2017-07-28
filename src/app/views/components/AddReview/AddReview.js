@@ -22,27 +22,19 @@ class AddReview extends Component {
 
   handleSubmit(values) {
     // event.preventDefault();
+    const reviewSelect = {
+      'venue' : this.props.addVenueReview,
+      'group' : 'addGroupReview',
+      'user' : 'addUserReview',
+    }
     console.log('Add Review Values', values);
     const review = {...values };
-    review[this.props.reviewType] = this.props.reviewSub;
-    review.user_id = this.props.user._id;
+    review.subject = this.props.reviewSub;
+    review.author = this.props.user._id;
+    this.props.addVenueReview(review);
+
     console.log("Set up add review action in redux!", review);
     // this.props.addVenueReview(review);
-
-
-    // this.props.addReview(review, id)
-    // .then( (response) => {
-    //   if (!response.error) {
-    //     this.props.addReviewSuccess(response.payload);
-    //     // Get last band added to users band array
-    //     if (this.props.toggleEdit !== undefined) this.props.toggleEdit();
-    //
-    //   } else {
-    //     this.props.addReviewFailure(response.payload);
-    //     // this.props.history.push(`/createband`)
-    //   }
-    //   // this.toggleAddGroup();
-    // });
   }
 
   componentDidMount(){

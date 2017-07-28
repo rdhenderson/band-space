@@ -33,8 +33,8 @@ module.exports = function(app) {
 
   //Add a new venue
   app.post('/api/venues', (req, res) => {
-    console.log("Posting a new venue", req.body.venue);
     const query = { name: req.body.venue.name };
+
     Venue.findOrCreate(query, req.body.venue, (err, venue) => {
       // my new or existing model is loaded as result
       if (err) console.error('ERROR', err);

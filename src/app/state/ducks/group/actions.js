@@ -29,7 +29,7 @@ export function getGroupList() {
 export function updateGroup(group) {
   return dispatch => {
     dispatch({type: types.UPDATE_GROUP})
-    const token = localStorage.get('jwtToken');
+    const token = localStorage.getItem('jwtToken');
     axios({
       method: 'put',
       url: `${ROOT_URL}/${group._id || group.id}`,
@@ -48,7 +48,7 @@ export function updateGroup(group) {
 export function addGroup(group) {
   return dispatch => {
     dispatch({type: types.ADD_GROUP})
-    const token = localStorage.get('jwtToken');
+    const token = localStorage.getItem('jwtToken');
 
     axios({
       method: 'post',
