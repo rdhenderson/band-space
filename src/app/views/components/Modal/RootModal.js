@@ -8,7 +8,8 @@ import TestFormModal from './TestFormModal'
 import ValidationFormModal from './ValidationFormModal'
 import MaterialFormModal from './MaterialFormModal'
 
-import AddEventReviewFormModal from './AddEventReviewFormModal'
+import AddEventReviewModal from './AddEventReviewModal'
+import AddEventModal from './AddEventModal'
 
 const MODAL_COMPONENTS = {
   // 'DELETE_POST': DeletePostModal,
@@ -17,7 +18,8 @@ const MODAL_COMPONENTS = {
   'TEST_FORM' : TestFormModal,
   'VALIDATION_FORM' : ValidationFormModal,
   'MATERIAL_FORM' : MaterialFormModal,
-  'ADD_EVENT_REVIEW_FORM' : AddEventReviewFormModal,
+  'ADD_EVENT_REVIEW' : AddEventReviewModal,
+  'ADD_EVENT' : AddEventModal,
     /* other modals */
 }
 

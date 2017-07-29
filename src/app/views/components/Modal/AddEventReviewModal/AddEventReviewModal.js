@@ -21,7 +21,7 @@ const customStyles = {
   }
 };
 
-class AddEventReviewFormModal extends Component {
+class AddEventReviewModal extends Component {
 
   componentDidMount() {
     this.props.getVenueList();
@@ -33,7 +33,7 @@ class AddEventReviewFormModal extends Component {
       <div>
         <Modal
           isOpen={true}
-          contentLabel="Test Form"
+          contentLabel="Add Event Review"
           onRequestClose={this.props.hideModal}
           styles={customStyles}
         >
@@ -67,4 +67,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ hideModal, ...venueActions }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddEventReviewFormModal);
+export default connect(mapStateToProps, mapDispatchToProps)(AddEventReviewModal);
