@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-
 import { actions as modalActions } from '../../../../state/ducks/modal'
 import MaterialForm from './MaterialForm'
 

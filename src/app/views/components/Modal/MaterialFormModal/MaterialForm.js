@@ -2,9 +2,8 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import TextField from 'material-ui/TextField'
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton'
-import Checkbox from 'material-ui/Checkbox'
-import SelectField from 'material-ui/SelectField'
-import MenuItem from 'material-ui/MenuItem'
+import MenuItem from 'material-ui/MenuItem';
+import { MUICheckbox, MUITextField, MUISelectField } from '../FormElements'
 
 const validate = values => {
   const errors = {}
@@ -20,42 +19,20 @@ const validate = values => {
   return errors
 }
 
-const MaterialTextField = ({ input, label, meta: { touched, error }, ...custom }) => (
-  <TextField hintText={label}
-    floatingLabelText={label}
-    errorText={touched && error}
-    {...input}
-    {...custom}
-  />
-)
 
-const MaterialCheckbox = ({ input, label }) => (
-  <Checkbox label={label}
-    checked={input.value ? true : false}
-    onCheck={input.onChange}/>
-)
-
-const MaterialSelectField = ({ input, label, meta: { touched, error }, children }) => (
-  <SelectField
-    floatingLabelText={label}
-    errorText={touched && error}
-    {...input}
-    onChange={(event, index, value) => input.onChange(value)}
-    children={children}/>
-)
 
 const MaterialForm = props => {
   const { onSubmit, handleSubmit, pristine, reset, submitting } = props
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <Field name="firstName" component={MaterialTextField} label="First Name"/>
+        <Field name="name" component={MUITextField} label="Venue Name"/>
       </div>
       <div>
-        <Field name="lastName" component={MaterialTextField} label="Last Name"/>
+        <Field name="description" component={MUITextField} label="Description"/>
       </div>
       <div>
-        <Field name="email" component={MaterialTextField} label="Email"/>
+        <Field name="email" component={MUITextField} label="Email"/>
       </div>
       <div>
         <Field name="sex" component={RadioButtonGroup}>
@@ -64,17 +41,17 @@ const MaterialForm = props => {
         </Field>
       </div>
       <div>
-        <Field name="event" component={MaterialSelectField} label="Favorite Color">
-          {props.subject.reviews.map( ({name, _id}) =>
+        <Field name="event" component={MUISelectField} label="Select Event to Review">
+          {props.subject.events && props.subject.events.map( ({name, _id}) =>
             <MenuItem key={_id} value={_id} primaryText={name}/>
           )}
         </Field>
       </div>
       <div>
-        <Field name="employed" component={MaterialCheckbox} label="Employed"/>
+        <Field name="employed" component={MUICheckbox} label="Employed"/>
       </div>
       <div>
-        <Field name="notes" component={MaterialTextField} label="Notes" multiLine={true} rows={2}/>
+        <Field name="notes" component={MUITextField} label="Notes" multiLine={true} rows={2}/>
       </div>
       <div>
         <button type="submit" disabled={pristine || submitting}>Submit</button>

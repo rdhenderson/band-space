@@ -17,9 +17,7 @@ class VenueProfile extends Component {
       data: false,
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
-    this.writeReview = this.writeReview.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -35,40 +33,9 @@ class VenueProfile extends Component {
     this.props.getVenue(id);
   }
 
-  handleSubmit(values) {
-    // event.preventDefault();
-    console.log("Edited Profile", values);
-    // axios.post('/api/users/profile', {
-    //   email: values.email,
-    //   password: values.password,
-    // })
-    // .then( ({ data }) => {
-    //   // this.props.history.push('/profile');
-    // }).catch(err => console.log(err));
-  }
-
   toggleEdit(){
     const newState = { makeEdit: !this.state.makeEdit }
     this.setState(newState);
-  }
-
-  toggleConnect(){
-    const newState = { showConnect: !this.state.showConnect }
-    this.setState(newState);
-  }
-
-  writeReview(e){
-    e.preventDefault();
-    if (this.state.activeReview === true){
-      this.setState({
-        activeReview: false
-      })
-    }
-    else {
-      this.setState({
-        activeReview: true
-      })
-    }
   }
 
   render() {
@@ -134,15 +101,11 @@ class VenueProfile extends Component {
         <UserReview reviews={reviews} />
 
         <div style={{display: "flex", justifyContent: "center"}} className="groupProfile__bottombody__botmain__right__header">
-          <h1> Write a review? </h1> <img src="/img/edit.svg" onClick={this.writeReview} />
-          {(this.state.activeReview)  &&
-            <AddReview
-              reviewType='venue_id'
-              reviewSub={venue._id || venue.id}
-              toggleEdit={this.writeReview}
-              author={this.props.user}
-            />
-          }
+          <h1> Write a review? </h1> <img src="/img/edit.svg" onClick={() => this.props.showVenueReviewModal()} />
+          <h1> Test Form </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('TEST_FORM')} />
+          {/* <h1> Validation Form </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('VALIDATION_FORM')} /> */}
+          <h1> Material Form </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('ADD_EVENT_REVIEW_FORM')} />
+
         </div>
       </div>
     )

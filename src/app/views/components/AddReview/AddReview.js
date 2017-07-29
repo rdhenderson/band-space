@@ -22,19 +22,17 @@ class AddReview extends Component {
 
   handleSubmit(values) {
     // event.preventDefault();
-    const reviewSelect = {
+    const submitActionSelect = {
       'venue' : this.props.addVenueReview,
       'group' : 'addGroupReview',
       'user' : 'addUserReview',
     }
-    console.log('Add Review Values', values);
     const review = {...values };
-    review.subject = this.props.reviewSub;
+    review.subject = this.props.subject._id;
     review.author = this.props.user._id;
-    this.props.addVenueReview(review);
-
-    console.log("Set up add review action in redux!", review);
-    // this.props.addVenueReview(review);
+    // submitActionSelect[this.props.reviewType](review);
+    this.props.addVenueReview(review)
+    this.props.hideModal();
   }
 
   componentDidMount(){
@@ -60,7 +58,7 @@ class AddReview extends Component {
           placeholder="Title"
         />
         <Field
-          name="details"
+          name="body"
           className="groupProfile__bottombody__botmain__right__writeReview__review"
           component="textarea"
           type="text"

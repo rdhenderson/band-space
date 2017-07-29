@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
-import { actions as authOps } from '../../../state/ducks/auth'
+import { actions as authActions } from '../../../state/ducks/auth'
 
 import Main from './Main'
 
@@ -15,7 +15,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  const { meFromToken } = authOps
+  const { meFromToken } = authActions
   return bindActionCreators({ meFromToken }, dispatch);
 }
 

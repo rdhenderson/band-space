@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import SVGInline from 'react-inlinesvg';
-
-import { SearchBar, ResultsList } from '../../components'
+import { SearchBar, ResultsList, Spinner } from '../../components'
 
 class Home extends Component {
 
@@ -10,15 +9,30 @@ class Home extends Component {
     this.state = {
       searchType: "venues",
       searchQuery: '',
+      displayList: this.props.venue || [],
+      data: false,
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleInputChange({ target }) {
-    this.setState({
-      [target.name]: (target.type === 'checkbox') ? target.checked : target.value
-    })
+    // this.setState({[target.name]: target.value});
+    if (target.name === 'searchType' ) {
+      this.setState({[target.name]: target.value});
+    } else {
+      const newSearchQuery = target.value;
+      const filter = newSearchQuery.toUpperCase();
+      const newDisplayList = this.props[this.state.searchType]
+      .filter( (item) => item.name.toUpperCase().indexOf(filter) > -1);
+      this.setState({searchQuery: newSearchQuery, displayList: newDisplayList });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+      if (nextProps) {
+          this.setState({ data: true });
+      }
   }
 
   componentDidMount() {
@@ -32,6 +46,8 @@ class Home extends Component {
   }
 
   render() {
+    if (this.props.isLoading || !this.state.data ) return (<Spinner />);
+
     return (
       <div>
         <div className="splash">
@@ -46,13 +62,16 @@ class Home extends Component {
             searchType={this.state.searchType}
             searchQuery={this.state.searchQuery}
             handleInputChange={this.handleInputChange}
+            placeholderText='Search for a venue, group or user!'
+            showSelect={true}
           />
         </div>
 
         {this.state.searchQuery.length !== 0 &&
           <ResultsList
             searchType={this.state.searchType}
-            items={this.props[this.state.searchType]}
+            items={this.state.displayList}
+            // items={this.props[this.state.searchType]}
           />
         }
       </div>
