@@ -139,8 +139,6 @@ class AddEventReviewForm extends Component {
             name="time"
             component={TimePicker}
             format={null}
-            defaultValue={null} // TimePicker requires an object,
-            // and redux-form defaults to ''
             hintText="Event Time"
             validate={required}
           />
@@ -185,11 +183,12 @@ AddEventReviewForm = connect(state => ({
   survey: selector(state, 'survey'),
 }))(AddEventReviewForm);
 
+
 AddEventReviewForm = reduxForm({
   form: 'addEventReview',
   initialValues: {
     name: 'Jane Doe',
-    survey: {acoustics: 0, crowd: 0}
+    survey: {acoustics: 0, crowd: 0},
   },
 })(AddEventReviewForm);
 
