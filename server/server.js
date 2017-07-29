@@ -43,7 +43,8 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-app.use(express.static(path.resolve(`${__dirname}/../public/`)));
+const staticDirectory = (process.env.ENV_HEROKU) ? `${__dirname}/../react-ui/build/` : `${__dirname}/../public/`;
+app.use(express.static(path.resolve(staticDirectory)));
 
 // Initialize routes
 routes(app, passport);

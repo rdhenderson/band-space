@@ -14,7 +14,13 @@ module.exports = function routes (app, passport) {
 
   //Catch-all directs everything else to react front end/index.html
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(`${__dirname}/../../public/index.html`))
+    let indexFile;
+    if (process.env.ENV_HEROKU) {
+     indexFile = `${__dirname}/../../react-ui/build/index.html`;
+   } else {
+     indexFile = `${__dirname}/../../public/index.html`;
+   }
+    res.sendFile(path.resolve(indexFile));
   });
 
 };
