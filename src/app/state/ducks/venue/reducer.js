@@ -44,6 +44,13 @@ export default function reducer(state = INITIAL_STATE, action){
       return { ...state, venue: action.payload, error:null, loading: false};
     case types.ADD_VENUE_REVIEW_FAILURE:
       return { ...state, error: action.payload, loading: false};
+
+    case types.ADD_VENUE_EVENT:
+      return { ...state, error: null, loading: true};
+    case types.ADD_VENUE_EVENT_SUCCESS:
+      return { ...state, venue: action.payload, error:null, loading: false};
+    case types.ADD_VENUE_EVENT_FAILURE:
+      return { ...state, error: action.payload, loading: false};
     default:
       return state;
   }

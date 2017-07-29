@@ -12,12 +12,13 @@ module.exports = function(app) {
     .catch( (err) => res.send("ERROR", err));
   });
 
-  app.post('/api/events/', isAuthenticated, (req, res) => {
+  app.post('/api/events', isAuthenticated, (req, res) => {
     Event.create(event, (err, event) => {
       if (err) console.error('ERROR', err);
       res.json(event)
     });
   });
+
 
   //TODO: CONFIRM THAT UPDATE PROPERLY AFFECTS ARRAYS
   app.put('/api/users/:id', isAuthenticated, (req, res) => {

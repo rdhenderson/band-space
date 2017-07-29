@@ -8,7 +8,7 @@ import { Spinner } from '../../../components'
 
 import { actions as modalActions } from '../../../../state/ducks/modal'
 import { actions as venueActions } from '../../../../state/ducks/venue'
-import AddEventReview from './AddEventReview'
+import AddEventReviewForm from './AddEventReviewForm'
 
 const customStyles = {
   content : {
@@ -21,7 +21,7 @@ const customStyles = {
   }
 };
 
-class AddEventReviewModal extends Component {
+class AddEventReview extends Component {
 
   componentDidMount() {
     this.props.getVenueList();
@@ -67,4 +67,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ hideModal, ...venueActions }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddEventReviewModal);
+export default connect(mapStateToProps, mapDispatchToProps)(AddEventReview);

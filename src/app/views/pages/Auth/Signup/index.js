@@ -14,7 +14,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch){
   const { loginUser } = authActions;
-  return bindActionCreators({ loginUser }, dispatch);
+  return bindActionCreators({ ...authActions }, dispatch);
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Signup));

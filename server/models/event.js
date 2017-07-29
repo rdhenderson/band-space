@@ -3,11 +3,14 @@ const Schema = mongoose.Schema;
 
 const EventSchema = new Schema({
   name: { type: String, trim: true, required: true },
-  artists: [{ type: String, trim: true }],
-  date: { type: String },
-  time: { type: String },
+  date: { type: String, trim: true },
+  time: { type: String, trim: true },
+  description: { type: String, trim: true },
+  type: { type: String, enum: ['public', 'private']},
+  groups: [{ type: Schema.Types.ObjectId, ref: 'Group'}],
   venue: { type: Schema.Types.ObjectId, ref: 'Venue'},
   reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }],
+
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },
 });

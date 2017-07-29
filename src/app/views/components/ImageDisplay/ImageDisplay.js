@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 
 import ImageEditor from './ImageEditor';
+import getImageStyle from '../../../utilities/getImageStyle'
 
 
 class ImageDisplay extends Component {
@@ -37,7 +38,7 @@ class ImageDisplay extends Component {
                 <div className="profile__topbody__left__profblock__imgdiv__imgborder">
                   <img className="profile__topbody__left__profblock__imgdiv__imgborder__pic"
                     src={user.profile_image.img}
-                    style={JSON.parse(user.profile_image.imageStyle)}
+                    style={getImageStyle(user.profile_image)}
                   />
                 </div>
                 {/* <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" /> */}
