@@ -13,6 +13,9 @@ function mapStateToProps(state) {
     	user: state.auth.user,
       isAuth: state.auth.isAuth,
       venues: state.venue.venueList,
+      users: state.user.userList,
+      groups: state.group.groupList,
+      isLoading: state.venue.loading || state.group.loading || state.user.loading,
     };
 }
 

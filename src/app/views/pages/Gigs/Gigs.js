@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
-
-// import Map, {GoogleApiWrapper, Marker, InfoWindow} from "google-maps-react"
-import GigMap from '../components/Map.js';
-
 import raf from 'raf'
 import _ from 'lodash';
 import canUseDOM from "can-use-dom";
 import Infinite from 'react-infinite';
+
+import GigMap from './GigMap.js';
 
 const geolocation = (
   canUseDOM && navigator.geolocation ?
@@ -139,21 +137,11 @@ class Gigs extends Component {
               type="text"
               id="address"
               onChange={this.handleInputChange}
-             />
-           </div>
-           {/* <div className="gigs__nav__pInput">
-             <input
-               name="minPrice"
-               value={this.state.minPrice}
-               placeholder="$20"
-               type="text"
-               id="minPrice"
-               onChange={this.handleInputChange}
-              />
-           </div> */}
-           <div className="gigs__nav__dInput">
+            />
+          </div>
+          <div className="gigs__nav__dInput">
 
-           </div>
+          </div>
         </div>
         <div className="gigs__body">
           <div className="gigs__body__map">
@@ -171,32 +159,30 @@ class Gigs extends Component {
           </div>
 
           <div className="gigs__body__info">
-          <Infinite containerHeight={800} width={'100%'} elementHeight={200}>
+            <Infinite containerHeight={800} width={'100%'} elementHeight={200}>
 
-            {this.state.jobs.map((item, index) => (
-              <div key={index} className="gigs__body__info__item">
-                <div className="gigs__body__info__item__price">
-                  <h3> ${item.Pay} </h3>
-                </div>
-                <div className="gigs__body__info__item__description">
-                  <div className="gigs__body__info__item__description__name">
-                    <h3> {item.Name} </h3>
-                    {/* <h3> 11 </h3> */}
+              {this.state.jobs.map((item, index) => (
+                <div key={index} className="gigs__body__info__item">
+                  <div className="gigs__body__info__item__price">
+                    <h3> ${item.Pay} </h3>
                   </div>
-                  <div className="gigs__body__info__item__description__job">
-                    <h4> {item.Title} </h4>
-                    <p> {item.Description} </p>
+                  <div className="gigs__body__info__item__description">
+                    <div className="gigs__body__info__item__description__name">
+                      <h3> {item.Name} </h3>
+                      {/* <h3> 11 </h3> */}
+                    </div>
+                    <div className="gigs__body__info__item__description__job">
+                      <h4> {item.Title} </h4>
+                      <p> {item.Description} </p>
+                    </div>
+
                   </div>
-
                 </div>
-              </div>
-            ))}
-          </Infinite>
-        </div>
+              ))}
+            </Infinite>
+          </div>
 
         </div>
-
-
       </div>
     )
   }

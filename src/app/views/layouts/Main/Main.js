@@ -1,6 +1,7 @@
 //Here we grab React, and peel component out of the library using ES6 syntax.
 import React, { Component } from 'react'
 import { NavMenu } from '../../components'
+import RootModal from '../../components/Modal/RootModal.js'
 
 class Main extends Component {
 
@@ -22,6 +23,7 @@ class Main extends Component {
         <div id="page-wrap">
           {this.props.children}
         </div>
+        <RootModal />
       </div>
     );
   }

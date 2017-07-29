@@ -25,7 +25,7 @@ const NavMenuAuth = (props) => {
       <Link to="/">
         <div className="navLinks">
           <img className="navLinks__icon" src="/img/logout.svg" />
-          <p className="menu-item" onClick={handleLogout}> Log Out </p>
+          <p className="menu-item" onClick={()=> props.logoutUser()}> Log Out </p>
         </div>
       </Link>
 

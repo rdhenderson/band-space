@@ -15,6 +15,7 @@ export function showVenueReviewModal(modalProps) {
     modalProps: modalProps
   };
 }
+
 export function hideModal(){
   return {
     type: types.HIDE_MODAL

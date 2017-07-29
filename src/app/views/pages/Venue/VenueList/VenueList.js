@@ -1,7 +1,7 @@
 //Here we grab React, and peel component out of the library using ES6 syntax.
 import React, { Component } from 'react'
 
-import { Spinner, ResultsList } from '../../../components'
+import { Spinner, ResultsList, SearchBar } from '../../../components'
 
 class VenueList extends Component {
   constructor(props) {
@@ -27,33 +27,23 @@ class VenueList extends Component {
 
     return (
       <div>
-        <div className="mreview">
-          <div className="mreview__header">
-            <h2> Venues around Washington D.C. </h2>
-          </div>
-
-          <div className="mreview__body">
-            <ResultsList
-              searchType='venues'
-              items={this.props.venues}
-            />
-          </div>
+        <div className="splash">
+          <SearchBar
+            searchType={this.state.searchType}
+            searchQuery={this.state.searchQuery}
+            handleInputChange={this.handleInputChange}
+            showSelect={false}
+            placeholderText='Search for a Venue'
+          />
         </div>
+
+        <ResultsList
+          searchType='venues'
+          items={this.props.venues}
+        />
+        }
       </div>
     );
   }
 }
 export default VenueList;
-
-{/* <button onClick={() =>
-  this.setState({ showAddVenue: !this.state.showAddVenue })}>
-  Add Venue
-  </button>
-  {this.state.showAddVenue &&
-  <VenueProfileEditArrays
-    onSubmit={this.handleSubmit}
-    // initialValues={venue}
-    fieldClass="profile__topbody__right"
-    venue={{}}
-  />
-} */}
