@@ -5,7 +5,8 @@ import {
   UserReview,
   HeadSearch,
   Spinner,
-  ResultsList } from '../../../components'
+  ResultsList,
+  ImageDisplay } from '../../../components'
 
 import { sampleReviews } from '../../../../utilities/dummyData.js'
 import getImageStyle from '../../../../utilities/getImageStyle'
@@ -58,17 +59,19 @@ class GroupProfile extends Component {
               <div>
                 <div className="profile__topbody__left__profblock__imgdiv">
                   <div>
-                    {(group.profile_image && group.profile_image.img) &&
+                    <ImageDisplay onSave={this.handleGroupUpdate.bind(this)} />
+
+                    {/* {(group.profile_image && group.profile_image.img) &&
                       <img className="profile__topbody__left__profblock__imgdiv__pic"
                         src={group.profile_image.img}
                         style={getImageStyle(group.profile_image)}
                       />
-                    }
+                    } */}
                   </div>
                 </div>
                 <div className="profile__topbody__left__profblock__proftext">
                   <h1 style={{"fontSize" : 50}}> {group.name} </h1>
-                  <h3 style={{"fontSize" : 20}}> Guitarist/Singer </h3>
+                  <h3 style={{"fontSize" : 20}}> {group.description} </h3>
                 </div>
               </div>
               }
@@ -76,14 +79,16 @@ class GroupProfile extends Component {
 
             <h1>{group.name} </h1>
             <div className="profile__topbody__left__details">
-              <div id="bands">
-                <h3> Bands </h3>
-                <ul>
-                  <li> The Fartz </li>
-                  <li> Paid Against the Machine </li>
-                  <li> Migos </li>
-                </ul>
-              </div>
+              {group.members !== undefined && (
+                <div>
+                  <h3> Group Members </h3>
+                  <ul>
+                    {group.members.map( (member, index) =>
+                      <li key={member._id || index}> #{index} - {member.name} </li>
+                    )}
+                  </ul>
+                </div>
+              )}
             </div>
 
           </div>

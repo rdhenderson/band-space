@@ -1,4 +1,6 @@
 const Venue = require('../../models/venue.js');
+const Event = require('../../models/event.js');
+
 const getEventfulVenues = require('../../api/event-search.js');
 const { isAuthenticated } = require('../../helpers/auth_check.js');
 
@@ -69,4 +71,20 @@ module.exports = function(app) {
       })
     }
   });
+
+  app.post('/api/venues/events', (req, res) => {
+    Event.create(req.body, (err, event) => {
+      const update = {$push: {"events": event._id}};
+      const options = {new : true};
+      Venue.findByIdAndUpdate(event.venue, update, options)
+      .then( (venue) => {
+        Venue.findById(venue._id)
+        .populate('events')
+        .populate('reviews')
+        .then( (venue) => res.send(venue))
+      })
+      .catch( (err) => res.send(err));
+    });
+  });
+
 };

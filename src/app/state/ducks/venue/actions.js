@@ -83,6 +83,25 @@ export function addVenueReview(review) {
       );
   }
 }
+
+export function addVenueEvent(event) {
+  return dispatch => {
+    dispatch({type: types.ADD_VENUE_EVENT})
+    const token = localStorage.getItem('jwtToken');
+    axios({
+      method: 'post',
+      url: `${ROOT_URL}/events`,
+      data: event,
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(
+        ({ data }) => dispatch({ type: types.ADD_VENUE_EVENT_SUCCESS, payload: data }),
+        ({ err })  => dispatch({ type: types.ADD_VENUE_EVENT_FAILURE, payload: err })
+      );
+  }
+}
 // export function addUserGroup(group, id) {
 //   const token = localStorage.getItem('jwtToken');
 //   //check if the token is still valid, if so, get me from the server
