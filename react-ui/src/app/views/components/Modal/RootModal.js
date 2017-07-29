@@ -14,8 +14,6 @@ import AddVenueReview from './AddVenueReview'
 
 
 const MODAL_COMPONENTS = {
-  'DELETE_POST': DeletePostModal,
-  'CONFIRM_LOGOUT': ConfirmLogoutModal,
   'ADD_VENUE_REVIEW' : AddVenueReview,
   'TEST_FORM' : TestFormModal,
   'VALIDATION_FORM' : ValidationFormModal,
