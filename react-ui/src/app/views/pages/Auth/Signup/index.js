@@ -13,7 +13,6 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-  const { loginUser } = authActions;
   return bindActionCreators({ ...authActions }, dispatch);
 }
 

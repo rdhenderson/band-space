@@ -7,6 +7,7 @@
   },
   "private": true,
   "dependencies": {
+    "axios": "^0.16.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
     "connect-flash": "^0.1.1",
@@ -39,9 +40,10 @@
     "watch-css": "npm run build-css && node-sass-chokidar src/styles/sass -o src/src/styles/css --watch --recursive",
     "start": "node server/server.js",
     "start-server": "nodemon server/server.js",
-    "start-dev": "npm run start-server && cd react-ui/ && npm run start-all",
+    "start-client": "cd react-ui/ && npm run start-dev",
+    "start-dev": "concurrently \"npm run start-server\" \"cd react-ui/ && npm run start-dev\"",
     "install-all": "npm install && cd react-ui/ && npm install",
-    "build-css": "node-sass-chokidar /react-ui/src/styles/sass -o /react-ui/src/styles/css"
+    "build-css": "node-sass-chokidar react-ui/src/styles/sass -o react-ui/src/styles/css"
   },
   "cacheDirectories": [
     "node_modules",

@@ -31,6 +31,8 @@ bower_components
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
+react-ui/build
+react-ui/src/styles/css
 dist/
 public/bundle.js
 src/styles/css

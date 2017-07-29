@@ -47,7 +47,7 @@
     "start": "react-scripts start",
     "start-dev": "npm-run-all -p watch-css start",
     "build": "npm run build-css && react-scripts build",
-    "build-css": "node-sass-chokidar /react-ui/src/styles/sass -o /react-ui/src/styles/css",
+    "build-css": "node-sass-chokidar src/styles/sass -o src/styles/css",
     "watch-css": "npm run build-css && node-sass-chokidar src/styles/sass -o src/src/styles/css --watch --recursive"
   },
   "proxy": "http://localhost:3001"
