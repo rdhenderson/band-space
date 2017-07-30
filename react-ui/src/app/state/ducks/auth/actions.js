@@ -20,7 +20,11 @@ export function loginUser(credentials) {
         localStorage.setItem('jwtToken', data.token);
         dispatch({ type: types.LOGIN_USER_SUCCESS, payload: data })
       },
-      ({ err })  => dispatch({ type: types.LOGIN_USER_FAILURE, payload: err })
+      ({ response, message }) =>
+        dispatch({
+          type: types.LOGIN_USER_FAILURE,
+          payload: (response) ? response.data : message
+        })
     );
   }
 }
@@ -33,7 +37,11 @@ export function signupUser(credentials) {
         localStorage.setItem('jwtToken', data.token);
         dispatch({ type: types.SIGNUP_USER_SUCCESS, payload: data })
       },
-      ({ err })  => dispatch({ type: types.SIGNUP_USER_FAILURE, payload: err })
+      ({ response, message }) =>
+        dispatch({
+          type: types.SIGNUP_USER_FAILURE,
+          payload: (response) ? response.data : message
+        })
     );
   }
 }
@@ -56,152 +64,16 @@ export function meFromToken() {
     }
     axios(authRequest)
     .then(
-        ({ data }) => dispatch({ type: types.ME_FROM_TOKEN_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.ME_FROM_TOKEN_FAILURE, payload: err })
-      );
+        ({ data }) => {
+          localStorage.setItem('jwtToken', data.token);
+          dispatch({ type: types.ME_FROM_TOKEN_SUCCESS, payload: data })
+        },
+        ({ response, message }) => {
+          localStorage.removeItem('jwtToken');
+          dispatch({
+            type: types.ME_FROM_TOKEN_FAILURE,
+            payload: (response) ? response.data : message
+          })
+      });
     }
 }
-
-// export function loginUser(user) {
-//   return {
-//     type: USER_LOGIN,
-//     payload: { user: user, isAuth: true }
-//   }
-// }
-//
-// // NOTE: Not a pure function -- removes JWT
-// export function logoutUser() {
-//   localStorage.removeItem('jwtToken');
-//   return {
-//     type: USER_LOGOUT,
-//     payload: {user: null, token: null, isAuth: false}
-//   }
-// }
-//
-// export function meFromToken(tokenFromStorage) {
-//   //check if the token is still valid, if so, get me from the server
-//   const request = axios({
-//     method: 'get',
-//     url: `${ROOT_URL}/users/me/from/token?token=${tokenFromStorage}`,
-//     headers: {
-//       'Authorization': `Bearer ${tokenFromStorage}`
-//     }
-//   });
-//
-//   return {
-//     type: ME_FROM_TOKEN,
-//     payload: request
-//   };
-// }
-//
-// export function meFromTokenSuccess(currentUser, token) {
-//   localStorage.setItem('jwtToken', token)
-//   return {
-//     type: ME_FROM_TOKEN_SUCCESS,
-//     payload: currentUser
-//   };
-// }
-//
-// export function meFromTokenFailure(error) {
-//   localStorage.removeItem('jwtToken');
-//   return {
-//     type: ME_FROM_TOKEN_FAILURE,
-//     payload: error
-//   };
-// }
-// export function updateUser(updates, id) {
-//   const token = localStorage.getItem('jwtToken');
-//
-//   const request = axios({
-//     method: 'put',
-//     url: `${ROOT_URL}/users/${id}?token=${token}`,
-//     data: updates,
-//     headers: {
-//       'Authorization': `Bearer ${token}`
-//     }
-//   });
-//
-//   return {
-//     type: UPDATE_USER,
-//     payload: request
-//   };
-// }
-//
-// export function updateUserSuccess(user) {
-//   console.log('USER update success', user);
-//   return {
-//     type: UPDATE_USER_SUCCESS,
-//     payload: user
-//   };
-// }
-//
-// export function updateUserFailure(error) {
-//   return {
-//     type: UPDATE_USER_FAILURE,
-//     payload: error
-//   };
-// }
-//
-// export function addUserGroup(group, id) {
-//   const token = localStorage.getItem('jwtToken');
-//   //check if the token is still valid, if so, get me from the server
-//   const request = axios({
-//     method: 'post',
-//     url: `${ROOT_URL}/users/${id}/groups`,
-//     data: group,
-//     headers: {
-//       'Authorization': `Bearer ${token}`
-//     }
-//   });
-//
-//   return {
-//     type: ADD_USER_GROUP,
-//     payload: request
-//   };
-// }
-//
-// export function addUserGroupSuccess(group) {
-//   return {
-//     type: ADD_USER_GROUP_SUCCESS,
-//     payload: group
-//   };
-// }
-//
-// export function addUserGroupFailure(error) {
-//   return {
-//     type: ADD_USER_GROUP_FAILURE,
-//     payload: error
-//   };
-// }
-//
-// export function addReview(review, id) {
-//   const token = localStorage.getItem('jwtToken');
-//   //check if the token is still valid, if so, get me from the server
-//   const request = axios({
-//     method: 'post',
-//     url: `${ROOT_URL}/reviews/${id}`,
-//     data: review,
-//     headers: {
-//       'Authorization': `Bearer ${token}`
-//     }
-//   });
-//
-//   return {
-//     type: ADD_REVIEW,
-//     payload: request
-//   };
-// }
-//
-// export function addReviewSuccess(review) {
-//   return {
-//     type: ADD_REVIEW_SUCCESS,
-//     payload: review
-//   };
-// }
-//
-// export function addReviewFailure(error) {
-//   return {
-//     type: ADD_REVIEW_FAILURE,
-//     payload: error
-//   };
-// }

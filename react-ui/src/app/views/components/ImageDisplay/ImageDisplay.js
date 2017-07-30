@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import ImageEditor from './ImageEditor';
 import Spinner from '../Spinner'
+import ErrorMessage from '../ErrorMessage'
 import getImageStyle from '../../../utilities/getImageStyle'
 
 
@@ -39,7 +40,12 @@ class ImageDisplay extends Component {
   }
 
   render(){
+    if (this.props.error) {
+      console.log("error", this.props.error);
+      return <ErrorMessage message={this.props.error} onRetry={()=>console.log('Sorry')} />
+    }
     if (this.props.isLoading) return (<Spinner />);
+
     const subject = this.props.subject;
 
     return (
@@ -50,6 +56,7 @@ class ImageDisplay extends Component {
             subject={subject}
             class="profile__topbody__left__profblock__imgdiv"
             toggleEdit={this.toggleEdit}
+            error={this.props.error}
           />
         ):(
           <div>

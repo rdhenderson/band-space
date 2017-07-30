@@ -28,33 +28,15 @@ module.exports = function(app, passport) {
     })
   });
 
-  // app.get('/api/users/:id/bands', (req, res) => {
-  //   User.findById(req.params.id, (err, user) => {
-  //     console.log('User bands', user.bands);
-  //     const bandPromises = user.bands.map( (id) => Band.find({_id: id}));
-  //     Promise.all(bandPromises).then( (bands) => {
-  //       console.log('Bands', bands);
-  //       if (err){
-  //         console.log("ERROR", err);
-  //         res.json(err);
-  //       } else {
-  //         res.status(200).json(bands);
-  //       }
-  //     });
-  //   });
-  // });
-
   //TODO: CONFIRM THAT UPDATE PROPERLY AFFECTS ARRAYS
   app.put('/api/users/:id', isAuthenticated, (req, res) => {
     const options = { upsert: true, new: true };
     const query = { _id:req.params.id };
     User.findOneAndUpdate(query, req.body, options, (err, user) => {
       if (err) {
-        console.log("Res status", res.status);
         res.json(err);
       } else {
-        console.log("Updated User", user);
-        res.json(user)
+        res.json(user);
       }
     })
   });
@@ -63,12 +45,16 @@ module.exports = function(app, passport) {
   // server/helpers/auth_check
 
   app.delete('/api/users/:id', isAuthenticated, (req, res) => {
-      User.findByIdAndRemove(req.params.id, function (err, user) {
-        res.send({
+    User.findByIdAndRemove(req.params.id, function (err, user) {
+      if (err) {
+        res.json(err)
+      } else {
+        res.json({
           message: "User successfully deleted",
           id: user._id
         })
-      })
+      }
+    })
   });
 
   app.post('/api/users/:id/groups', isAuthenticated, (req, res) => {

@@ -83,8 +83,9 @@ class PrivateProfile extends Component {
       return <Redirect to="/auth/login" />
     }
 
-    if (this.props.isLoading) return (<Spinner />);
-
+    if (this.props.isLoading)
+      return (<Spinner />);
+  
     let user = this.props.user;
 
     return (

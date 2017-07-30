@@ -10,7 +10,11 @@ export function getGroup(id) {
     axios.get(`${ROOT_URL}/${id}`)
     .then(
       ({ data }) => dispatch({ type: types.GET_GROUP_SUCCESS, payload: data }),
-      ({ err })  => dispatch({ type: types.GET_GROUP_FAILURE, payload: err })
+      ({ response, message }) =>
+        dispatch({
+          type: types.GET_GROUP_FAILURE,
+          payload: (response) ? response.data : message
+        })
     );
   }
 }
@@ -21,7 +25,11 @@ export function getGroupList() {
     axios.get(ROOT_URL)
     .then(
         ({ data }) => dispatch({ type: types.GET_GROUP_LIST_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.GET_GROUP_LIST_FAILURE, payload: err })
+        ({ response, message }) =>
+          dispatch({
+            type: types.GET_GROUP_LIST_FAILURE,
+            payload: (response) ? response.data : message
+          })
       );
     }
 }
@@ -40,7 +48,11 @@ export function updateGroup(group) {
     })
     .then(
         ({ data }) => dispatch({ type: types.UPDATE_GROUP_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.UPDATE_GROUP_FAILURE, payload: err })
+        ({ response, message }) =>
+          dispatch({
+            type: types.UPDATE_GROUP_FAILURE,
+            payload: (response) ? response.data : message
+          })
       );
   }
 }
@@ -60,7 +72,11 @@ export function addGroup(group) {
     })
     .then(
         ({ data }) => dispatch({ type: types.ADD_GROUP_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.ADD_GROUP_FAILURE, payload: err })
+        ({ response, message }) =>
+          dispatch({
+            type: types.ADD_GROUP_FAILURE,
+            payload: (response) ? response.data : message
+          })
       );
   }
 }

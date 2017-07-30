@@ -10,7 +10,11 @@ export function getReview(id) {
     axios.get(`${ROOT_URL}/${id}`)
     .then(
         ({ data }) => dispatch({ type: types.GET_REVIEW_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.GET_REVIEW_FAILURE, payload: err })
+        ({ response, message }) =>
+          dispatch({
+            type: types.GET_REVIEW_FAILURE,
+            payload: (response) ? response.data : message
+          })
       );
     }
 }

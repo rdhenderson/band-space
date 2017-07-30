@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import ErrorMessage from '../ErrorMessage'
 // import {updateUser, updateGroup} from '../helpers/index.js'
 
 class ImageEditor extends Component{
@@ -12,6 +12,7 @@ class ImageEditor extends Component{
       rotate: 0,
       img: '/img/user.svg'
     }
+    this.savePicture = this.savePicture.bind(this);
   }
 
   handleNewImage = (e) => {
@@ -60,10 +61,9 @@ class ImageEditor extends Component{
         y: this.state.ypos,
       },
     };
-
       // Send entire object back, with updated profile_image field
     this.props.onSave({...this.props.subject, profile_image });
-    this.props.toggleEdit();
+    // fthis.props.toggleEdit();
   }
 
   componentWillMount(){

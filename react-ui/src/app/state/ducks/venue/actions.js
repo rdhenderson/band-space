@@ -10,7 +10,11 @@ export function getVenue(id) {
     axios.get(`${ROOT_URL}/${id}`)
     .then(
         ({ data }) => dispatch({ type: types.GET_VENUE_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.GET_VENUE_FAILURE, payload: err })
+        ({ response, message }) =>
+          dispatch({
+            type: types.GET_VENUE_FAILURE,
+            payload: (response) ? response.data : message
+          })
       );
     }
 }
@@ -21,7 +25,11 @@ export function getVenueList() {
     axios.get(`${ROOT_URL}`)
     .then(
         ({ data }) => dispatch({ type: types.GET_VENUE_LIST_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.GET_VENUE_LIST_FAILURE, payload: err })
+        ({ response, message }) =>
+          dispatch({
+            type: types.GET_VENUE_LIST_FAILURE,
+            payload: (response) ? response.data : message
+          })
       );
     }
 }
@@ -41,7 +49,11 @@ export function addVenue(venue) {
     })
     .then(
         ({ data }) => dispatch({ type: types.ADD_VENUE_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.ADD_VENUE_FAILURE, payload: err })
+        ({ response, message }) =>
+          dispatch({
+            type: types.ADD_VENUE_FAILURE,
+            payload: (response) ? response.data : message
+          })
       );
   }
 }
@@ -60,7 +72,11 @@ export function updateVenue(venue) {
     })
     .then(
         ({ data }) => dispatch({ type: types.UPDATE_VENUE_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.UPDATE_VENUE_FAILURE, payload: err })
+        ({ response, message }) =>
+          dispatch({
+            type: types.UPDATE_VENUE_FAILURE,
+            payload: (response) ? response.data : message
+          })
       );
   }
 }
@@ -79,7 +95,11 @@ export function addVenueReview(review) {
     })
     .then(
         ({ data }) => dispatch({ type: types.ADD_VENUE_REVIEW_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.ADD_VENUE_REVIEW_FAILURE, payload: err })
+        ({ response, message }) =>
+          dispatch({
+            type: types.ADD_VENUE_REVIEW_FAILURE,
+            payload: (response) ? response.data : message
+          })
       );
   }
 }
@@ -98,7 +118,11 @@ export function addVenueEvent(event) {
     })
     .then(
         ({ data }) => dispatch({ type: types.ADD_VENUE_EVENT_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.ADD_VENUE_EVENT_FAILURE, payload: err })
+        ({ response, message }) =>
+          dispatch({
+            type: types.ADD_VENUE_EVENT_FAILURE,
+            payload: (response) ? response.data : message
+          })
       );
   }
 }
