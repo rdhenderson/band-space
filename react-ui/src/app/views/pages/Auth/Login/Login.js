@@ -26,7 +26,7 @@ class Login extends Component {
 
   render(){
 
-    if ( this.state.redirect ) return (<Redirect to='/profile'/>);
+    if ( this.props.isAuth ) return (<Redirect to='/profile'/>);
 
     return (
     <div>

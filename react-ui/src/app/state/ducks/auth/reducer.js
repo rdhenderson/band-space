@@ -5,7 +5,7 @@ import * as types from './types'
 const token = localStorage.getItem('jwtToken');
 
 const INITIAL_STATE = {
-  user: {name:'Guest'},
+  user: null,
   isAuth: false,
   error: null,
   loading: true,
@@ -17,19 +17,19 @@ export default function reducer(state = INITIAL_STATE, action){
 
   switch (action.type) {
     case types.LOGIN_USER:
-      return {...state, user: {name:'Guest'}, isAuth: false, error: null, loading:true }
+      return {...state, isAuth: false, error: null, loading:true }
     case types.LOGIN_USER_SUCCESS:
       return {...state, token: action.payload.token, user: action.payload.user, isAuth: true, error: null, loading:false }
     case types.LOGIN_USER_FAILURE:
-      return {...state, token: null, user: {name:'Guest'}, isAuth: false, error: action.payload, loading:false }
+      return {...state, isAuth: false, error: action.payload, loading:false }
     case types.SIGNUP_USER:
       return {...state, isAuth: false, error: null, loading:true }
     case types.SIGNUP_USER_SUCCESS:
       return {...state, token: action.payload.token, user: action.payload.user, isAuth: true, error: null, loading:false }
     case types.SIGNUP_USER_FAILURE:
-      return {...state, token: null, user: {name:'Guest'}, isAuth: false, error: action.payload, loading:false }
+      return {...state, token: null, isAuth: false, error: action.payload, loading:false }
     case types.LOGOUT_USER:
-      return {...state, token: null, user: {name:'Guest'}, isAuth:false, error: null, loading: false }
+      return {...state, token: null, user: null, isAuth:false, error: null, loading: false }
     case types.ME_FROM_TOKEN:// loading currentUser("me") from jwttoken in local/session storage storage,
       return { ...state, loading: true};
     case types.ME_FROM_TOKEN_SUCCESS://return user, status = authenticated and make loading = false

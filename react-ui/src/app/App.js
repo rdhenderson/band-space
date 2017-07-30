@@ -3,13 +3,13 @@ import { Route } from 'react-router-dom'
 
 import { Auth, Home, Gigs, Venue, User, Group, PrivateProfile } from './views/pages';
 import { Main } from './views/layouts'
+import PrivateRoute from './views/components/PrivateRoute'
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // Remove tap delay for material-ui
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin();
-
 
 class App extends Component {
   render() {

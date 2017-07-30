@@ -51,53 +51,33 @@ class ImageEditor extends Component{
 
   savePicture = (e) => {
     e.preventDefault()
-    if (this.props.type === "user"){
-      // this.props.user.profile_image = {...this.state};
-      const imageStyle = {
-        "width": `${200 * this.state.scale}px`,
-        "height": `${200 * this.state.scale}px`,
-        "marginLeft": `${(this.state.xpos * 100) - 50}%`,
-        "marginTop": `${(this.state.ypos * 100) - 50}%`,
-        "transform": `rotate(${this.state.rotate}deg)`
-      };
+    const profile_image = {
+      img: this.state.img,
+      scale: this.state.scale,
+      rotate: this.state.rotate,
+      position: {
+        x: this.state.xpos,
+        y: this.state.ypos,
+      },
+    };
 
-      const profile_image = {
-        img: this.state.img,
-        scale: this.state.scale,
-        rotate: this.state.rotate,
-        position: {
-          x: this.state.xpos,
-          y: this.state.ypos,
-        },
-        imageStyle: JSON.stringify(imageStyle),
-      };
-
-      this.props.onSave({profile_image: profile_image});
-    }
+      // Send entire object back, with updated profile_image field
+    this.props.onSave({...this.props.subject, profile_image });
     this.props.toggleEdit();
   }
 
   componentWillMount(){
-    if (this.props.user.profile_image){
+    if (this.props.subject.profile_image){
+      const { scale, rotate, img, xpos, ypos } = this.props.subject.profile_image;
       let newState = {
-        scale: this.props.user.profile_image.scale,
-        rotate: this.props.user.profile_image.rotate,
-        img: this.props.user.profile_image.img,
-        xpos: this.props.user.profile_image.xpos,
-        ypos: this.props.user.profile_image.ypos,
+        scale, rotate, img, xpos, ypos,
       };
-    this.setState(newState);
+
+      this.setState(newState);
     }
   }
 
   render () {
-    // let imageStyle = {
-    //   "width": `${200 * this.state.scale}px`,
-    //   "height": `${200 * this.state.scale}px`,
-    //   "marginLeft": `${(this.state.xpos * 100) - 50}%`,
-    //   "marginTop": `${(this.state.ypos * 100) - 50}%`,
-    //   "transform": `rotate(${this.state.rotate}deg)`
-    // };
     return (
       <div className={this.props.class}>
         <div style={{borderRadius: 60, width:200, height: 200, overflow: "hidden" }}>

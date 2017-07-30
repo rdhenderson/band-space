@@ -10,10 +10,10 @@ import PrivateProfile from './PrivateProfile'
 function mapStateToProps(state) {
   return {
     user: state.user.user,
-    authUser: state.auth.user,
+    currUser: state.auth.user,
     isAuth: state.auth.isAuth,
     error: state.auth.error,
-    isLoading: state.auth.loading,
+    isLoading: state.user.loading,
   };
 }
 

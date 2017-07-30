@@ -22,6 +22,8 @@ class Signup extends Component {
   }
 
   render(){
+    if ( this.props.isAuth ) return (<Redirect to='/profile'/>);
+
     return (
     <div>
       <div className="uSignup__top">

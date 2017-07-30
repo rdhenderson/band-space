@@ -37,10 +37,14 @@ export function updateUser(user) {
         'Authorization': `Bearer ${token}`
       }
     })
-    .then(
-        ({ data }) => dispatch({ type: types.UPDATE_USER_SUCCESS, payload: data }),
-        ({ err })  => dispatch({ type: types.UPDATE_USER_FAILURE, payload: err })
-      );
+    .then( (response) => {
+      console.log("Update response", response);
+      if (response.status >= 200 && response.status < 300) {
+        dispatch({ type: types.UPDATE_USER_SUCCESS, payload: response.data })
+      } else {
+        dispatch({ type: types.UPDATE_USER_FAILURE, payload: response.err })
+      }
+    });
   }
 }
 

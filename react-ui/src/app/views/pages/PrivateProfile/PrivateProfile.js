@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 // import components
 import ProfileForm from './components/ProfileForm'
 import SimpleForm from './components/SimpleForm'
@@ -22,34 +22,43 @@ class PrivateProfile extends Component {
       showConnect: false,
       isAddGroup: false,
       redirect: false,
+      fetchWhenAuth: false,
+      data: false,
     }
 
-    this.handleUserUpdate = this.handleUserUpdate.bind(this);
     this.userAddGroup = this.userAddGroup.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
     this.toggleAddGroup = this.toggleAddGroup.bind(this);
     this.toggleConnect = this.toggleConnect.bind(this);
   }
 
-  componentDidMount(){
-    this.props.getUser(props.authUser._id);
+  componentWillReceiveProps(nextProps) {
+    if (nextProps) {
+      this.setState({ data: true });
+    }
   }
 
-  handleUserUpdate(updates) {
-    // event.preventDefault();
-    this.props.updateUser(updates, this.props.user._id);
-    this.setState({redirect: true});
+  componentDidMount() {
+    if (this.props.isAuth) {
+      this.props.getUser(this.props.currUser._id);
+    }
   }
-
+  // FIXME: Need a better location for this information
+  // Need to confirm that user isn't already in members.
   userAddGroup(values) {
     // event.preventDefault();
-    const user = this.props.user
-    const newGroup = {
-      members: {
-        user_id: [user._id],
-        name: user.name,
-        email: user.email
-      }, ...values };
+    const user = this.props.user;
+    const userMember = {
+      user_id: [user._id],
+      name: user.name,
+      email: user.email
+    };
+    const newGroup = {...values};
+    if (!newGroup.members) {
+      newGroup.members = [userMember];
+    } else {
+      newGroup.members.push(userMember)
+    }
     console.log("New Group", newGroup);
     this.props.addUserGroup(newGroup, user._id);
   }
@@ -67,41 +76,35 @@ class PrivateProfile extends Component {
     this.setState(newState);
   }
 
-  // componentWillMount(){
-  //   var userId = this.props.match.params.id;
-  //   getUser(userId).then(pageUser => {
-  //     this.setState({
-  //       name: pageUser.data.name,
-  //       id: pageUser.data._id,
-  //       profile_image: pageUser.data.profile_image,
-  //       bands: pageUser.data.bands,
-  //       reviews: pageUser.data.reviews,
-  //       tags: pageUser.data.tags,
-  //       venues: pageUser.data.venues
-  //     });
-  //   });
-  // }
-
 
   render(){
+    if (!this.props.isAuth) {
+      console.log("Redirecting to auth");
+      return <Redirect to="/auth/login" />
+    }
+
     if (this.props.isLoading) return (<Spinner />);
 
-    let user = this.props.user || this.props.authUser;
-    console.log("User", user);
+    let user = this.props.user;
+
     return (
       <div className="profile">
         <HeadSearch />
         <div className="profile__topbody">
           <div className="profile__topbody__left">
 
-            <ImageDisplay onSave={this.handleUserUpdate.bind(this)} />
+            <ImageDisplay
+              type="user"
+              subject={this.props.user}
+            />
 
             <div className="profile__topbody__left__details">
 
               <div id="bands">
                 <h3> Your Groups </h3>
                 <ul>
-                  {user.groups && user.groups.map( (group, index) =>(
+                  {user.groups !== undefined &&
+                    user.groups.map( (group, index) =>(
                     <Link key={group.id} to={`/groups/${group._id}`}>
                       <li>#{index+1}: {group.name} </li>
                     </Link>

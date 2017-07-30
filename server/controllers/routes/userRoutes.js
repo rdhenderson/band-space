@@ -50,10 +50,11 @@ module.exports = function(app, passport) {
     const query = { _id:req.params.id };
     User.findOneAndUpdate(query, req.body, options, (err, user) => {
       if (err) {
-        console.log("ERROR", err);
+        console.log("Res status", res.status);
         res.json(err);
       } else {
-        res.redirect(303, `/api/users/${user._id}`);
+        console.log("Updated User", user);
+        res.json(user)
       }
     })
   });
