@@ -13,7 +13,7 @@ function generateToken(user) {
     facebook: user.facebook,
     spotify: user.spotify,
     profile_image: user.profile_image,
-    bands: user.bands,
+    groups: user.groups,
     reviews: user.reviews,
     // isEmailVerified: user.isEmailVerified //used to prevent creating posts w/o verifying emails
   };
@@ -33,7 +33,7 @@ function getCleanUser(user) {
     _id: u._id,
     name: u.name,
     email: u.email,
-    bands: u.bands,
+    groups: u.groups,
     reviews: u.reviews,
     admin: u.admin,
     moderator: u.moderator,
