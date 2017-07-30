@@ -31,6 +31,10 @@ class PrivateProfile extends Component {
     this.toggleConnect = this.toggleConnect.bind(this);
   }
 
+  componentDidMount(){
+    this.props.getUser(props.authUser._id);
+  }
+
   handleUserUpdate(updates) {
     // event.preventDefault();
     this.props.updateUser(updates, this.props.user._id);
@@ -82,7 +86,7 @@ class PrivateProfile extends Component {
   render(){
     if (this.props.isLoading) return (<Spinner />);
 
-    let user = this.props.user;
+    let user = this.props.user || this.props.authUser;
     console.log("User", user);
     return (
       <div className="profile">
