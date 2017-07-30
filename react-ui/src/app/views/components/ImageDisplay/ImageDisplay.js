@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 
 import ImageEditor from './ImageEditor';
+import SVGInline from 'react-inlinesvg';
 import Spinner from '../Spinner'
 import ErrorMessage from '../ErrorMessage'
 import getImageStyle from '../../../utilities/getImageStyle'
@@ -73,7 +74,9 @@ class ImageDisplay extends Component {
               <h1 style={{"fontSize" : 50}}> {subject.name}</h1>
               <h3 style={{"fontSize" : 20}}> Guitarist/Singer </h3>
             </div>
-            <button className="normal-btn" onClick={this.toggleEdit}> Edit Profile Picture </button>
+            <div onClick={this.toggleEdit}>
+            <SVGInline className="editProfPic" src="img/edit.svg" />
+            </div>
           </div>
           )}
         </div>
