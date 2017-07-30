@@ -1,7 +1,7 @@
 const path = require('path');
 const { getCleanUser, generateToken } = require('../../helpers/users.js')
 const User = require('../../models/user.js');
-const Band = require('../../models/band.js');
+const Group = require('../../models/group.js');
 const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_SECRET;
 const { isAuthenticated } = require('../../helpers/auth_check.js');
@@ -61,7 +61,7 @@ module.exports = function(app, passport) {
     // console.log("Request Body:", req.body);
     const options = {appendToArray: true, upsert:true, new:true};
     const query = { name: req.body.name }
-    Band.create(query, req.body, options, (err, group) => {
+    Group.create(query, req.body, options, (err, group) => {
       if (err) console.log("ERROR CREATING BAND", err);
       User.findOrCreate({_id:req.params.id}, { bands: group }, options, (err, user) => {
         if (err) {
