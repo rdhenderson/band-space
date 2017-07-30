@@ -26,9 +26,9 @@ var userSchema = new Schema({
     }
   },
   images: [{ type: String, trim: true }],
-  bands: [{
+  groups: [{
     type: Schema.Types.ObjectId,
-    ref: 'Band',
+    ref: 'Group',
   }],
   venues:[{
     type: Schema.Types.ObjectId,

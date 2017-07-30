@@ -88,8 +88,8 @@ export function addUserGroup(user, id) {
     const token = localStorage.getItem('jwtToken');
 
     axios({
-      method: 'put',
-      url: `${ROOT_URL}/${user._id}/groups`,
+      method: 'post',
+      url: `${ROOT_URL}/${id}/groups`,
       data: user,
       headers: {
         'Authorization': `Bearer ${token}`

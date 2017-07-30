@@ -58,24 +58,18 @@ module.exports = function(app, passport) {
   });
 
   app.post('/api/users/:id/groups', isAuthenticated, (req, res) => {
-    // console.log("Request Body:", req.body);
-    const options = {appendToArray: true, upsert:true, new:true};
-    const query = { name: req.body.name }
-    Group.create(query, req.body, options, (err, group) => {
-      if (err) console.log("ERROR CREATING BAND", err);
-      User.findOrCreate({_id:req.params.id}, { groups: group }, options, (err, user) => {
-        if (err) {
-          res.json({
-            success: false,
-            message: 'Check the form for errors.',
-            error: err,
-          });
-        } else {
-          // res.json(user);
-          res.redirect(301, `/api/users/${user._id}`);
-        }
+    Group.create(req.body, (err, group) => {
+      const update = {$push: {"groups": group._id}};
+      const options = {new : true};
+      User.findByIdAndUpdate(req.params.id, update, options)
+      .then( (user) => {
+        User.findById(user._id)
+        .populate('groups')
+        .then( (user) => res.send(user))
       })
-    })
-  })
+      .catch( (err) => res.send(err));
+    });
+  });
+
 
 };
