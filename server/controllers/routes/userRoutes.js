@@ -16,7 +16,7 @@ module.exports = function(app, passport) {
 
   app.get('/api/users/:id', (req, res) => {
     User.findById(req.params.id)
-    .populate('bands')
+    .populate('groups')
     .populate('reviews')
     .exec( (err, user) => {
       if (err){
@@ -63,7 +63,7 @@ module.exports = function(app, passport) {
     const query = { name: req.body.name }
     Group.create(query, req.body, options, (err, group) => {
       if (err) console.log("ERROR CREATING BAND", err);
-      User.findOrCreate({_id:req.params.id}, { bands: group }, options, (err, user) => {
+      User.findOrCreate({_id:req.params.id}, { groups: group }, options, (err, user) => {
         if (err) {
           res.json({
             success: false,

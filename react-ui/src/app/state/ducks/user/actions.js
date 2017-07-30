@@ -89,7 +89,7 @@ export function addUserGroup(user, id) {
 
     axios({
       method: 'put',
-      url: `${ROOT_URL}/${user._id}`,
+      url: `${ROOT_URL}/${user._id}/groups`,
       data: user,
       headers: {
         'Authorization': `Bearer ${token}`
