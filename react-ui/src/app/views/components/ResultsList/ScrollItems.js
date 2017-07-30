@@ -41,8 +41,8 @@ export const UserItem = ({ item }) => (
         <p>{item.description}</p>
         {/* <img src="http://lorempixel.com/500/100" /> */}
         <ul>
-          {item && item.groups && item.groups.map( (band, index) => (
-            <li key={index}> Group#{index}: {band.name} </li>
+          {item && item.groups && item.groups.map( (group, index) => (
+            <li key={index}> Group#{index}: {group.name} </li>
           ))}
         </ul>
       </div>
