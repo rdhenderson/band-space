@@ -56,10 +56,8 @@ class ImageEditor extends Component{
       img: this.state.img,
       scale: this.state.scale,
       rotate: this.state.rotate,
-      position: {
-        x: this.state.xpos,
-        y: this.state.ypos,
-      },
+      xpos: this.state.xpos,
+      ypos: this.state.ypos,
     };
       // Send entire object back, with updated profile_image field
     this.props.onSave({...this.props.subject, profile_image });
