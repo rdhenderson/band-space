@@ -106,10 +106,10 @@ class PrivateProfile extends Component {
                 <h3> Your Groups </h3>
                 <ul>
                   {uGroups !== undefined &&
-                    user.groups.map( (group, index) =>(
-                    <Link key={group.id} to={`/groups/${group._id}`}>
-                      <li>#{index+1}: {group.name} </li>
-                    </Link>
+                    uGroups.map( (group, index) =>(
+                      <Link key={group.id} to={`/groups/${group._id}`}>
+                        <li>#{index+1}: {group.name} </li>
+                      </Link>
                   ))}
 
                 </ul>

@@ -1,6 +1,6 @@
 // import { applyMiddleware, createStore } from "redux"
 //
-// import logger from "redux-logger"
+import logger from "redux-logger"
 // import reducer from "./reducers"
 //
 // // const middleware = applyMiddleware(logger);
@@ -15,5 +15,5 @@ import ReduxThunk from 'redux-thunk'
 
 import reducer from './reducers';
 
-const middleware = applyMiddleware(promise, ReduxThunk);
+const middleware = applyMiddleware(promise, ReduxThunk, logger);
 export default createStore(reducer, composeWithDevTools(middleware));

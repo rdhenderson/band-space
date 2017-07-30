@@ -46,7 +46,6 @@ export function signupUser(credentials) {
   }
 }
 
-
 export function logoutUser() {
   localStorage.removeItem('jwtToken');
   return { type: types.LOGOUT_USER }

@@ -17,6 +17,7 @@ import {
   Toggle,
 } from 'redux-form-material-ui';
 
+
 // validation functions
 const required = value => (value == null ? 'Required' : undefined);
 const email = value =>
@@ -24,20 +25,47 @@ const email = value =>
     ? 'Invalid email'
     : undefined);
 
+    const surveyFields = [
+      {
+        name: 'professionalism',
+        description: "Venue's responsiveness, honesty, and organization before, during and after event.",
+        label: "Professionalism",
+      },
+      {
+        name: 'ambiance',
+        description: "Venue's overall ambiance/vibe.",
+        label: "Ambiance",
+      },
+      {
+        name: 'crowd',
+        description: "Rate the crowd at the venue - engaged, active, there for the music?",
+        label: "Crowd",
+      },
+      {
+        name: 'sound',
+        description: "Acoustics in the venue and sound system setup and quality.",
+        label: "Sound and acoustics",
+      },
+      {
+        name: 'value',
+        description: "How were you paid compared to any issues or inconvenience with the venue.",
+        label: "Value",
+      },
+    ];
+
 class AddEventReviewForm extends Component {
-  constructor(props) {
-    super(props)
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     data: false,
+  //   };
+  // }
 
-    this.state = {
-      data: false,
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-      if (nextProps) {
-          this.setState({ data: true });
-      }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //     if (nextProps) {
+  //         this.setState({ data: true });
+  //     }
+  // }
   componentDidMount() {
     this.refs.venue // the Field
       .getRenderedComponent() // on Field, returns ReduxFormMaterialUITextField
@@ -47,6 +75,7 @@ class AddEventReviewForm extends Component {
 
   render() {
     const {onSubmit, handleSubmit, pristine, survey, reset, submitting} = this.props;
+    console.log("handleSubmit", JSON.stringify(handleSubmit));
     return (
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
@@ -80,37 +109,29 @@ class AddEventReviewForm extends Component {
           </Field>
         </div>
         <div>How would you rate the event on a scale of 1-10?</div>
-        {survey && <div>Crowd: {survey && survey.crowd}</div>}
-        <div>
-          <Field
-            name="survey.crowd"
-            component={Slider}
-            defaultValue={0}
-            format={null}
-            min={0}
-            max={10}
-            step={1}
-          />
-        </div>
-        {survey && <div>Acoustics: {survey.acoustics}</div>}
-        <div>
-          <Field
-            name="survey.acoustics"
-            component={Slider}
-            defaultValue={0}
-            format={null}
-            min={0}
-            max={10}
-            step={1}
-          />
-        </div>
-        <div>
+        {surveyFields.map( (item, index) => (
+          <div key={index}>
+            <label> {item.label} </label>
+            <Field
+              name={item.name}
+              floatingLabelText={item.description}
+              component={Slider}
+              defaultValue={0}
+              format={null}
+              min={0}
+              max={10}
+              step={1}
+            />
+          </div>
+        ))}
+
+          <div>
           <Field
             name="group"
             component={SelectField}
             hintText="Group"
             floatingLabelText="Group"
-          >
+            >
             <MenuItem value="alice@redux-pizza.com" primaryText="Alice" />
             <MenuItem value="bob@redux-pizza.com" primaryText="Bob" />
             <MenuItem value="carl@redux-pizza.com" primaryText="Carl" />
@@ -183,13 +204,8 @@ AddEventReviewForm = connect(state => ({
   survey: selector(state, 'survey'),
 }))(AddEventReviewForm);
 
-
 AddEventReviewForm = reduxForm({
   form: 'addEventReview',
-  initialValues: {
-    name: 'Jane Doe',
-    survey: {acoustics: 0, crowd: 0},
-  },
 })(AddEventReviewForm);
 
-export default AddEventReviewForm;
+ export default AddEventReviewForm;

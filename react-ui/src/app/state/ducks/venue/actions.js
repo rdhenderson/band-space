@@ -25,7 +25,7 @@ export function getVenueList() {
     axios.get(`${ROOT_URL}`)
     .then(
         ({ data }) => dispatch({ type: types.GET_VENUE_LIST_SUCCESS, payload: data }),
-        ({ response, message }) =>
+        ({ response, message }) => 
           dispatch({
             type: types.GET_VENUE_LIST_FAILURE,
             payload: (response) ? response.data : message

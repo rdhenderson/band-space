@@ -19,15 +19,16 @@ var userSchema = new Schema({
     ypos:  { type: Number, default: 0.5 },
     scale:  { type: Number, default: 1 },
     rotate: { type: Number, default: 0 },
+    // imageStyle is deprecated and should be removed.
     imageStyle: {
       type: String,
       default: "{}",
     }
   },
   images: [{ type: String, trim: true }],
-  bands: [{
+  groups: [{
     type: Schema.Types.ObjectId,
-    ref: 'Band',
+    ref: 'Group',
   }],
   venues:[{
     type: Schema.Types.ObjectId,
