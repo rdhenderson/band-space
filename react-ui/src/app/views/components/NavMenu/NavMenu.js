@@ -8,6 +8,7 @@ import Spinner from '../Spinner'
 const NavMenu = ({user, isAuth, handleLogout, isLoading, logoutUser}) => {
   if (isLoading) return <Spinner />
   return (
+
     <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
       {isAuth ? (
         <NavMenuAuth
@@ -15,10 +16,10 @@ const NavMenu = ({user, isAuth, handleLogout, isLoading, logoutUser}) => {
           logoutUser={logoutUser}
           profileImage={user.profile_image.img}
           profileImageStyle={{
-        width: `${180 * user.profile_image.scale}px`,
-        height: `${180 * user.profile_image.scale}px`,
-        "marginLeft": `${(user.profile_image.xpos * 100) - 150}%`,
-        "marginTop": `${(user.profile_image.ypos * 100) - 100}%`,
+        width: `${140 * user.profile_image.scale}px`,
+        height: `${140 * user.profile_image.scale}px`,
+        "marginLeft": `${(user.profile_image.xpos * 100) - 80}%`,
+        "marginTop": `${(user.profile_image.ypos * 100) - 80}%`,
         "transform": `rotate(${user.profile_image.rotate}deg)`
           }}
         />

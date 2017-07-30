@@ -3,10 +3,10 @@
 */
 function getImageStyle({ xpos, ypos, scale, rotate }){
   return {
-    width: `${180 * scale}px`,
-    height: `${180 * scale}px`,
-    // "marginLeft": `${(xpos * 100) - 150}%`,
-    // "marginTop": `${(ypos * 100) - 100}%`,
+    width: `${200 * scale}px`,
+    height: `${200 * scale}px`,
+    "marginLeft": `${(xpos * 100) - 50}%`,
+    "marginTop": `${(ypos * 100) - 50}%`,
     "transform": `rotate(${rotate}deg)`
   }
 }
