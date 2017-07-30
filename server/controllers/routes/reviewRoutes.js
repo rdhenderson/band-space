@@ -22,7 +22,7 @@ module.exports = function(app) {
     .then( (results) => res.send(results))
     .catch( (err) => res.send(err));
   });
-  
+
   // Get all reviews about an item
   app.get('/api/reviews/subject/:id', (req, res) => {
     Review.find({subject: req.params.id})
