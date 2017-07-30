@@ -96,10 +96,10 @@ export function addUserGroup(user, id) {
       }
     })
     .then(
-        ({ data }) => dispatch({ type: types.ADD_USER__GROUP_SUCCESS, payload: data }),
+        ({ data }) => dispatch({ type: types.ADD_USER_GROUP_SUCCESS, payload: data }),
         ({ response, message }) =>
           dispatch({
-            type: types.ADD_USER__GROUP_FAILURE,
+            type: types.ADD_USER_GROUP_FAILURE,
             payload: (response) ? response.data : message
           })
       );
