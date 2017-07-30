@@ -86,21 +86,13 @@ class CreateGroup extends Component {
   handleSubmit(values) {
     // event.preventDefault();
     const id = this.props.user.user._id
-    this.props.addUserGroup(values, id)
-    .then( (response) => {
-      if (!response.error) {
-        this.props.addUserGroupSuccess(response.payload);
-        // Get last band added to users band array
-        const bands = response.payload.data.bands
-        const bandId = bands[bands.length-1];
-        //redirect to band profile page
-        this.props.history.push(`/groups/${bandId}`)
-      } else {
-        this.props.addUserGroupFailure(response.payload);
-        // this.props.history.push(`/createband`)
+    this.props.addUserGroup(values, id);
+    // IF WE WANT A REDIRECT, will want to set it by looking at user's groups
+    // and redirecting on change.  Easier to redirect back to profile or
+    // to a page listing user's groups.  If you want the redirect, I can think
+    // of how to do it. 
 
-      }
-      // this.toggleAddGroup();
+
     });
   }
 
