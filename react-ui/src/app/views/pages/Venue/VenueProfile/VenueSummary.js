@@ -8,12 +8,17 @@ const VenueSummary = (props) => (
       {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
     </div>
     <div className="profile__topbody__right__sliders__sliderItem">
-      <h3> Musicality </h3>
+      <h3> Ambiance </h3>
       <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
       {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
     </div>
     <div className="profile__topbody__right__sliders__sliderItem">
-      <h3> Showmanship </h3>
+      <h3> Crowd </h3>
+      <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+      {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
+    </div>
+    <div className="profile__topbody__right__sliders__sliderItem">
+      <h3> Sound </h3>
       <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
       {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="/img/Fader.png" /> */}
     </div>

@@ -85,7 +85,7 @@ class PrivateProfile extends Component {
 
     if (this.props.isLoading)
       return (<Spinner />);
-  
+
     let user = this.props.user;
 
     return (
@@ -104,7 +104,7 @@ class PrivateProfile extends Component {
               <div id="bands">
                 <h3> Your Groups </h3>
                 <ul>
-                  {user.groups !== undefined &&
+                  {user && user.groups !== undefined &&
                     user.groups.map( (group, index) =>(
                     <Link key={group.id} to={`/groups/${group._id}`}>
                       <li>#{index+1}: {group.name} </li>

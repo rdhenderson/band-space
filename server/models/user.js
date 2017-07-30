@@ -19,6 +19,7 @@ var userSchema = new Schema({
     ypos:  { type: Number, default: 0.5 },
     scale:  { type: Number, default: 1 },
     rotate: { type: Number, default: 0 },
+    // imageStyle is deprecated and should be removed.
     imageStyle: {
       type: String,
       default: "{}",

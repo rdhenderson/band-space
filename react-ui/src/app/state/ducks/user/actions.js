@@ -81,3 +81,27 @@ export function addUser(user) {
       );
   }
 }
+
+export function addUserGroup(user, id) {
+  return dispatch => {
+    dispatch({type: types.ADD_USER_GROUP})
+    const token = localStorage.getItem('jwtToken');
+
+    axios({
+      method: 'put',
+      url: `${ROOT_URL}/${user._id}`,
+      data: user,
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(
+        ({ data }) => dispatch({ type: types.ADD_USER__GROUP_SUCCESS, payload: data }),
+        ({ response, message }) =>
+          dispatch({
+            type: types.ADD_USER__GROUP_FAILURE,
+            payload: (response) ? response.data : message
+          })
+      );
+  }
+}
