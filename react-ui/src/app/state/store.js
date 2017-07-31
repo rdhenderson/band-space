@@ -14,6 +14,8 @@ import promise from 'redux-promise';
 import ReduxThunk from 'redux-thunk'
 
 import reducer from './reducers';
+//Only set logger for dev environment, turn it off for heroku
+const middleware =
+  (process.env.HEROKU_ENV) ? applyMiddleware(promise, ReduxThunk) : applyMiddleware(promise, ReduxThunk, logger);
 
-const middleware = applyMiddleware(promise, ReduxThunk, logger);
 export default createStore(reducer, composeWithDevTools(middleware));

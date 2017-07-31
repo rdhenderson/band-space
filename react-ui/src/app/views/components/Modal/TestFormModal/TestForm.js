@@ -68,6 +68,16 @@ const TestForm = (props) => {
         </div>
       </div>
       <div>
+        <label>On an overall scale of meh (1) to Amazing!(5) how would you rate this venue?</label>
+        <div className="reviewModal__radio">
+          <label><Field name="rating" component="input" type="radio" value="1"/> 1</label>
+          <label><Field name="rating" component="input" type="radio" value="2"/> 2</label>
+          <label><Field name="rating" component="input" type="radio" value="3"/> 3</label>
+          <label><Field name="rating" component="input" type="radio" value="4"/> 4</label>
+          <label><Field name="rating" component="input" type="radio" value="5"/> 5</label>
+        </div>
+      </div>
+      <div>
         <label>Any other notes?</label>
         <div>
           <Field maxlength="50" className="reviewModal__textArea" name="notes" component="textarea"/>
