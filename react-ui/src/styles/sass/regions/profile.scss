@@ -185,8 +185,23 @@
 }
 
 .editProfile{
+  position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  text-align: center;
+  margin-top: 10px;
+
+  &__header > h1{
+    font-size: 40px;
+    margin-top: 10px;
+  }
+
+  &__button{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
 
   &__textarea{
     resize: none;
@@ -208,6 +223,10 @@
 
 .editProfPic:hover{
   filter: drop-shadow( 2px 2px 5px #000 );
+}
+
+#slidSkills{
+  padding-bottom: 20px;
 }
 /*
 ===================================
