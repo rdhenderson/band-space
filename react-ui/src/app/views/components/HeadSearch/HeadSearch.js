@@ -21,7 +21,6 @@ class HeadSearch extends Component {
   // }
 
   render(){
-    console.log("displayList", this.props.displayList);
     return(
       <div>
 
@@ -31,6 +30,7 @@ class HeadSearch extends Component {
               <option value="users">Users</option>
               <option value="venues">Venues</option>
               <option value="groups">Groups</option>
+              <option value="all">All</option>
             </select>
           </div>
           <div className="queryHeader__inputdiv">
