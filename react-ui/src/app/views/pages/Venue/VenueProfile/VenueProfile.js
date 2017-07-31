@@ -103,19 +103,18 @@ class VenueProfile extends Component {
         </div>
 
         <UserReview reviews={reviews} />
+        {venue &&
+          <div style={{display: "flex", justifyContent: "center"}} className="groupProfile__bottombody__botmain__right__header">
+            {/* <h1> Write a review? </h1> <img src="/img/edit.svg" onClick={() => this.props.showVenueReviewModal()} /> */}
+            <h1> Write a Review! for {venue.name} </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('TEST_FORM')} />
 
-        <div style={{display: "flex", justifyContent: "center"}} className="groupProfile__bottombody__botmain__right__header">
-          {/* <h1> Write a review? </h1> <img src="/img/edit.svg" onClick={() => this.props.showVenueReviewModal()} /> */}
-          {venue &&
-            <div>
-              <h1> Write a Review! for {venue.name} </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('TEST_FORM')} />
-            </div>
-          }
+
             {/* <h1> Add Event </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('ADD_EVENT')} /> */}
-          {/* <h1> Validation Form </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('VALIDATION_FORM')} /> */}
-          {/* <h1> Add Event Review </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('ADD_EVENT_REVIEW')} /> */}
-
-        </div>
+            {/* <h1> Validation Form </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('VALIDATION_FORM')} /> */}
+            {/* <h1> Add Event Review </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('ADD_EVENT_REVIEW')} /> */}
+            
+          </div>
+        }
       </div>
     )
   }
