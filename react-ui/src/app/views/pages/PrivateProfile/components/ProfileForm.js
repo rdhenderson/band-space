@@ -7,9 +7,9 @@ let ProfileForm = props => {
   return (
     <form className="editProfile" onSubmit={ handleSubmit }>
 
-        <div className="createGroup__body__left__header">
-          <h1> Tell Us About Yourself </h1>
-          <button className="normal-btn" onClick={this.toggleEdit}>Edit Profile</button>
+        <div className="editProfile__header">
+          <h1> Edit Your Information </h1>
+          <button className="normal-btn editProfile__button" onClick={this.toggleEdit}>Edit Profile</button>
         </div>
         <div className="editGroupFields">
           <Field

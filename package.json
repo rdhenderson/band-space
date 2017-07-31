@@ -32,9 +32,7 @@
     "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
     "passport-spotify": "^0.3.1",
-    "passport-twitter": "^1.0.4",
-    "react-datepicker": "^0.52.0",
-    "survey-react": "^0.12.20"
+    "passport-twitter": "^1.0.4"
   },
   "devDependencies": {},
   "scripts": {

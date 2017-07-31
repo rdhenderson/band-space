@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 
-import { Auth, Home, Gigs, Venue, User, Group, PrivateProfile } from './views/pages';
+import { Auth, Home, Gigs, Venue, User, Group, PrivateProfile, CreateGroup } from './views/pages';
 import { Main } from './views/layouts'
 import PrivateRoute from './views/components/PrivateRoute'
 
@@ -23,6 +23,7 @@ class App extends Component {
           <Route path="/users" component={User} />
           <Route path="/groups" component={Group} />
           <Route path="/profile" component={PrivateProfile} />
+          <Route path='/creategroup' component={CreateGroup} />
         </Main>
       </MuiThemeProvider>
     );

@@ -76,9 +76,9 @@ class VenueProfile extends Component {
 
           <div className="profile__topbody__right">
             <div style={{ paddingBottom: 20}} className="profile__topbody__right__sliders">
-              <button onClick={this.toggleEdit}>
+              {/* <button onClick={this.toggleEdit}>
                 {(!this.state.makeEdit) ? "Edit Profile" : "View Summary" }
-              </button>
+              </button> */}
               {this.state.makeEdit ? (
                 <VenueProfileEditArrays
                   onSubmit={this.handleSubmit}

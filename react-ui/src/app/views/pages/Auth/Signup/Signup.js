@@ -39,7 +39,7 @@ class Signup extends Component {
 
             <SignupForm onSubmit={this.handleSubmit} />
             <ThirdPartyAuth />
-            <Link to="/login"> <p>Already a member? Log in here </p></Link>
+            <Link to="/auth/login"> <p>Already a member? Log in here </p></Link>
           </div>
         </div>
         <div className="uSignup__right">
