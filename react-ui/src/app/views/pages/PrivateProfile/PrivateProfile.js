@@ -33,7 +33,9 @@ class PrivateProfile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps) {
+    if (nextProps && nextProps.isAuth && !this.props.isAuth) {
+      this.props.fetchUser(this.props.authId);
+    } else if (nextProps) {
       this.setState({ data: true });
     }
   }
@@ -85,7 +87,7 @@ class PrivateProfile extends Component {
       return <Redirect to="/auth/login" />
     }
 
-    if (this.props.isLoading)
+    if (this.props.isLoading || !this.props.user)
       return (<Spinner />);
 
     let user = this.props.user;
@@ -99,6 +101,7 @@ class PrivateProfile extends Component {
 
             <ImageDisplay
               type="user"
+              subject={this.props.subject}
             />
 
             <div className="profile__topbody__left__details">

@@ -8,7 +8,8 @@ const ROOT_URL = '/api/users';
 
 export function fetchUser(id) {
   return (dispatch, getState) => {
-    if (shouldUpdateUser(getState(), id)) {
+    const currState = getState();
+    if (shouldUpdateUser(currState, id)) {
       dispatch({type: types.GET_USER});
       axios.get(`${ROOT_URL}/${id}`)
       .then(
@@ -23,6 +24,9 @@ export function fetchUser(id) {
           payload: (response) ? response.data : message
         })
       )
+    // } else if (!currState.user.user || (currState.user.user._id !== id)) {
+    //     const currUser = getUserById(currState, id);
+    //     dispatch({ type: types.SET_CURR_USER, payload: addLastUpdated(currUser) })
     }
   }
 }
@@ -69,8 +73,8 @@ export function updateUser(user) {
           payload: (response) ? response.data : message
         })
       );
+    }
   }
-}
 
 export function addUser(user) {
   return dispatch => {
@@ -126,6 +130,9 @@ const shouldUpdateUser = (state, id) => {
   if (!user || isStale(user.lastUpdated))
     return true
 
+  if (!state.user.user || (state.user.user._id !== id))
+    return true
+
   if (state.user.loading)
     return false
   // return users.didInvalidate
@@ -134,13 +141,14 @@ const shouldUpdateUser = (state, id) => {
 
 const shouldUpdateUserList = (state, id) => {
   const list = getAllUsers(state);
-  if (!list || isStale(list.lastUpdated)) {
+  if (!list || isStale(list.lastUpdated))
     return true
-  }
-  if (state.user.loading) return false
-  // return users.didInvalidate
+
   return false;
 }
+
+  // if (state.user.loading) return false
+  // return users.didInvalidate
 
 // Check if last updated was more than 5 minutes ago
 const isStale = (lastUpdated) => {

@@ -28,6 +28,13 @@ export default function reducer(state = INITIAL_STATE, action){
       };
     case types.GET_USER_FAILURE:// return error and make loading = false
       return { ...state, error: action.payload, loading: false};
+    case types.SET_CURR_USER://return user, status = authenticated and make loading = false
+      return {
+        ...state,
+        user: action.payload,
+        error: null,
+        loading: false
+      };
     case types.GET_USER_LIST:
       return { ...state, error: null, loading: true};
     case types.GET_USER_LIST_SUCCESS:

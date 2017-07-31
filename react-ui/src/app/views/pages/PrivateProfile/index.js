@@ -12,7 +12,7 @@ function mapStateToProps(state) {
   const { getAuthUser, getAuthProfileImage } = userSelect;
 
   return {
-    user: getAuthUser(state),
+    user: state.user.user,
     profile_image: getAuthProfileImage(state),
     authId: state.auth.id,
     isAuth: state.auth.isAuth,
