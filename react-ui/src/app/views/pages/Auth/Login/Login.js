@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { Link, Redirect } from 'react-router-dom'
+import SVGInline from 'react-inlinesvg';
 
 // import components
 import LoginForm from './LoginForm.js'
 import { ThirdPartyAuth } from '../../../components'
-import GuitarFloat from '../GuitarFloat'
 
 class Login extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class Login extends Component {
           <Link to="/auth/signup"> <p>Not a member?  Sign Up here </p></Link>
         </div>
         <div className="uSignup__right">
-          <GuitarFloat />
+          <SVGInline src="/img/GuitarFloat.svg" />
         </div>
       </div>
     </div>

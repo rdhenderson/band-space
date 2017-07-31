@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import BandMemberValidate from './BandMemberValidate';
 import axios from 'axios'
-import helpers from '../helpers'
+// import helpers from '../helpers'
 
 const renderMembers = ({fields, meta: { touched, error } }) => {
   return (
@@ -74,27 +74,26 @@ class CreateGroup extends Component {
   }
 
   initializeMembers(){
-    const initData = {
-      members: [{
-        name: this.props.user.user.name,
-        email: this.props.user.user.email,
-      }]
-    };
-    this.props.initialize(initData);
+    // const initData = {
+    //   members: [{
+    //     name: this.props.user.user.name,
+    //     email: this.props.user.user.email,
+    //   }]
+    // };
+    // this.props.initialize(initData);
   }
 
   handleSubmit(values) {
     // event.preventDefault();
-    const id = this.props.user.user._id
-    this.props.addUserGroup(values, id);
+    // const id = this.props.user.user._id
+    // this.props.addUserGroup(values, id);
     // IF WE WANT A REDIRECT, will want to set it by looking at user's groups
     // and redirecting on change.  Easier to redirect back to profile or
     // to a page listing user's groups.  If you want the redirect, I can think
-    // of how to do it. 
+    // of how to do it.
 
 
-    });
-  }
+    }
 
   componentDidMount(){
 
