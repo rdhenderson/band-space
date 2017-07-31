@@ -33,7 +33,7 @@ class PrivateProfile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps && nextProps.isAuth && !this.props.isAuth) {
+    if (nextProps && nextProps.user && !this.props.isAuth) {
       this.props.fetchUser(this.props.authId);
     } else if (nextProps) {
       this.setState({ data: true });
@@ -68,7 +68,8 @@ class PrivateProfile extends Component {
   }
 
   toggleAddGroup(){
-    this.setState({isAddGroup: !this.state.isAddGroup});
+    const newState = { makeEdit: !this.state.isAddGroup }
+    this.setState(newState);
   }
   toggleEdit(){
     const newState = { makeEdit: !this.state.makeEdit }

@@ -22,6 +22,7 @@ class GroupProfile extends Component {
     };
 
     this.writeReview = this.writeReview.bind(this);
+    this.handleGroupUpdate = this.handleGroupUpdate.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -35,6 +36,9 @@ class GroupProfile extends Component {
     this.props.getGroup(groupId);
   }
 
+  handleGroupUpdate(update) {
+
+  }
   writeReview(){
     const newState = { activeReview: !this.state.activeReview }
     this.setState(newState);
@@ -46,7 +50,7 @@ class GroupProfile extends Component {
     if (this.props.error === true) return (<h1> "Error!"</h1>);
 
     const { group } = this.props;
-    const reviews = group.reviews ||  sampleReviews;
+    const reviews = (group && group.reviews) ? group.reviews : sampleReviews;
 
     return (
 
@@ -59,27 +63,27 @@ class GroupProfile extends Component {
               <div>
                 <div className="profile__topbody__left__profblock__imgdiv">
                   <div>
-                    <ImageDisplay onSave={this.handleGroupUpdate.bind(this)} />
+                    <ImageDisplay
+                      subject={this.props.group}
+                      type="group"
+                    />
 
-                    {/* {(group.profile_image && group.profile_image.img) &&
-                      <img className="profile__topbody__left__profblock__imgdiv__pic"
-                        src={group.profile_image.img}
-                        style={getImageStyle(group.profile_image)}
-                      />
-                    } */}
                   </div>
                 </div>
-                <div className="profile__topbody__left__profblock__proftext">
-                  <h1 style={{"fontSize" : 50}}> {group.name} </h1>
-                  <h3 style={{"fontSize" : 20}}> {group.description} </h3>
-                </div>
+                {group &&
+                  <div className="profile__topbody__left__profblock__proftext">
+                    <h1 style={{"fontSize" : 50}}> {group.name} </h1>
+                    <h3 style={{"fontSize" : 20}}> {group.description} </h3>
+                  </div>
+                }
               </div>
               }
             </div>
-
-            <h1>{group.name} </h1>
+            {group &&
+              <h1>{group.name} </h1>
+            }
             <div className="profile__topbody__left__details">
-              {group.members !== undefined && (
+              {group && group.members !== undefined && (
                 <div>
                   <h3> Group Members </h3>
                   <ul>
@@ -103,7 +107,7 @@ class GroupProfile extends Component {
 
         <div style={{display: "flex", justifyContent: "center"}} className="groupProfile__bottombody__botmain__right__header">
           <h1> Write a review? </h1> <img src="/img/edit.svg" onClick={this.writeReview} />
-          {(this.state.activeReview)  &&
+          {(this.state.activeReview)  && group &&
             <AddReview
               reviewType='group_id'
               reviewSub={group._id}

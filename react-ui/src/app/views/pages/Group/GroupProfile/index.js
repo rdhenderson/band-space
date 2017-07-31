@@ -7,9 +7,8 @@ import GroupProfile from './GroupProfile';
 
 function mapStateToProps(state) {
   return {
-    user: state.group.user,
     isLoading: state.group.loading,
-
+    group: state.group.group,
     error: state.group.error,
     isAuth: state.auth.isAuth,
     currentUser: state.auth.user

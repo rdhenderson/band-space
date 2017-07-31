@@ -61,7 +61,7 @@ class ImageEditor extends Component{
     };
       // Send entire object back, with updated profile_image field
     this.props.onSave({...this.props.subject, profile_image });
-    // fthis.props.toggleEdit();
+    this.props.toggleEdit();
   }
 
   componentWillMount(){

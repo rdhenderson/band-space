@@ -36,7 +36,10 @@ class ImageDisplay extends Component {
       venue: this.props.updateVenue,
       group: this.props.updateGroup,
     }
+    console.log("Type: ", this.props.type);
     saveSelect[this.props.type](update);
+    this.toggleEdit = this.toggleEdit.bind(this)
+
   }
 
   render(){
@@ -51,7 +54,6 @@ class ImageDisplay extends Component {
 
     return (
       <div className="profile__topbody__left__profblock">
-        {subject.lastUpdated}
         {(this.state.editActive) ? (
           <ImageEditor
             onSave={this.handleSave}
@@ -76,7 +78,8 @@ class ImageDisplay extends Component {
               <h3 style={{"fontSize" : 20}}> Guitarist/Singer </h3>
             </div>
             <div onClick={this.toggleEdit}>
-            <SVGInline className="editProfPic" src="img/edit.svg" />
+              <button> "Edit Picture"</button>
+              <SVGInline className="editProfPic" src="/img/edit.svg" />
             </div>
           </div>
           )}
