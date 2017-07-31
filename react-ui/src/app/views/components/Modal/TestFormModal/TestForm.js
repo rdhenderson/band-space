@@ -4,58 +4,78 @@ import { Field, reduxForm } from 'redux-form'
 const TestForm = (props) => {
   const { handleSubmit, onSubmit, pristine, reset, submitting } = props
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="reviewModal" onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label>First Name</label>
+        <label>Name of the Event</label>
         <div>
-          <Field name="firstName" component="input" type="text" placeholder="First Name"/>
+          <Field className="reviewModal__input" name="eventName" component="input" type="text"/>
         </div>
       </div>
       <div>
-        <label>Last Name</label>
+        <label>Date of the Event</label>
         <div>
-          <Field name="lastName" component="input" type="text" placeholder="Last Name"/>
+          <Field placeholder="mm/dd/yy" className="reviewModal__input" name="eventDate" component="input" type="text"/>
+        </div>
+      </div>
+      <div style={{marginTop: "10px"}}>
+        <label>Professionalism</label>
+        <div className="reviewModal__radio">
+          <label><Field name="eventProfessionalism" component="input" type="radio" value="1"/> 1</label>
+          <label><Field name="eventProfessionalism" component="input" type="radio" value="2"/> 2</label>
+          <label><Field name="eventProfessionalism" component="input" type="radio" value="3"/> 3</label>
+          <label><Field name="eventProfessionalism" component="input" type="radio" value="4"/> 4</label>
+          <label><Field name="eventProfessionalism" component="input" type="radio" value="5"/> 5</label>
         </div>
       </div>
       <div>
-        <label>Email</label>
-        <div>
-          <Field name="email" component="input" type="email" placeholder="Email"/>
+        <label>Ambiance</label>
+        <div className="reviewModal__radio">
+          <label><Field name="eventAmbiance" component="input" type="radio" value="1"/> 1</label>
+          <label><Field name="eventAmbiance" component="input" type="radio" value="2"/> 2</label>
+          <label><Field name="eventAmbiance" component="input" type="radio" value="3"/> 3</label>
+          <label><Field name="eventAmbiance" component="input" type="radio" value="4"/> 4</label>
+          <label><Field name="eventAmbiance" component="input" type="radio" value="5"/> 5</label>
         </div>
       </div>
       <div>
-        <label>Sex</label>
-        <div>
-          <label><Field name="sex" component="input" type="radio" value="male"/> Male</label>
-          <label><Field name="sex" component="input" type="radio" value="female"/> Female</label>
+        <label>Crowd</label>
+        <div className="reviewModal__radio">
+          <label><Field name="eventCrowd" component="input" type="radio" value="1"/> 1</label>
+          <label><Field name="eventCrowd" component="input" type="radio" value="2"/> 2</label>
+          <label><Field name="eventCrowd" component="input" type="radio" value="3"/> 3</label>
+          <label><Field name="eventCrowd" component="input" type="radio" value="4"/> 4</label>
+          <label><Field name="eventCrowd" component="input" type="radio" value="5"/> 5</label>
         </div>
       </div>
       <div>
-        <label>Favorite Color</label>
-        <div>
-          <Field name="favoriteColor" component="select">
-            <option></option>
-            <option value="ff0000">Red</option>
-            <option value="00ff00">Green</option>
-            <option value="0000ff">Blue</option>
-          </Field>
+        <label>Sound</label>
+        <div className="reviewModal__radio">
+          <label><Field name="eventSound" component="input" type="radio" value="1"/> 1</label>
+          <label><Field name="eventSound" component="input" type="radio" value="2"/> 2</label>
+          <label><Field name="eventSound" component="input" type="radio" value="3"/> 3</label>
+          <label><Field name="eventSound" component="input" type="radio" value="4"/> 4</label>
+          <label><Field name="eventSound" component="input" type="radio" value="5"/> 5</label>
         </div>
       </div>
       <div>
-        <label htmlFor="employed">Employed</label>
-        <div>
-          <Field name="employed" id="employed" component="input" type="checkbox"/>
+        <label>Value</label>
+        <div className="reviewModal__radio">
+          <label><Field name="eventValue" component="input" type="radio" value="1"/> 1</label>
+          <label><Field name="eventValue" component="input" type="radio" value="2"/> 2</label>
+          <label><Field name="eventValue" component="input" type="radio" value="3"/> 3</label>
+          <label><Field name="eventValue" component="input" type="radio" value="4"/> 4</label>
+          <label><Field name="eventValue" component="input" type="radio" value="5"/> 5</label>
         </div>
       </div>
       <div>
-        <label>Notes</label>
+        <label>Any other notes?</label>
         <div>
-          <Field name="notes" component="textarea"/>
+          <Field maxlength="50" className="reviewModal__textArea" name="notes" component="textarea"/>
         </div>
       </div>
       <div>
-        <button type="submit" disabled={pristine || submitting}>Submit</button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+        <button className="normal-btn" type="submit" disabled={pristine || submitting}>Submit</button>
+        <button className="normal-btn" type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
       </div>
     </form>
   )

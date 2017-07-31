@@ -153,6 +153,37 @@ main{
   box-shadow: -1px 2px 3px 0px black;
 }
 
+.reviewModal{
+  width: 100%;
+
+  &__input{
+    width: 100%;
+    max-width: 400px;
+    height: 40px;
+    line-height: 40px;
+    font-size: calc(2vw + 2vh);;
+  }
+
+  &__radio{
+    // margin-bottom: 20px;
+  }
+
+  &__textArea{
+    width: 90%;
+    height: 100px;
+    margin-top: 10px;
+    resize: none;
+    line-height: 25px;
+    font-size: 25px;
+  }
+}
+
+input[type='radio'] {
+    transform: scale(2);
+    margin: 15px;
+}
+
+
 /*
 ===================================
     MEDIA QUERIES

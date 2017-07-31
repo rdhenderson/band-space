@@ -61,6 +61,7 @@ class PrivateProfile extends Component {
     }
     console.log("New Group", newGroup);
     this.props.addUserGroup(newGroup, user._id);
+    this.setState({isAddGroup: false});
   }
 
   toggleAddGroup(){
@@ -124,43 +125,54 @@ class PrivateProfile extends Component {
 
           <div className="profile__topbody__right">
 
-            <div className="profile__topbody__right__sliders">
-              <div id="Header">
-                <h1 id="skillheader"> Skills </h1>
+
+              {this.state.makeEdit ? (
+                <div className="profile__topbody__right__sliders">
+                  <ProfileForm user={user} onSubmit={this.handleUserUpdate} toggleEdit={this.toggleEdit}/>
+                </div>
+              )
+              :
+              (
+              <div className="profile__topbody__right__sliders">
+                <div id="Header">
+                  <h1 id="skillheader"> Skills </h1>
+                </div>
+                <div id="slidSkills">
+                  <button className="normal-btn" onClick={this.toggleEdit}>Edit Profile</button>
+                  <div className="profile__topbody__right__sliders__sliderItem">
+                    <h3> Professionalism </h3>
+                    <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                    {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" /> */}
+                  </div>
+                  <div className="profile__topbody__right__sliders__sliderItem">
+                    <h3> Musicality </h3>
+                    <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                    {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" /> */}
+                  </div>
+                  <div className="profile__topbody__right__sliders__sliderItem">
+                    <h3> Showmanship </h3>
+                    <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                    {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" /> */}
+                  </div>
+                  <div className="profile__topbody__right__sliders__sliderItem">
+                    <h3> Value </h3>
+                    <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
+                    {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" /> */}
+                  </div>
+                </div>
               </div>
-              <div id="slidSkills">
-                <div className="profile__topbody__right__sliders__sliderItem">
-                  <h3> Professionalism </h3>
-                  <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
-                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" /> */}
-                </div>
-                <div className="profile__topbody__right__sliders__sliderItem">
-                  <h3> Musicality </h3>
-                  <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
-                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" /> */}
-                </div>
-                <div className="profile__topbody__right__sliders__sliderItem">
-                  <h3> Showmanship </h3>
-                  <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
-                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" /> */}
-                </div>
-                <div className="profile__topbody__right__sliders__sliderItem">
-                  <h3> Value </h3>
-                  <h3 style={{'fontSize': 50 }}> {Math.floor(Math.random() * 50)/10} </h3>
-                  {/* <img className="profile__topbody__right__sliders__sliderItem__slider" src="./img/Fader.png" /> */}
-                </div>
-              </div>
-            </div>
+            )}
+
 
           </div>
 
         </div>
         <UserReview reviews={sampleReviews} />
 
-        <button className="normal-btn" onClick={this.toggleEdit}>Edit Profile</button>
-        {this.state.makeEdit && (
+        {/* <button className="normal-btn" onClick={this.toggleEdit}>Edit Profile</button> */}
+        {/* {this.state.makeEdit && (
           <ProfileForm user={user} onSubmit={this.handleUserUpdate}/>
-        )}
+        )} */}
         {/* <button className="normal-btn" onClick={this.toggleConnect}>Connect Services</button>
           {this.state.showConnect && (
           <ThirdPartyAuth connect={true} />

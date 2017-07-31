@@ -15,11 +15,11 @@ import AddVenueReview from './AddVenueReview'
 
 const MODAL_COMPONENTS = {
   'TEST_FORM' : TestFormModal,
-  'VALIDATION_FORM' : ValidationFormModal,
-  'MATERIAL_FORM' : MaterialFormModal,
-  'ADD_VENUE_REVIEW': AddVenueReview,
-  'ADD_EVENT_REVIEW' : AddEventReview,
-  'ADD_EVENT' : AddEvent,
+  // 'VALIDATION_FORM' : ValidationFormModal,
+  // 'MATERIAL_FORM' : MaterialFormModal,
+  // 'ADD_VENUE_REVIEW': AddVenueReview,
+  // 'ADD_EVENT_REVIEW' : AddEventReview,
+  // 'ADD_EVENT' : AddEvent,
     /* other modals */
 }
 
@@ -31,7 +31,7 @@ const ModalRoot = ({ modalType, modalProps }) => {
     return null; // <span /> // after React v15 you can return null here
   }
   const SpecificModal = (MODAL_COMPONENTS[modalType])
-  return <AddEventReview {...modalProps} />
+  return <TestFormModal {...modalProps} />
 }
 
 export default connect(

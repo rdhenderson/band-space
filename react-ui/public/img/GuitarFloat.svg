@@ -1,15 +1,3 @@
-import React, { Component } from 'react';
-
-class GuitarFloat extends Component{
-
-  constructor(props) {
-    super(props)
-  }
-
-  render(){
-
-    return(
-
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="470 300 1200 1400">
 	<g id="Layer_1">
 		<rect display="none" fill="#58D0C5" width="2000" height="2000" />
@@ -541,9 +529,3 @@ class GuitarFloat extends Component{
 		</g>
 	</g>
 </svg>
-
-)
-}
-}
-
-export default GuitarFloat
