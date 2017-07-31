@@ -37,7 +37,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.props.getVenueList();
-    this.props.getUserList();
+    this.props.fetchUserList();
     this.props.getGroupList();
   }
 

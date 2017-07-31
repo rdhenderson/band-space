@@ -3,17 +3,18 @@ import { bindActionCreators } from 'redux';
 
 import { actions as authActions } from '../../../state/ducks/auth'
 import { actions as venueActions } from '../../../state/ducks/venue'
-import { actions as userActions } from '../../../state/ducks/user'
+import { actions as userActions, selectors as userSelectors } from '../../../state/ducks/user'
 import { actions as groupActions } from '../../../state/ducks/group'
-
 import Home from './Home'
+
+const { getAuthUser, getAllUsers } = userSelectors;
 
 function mapStateToProps(state) {
   return {
-    	user: state.auth.user,
+    	user: getAuthUser(state),
       isAuth: state.auth.isAuth,
       venues: state.venue.venueList,
-      users: state.user.userList,
+      users: getAllUsers(state),
       groups: state.group.groupList,
       isLoading: state.venue.loading || state.group.loading || state.user.loading,
     };

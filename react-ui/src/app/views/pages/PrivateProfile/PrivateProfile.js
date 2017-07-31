@@ -40,8 +40,9 @@ class PrivateProfile extends Component {
 
   componentDidMount() {
     if (this.props.isAuth) {
-      this.props.getUser(this.props.currUser._id);
+      this.props.fetchUser(this.props.authId);
     }
+    //if (this.props.user) this.setState({data:true})
   }
   // FIXME: Need a better location for this information
   // Need to confirm that user isn't already in members.
@@ -49,7 +50,7 @@ class PrivateProfile extends Component {
     // event.preventDefault();
     const user = this.props.user;
     const userMember = {
-      user_id: [user._id],
+      user_id: this.props.authId,
       name: user.name,
       email: user.email
     };
@@ -97,7 +98,6 @@ class PrivateProfile extends Component {
 
             <ImageDisplay
               type="user"
-              subject={this.props.user}
             />
 
             <div className="profile__topbody__left__details">

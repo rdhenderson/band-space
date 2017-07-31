@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ErrorMessage from '../ErrorMessage'
 // import {updateUser, updateGroup} from '../helpers/index.js'
+import { connect } from "react-redux";
 
 class ImageEditor extends Component{
   constructor(props){
@@ -51,7 +52,6 @@ class ImageEditor extends Component{
   }
 
   savePicture = (e) => {
-    e.preventDefault()
     const profile_image = {
       img: this.state.img,
       scale: this.state.scale,
@@ -142,4 +142,4 @@ class ImageEditor extends Component{
   }
 }
 
-export default ImageEditor;
+export default connect((state) => state)(ImageEditor);

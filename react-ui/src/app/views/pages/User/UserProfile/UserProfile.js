@@ -30,7 +30,7 @@ class UserProfile extends Component {
 
   componentDidMount() {
     const userId = this.props.match.params.id;
-    this.props.getUser(userId);
+    this.props.fetchUser(userId);
   }
 
   writeReview(){
