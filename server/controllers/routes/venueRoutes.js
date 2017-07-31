@@ -46,9 +46,10 @@ module.exports = function(app) {
   });
 
   app.put('/api/venues/:id', isAuthenticated, (req, res) => {
+    console.log("Hit route");
     const options = { upsert: true, new: true };
     const query = { _id: req.params.id };
-    Venue.findOneAndUpdate(query, req.body.venue, options, (err, venue) => {
+    Venue.findOneAndUpdate(query, req.body, options, (err, venue) => {
       if (err) {
         console.log("ERROR", err);
         res.json(err);
