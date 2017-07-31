@@ -101,7 +101,7 @@ class PrivateProfile extends Component {
 
             <ImageDisplay
               type="user"
-              subject={this.props.subject}
+              subject={this.props.user}
             />
 
             <div className="profile__topbody__left__details">

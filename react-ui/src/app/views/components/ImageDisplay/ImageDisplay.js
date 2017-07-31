@@ -25,8 +25,7 @@ class ImageDisplay extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log("Receiving props", nextProps.subject);
-    if (nextProps.currUser !== null) {
+    if (nextProps.subject !== null) {
       this.setState({data:true});
     }
   }

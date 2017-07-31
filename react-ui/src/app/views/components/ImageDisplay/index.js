@@ -11,14 +11,11 @@ const { getAuthUser } = userSelectors;
 
 function mapStateToProps(state, {type, subject_id}) {
   return {
-    state,
     isAuth: state.auth.isAuth,
     currUser: state.auth.user,
-    user: state.user.user,
     userList: state.user.userList,
     error: state.user.error,
     isLoading: state.user.loading,
-    subject: getAuthUser(state)
   };
 }
 

@@ -13,7 +13,6 @@ function mapStateToProps(state) {
 
   return {
     user: state.user.user,
-    profile_image: getAuthProfileImage(state),
     authId: state.auth.id,
     isAuth: state.auth.isAuth,
     error: state.auth.error,
