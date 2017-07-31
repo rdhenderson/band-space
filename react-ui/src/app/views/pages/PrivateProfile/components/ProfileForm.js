@@ -3,15 +3,13 @@ import { Field, reduxForm } from 'redux-form'
 
 let ProfileForm = props => {
   const { handleSubmit } = props
+
   return (
-  <div className="createGroup">
-    <div className="createGroup__header">
-      <h1> Time to Rock the World </h1>
-    </div>
     <form className="editProfile" onSubmit={ handleSubmit }>
-      <div className="createGroup__body__left">
+
         <div className="createGroup__body__left__header">
           <h1> Tell Us About Yourself </h1>
+          <button className="normal-btn" onClick={this.toggleEdit}>Edit Profile</button>
         </div>
         <div className="editGroupFields">
           <Field
@@ -38,11 +36,7 @@ let ProfileForm = props => {
           <button className="normal-btn " type="submit">Submit</button>
         </div>
         <br/>
-
-      </div>
-
     </form>
-  </div>
 )};
 
 ProfileForm = reduxForm({

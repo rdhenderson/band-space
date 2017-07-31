@@ -22,16 +22,17 @@ const ResultsList = ({searchType, items, clickHandler}) => {
         <h2> {`${titleCaseSearchType} in Washington D.C.`} </h2>
       </div>
       <div className="mreview__body">
-        <Infinite className="mreview__body__container" containerHeight={550} width={'100%'} elementHeight={200}>
+        <Infinite className="mreview__body__container" containerHeight={550} width={'100%'} elementHeight={200} elementWidth={'100%'}>
 
           {items.map( (item, index) => (
             <DisplayItem
               key={item._id}
               item={item}
+
             />
           ))
           }
-          
+
         </Infinite>
       </div>
     </div>

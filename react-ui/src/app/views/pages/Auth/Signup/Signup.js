@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import SVGInline from 'react-inlinesvg';
 
 import { Link, Redirect } from 'react-router-dom'
 
+
 import SignupForm from './SignupForm'
 import { ThirdPartyAuth } from '../../../components'
-import GuitarFloat from '../GuitarFloat'
 
 class Signup extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class Signup extends Component {
           </div>
         </div>
         <div className="uSignup__right">
-          <GuitarFloat />
+          <SVGInline src="/img/GuitarFloat.svg" />
         </div>
       </div>
     </div>
