@@ -82,13 +82,17 @@ export function updateVenue(venue) {
 }
 
 export function addVenueReview(review) {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const state = getState();
+    const reviewMeta = { author: state.auth.id, subject: state.venue.venue._id}
+    const newReview = { ...review, ...reviewMeta };
+    console.log("New Review", newReview);
     dispatch({type: types.ADD_VENUE_REVIEW})
     const token = localStorage.getItem('jwtToken');
     axios({
       method: 'post',
       url: `/api/reviews/venues/`,
-      data: review,
+      data: newReview,
       headers: {
         'Authorization': `Bearer ${token}`
       }

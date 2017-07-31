@@ -10,11 +10,11 @@ import MaterialFormModal from './MaterialFormModal'
 
 import AddEvent from './AddEvent'
 import AddEventReview from './AddEventReview'
-import AddVenueReview from './AddVenueReview'
+// import AddVenueReview from './AddVenueReview'
 
 
 const MODAL_COMPONENTS = {
-  'TEST_FORM' : TestFormModal,
+  'ADD_VENUE_REVIEW' : TestFormModal,
   // 'VALIDATION_FORM' : ValidationFormModal,
   // 'MATERIAL_FORM' : MaterialFormModal,
   // 'ADD_VENUE_REVIEW': AddVenueReview,

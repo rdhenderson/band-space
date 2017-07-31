@@ -17,7 +17,7 @@ module.exports = function(app) {
   });
 
   // Get all reviews authored by a user
-  app.get('/api/reviews/users/:id/author', (req, res) => {
+  app.get('/api/reviews/author/:id', (req, res) => {
     Review.find({author: req.params.id})
     .then( (results) => res.send(results))
     .catch( (err) => res.send(err));
@@ -58,7 +58,7 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/api/reviews/users/', (req, res) => {
+  app.post('/api/reviews/group/', (req, res) => {
     Review.create(req.body, (err, review) => {
       const update = {$push: {"reviews": review._id}};
       const options = {new : true};
@@ -71,6 +71,7 @@ module.exports = function(app) {
       .catch( (err) => res.send(err));
     });
   });
+  
   //TODO: CONFIRM THAT UPDATE PROPERLY AFFECTS ARRAYS
   app.put('/api/reviews/:id', isAuthenticated, (req, res) => {
     const options = { upsert: true, new: true };

@@ -99,18 +99,19 @@ class UserProfile extends Component {
           } */}
         </div>
         <UserReview reviews={reviews} />
-
-        <div style={{display: "flex", justifyContent: "center"}} className="groupProfile__bottombody__botmain__right__header">
-          <h1> Write a review? </h1> <img src="/img/edit.svg" onClick={this.writeReview} />
-          {(this.state.activeReview)  &&
-            <AddReview
-              reviewType='venue_id'
-              reviewSub={user._id}
-              toggleEdit={this.writeReview}
-              author={this.props.currentUser}
-            />
-          }
-        </div>
+        {this.props.isAuth &&
+          <div style={{display: "flex", justifyContent: "center"}} className="groupProfile__bottombody__botmain__right__header">
+            <h1> Write a review? </h1> <img src="/img/edit.svg" onClick={this.writeReview} />
+            {(this.state.activeReview)  &&
+              <AddReview
+                reviewType='venue_id'
+                reviewSub={user._id}
+                toggleEdit={this.writeReview}
+                author={this.props.currentUser}
+              />
+            }
+          </div>
+        }
       </div>
     )
   }

@@ -8,63 +8,63 @@ const TestForm = (props) => {
       <div>
         <label>Name of the Event</label>
         <div>
-          <Field className="reviewModal__input" name="eventName" component="input" type="text"/>
+          <Field className="reviewModal__input" name="name" component="input" type="text"/>
         </div>
       </div>
       <div>
         <label>Date of the Event</label>
         <div>
-          <Field placeholder="mm/dd/yy" className="reviewModal__input" name="eventDate" component="input" type="text"/>
+          <Field placeholder="mm/dd/yy" className="reviewModal__input" name="date" component="input" type="text"/>
         </div>
       </div>
       <div style={{marginTop: "10px"}}>
         <label>Professionalism</label>
         <div className="reviewModal__radio">
-          <label><Field name="eventProfessionalism" component="input" type="radio" value="1"/> 1</label>
-          <label><Field name="eventProfessionalism" component="input" type="radio" value="2"/> 2</label>
-          <label><Field name="eventProfessionalism" component="input" type="radio" value="3"/> 3</label>
-          <label><Field name="eventProfessionalism" component="input" type="radio" value="4"/> 4</label>
-          <label><Field name="eventProfessionalism" component="input" type="radio" value="5"/> 5</label>
+          <label><Field name="survey.professionalism" component="input" type="radio" value="1"/> 1</label>
+          <label><Field name="survey.professionalism" component="input" type="radio" value="2"/> 2</label>
+          <label><Field name="survey.professionalism" component="input" type="radio" value="3"/> 3</label>
+          <label><Field name="survey.professionalism" component="input" type="radio" value="4"/> 4</label>
+          <label><Field name="survey.professionalism" component="input" type="radio" value="5"/> 5</label>
         </div>
       </div>
       <div>
         <label>Ambiance</label>
         <div className="reviewModal__radio">
-          <label><Field name="eventAmbiance" component="input" type="radio" value="1"/> 1</label>
-          <label><Field name="eventAmbiance" component="input" type="radio" value="2"/> 2</label>
-          <label><Field name="eventAmbiance" component="input" type="radio" value="3"/> 3</label>
-          <label><Field name="eventAmbiance" component="input" type="radio" value="4"/> 4</label>
-          <label><Field name="eventAmbiance" component="input" type="radio" value="5"/> 5</label>
+          <label><Field name="survey.ambiance" component="input" type="radio" value="1"/> 1</label>
+          <label><Field name="survey.ambiance" component="input" type="radio" value="2"/> 2</label>
+          <label><Field name="survey.ambiance" component="input" type="radio" value="3"/> 3</label>
+          <label><Field name="survey.ambiance" component="input" type="radio" value="4"/> 4</label>
+          <label><Field name="survey.ambiance" component="input" type="radio" value="5"/> 5</label>
         </div>
       </div>
       <div>
         <label>Crowd</label>
         <div className="reviewModal__radio">
-          <label><Field name="eventCrowd" component="input" type="radio" value="1"/> 1</label>
-          <label><Field name="eventCrowd" component="input" type="radio" value="2"/> 2</label>
-          <label><Field name="eventCrowd" component="input" type="radio" value="3"/> 3</label>
-          <label><Field name="eventCrowd" component="input" type="radio" value="4"/> 4</label>
-          <label><Field name="eventCrowd" component="input" type="radio" value="5"/> 5</label>
+          <label><Field name="survey.crowd" component="input" type="radio" value="1"/> 1</label>
+          <label><Field name="survey.crowd" component="input" type="radio" value="2"/> 2</label>
+          <label><Field name="survey.crowd" component="input" type="radio" value="3"/> 3</label>
+          <label><Field name="survey.crowd" component="input" type="radio" value="4"/> 4</label>
+          <label><Field name="survey.crowd" component="input" type="radio" value="5"/> 5</label>
         </div>
       </div>
       <div>
         <label>Sound</label>
         <div className="reviewModal__radio">
-          <label><Field name="eventSound" component="input" type="radio" value="1"/> 1</label>
-          <label><Field name="eventSound" component="input" type="radio" value="2"/> 2</label>
-          <label><Field name="eventSound" component="input" type="radio" value="3"/> 3</label>
-          <label><Field name="eventSound" component="input" type="radio" value="4"/> 4</label>
-          <label><Field name="eventSound" component="input" type="radio" value="5"/> 5</label>
+          <label><Field name="survey.sound" component="input" type="radio" value="1"/> 1</label>
+          <label><Field name="survey.sound" component="input" type="radio" value="2"/> 2</label>
+          <label><Field name="survey.sound" component="input" type="radio" value="3"/> 3</label>
+          <label><Field name="survey.sound" component="input" type="radio" value="4"/> 4</label>
+          <label><Field name="survey.sound" component="input" type="radio" value="5"/> 5</label>
         </div>
       </div>
       <div>
         <label>Value</label>
         <div className="reviewModal__radio">
-          <label><Field name="eventValue" component="input" type="radio" value="1"/> 1</label>
-          <label><Field name="eventValue" component="input" type="radio" value="2"/> 2</label>
-          <label><Field name="eventValue" component="input" type="radio" value="3"/> 3</label>
-          <label><Field name="eventValue" component="input" type="radio" value="4"/> 4</label>
-          <label><Field name="eventValue" component="input" type="radio" value="5"/> 5</label>
+          <label><Field name="survey.value" component="input" type="radio" value="1"/> 1</label>
+          <label><Field name="survey.value" component="input" type="radio" value="2"/> 2</label>
+          <label><Field name="survey.value" component="input" type="radio" value="3"/> 3</label>
+          <label><Field name="survey.value" component="input" type="radio" value="4"/> 4</label>
+          <label><Field name="survey.value" component="input" type="radio" value="5"/> 5</label>
         </div>
       </div>
       <div>

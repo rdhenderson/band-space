@@ -47,14 +47,14 @@ class ImageDisplay extends Component {
       console.log("error", this.props.error);
       return <ErrorMessage message={this.props.error} onRetry={()=>console.log('Sorry')} />
     }
-    if (this.props.isLoading || !this.props.subject) return (<Spinner />);
+    if (this.props.isLoading || !this.props.subject || !this.props.subject.profile_image) return (<Spinner />);
 
     const { subject } = this.props;
     const { profile_image } = subject;
 
     return (
       <div className="profile__topbody__left__profblock">
-        {(this.state.editActive) ? (
+        {(this.state.editActive && this.props.isAuth) ? (
           <ImageEditor
             onSave={this.handleSave}
             subject={subject}
@@ -77,10 +77,11 @@ class ImageDisplay extends Component {
               <h1 style={{"fontSize" : 50}}> {subject.name}</h1>
               <h3 style={{"fontSize" : 20}}> Guitarist/Singer </h3>
             </div>
-            <div onClick={this.toggleEdit}>
-              <button> "Edit Picture"</button>
-              <SVGInline className="editProfPic" src="/img/edit.svg" />
-            </div>
+            { this.props.isAuth &&
+              <div onClick={this.toggleEdit}>
+                <SVGInline className="editProfPic" src="/img/edit.svg" />
+              </div>
+            }
           </div>
           )}
         </div>
