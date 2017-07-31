@@ -15,6 +15,7 @@ const ReviewSchema = new Schema({
     type: Schema.Types.ObjectId,
     required: true,
   },
+  ratings: [{type: Number}],
   survey: {
     professionalism: { type: Number, trim: true },
     ambiance: { type: Number, trim: true },
