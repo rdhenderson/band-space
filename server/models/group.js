@@ -18,10 +18,6 @@ const GroupSchema = new Schema({
     ypos:  { type: Number, default: 0.5 },
     scale:  { type: Number, default: 1 },
     rotate: { type: Number, default: 0 },
-    imageStyle: {
-      type: String,
-      default: "{}",
-    }
   },
   images: [{ type: String, trim: true }],
   spotify: { type: String, trim: true },

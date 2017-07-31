@@ -14,7 +14,7 @@ class UserList extends Component {
   // Get list of venues from database when component is mounting
   // Draw list of components
   componentDidMount() {
-    this.props.getUserList();
+    this.props.fetchUserList();
   }
 
   render() {

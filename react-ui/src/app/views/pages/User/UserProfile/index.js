@@ -1,19 +1,19 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
-import { actions as userActions } from '../../../../state/ducks/user'
+import { actions as userActions, selectors as userSelectors } from '../../../../state/ducks/user'
 
 import UserProfile from './UserProfile';
 
-function mapStateToProps(state) {
-  return {
-    user: state.user.user,
-    isLoading: state.user.loading,
+const { getAuthUser, getUserByUrl } = userSelectors;
 
+function mapStateToProps(state, ownProps) {
+  return {
+    user: getUserByUrl(state, ownProps),
+    currentUser: getAuthUser(state),
+    isLoading: state.user.loading,
     error: state.user.error,
     isAuth: state.auth.isAuth,
-    currentUser: state.auth.user
-
   };
 }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import VenueSummary from './VenueSummary'
 import VenueProfileEditArrays from './VenueProfileEditArrays'
-import { Spinner, AddReview, HeadSearch, UserReview } from '../../../components'
+import { Spinner, AddReview, HeadSearch, UserReview, ImageDisplay } from '../../../components'
 
 import { sampleReviews } from '../../../../utilities/dummyData.js'
 
@@ -51,18 +51,22 @@ class VenueProfile extends Component {
         <HeadSearch />
         <div className="profile__topbody">
           <div className="profile__topbody__left">
+            <ImageDisplay
+              type="venue"
+              subject={this.props.venue}
+            />
             <div className="profile__topbody__left__profblock">
-              <div className="profile__topbody__left__profblock__imgdiv">
+              {/*  <div className="profile__topbody__left__profblock__imgdiv">
                 <img className="profile__topbody__left__profblock__imgdiv__pic"
-                  src="http://lorempixel.com/250/250"
+                src="http://lorempixel.com/250/250"
                 />
                 <div className="profile__topbody__left__profblock__proftext">
-                  <h1 style={{"fontSize" : 50}}> {venue.name} </h1>
-                  <h3 style={{"fontSize" : 20}}> {venue.address.street} </h3>
-                  <h4 style={{"fontSize" : 20}}> {venue.description} </h4>
+                <h1 style={{"fontSize" : 50}}> {venue.name} </h1>
+                <h3 style={{"fontSize" : 20}}> {venue.address.street} </h3>
+                <h4 style={{"fontSize" : 20}}> {venue.description} </h4>
                 </div>
-              </div>
-
+                </div>
+              */}
               <div className="profile__topbody__left__details">
                 <h3> Events </h3>
                 <ul>
@@ -99,15 +103,18 @@ class VenueProfile extends Component {
         </div>
 
         <UserReview reviews={reviews} />
+        {venue && this.props.isAuth &&
+          <div style={{display: "flex", justifyContent: "center"}} className="groupProfile__bottombody__botmain__right__header">
+            {/* <h1> Write a review? </h1> <img src="/img/edit.svg" onClick={() => this.props.showVenueReviewModal()} /> */}
+            <h1> Write a Review! for {venue.name} </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('ADD_VENUE_REVIEW')} />
 
-        <div style={{display: "flex", justifyContent: "center"}} className="groupProfile__bottombody__botmain__right__header">
-          {/* <h1> Write a review? </h1> <img src="/img/edit.svg" onClick={() => this.props.showVenueReviewModal()} /> */}
-          <h1> Write a Review! for {venue.name} </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('TEST_FORM')} />
-          {/* <h1> Add Event </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('ADD_EVENT')} /> */}
-          {/* <h1> Validation Form </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('VALIDATION_FORM')} /> */}
-          {/* <h1> Add Event Review </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('ADD_EVENT_REVIEW')} /> */}
 
-        </div>
+            {/* <h1> Add Event </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('ADD_EVENT')} /> */}
+            {/* <h1> Validation Form </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('VALIDATION_FORM')} /> */}
+            {/* <h1> Add Event Review </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('ADD_EVENT_REVIEW')} /> */}
+
+          </div>
+        }
       </div>
     )
   }

@@ -32,6 +32,13 @@ export default function reducer(state = INITIAL_STATE, action){
       return { ...state, group: action.payload, error:null, loading: false}; //<-- authenticated
     case types.ADD_GROUP_FAILURE:// return error and make loading = false
       return { ...state, group: null, error: action.payload, loading: false};
+
+    case types.UPDATE_GROUP:
+      return { ...state, error: null, loading: true};
+    case types.UPDATE_GROUP_SUCCESS:
+      return { ...state, group: action.payload, error:null, loading: false};
+    case types.UPDATE_GROUP_FAILURE:
+      return { ...state, error: action.payload, loading: false};
     // case ADD_GROUP_REVIEW:// loading currentUser("me") from jwttoken in local/session storage storage,
     //   return { ...state, error: null, loading: true};
     // case ADD_GROUP_REVIEW_SUCCESS://return user, status = authenticated and make loading = false

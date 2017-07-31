@@ -28,7 +28,6 @@ module.exports = function(app) {
    .populate('events')
   //  .populate('staff')
    .then( (result) => {
-     console.log("Venue find", result);
       return res.send(result)
     });
   });
@@ -39,16 +38,19 @@ module.exports = function(app) {
 
     Venue.findOrCreate(query, req.body.venue, (err, venue) => {
       // my new or existing model is loaded as result
-      if (err) console.error('ERROR', err);
-      // Send to favorites route to populate favorites for return
-      res.redirect(`/api/venue/`);
+      if (err) {
+        res.json(err);
+      } else {
+        res.json(venue);
+      }
     });
   });
 
   app.put('/api/venues/:id', isAuthenticated, (req, res) => {
+    console.log("Hit route");
     const options = { upsert: true, new: true };
     const query = { _id: req.params.id };
-    Venue.findOneAndUpdate(query, req.body.venue, options, (err, venue) => {
+    Venue.findOneAndUpdate(query, req.body, options, (err, venue) => {
       if (err) {
         console.log("ERROR", err);
         res.json(err);

@@ -33,15 +33,18 @@ class PrivateProfile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps) {
+    if (nextProps && nextProps.user && !this.props.isAuth) {
+      this.props.fetchUser(this.props.authId);
+    } else if (nextProps) {
       this.setState({ data: true });
     }
   }
 
   componentDidMount() {
     if (this.props.isAuth) {
-      this.props.getUser(this.props.currUser._id);
+      this.props.fetchUser(this.props.authId);
     }
+    //if (this.props.user) this.setState({data:true})
   }
   // FIXME: Need a better location for this information
   // Need to confirm that user isn't already in members.
@@ -49,7 +52,7 @@ class PrivateProfile extends Component {
     // event.preventDefault();
     const user = this.props.user;
     const userMember = {
-      user_id: [user._id],
+      user_id: this.props.authId,
       name: user.name,
       email: user.email
     };
@@ -65,7 +68,8 @@ class PrivateProfile extends Component {
   }
 
   toggleAddGroup(){
-    this.setState({isAddGroup: !this.state.isAddGroup});
+    const newState = { makeEdit: !this.state.isAddGroup }
+    this.setState(newState);
   }
   toggleEdit(){
     const newState = { makeEdit: !this.state.makeEdit }
@@ -84,7 +88,7 @@ class PrivateProfile extends Component {
       return <Redirect to="/auth/login" />
     }
 
-    if (this.props.isLoading)
+    if (this.props.isLoading || !this.props.user)
       return (<Spinner />);
 
     let user = this.props.user;
