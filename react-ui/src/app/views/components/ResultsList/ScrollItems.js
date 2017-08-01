@@ -7,8 +7,9 @@ export const VenueItem = ({ item }) => (
   <Link to={`/venues/${item._id}`}>
     <div className="mreview__body__item">
       <div className="mreview__body__item__imgdiv">
+
         <img className="mreview__body__item__imgdiv__img"
-          src={(item.images && item.images.length > 0) ?
+          src={(item && item.images && item.images.length > 0) ?
           item.images[0] : "http://lorempixel.com/100/100"}
         />
         <h3> {item.name} </h3>
@@ -17,7 +18,7 @@ export const VenueItem = ({ item }) => (
         <p>{item.description}</p>
         {/* <img src="http://lorempixel.com/500/100" /> */}
         <ul>
-          {item.staff.map( (staff, index) => (
+          {item && item.staff && item.staff.map( (staff, index) => (
             <li key={index}> {staff.name}: {staff.role} </li>
           ))}
         </ul>
@@ -30,12 +31,15 @@ export const UserItem = ({ item }) => (
   <Link to={`/users/${item._id}`}>
     <div className="mreview__body__item">
       <div className="mreview__body__item__imgdiv">
-        <img className="mreview__body__item__imgdiv__img"
-          src={item.profile_image.img}
-          // style={getImageStyle(item.profile_image)}
-        />
-        <h3> {item.name} </h3>
-
+        {item && item.profile_img &&
+          <img className="mreview__body__item__imgdiv__img"
+            src={item.profile_image.img}
+            // style={getImageStyle(item.profile_image)}
+          />
+        }
+        {item &&
+          <h3> {item.name} </h3>
+        }
       </div>
       <div className="mreview__body__item__text">
         <p>{item.description}</p>
