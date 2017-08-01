@@ -21,8 +21,6 @@ function getFullTypeList(list, listType){
 export const getLimitedDisplayList = createSelector(
   [getUserList, getGroupList, getVenueList, getSearchType, getSearchQuery],
   (users, groups, venues, type, query) => {
-    [getUserList, getGroupList, getVenueList, getSearchType, getSearchQuery],
-    (users, groups, venues, type, query) => {
       const lists = { users, venues, groups };
       const list = lists[type];
       if (!list || list.length < 1) return [];
