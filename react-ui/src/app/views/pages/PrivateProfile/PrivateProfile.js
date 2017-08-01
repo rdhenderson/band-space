@@ -67,7 +67,7 @@ class PrivateProfile extends Component {
   }
 
   toggleAddGroup(){
-    const newState = { addGroup: !this.state.isAddGroup }
+    const newState = { isAddGroup: !this.state.isAddGroup }
     this.setState(newState);
   }
   toggleEdit(){
