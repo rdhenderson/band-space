@@ -112,11 +112,11 @@ class PrivateProfile extends Component {
                 <ul>
                   {uGroups !== undefined &&
                     uGroups.map( (group, index) =>(
-                      <Link key={group.id} to={`/groups/${group._id}`}>
+                      <Link key={group._id} to={`/groups/${group._id}`}>
                         <li>#{index+1}: {group.name} </li>
                       </Link>
-                  ))}
-
+                    ))}
+                  
                 </ul>
                 <button className="normal-btn" onClick={this.toggleAddGroup}>Add Group</button>
                 {this.state.isAddGroup &&

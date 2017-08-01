@@ -5,11 +5,11 @@ import { actions as userActions, selectors as userSelectors } from '../../../../
 
 import UserProfile from './UserProfile';
 
-const { getAuthUser, getUserByUrl } = userSelectors;
+const { getAuthUser, getUserByURL} = userSelectors;
 
 function mapStateToProps(state, ownProps) {
   return {
-    user: getUserByUrl(state, ownProps),
+    user: state.user.user,
     currentUser: getAuthUser(state),
     isLoading: state.user.loading,
     error: state.user.error,

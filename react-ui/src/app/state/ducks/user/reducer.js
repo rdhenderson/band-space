@@ -38,7 +38,7 @@ export default function reducer(state = INITIAL_STATE, action){
     case types.GET_USER_LIST:
       return { ...state, error: null, loading: true};
     case types.GET_USER_LIST_SUCCESS:
-      return { ...state, userList: action.payload, error:null, loading: false};
+      return { ...state, userList: action.payload.userList, lastUpdated: action.payload.lastUpdated, error:null, loading: false};
     case types.GET_USER_LIST_FAILURE:
       return { ...state, error: action.payload, loading: false};
 

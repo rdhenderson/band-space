@@ -13,6 +13,7 @@ class Main extends Component {
     if(!token || token === '') return;
     // fetch user from token (if server deems it's valid token)
     this.props.meFromToken(token);
+    
     this.props.fetchUserList();
     this.props.getVenueList();
     this.props.getGroupList();

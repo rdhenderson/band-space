@@ -2,7 +2,7 @@ import * as types from './types';
 
 const INITIAL_STATE = {
   query: '',
-  searchType: types.searchType.all
+  searchType: types.searchType.venue
 };
 
 export default function reducer(state = INITIAL_STATE, action) {
@@ -14,6 +14,6 @@ export default function reducer(state = INITIAL_STATE, action) {
     case types.RESET_SEARCH:
       return INITIAL_STATE
     default:
-      return state
+      return state;
   }
 }

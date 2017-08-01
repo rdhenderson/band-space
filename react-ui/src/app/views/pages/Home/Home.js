@@ -34,14 +34,16 @@ class Home extends Component {
           this.setState({ data: true });
       }
   }
-
-  componentDidMount() {
-    this.props.getVenueList();
-    this.props.fetchUserList();
-    this.props.getGroupList();
+  componentDidMount(){
+    if (!this.props.userIsLoading)
+      this.props.fetchUserList();
+    if (!this.props.venueIsLoading)
+      this.props.getVenueList();
+    if (!this.props.userIsLoading)
+      this.props.getGroupList();
   }
-
   componentWillUnmount(){
+    this.props.resetSearch();
     // this.props.resetMe();
   }
 
@@ -51,7 +53,7 @@ class Home extends Component {
     return (
       <div>
         <div className="splash">
-          {this.state.searchQuery.length === 0 &&
+          {this.props.query.length === 0 &&
             <div className="splash__logo" id="splashlogo">
               <SVGInline className="splash__logo__svg" src="/img/amplifier.svg" />
               <h1 id="logotemplate"> BandSpace </h1>
@@ -67,12 +69,8 @@ class Home extends Component {
           />
         </div>
 
-        {this.state.searchQuery.length !== 0 &&
-          <ResultsList
-            searchType={this.state.searchType}
-            items={this.state.displayList}
-            // items={this.props[this.state.searchType]}
-          />
+        {this.props.query.length !== 0 &&
+          <ResultsList />
         }
       </div>
 

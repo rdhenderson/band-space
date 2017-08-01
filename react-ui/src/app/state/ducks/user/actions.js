@@ -16,6 +16,8 @@ export function fetchUser(id) {
         ({ data }) => {
           const list = getState().user.userList;
           const user = addLastUpdated(data);
+          console.log("DATA", data);
+          console.log("USER", user);
           const newList = insertItemInList(list, user);
           dispatch({ type: types.GET_USER_SUCCESS, payload: { list: newList, user }})
         },
@@ -37,7 +39,7 @@ export function fetchUserList() {
       dispatch({type: types.GET_USER_LIST})
       axios.get(ROOT_URL)
       .then(
-        ({ data }) => dispatch({ type: types.GET_USER_LIST_SUCCESS, payload: addLastUpdatedList(data) }),
+        ({ data }) => dispatch({ type: types.GET_USER_LIST_SUCCESS, payload: {userList:addLastUpdatedList(data), lastUpdated: new Date().getTime()} }),
         ({ response, message }) =>
           dispatch({
             type: types.GET_USER_LIST_FAILURE,
@@ -141,7 +143,7 @@ const shouldUpdateUser = (state, id) => {
 
 const shouldUpdateUserList = (state, id) => {
   const list = getAllUsers(state);
-  if (!list || isStale(list.lastUpdated))
+  if (!list || !state.user.lastUpdated || !isStale(list.lastUpdated))
     return true
 
   return false;
@@ -161,7 +163,7 @@ const addLastUpdated = (item) => {
 }
 // We want to add last updated to each field AND to the userList itself
 const addLastUpdatedList = (list) => {
-  return addLastUpdated(list.map( (item) => addLastUpdated(item)));
+  return list.map( (item) => addLastUpdated(item));
 }
 
 const insertItemInList = (list, item) => {
