@@ -2,7 +2,20 @@ import * as types from './types';
 
 const INITIAL_STATE = {
   venueList: [],
-  venue: {},
+  venue:  {
+    name: null,
+    description: null,
+    address: {
+      street: null,
+      city: null,
+      state: null,
+      zipcode: null
+    },
+    phone: null,
+    reviews: [],
+    lastUpdated: null,
+  },
+  lastUpdated: null,
   error: null,
   loading: false,
 };
