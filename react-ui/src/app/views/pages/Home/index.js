@@ -19,7 +19,9 @@ function mapStateToProps(state) {
       venues: state.venue.venueList,
       users: getAllUsers(state),
       groups: state.group.groupList,
-      isLoading: state.venue.loading || state.group.loading || state.user.loading,
+      isVenueLoading: state.venue.loading,
+      isGroupLoading: state.group.loading,
+      isUserLoading: state.user.loading,
     };
 }
 

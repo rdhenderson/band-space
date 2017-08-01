@@ -8,7 +8,7 @@ import HeadSearch from './HeadSearch'
 
 function mapStateToProps(state) {
   return {
-    displayList: searchSelectors.getLimitedDisplayList(state),
+    displayList: searchSelectors.getFullDisplayList(state),
     query: state.search.query,
     searchType: state.search.searchType,
   };
