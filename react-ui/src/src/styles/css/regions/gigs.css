@@ -1,0 +1,58 @@
+.gigs {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #018BE4; }
+  .gigs__nav {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    height: 120px;
+    margin-left: 110px; }
+    .gigs__nav__aInput > input {
+      height: 50px;
+      font-size: 40px;
+      line-height: 50px;
+      width: 600px;
+      background-color: transparent;
+      color: white;
+      border: 2px solid #0a9efc; }
+    .gigs__nav__aInput > input::placeholder {
+      color: white; }
+  .gigs__body {
+    display: flex;
+    flex-direction: row;
+    height: 100%; }
+    .gigs__body__map {
+      flex-grow: 1;
+      height: 100%;
+      width: 100%;
+      min-width: 500px;
+      min-height: 500px; }
+    .gigs__body__info {
+      background-color: #0a9efc;
+      height: 100%;
+      width: 500px;
+      align-self: flex-end;
+      display: flex;
+      flex-direction: column; }
+      .gigs__body__info__item {
+        display: flex;
+        flex-direction: row;
+        margin-left: 1%;
+        margin-right: 1%;
+        box-shadow: -1px 0.5px 0.5px 0.5px black;
+        margin-top: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px; }
+        .gigs__body__info__item__price {
+          color: green;
+          font-size: 50px; }
+        .gigs__body__info__item__description {
+          color: white;
+          display: flex;
+          flex-direction: column; }
+          .gigs__body__info__item__description__name {
+            font-size: 30px; }
+          .gigs__body__info__item__description__job {
+            font-size: 20px; }
