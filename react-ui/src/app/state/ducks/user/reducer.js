@@ -5,8 +5,21 @@ import _ from 'lodash'
 
 //It is best practice to define your initial state as a constant that gets passed as an argument to your reducer function
 const INITIAL_STATE = {
-  user: null,
   userList: [],
+  user: {
+    name: null,
+    description: null,
+    address: {
+      street: null,
+      city: null,
+      state: null,
+      zipcode: null,
+    },
+    email: null,
+    reviews: [],
+    groups: [],
+    lastUpdated: null,
+  },
   error: null,
   loading: false,
   lastUpdated: null,
