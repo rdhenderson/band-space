@@ -3,6 +3,8 @@ import CreateGroup from './CreateGroup';
 
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
+import { actions as userActions } from '../../../state/ducks/user'
+
 // import { userActions} from '../modules'
 // import actions from '../redux/userActions.js'
 
@@ -41,6 +43,7 @@ import { bindActionCreators } from 'redux';
 function mapStateToProps(state) {
   return {
     user: state.user,
+    authId: state.auth.id,
     isAuth: state.user.isAuth,
     error: state.user.error,
     loading: state.user.loading,
@@ -48,7 +51,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-  // return bindActionCreators({...userActions}, dispatch);
+  return bindActionCreators({...userActions}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateGroup);

@@ -84,16 +84,22 @@ class CreateGroup extends Component {
   }
 
   handleSubmit(values) {
-    // event.preventDefault();
-    // const id = this.props.user.user._id
-    // this.props.addUserGroup(values, id);
-    // IF WE WANT A REDIRECT, will want to set it by looking at user's groups
-    // and redirecting on change.  Easier to redirect back to profile or
-    // to a page listing user's groups.  If you want the redirect, I can think
-    // of how to do it.
-
-
+    const user = this.props.user;
+    const userMember = {
+      user_id: this.props.authId,
+      name: user.name,
+      email: user.email
+    };
+    const newGroup = {...values};
+    if (!newGroup.members) {
+      newGroup.members = [userMember];
+    } else {
+      newGroup.members.push(userMember)
     }
+    this.props.addUserGroup(newGroup, this.props.authId);
+    this.props.history.push('/profile');
+  }
+
 
   componentDidMount(){
 

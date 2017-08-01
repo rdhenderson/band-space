@@ -116,7 +116,10 @@ export function addUserGroup(user, id) {
       }
     })
     .then(
-        ({ data }) => dispatch({ type: types.ADD_USER_GROUP_SUCCESS, payload: addLastUpdated(data) }),
+        ({ data }) => {
+          console.log("new group added", data);
+          dispatch({ type: types.ADD_USER_GROUP_SUCCESS, payload: addLastUpdated(data) })
+        },
         ({ response, message }) =>
           dispatch({
             type: types.ADD_USER_GROUP_FAILURE,
@@ -193,7 +196,7 @@ const addLastUpdatedList = (list) => {
 }
 
 const insertItemInList = (list, item) => {
-  let newList = list.slice() || [];
+  let newList = (list) ? list.slice() : [];
   const newItem = {...item};
   const index = _.findIndex(newList, ['_id', newItem._id]);
   if (index !== -1 ) {

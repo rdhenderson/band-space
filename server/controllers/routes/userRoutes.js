@@ -59,6 +59,7 @@ module.exports = function(app, passport) {
 
   app.post('/api/users/:id/groups', isAuthenticated, (req, res) => {
     Group.create(req.body, (err, group) => {
+      console.log("Group created", group);
       const update = {$push: {"groups": group._id}};
       const options = {new : true};
       User.findByIdAndUpdate(req.params.id, update, options)
