@@ -72,6 +72,23 @@ export default function reducer(state = INITIAL_STATE, action){
       };
     case types.ADD_USER_GROUP_FAILURE:
       return { ...state, error: action.payload, loading: false};
+    case types.ADD_USER_REVIEW:
+        return { ...state, error:null, loading: true};
+    case types.ADD_USER_REVIEW_SUCCESS:
+      if (state.userList.lastUpdated) {
+        newList = [...state.userList];
+        index = _.indexOf(newList, _.find(newList, {_id: action.payload._id}));
+        newList = newList.splice(index, 1, action.payload);
+      }
+      return {
+        ...state,
+        userList: newList,
+        user: action.payload,
+        error:null,
+        loading: false
+      };
+    case types.ADD_USER_REVIEW_FAILURE:
+      return { ...state, error: action.payload, loading: false};
 
     // case types.ADD_USER_REVIEW:// loading currentUser("me") from jwttoken in local/session storage storage,
     //   return { ...state, error: null, loading: true};

@@ -125,6 +125,32 @@ export function addUserGroup(user, id) {
       );
   }
 }
+export function addUserReview(review) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const reviewMeta = { author: state.auth.id, subject: state.user.user._id}
+    const newReview = { ...review, ...reviewMeta };
+
+    dispatch({type: types.ADD_USER_REVIEW})
+    const token = localStorage.getItem('jwtToken');
+    axios({
+      method: 'post',
+      url: `/api/reviews/users/`,
+      data: newReview,
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(
+        ({ data }) => dispatch({ type: types.ADD_USER_REVIEW_SUCCESS, payload: addLastUpdated(data) }),
+        ({ response, message }) =>
+          dispatch({
+            type: types.ADD_USER_REVIEW_FAILURE,
+            payload: (response) ? response.data : message
+          })
+      );
+  }
+}
 
 // Add option to manually refresh items
 const shouldUpdateUser = (state, id) => {
