@@ -17,7 +17,7 @@ const ResultsList = ({searchType, displayList }) => {
   if (!displayList || displayList.length === 0) return (
     <div className="mreview">
       <div className="mreview__header">
-        <h4> No results found ... please try another query </h4>
+        <h4> No results found yet... please wait a moment or try another query </h4>
       </div>
     </div>
   );
