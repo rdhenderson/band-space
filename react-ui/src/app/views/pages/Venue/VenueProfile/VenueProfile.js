@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import VenueSummary from './VenueSummary'
 import VenueProfileEditArrays from './VenueProfileEditArrays'
+import VenueProfileForm from './VenueProfileForm'
 import { Spinner, AddReview, HeadSearch, UserReview, ImageDisplay } from '../../../components'
 
 import { sampleReviews } from '../../../../utilities/dummyData.js'
@@ -44,7 +45,6 @@ class VenueProfile extends Component {
     if (this.props.error === true) return (<h1> "Error!"</h1>);
 
     const venue = this.props.venue;
-    const reviews = sampleReviews;
 
     return (
       <div className="profile">
@@ -54,25 +54,19 @@ class VenueProfile extends Component {
             <ImageDisplay
               type="venue"
               subject={this.props.venue}
+              profileText={
+                (<div className="profile__topbody__left__profblock__proftext">
+                  <h1 style={{"fontSize" : 50}}> {venue.name} </h1>
+                  <h3 style={{"fontSize" : 20}}> {venue.address.street} </h3>
+                  <h4 style={{"fontSize" : 20, maxWidth: 300, maxHeight: 200, overflow: "auto", textAlign: "justify"}}> {venue.description} </h4>
+                </div>)
+              }
             />
-            <div className="profile__topbody__left__profblock">
-              {/*  <div className="profile__topbody__left__profblock__imgdiv">
-                <img className="profile__topbody__left__profblock__imgdiv__pic"
-                src="http://lorempixel.com/250/250"
-                />
-                <div className="profile__topbody__left__profblock__proftext">
-                <h1 style={{"fontSize" : 50}}> {venue.name} </h1>
-                <h3 style={{"fontSize" : 20}}> {venue.address.street} </h3>
-                <h4 style={{"fontSize" : 20}}> {venue.description} </h4>
-                </div>
-                </div>
-              */}
-              <div className="profile__topbody__left__details">
-                <h3> Events </h3>
-                <ul>
-                  <li> List Venue Events </li>
-                </ul>
-              </div>
+
+            <div className="profile__topbody__left__details">
+              <button className="normal-btn" onClick={this.toggleEdit}>
+                {(!this.state.makeEdit) ? "Edit Profile" : "View Summary" }
+              </button>
 
             </div>
 
@@ -80,16 +74,14 @@ class VenueProfile extends Component {
 
           <div className="profile__topbody__right">
             <div style={{ paddingBottom: 20}} className="profile__topbody__right__sliders">
-              {/* <button onClick={this.toggleEdit}>
-                {(!this.state.makeEdit) ? "Edit Profile" : "View Summary" }
-              </button> */}
+
               {this.state.makeEdit ? (
-                <VenueProfileEditArrays
-                  onSubmit={this.handleSubmit}
-                  // initialValues={venue}
-                  fieldClass="profile__topbody__right"
+                <VenueProfileForm
                   venue={venue}
+                  onSubmit={(values)=>{this.props.updateVenue({...venue, ...values}); this.toggleEdit()}}
+
                 />
+
               ) : (
                 <div>
                   <div id="Header">
@@ -102,13 +94,13 @@ class VenueProfile extends Component {
           </div>
         </div>
 
-        <UserReview reviews={reviews} />
+        {venue && venue.reviews && venue.reviews.length > 0 &&
+          <UserReview reviews={venue.reviews} />
+        }
         {venue && this.props.isAuth &&
           <div style={{display: "flex", justifyContent: "center"}} className="groupProfile__bottombody__botmain__right__header">
             {/* <h1> Write a review? </h1> <img src="/img/edit.svg" onClick={() => this.props.showVenueReviewModal()} /> */}
             <h1> Write a Review! for {venue.name} </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('ADD_VENUE_REVIEW')} />
-
-
             {/* <h1> Add Event </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('ADD_EVENT')} /> */}
             {/* <h1> Validation Form </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('VALIDATION_FORM')} /> */}
             {/* <h1> Add Event Review </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('ADD_EVENT_REVIEW')} /> */}

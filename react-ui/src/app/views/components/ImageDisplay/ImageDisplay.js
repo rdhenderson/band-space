@@ -73,10 +73,8 @@ class ImageDisplay extends Component {
               </div>
               {/* <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" /> */}
             </div>
-            <div className="profile__topbody__left__profblock__proftext">
-              <h1 style={{"fontSize" : 50}}> {subject.name}</h1>
-              <h3 style={{"fontSize" : 20}}> Guitarist/Singer </h3>
-            </div>
+            {this.props.profileText}
+            
             { this.props.isAuth &&
               <div onClick={this.toggleEdit}>
                 <SVGInline className="editProfPic" src="/img/edit.svg" />

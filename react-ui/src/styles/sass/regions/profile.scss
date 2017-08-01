@@ -40,7 +40,17 @@
                     }
 
                   }
+                  &__imgsquare{
+                    width: 200px;
+                    height: 200px;
+                    overflow: hidden;
 
+                    &__pic{
+                        width: 250px;
+
+                    }
+
+                  }
 
                     &__stars{
                         width: 100px;

@@ -101,7 +101,12 @@ class PrivateProfile extends Component {
 
             <ImageDisplay
               type="user"
-              subject={this.props.user}
+              subject={user}
+              profileText={( <div className="profile__topbody__left__profblock__proftext">
+                <h1 style={{"fontSize" : 50}}> {user.name}</h1>
+                <h3 style={{"fontSize" : 20}}> {user.email} </h3>
+                <h3 style={{"fontSize" : 20}}> {user.description} </h3>
+              </div>)}
             />
 
             <div className="profile__topbody__left__details">
