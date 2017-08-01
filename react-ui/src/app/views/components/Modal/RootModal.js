@@ -32,7 +32,7 @@ const ModalRoot = ({ modalType, modalProps }) => {
     return null; // <span /> // after React v15 you can return null here
   }
   const SpecificModal = (MODAL_COMPONENTS[modalType])
-  return <TestFormModal {...modalProps} />
+  return <SpecificModal {...modalProps} />
 }
 
 export default connect(
