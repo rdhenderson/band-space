@@ -39,7 +39,7 @@ class Home extends Component {
       this.props.fetchUserList();
     if (!this.props.venueIsLoading)
       this.props.getVenueList();
-    if (!this.props.userIsLoading)
+    if (!this.props.groupIsLoading)
       this.props.getGroupList();
   }
   componentWillUnmount(){
