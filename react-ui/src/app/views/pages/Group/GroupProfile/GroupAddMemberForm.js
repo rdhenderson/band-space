@@ -1,15 +1,14 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
-let ProfileForm = props => {
+let GroupAddMemberForm = props => {
   const { handleSubmit, onSubmit } = props
 
   return (
     <form className="editProfile" onSubmit={ handleSubmit(onSubmit) }>
 
       <div className="editProfile__header">
-        <h1> Edit Your Information </h1>
-        {/* <button className="normal-btn editProfile__button" onClick={this.toggleEdit}>Edit Profile</button> */}
+        <h1> Add Group Member Information </h1>
       </div>
       <div className="editGroupFields">
         <Field
@@ -20,28 +19,31 @@ let ProfileForm = props => {
           placeholder="Name"
         />
         <Field
-          name="phone"
+          name="email"
           component="input"
           type= "text"
           className="createGroup__body__left__members__item__field"
-          placeholder="Phone Number"
+          placeholder="Email Address"
         />
         <Field
-          name="description"
-          component="textarea"
-          type="text"
-          className="editProfile__textarea"
-          placeholder="Tell us about yourself"
+          name="instrument"
+          component="input"
+          type= "text"
+          className="createGroup__body__left__members__item__field"
+          placeholder="Instrument"
         />
-        <button className="normal-btn " type="submit">Submit</button>
+        
       </div>
-      <br/>
+
+      <button className="normal-btn " type="submit">Submit</button>
+
+      <br />
     </form>
 )};
 
-ProfileForm = reduxForm({
+GroupAddMemberForm = reduxForm({
   // a unique name for the form
-  form: 'userProfile'
-})(ProfileForm)
+  form: 'groupAddMember'
+})(GroupAddMemberForm);
 
-export default ProfileForm;
+export default GroupAddMemberForm

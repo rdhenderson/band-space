@@ -1,15 +1,14 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
-let ProfileForm = props => {
+let GroupProfileForm = props => {
   const { handleSubmit, onSubmit } = props
 
   return (
     <form className="editProfile" onSubmit={ handleSubmit(onSubmit) }>
 
       <div className="editProfile__header">
-        <h1> Edit Venue Information </h1>
-        {/* <button className="normal-btn editProfile__button" onClick={this.toggleEdit}>Edit Profile</button> */}
+        <h1> Edit Group Information </h1>
       </div>
       <div className="editGroupFields">
         <Field
@@ -32,16 +31,18 @@ let ProfileForm = props => {
           type="text"
           className="editProfile__textarea"
           placeholder="Tell us about the venue"
-          />
-          <button className="normal-btn " type="submit">Submit</button>
-        </div>
-        <br/>
+        />
+      </div>
+
+      <button className="normal-btn " type="submit">Submit</button>
+
+      <br />
     </form>
 )};
 
-ProfileForm = reduxForm({
+GroupProfileForm = reduxForm({
   // a unique name for the form
-  form: 'venueProfile'
-})(ProfileForm)
+  form: 'groupProfile'
+})(GroupProfileForm);
 
-export default ProfileForm;
+export default GroupProfileForm

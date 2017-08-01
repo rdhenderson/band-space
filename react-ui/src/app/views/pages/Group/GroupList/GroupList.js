@@ -1,7 +1,7 @@
 //Here we grab React, and peel component out of the library using ES6 syntax.
 import React, { Component } from 'react'
 
-import { Spinner, ResultsList } from '../../../components'
+import { Spinner, ResultsList, SearchBar } from '../../../components'
 
 class GroupList extends Component {
   constructor(props) {
@@ -15,6 +15,7 @@ class GroupList extends Component {
   // Draw list of components
   componentDidMount() {
     this.props.getGroupList();
+    this.props.changeSearchType({target:{value:'groups'}});
   }
 
   render() {
@@ -22,18 +23,12 @@ class GroupList extends Component {
 
     return (
       <div>
-        <div className="mreview">
-          <div className="mreview__header">
-            <h2> Groups around Washington D.C. </h2>
-          </div>
-
-          <div className="mreview__body">
-            <ResultsList
-              searchType='groups'
-              items={this.props.groups}
-            />
-          </div>
+        <div className="splash">
+          <SearchBar />
         </div>
+
+        <ResultsList />
+
       </div>
     );
   }

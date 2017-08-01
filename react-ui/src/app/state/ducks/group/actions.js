@@ -80,3 +80,29 @@ export function addGroup(group) {
       );
   }
 }
+
+export function addGroupReview(review) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const reviewMeta = { author: state.auth.id, subject: state.group.group._id}
+    const newReview = { ...review, ...reviewMeta };
+    dispatch({type: types.ADD_GROUP_REVIEW})
+    const token = localStorage.getItem('jwtToken');
+    axios({
+      method: 'post',
+      url: `/api/reviews/groups/`,
+      data: newReview,
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then(
+        ({ data }) => dispatch({ type: types.ADD_GROUP_REVIEW_SUCCESS, payload: data }),
+        ({ response, message }) =>
+          dispatch({
+            type: types.ADD_GROUP_REVIEW_FAILURE,
+            payload: (response) ? response.data : message
+          })
+      );
+  }
+}

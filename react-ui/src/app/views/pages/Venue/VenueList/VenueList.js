@@ -16,6 +16,7 @@ class VenueList extends Component {
   // Draw list of components
   componentDidMount() {
     this.props.getVenueList();
+    this.props.changeSearchType({target:{value:'venues'}});
   }
 
   handleSubmit(values) {
@@ -28,20 +29,10 @@ class VenueList extends Component {
     return (
       <div>
         <div className="splash">
-          <SearchBar
-            searchType={this.state.searchType}
-            searchQuery={this.state.searchQuery}
-            handleInputChange={this.handleInputChange}
-            showSelect={false}
-            placeholderText='Search for a Venue'
-          />
+          <SearchBar />
         </div>
 
-        <ResultsList
-          searchType='venues'
-          items={this.props.venues}
-        />
-        }
+        <ResultsList />
       </div>
     );
   }

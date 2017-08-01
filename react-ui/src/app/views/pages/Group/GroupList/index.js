@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
 import { actions as groupActions } from '../../../../state/ducks/group'
+import { actions as searchActions } from '../../../../state/ducks/search'
 
 import GroupList from './GroupList';
 
@@ -17,7 +18,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators( { ...groupActions }, dispatch);
+  return bindActionCreators( { ...groupActions, ...searchActions }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupList);

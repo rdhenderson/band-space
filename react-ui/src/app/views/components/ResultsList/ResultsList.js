@@ -13,6 +13,7 @@ const displaySelector = {
 
 const ResultsList = ({searchType, displayList }) => {
   console.log("SearchType: ", searchType);
+  console.log("displayList", displayList);
   if (!displayList || displayList.length === 0) return (
     <div className="mreview">
       <div className="mreview__header">
