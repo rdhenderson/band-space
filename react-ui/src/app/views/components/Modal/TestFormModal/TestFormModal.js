@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
 import { actions as modalActions } from '../../../../state/ducks/modal'
+import { actions as venueActions } from '../../../../state/ducks/venue'
+
 import TestForm from './TestForm'
 
 const customStyles = {
@@ -40,7 +42,7 @@ const TestFormModal = (props) => {
           subject={props.subject}
           author={props.author}
           hideModal={props.hideModal}
-          onSubmit={(values) => console.log('Values', values)}
+          onSubmit={(values) => props.addVenueReview(values)}
         />
       </Modal>
     </div>
@@ -56,8 +58,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  const { hideModal } = modalActions;
-  return bindActionCreators({ hideModal }, dispatch);
+  return bindActionCreators({  ...modalActions, ...venueActions }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TestFormModal);

@@ -4,13 +4,16 @@ import { bindActionCreators } from 'redux';
 
 import { actions as authActions } from '../../../state/ducks/auth'
 import { actions as userActions } from '../../../state/ducks/user'
+import { selectors as userSelect } from '../../../state/ducks/user'
 
 import PrivateProfile from './PrivateProfile'
 
 function mapStateToProps(state) {
+  const { getAuthUser, getAuthProfileImage } = userSelect;
+
   return {
     user: state.user.user,
-    currUser: state.auth.user,
+    authId: state.auth.id,
     isAuth: state.auth.isAuth,
     error: state.auth.error,
     isLoading: state.user.loading,

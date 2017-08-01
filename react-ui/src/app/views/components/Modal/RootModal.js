@@ -5,16 +5,18 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import TestFormModal from './TestFormModal'
+import GroupReviewModal from './GroupReviewModal'
 import ValidationFormModal from './ValidationFormModal'
 import MaterialFormModal from './MaterialFormModal'
 
 import AddEvent from './AddEvent'
 import AddEventReview from './AddEventReview'
-import AddVenueReview from './AddVenueReview'
+// import AddVenueReview from './AddVenueReview'
 
 
 const MODAL_COMPONENTS = {
-  'TEST_FORM' : TestFormModal,
+  'ADD_VENUE_REVIEW' : TestFormModal,
+  'ADD_GROUP_REVIEW' : GroupReviewModal,
   // 'VALIDATION_FORM' : ValidationFormModal,
   // 'MATERIAL_FORM' : MaterialFormModal,
   // 'ADD_VENUE_REVIEW': AddVenueReview,
@@ -26,7 +28,6 @@ const MODAL_COMPONENTS = {
 
 
 const ModalRoot = ({ modalType, modalProps }) => {
-  if (modalType === 'ADD_EVENT_REVIEW') console.log("launching event review", JSON.stringify(modalProps));
   if (!modalType) {
     return null; // <span /> // after React v15 you can return null here
   }

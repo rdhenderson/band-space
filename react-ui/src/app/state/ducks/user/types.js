@@ -2,6 +2,8 @@ export const GET_USER = 'GET_USER';
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 export const GET_USER_FAILURE = 'GET_USER_FAILURE';
 
+export const SET_CURR_USER = 'SET_CURR_USER';
+
 export const GET_USER_LIST = 'GET_USER_LIST';
 export const GET_USER_LIST_SUCCESS = 'GET_USER_LIST_SUCCESS';
 export const GET_USER_LIST_FAILURE = 'GET_USER_LIST_FAILURE';

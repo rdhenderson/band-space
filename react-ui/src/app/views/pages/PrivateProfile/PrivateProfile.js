@@ -33,15 +33,18 @@ class PrivateProfile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps) {
+    if (nextProps && nextProps.user && !this.props.isAuth) {
+      this.props.fetchUser(this.props.authId);
+    } else if (nextProps) {
       this.setState({ data: true });
     }
   }
 
   componentDidMount() {
     if (this.props.isAuth) {
-      this.props.getUser(this.props.currUser._id);
+      this.props.fetchUser(this.props.authId);
     }
+    //if (this.props.user) this.setState({data:true})
   }
   // FIXME: Need a better location for this information
   // Need to confirm that user isn't already in members.
@@ -49,7 +52,7 @@ class PrivateProfile extends Component {
     // event.preventDefault();
     const user = this.props.user;
     const userMember = {
-      user_id: [user._id],
+      user_id: this.props.authId,
       name: user.name,
       email: user.email
     };
@@ -59,13 +62,13 @@ class PrivateProfile extends Component {
     } else {
       newGroup.members.push(userMember)
     }
-    console.log("New Group", newGroup);
     this.props.addUserGroup(newGroup, user._id);
     this.setState({isAddGroup: false});
   }
 
   toggleAddGroup(){
-    this.setState({isAddGroup: !this.state.isAddGroup});
+    const newState = { addGroup: !this.state.isAddGroup }
+    this.setState(newState);
   }
   toggleEdit(){
     const newState = { makeEdit: !this.state.makeEdit }
@@ -84,7 +87,7 @@ class PrivateProfile extends Component {
       return <Redirect to="/auth/login" />
     }
 
-    if (this.props.isLoading)
+    if (this.props.isLoading || !this.props.user)
       return (<Spinner />);
 
     let user = this.props.user;
@@ -98,7 +101,12 @@ class PrivateProfile extends Component {
 
             <ImageDisplay
               type="user"
-              subject={this.props.user}
+              subject={user}
+              profileText={( <div className="profile__topbody__left__profblock__proftext">
+                <h1 style={{"fontSize" : 50}}> {user.name}</h1>
+                <h3 style={{"fontSize" : 20}}> {user.email} </h3>
+                <h3 style={{"fontSize" : 20}}> {user.description} </h3>
+              </div>)}
             />
 
             <div className="profile__topbody__left__details">
@@ -108,10 +116,10 @@ class PrivateProfile extends Component {
                 <ul>
                   {uGroups !== undefined &&
                     uGroups.map( (group, index) =>(
-                      <Link key={group.id} to={`/groups/${group._id}`}>
+                      <Link key={group._id} to={`/groups/${group._id}`}>
                         <li>#{index+1}: {group.name} </li>
                       </Link>
-                  ))}
+                    ))}
 
                 </ul>
                 <button className="normal-btn" onClick={this.toggleAddGroup}>Add Group</button>
@@ -126,13 +134,17 @@ class PrivateProfile extends Component {
           <div className="profile__topbody__right">
 
 
-              {this.state.makeEdit ? (
-                <div className="profile__topbody__right__sliders">
-                  <ProfileForm user={user} onSubmit={this.handleUserUpdate} toggleEdit={this.toggleEdit}/>
-                </div>
-              )
-              :
-              (
+            {this.state.makeEdit ? (
+              <div className="profile__topbody__right__sliders">
+                <ProfileForm
+                  user={user}
+                  onSubmit={(values)=>{this.props.updateUser({...user, ...values}); this.toggleEdit()}}
+
+                />
+              </div>
+            )
+            :
+            (
               <div className="profile__topbody__right__sliders">
                 <div id="Header">
                   <h1 id="skillheader"> Skills </h1>

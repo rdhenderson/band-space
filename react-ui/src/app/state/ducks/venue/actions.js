@@ -25,7 +25,7 @@ export function getVenueList() {
     axios.get(`${ROOT_URL}`)
     .then(
         ({ data }) => dispatch({ type: types.GET_VENUE_LIST_SUCCESS, payload: data }),
-        ({ response, message }) => 
+        ({ response, message }) =>
           dispatch({
             type: types.GET_VENUE_LIST_FAILURE,
             payload: (response) ? response.data : message
@@ -63,8 +63,8 @@ export function updateVenue(venue) {
 
     const token = localStorage.getItem('jwtToken');
     axios({
-      method: 'post',
-      url: `${ROOT_URL}/${venue._id || venue.id}`,
+      method: 'put',
+      url: `${ROOT_URL}/${venue._id}`,
       data: venue,
       headers: {
         'Authorization': `Bearer ${token}`
@@ -82,13 +82,16 @@ export function updateVenue(venue) {
 }
 
 export function addVenueReview(review) {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const state = getState();
+    const reviewMeta = { author: state.auth.id, subject: state.venue.venue._id}
+    const newReview = { ...review, ...reviewMeta };
     dispatch({type: types.ADD_VENUE_REVIEW})
     const token = localStorage.getItem('jwtToken');
     axios({
       method: 'post',
       url: `/api/reviews/venues/`,
-      data: review,
+      data: newReview,
       headers: {
         'Authorization': `Bearer ${token}`
       }

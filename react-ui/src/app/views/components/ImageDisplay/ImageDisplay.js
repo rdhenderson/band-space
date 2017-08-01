@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
 
 import ImageEditor from './ImageEditor';
 import SVGInline from 'react-inlinesvg';
@@ -26,7 +25,7 @@ class ImageDisplay extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if (nextProps.currUser !== null) {
+    if (nextProps.subject !== null) {
       this.setState({data:true});
     }
   }
@@ -37,7 +36,10 @@ class ImageDisplay extends Component {
       venue: this.props.updateVenue,
       group: this.props.updateGroup,
     }
+    console.log("Type: ", this.props.type);
     saveSelect[this.props.type](update);
+    this.toggleEdit = this.toggleEdit.bind(this)
+
   }
 
   render(){
@@ -45,13 +47,14 @@ class ImageDisplay extends Component {
       console.log("error", this.props.error);
       return <ErrorMessage message={this.props.error} onRetry={()=>console.log('Sorry')} />
     }
-    if (this.props.isLoading) return (<Spinner />);
+    if (this.props.isLoading || !this.props.subject || !this.props.subject.profile_image) return (<Spinner />);
 
-    const subject = this.props.subject;
+    const { subject } = this.props;
+    const { profile_image } = subject;
 
     return (
       <div className="profile__topbody__left__profblock">
-        {(this.state.editActive) ? (
+        {(this.state.editActive && this.props.isAuth) ? (
           <ImageEditor
             onSave={this.handleSave}
             subject={subject}
@@ -64,19 +67,19 @@ class ImageDisplay extends Component {
             <div className="profile__topbody__left__profblock__imgdiv">
               <div className="profile__topbody__left__profblock__imgdiv__imgborder">
                 <img className="profile__topbody__left__profblock__imgdiv__imgborder__pic"
-                  src={subject.profile_image.img}
-                  style={getImageStyle(subject.profile_image)}
+                  src={profile_image.img}
+                  style={getImageStyle(profile_image)}
                 />
               </div>
               {/* <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" /> */}
             </div>
-            <div className="profile__topbody__left__profblock__proftext">
-              <h1 style={{"fontSize" : 50}}> {subject.name}</h1>
-              <h3 style={{"fontSize" : 20}}> Guitarist/Singer </h3>
-            </div>
-            <div onClick={this.toggleEdit}>
-            <SVGInline className="editProfPic" src="img/edit.svg" />
-            </div>
+            {this.props.profileText}
+            
+            { this.props.isAuth &&
+              <div onClick={this.toggleEdit}>
+                <SVGInline className="editProfPic" src="/img/edit.svg" />
+              </div>
+            }
           </div>
           )}
         </div>
@@ -84,5 +87,6 @@ class ImageDisplay extends Component {
   }
 }
 
-export default ImageDisplay
+export default ImageDisplay;
+
 // export default ProfilePage;

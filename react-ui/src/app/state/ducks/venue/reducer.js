@@ -11,32 +11,32 @@ export default function reducer(state = INITIAL_STATE, action){
   let error;
   switch (action.type) {
     case types.GET_VENUE:
-      return { ...state, venue: null, error: null, loading: true};
+      return { ...state, error: null, loading: true};
     case types.GET_VENUE_SUCCESS:
       return { ...state, venue: action.payload, error:null, loading: false};
     case types.GET_VENUE_FAILURE:
-      return { ...state, venue: null, error: action.payload, loading: false};
+      return { ...state, error: action.payload, loading: false};
 
     case types.GET_VENUE_LIST:
-      return { ...state, venueList: null, error: null, loading: true};
+      return { ...state, error: null, loading: true};
     case types.GET_VENUE_LIST_SUCCESS:
       return { ...state, venueList: action.payload, error:null, loading: false};
     case types.GET_VENUE_LIST_FAILURE:
-      return { ...state, venueList: null, error: action.payload, loading: false};
+      return { ...state, error: action.payload, loading: false};
 
     case types.ADD_VENUE:
-      return { ...state, venue: null, error: null, loading: true};
+      return { ...state, error: null, loading: true};
     case types.ADD_VENUE_SUCCESS:
       return { ...state, venue: action.payload, error:null, loading: false};
     case types.ADD_VENUE_FAILURE:
-      return { ...state, venue: null, error: action.payload, loading: false};
+      return { ...state, error: action.payload, loading: false};
 
     case types.UPDATE_VENUE:
-      return { ...state, venue: null, error: null, loading: true};
+      return { ...state, error: null, loading: true};
     case types.UPDATE_VENUE_SUCCESS:
       return { ...state, venue: action.payload, error:null, loading: false};
     case types.UPDATE_VENUE_FAILURE:
-      return { ...state, venue: null, error: action.payload, loading: false};
+      return { ...state, error: action.payload, loading: false};
 
     case types.ADD_VENUE_REVIEW:
       return { ...state, error: null, loading: true};

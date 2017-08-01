@@ -1,7 +1,7 @@
 //Here we grab React, and peel component out of the library using ES6 syntax.
 import React, { Component } from 'react'
 
-import { Spinner, ResultsList } from '../../../components'
+import { Spinner, ResultsList, SearchBar } from '../../../components'
 
 class UserList extends Component {
   constructor(props) {
@@ -14,7 +14,9 @@ class UserList extends Component {
   // Get list of venues from database when component is mounting
   // Draw list of components
   componentDidMount() {
-    this.props.getUserList();
+    this.props.fetchUserList();
+    this.props.changeSearchType({target:{value:'users'}});
+
   }
 
   render() {
@@ -22,18 +24,11 @@ class UserList extends Component {
 
     return (
       <div>
-        <div className="mreview">
-          <div className="mreview__header">
-            <h2> Users around Washington D.C. </h2>
-          </div>
-
-          <div className="mreview__body">
-            <ResultsList
-              searchType='users'
-              items={this.props.users}
-            />
-          </div>
+        <div className="splash">
+          <SearchBar />
         </div>
+
+        <ResultsList />
       </div>
     );
   }

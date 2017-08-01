@@ -5,7 +5,7 @@ import RootModal from '../../components/Modal/RootModal.js'
 
 class Main extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     // If user is not already authenticated
     if (this.props.isAuth) return;
     let token = localStorage.getItem('jwtToken');
@@ -13,7 +13,10 @@ class Main extends Component {
     if(!token || token === '') return;
     // fetch user from token (if server deems it's valid token)
     this.props.meFromToken(token);
-
+    
+    this.props.fetchUserList();
+    this.props.getVenueList();
+    this.props.getGroupList();
   }
 
   render() {

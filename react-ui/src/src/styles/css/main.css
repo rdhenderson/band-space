@@ -288,6 +288,7 @@ a {
             overflow: hidden; }
             .profile__topbody__left__profblock__imgdiv__imgborder__pic {
               width: 250px; }
+
           .profile__topbody__left__profblock__imgdiv__stars {
             width: 100px; }
         .profile__topbody__left__profblock__proftext {
@@ -448,7 +449,10 @@ a {
     .gigs__body__map {
       flex-grow: 1;
       height: 100%;
-      width: 100%; }
+
+      width: 100%;
+      min-width: 500px;
+      min-height: 500px; }
     .gigs__body__info {
       background-color: #0a9efc;
       height: 100%;
@@ -836,6 +840,9 @@ main {
 
 #page-wrap {
   height: 100%; }
+
+.bm-menu-wrap {
+  overflow: hidden; }
 
 .navLinks {
   display: flex !important;

@@ -36,20 +36,16 @@ module.exports = function(app) {
   app.put('/api/groups/:id', isAuthenticated, (req, res) => {
     const options = { upsert: true, new: true };
     const query = { _id: req.params.id };
-    Venue.findOneAndUpdate(query, req.body.group, options, (err, group) => {
+    console.log(query, req.body);
+    Group.findOneAndUpdate(query, req.body, options, (err, group) => {
       if (err) {
-        console.log("ERROR", err);
         res.json(err);
-      } else {
-        console.log("result", group);
-        // Render not found error
-        if(!group) {
-          return res.status(404).json({
-            message: 'Group with id ' + req.params.id + ' can not be found.'
-          });
-        }
-        res.status(200).json(group);
+      } else if(!group) {
+        return res.status(404).json({
+          message: 'Group with id ' + req.params.id + ' can not be found.'
+        });
       }
+      res.status(200).json(group);
     })
   });
 
