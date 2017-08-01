@@ -150,7 +150,7 @@ class Gigs extends Component {
                 <div style={{ height: `100%`, width: `100%` }}> </div>
               }
               mapElement={
-                <div style={{ height: `100%`, width: `100%` }}> </div>
+                <div style={{ height: `100%`, width: `100%`, minWidth: 500, minHeight: 500 }}> </div>
               }
               center={this.state.center}
               content={this.state.content}
