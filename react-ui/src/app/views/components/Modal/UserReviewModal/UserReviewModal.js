@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
 import { actions as modalActions } from '../../../../state/ducks/modal'
-import { actions as groupActions } from '../../../../state/ducks/group'
+import { actions as userActions } from '../../../../state/ducks/user'
 
-import GroupReviewForm from './GroupReviewForm'
+import UserReviewForm from './UserReviewForm'
 
 const customStyles = {
   overlay : {
@@ -29,20 +29,20 @@ const customStyles = {
   }
 };
 
-const GroupReviewModal = (props) => {
+const UserReviewModal = (props) => {
   return (
     <div>
       <Modal
         isOpen={true}
-        contentLabel="GroupReview Modal"
+        contentLabel="User Review Modal"
         onRequestClose={props.hideModal}
         style={customStyles}
       >
-        <GroupReviewForm
+        <UserReviewForm
           subject={props.subject}
           author={props.author}
           hideModal={props.hideModal}
-          onSubmit={(values) => {props.addGroupReview(values); props.hideModal();}}
+          onSubmit={(values) => {props.addUserReview(values); props.hideModal()}}
         />
       </Modal>
     </div>
@@ -53,12 +53,12 @@ function mapStateToProps(state) {
   return {
     	author: state.auth.user,
       isAuth: state.auth.isAuth,
-      subject: state.group.group,
+      subject: state.user.user,
     };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({  ...modalActions, ...groupActions }, dispatch);
+  return bindActionCreators({  ...modalActions, ...userActions }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupReviewModal);
+export default connect(mapStateToProps, mapDispatchToProps)(UserReviewModal);

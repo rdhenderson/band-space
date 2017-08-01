@@ -21,7 +21,7 @@ class UserReview extends Component{
                 cName="profile__bottombody__botmain__right__event"
                 event={review.event}
                 title={review.title}
-                body={review.body}
+                body={review.notes}
                 imgSrc={review.image}
 
               />

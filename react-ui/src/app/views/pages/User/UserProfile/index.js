@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
 import { actions as userActions, selectors as userSelectors } from '../../../../state/ducks/user'
+import { actions as modalActions } from '../../../../state/ducks/modal'
 
 import UserProfile from './UserProfile';
 
@@ -18,7 +19,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators( { ...userActions }, dispatch);
+  return bindActionCreators( { ...userActions, ...modalActions }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);

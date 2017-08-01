@@ -42,7 +42,7 @@ const TestFormModal = (props) => {
           subject={props.subject}
           author={props.author}
           hideModal={props.hideModal}
-          onSubmit={(values) => props.addVenueReview(values)}
+          onSubmit={(values) => { props.addVenueReview(values); props.hideModal();}}
         />
       </Modal>
     </div>
