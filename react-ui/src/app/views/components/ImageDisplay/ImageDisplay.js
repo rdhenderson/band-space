@@ -51,7 +51,8 @@ class ImageDisplay extends Component {
 
     const { subject } = this.props;
     const { profile_image } = subject;
-
+    if (profile_image && profile_image.img && profile_image.img[0] === '.')
+      profile_image.img = profile_image.img.substring(1);
     return (
       <div className="profile__topbody__left__profblock">
         {(this.state.editActive && this.props.isAuth) ? (
@@ -74,7 +75,7 @@ class ImageDisplay extends Component {
               {/* <img className="profile__topbody__left__profblock__imgdiv__stars" src="http://keycdn.theouterhaven.net/wp-content/uploads/2014/12/5star.png-610x0.png" /> */}
             </div>
             {this.props.profileText}
-            
+
             { this.props.isAuth &&
               <div onClick={this.toggleEdit}>
                 <SVGInline className="editProfPic" src="/img/edit.svg" />
