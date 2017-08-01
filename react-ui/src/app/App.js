@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
+
+import { actions as venueActions } from './state/ducks/venue'
+import { actions as userActions, selectors as userSelectors } from './state/ducks/user'
+import { actions as groupActions } from './state/ducks/group'
 
 import { Auth, Home, Gigs, Venue, User, Group, PrivateProfile, CreateGroup } from './views/pages';
 import { Main } from './views/layouts'
@@ -12,6 +18,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin();
 
 class App extends Component {
+
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
@@ -30,4 +37,14 @@ class App extends Component {
   }
 }
 
-export default App
+export default App;
+// function mapStateToProps(state) {
+//   return state;
+// }
+//
+// function mapDispatchToProps(dispatch) {
+//   const actions = {...venueActions, ...userActions, ...groupActions };
+//   return bindActionCreators(actions, dispatch);
+// }
+//
+// export default connect(mapStateToProps, mapDispatchToProps)(App);

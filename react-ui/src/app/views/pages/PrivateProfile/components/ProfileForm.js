@@ -2,14 +2,14 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
 let ProfileForm = props => {
-  const { handleSubmit } = props
+  const { handleSubmit, onSubmit } = props
 
   return (
-    <form className="editProfile" onSubmit={ handleSubmit }>
+    <form className="editProfile" onSubmit={ handleSubmit(onSubmit) }>
 
-        <div className="editProfile__header">
-          <h1> Edit Your Information </h1>
-          <button className="normal-btn editProfile__button" onClick={this.toggleEdit}>Edit Profile</button>
+      <div className="editProfile__header">
+        <h1> Edit Your Information </h1>
+        {/* <button className="normal-btn editProfile__button" onClick={this.toggleEdit}>Edit Profile</button> */}
         </div>
         <div className="editGroupFields">
           <Field

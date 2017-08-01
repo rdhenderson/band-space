@@ -19,14 +19,16 @@ class HeadSearch extends Component {
   //     [name]: value
   //   });
   // }
-
+componentWillUnmount(){
+  this.props.resetSearch();
+}
   render(){
     return(
       <div>
 
         <form onSubmit={this.Search} className="queryHeader">
           <div className="queryHeader__searchtype">
-            <select name="searchType" value={this.props.searchType} onChange={this.props.updateSearchType}>
+            <select name="searchType" value={this.props.searchType} onChange={this.props.changeSearchType}>
               <option value="users">Users</option>
               <option value="venues">Venues</option>
               <option value="groups">Groups</option>

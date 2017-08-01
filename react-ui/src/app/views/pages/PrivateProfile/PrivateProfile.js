@@ -62,13 +62,12 @@ class PrivateProfile extends Component {
     } else {
       newGroup.members.push(userMember)
     }
-    console.log("New Group", newGroup);
     this.props.addUserGroup(newGroup, user._id);
     this.setState({isAddGroup: false});
   }
 
   toggleAddGroup(){
-    const newState = { makeEdit: !this.state.isAddGroup }
+    const newState = { addGroup: !this.state.isAddGroup }
     this.setState(newState);
   }
   toggleEdit(){
@@ -112,10 +111,10 @@ class PrivateProfile extends Component {
                 <ul>
                   {uGroups !== undefined &&
                     uGroups.map( (group, index) =>(
-                      <Link key={group.id} to={`/groups/${group._id}`}>
+                      <Link key={group._id} to={`/groups/${group._id}`}>
                         <li>#{index+1}: {group.name} </li>
                       </Link>
-                  ))}
+                    ))}
 
                 </ul>
                 <button className="normal-btn" onClick={this.toggleAddGroup}>Add Group</button>
@@ -130,13 +129,17 @@ class PrivateProfile extends Component {
           <div className="profile__topbody__right">
 
 
-              {this.state.makeEdit ? (
-                <div className="profile__topbody__right__sliders">
-                  <ProfileForm user={user} onSubmit={this.handleUserUpdate} toggleEdit={this.toggleEdit}/>
-                </div>
-              )
-              :
-              (
+            {this.state.makeEdit ? (
+              <div className="profile__topbody__right__sliders">
+                <ProfileForm
+                  user={user}
+                  onSubmit={(values)=>{this.props.updateUser({...user, ...values}); this.toggleEdit()}}
+
+                />
+              </div>
+            )
+            :
+            (
               <div className="profile__topbody__right__sliders">
                 <div id="Header">
                   <h1 id="skillheader"> Skills </h1>

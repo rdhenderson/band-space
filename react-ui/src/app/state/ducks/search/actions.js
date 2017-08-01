@@ -9,10 +9,11 @@ export function updateQuery(event) {
 }
 // If category is unrecognized, set searchType to 'all'
 export function changeSearchType(event) {
-  const category = (event.target) ? event.target.value : event;
+  const target = event.target;
+  const value = target.type === 'checkbox' ? target.checked : target.value;
   return {
     type: types.CHANGE_SEARCH_TYPE,
-    payload: { searchType: (types.searchType[category]) ? types.searchType[category] : types.searchType.all },
+    payload: value
   };
 }
 

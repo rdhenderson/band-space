@@ -86,7 +86,6 @@ export function addVenueReview(review) {
     const state = getState();
     const reviewMeta = { author: state.auth.id, subject: state.venue.venue._id}
     const newReview = { ...review, ...reviewMeta };
-    console.log("New Review", newReview);
     dispatch({type: types.ADD_VENUE_REVIEW})
     const token = localStorage.getItem('jwtToken');
     axios({

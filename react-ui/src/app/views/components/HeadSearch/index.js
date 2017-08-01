@@ -8,11 +8,9 @@ import HeadSearch from './HeadSearch'
 
 function mapStateToProps(state) {
   return {
-    isLoading: state.group.loading,
-    displayList: searchSelectors.getDisplayList(state),
+    displayList: searchSelectors.getLimitedDisplayList(state),
     query: state.search.query,
     searchType: state.search.searchType,
-
   };
 }
 
