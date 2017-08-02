@@ -36,6 +36,26 @@ const NavMenuAuth = (props) => {
         </div>
       </Link>
 
+      <Link to="/venues">
+        <div className="navLinks">
+          <img className="navLinks__icon" src="/img/stage.svg" />
+          <p id="home" className="menu-item">Venues</p>
+        </div>
+      </Link>
+
+      <Link to="/users">
+        <div className="navLinks">
+          <img className="navLinks__icon" src="/img/user.svg" />
+          <p id="home" className="menu-item">Users</p>
+        </div>
+      </Link>
+      <Link to="/groups">
+        <div className="navLinks">
+          <img className="navLinks__icon" src="/img/group.svg" />
+          <p id="home" className="menu-item">Groups</p>
+        </div>
+      </Link>
+
       <Link to="/gigs">
         <div className="navLinks">
           <img className="navLinks__icon" src="/img/map.svg" />
