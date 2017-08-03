@@ -1,30 +1,20 @@
 import axios from 'axios';
-import * as types from './types'
+import { normalize } from 'normalizr'
 
-// const ROOT_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+import * as types from './types'
+import { normalizeItem, normalizeArray } from '../../utils/normalizeData.js'
+
 const ROOT_URL = '/api/venues';
 
-export function getVenue(id) {
-  return dispatch => {
-    dispatch({type: types.GET_VENUE})
-    axios.get(`${ROOT_URL}/${id}`)
-    .then(
-        ({ data }) => dispatch({ type: types.GET_VENUE_SUCCESS, payload: data }),
-        ({ response, message }) =>
-          dispatch({
-            type: types.GET_VENUE_FAILURE,
-            payload: (response) ? response.data : message
-          })
-      );
-    }
-}
-
-export function getVenueList() {
+export function fetchVenueList() {
   return dispatch => {
     dispatch({type: types.GET_VENUE_LIST})
     axios.get(`${ROOT_URL}`)
-    .then(
-        ({ data }) => dispatch({ type: types.GET_VENUE_LIST_SUCCESS, payload: data }),
+    .then(({ data }) =>
+      dispatch({
+        type: types.GET_VENUE_LIST_SUCCESS,
+        response: normalizeArray(data)
+      }),
         ({ response, message }) =>
           dispatch({
             type: types.GET_VENUE_LIST_FAILURE,
@@ -48,7 +38,10 @@ export function addVenue(venue) {
       }
     })
     .then(
-        ({ data }) => dispatch({ type: types.ADD_VENUE_SUCCESS, payload: data }),
+        ({ data }) => dispatch({
+          type: types.ADD_VENUE_SUCCESS,
+          response: normalizeItem(data)
+        }),
         ({ response, message }) =>
           dispatch({
             type: types.ADD_VENUE_FAILURE,
@@ -71,7 +64,10 @@ export function updateVenue(venue) {
       }
     })
     .then(
-        ({ data }) => dispatch({ type: types.UPDATE_VENUE_SUCCESS, payload: data }),
+        ({ data }) => dispatch({
+          type: types.UPDATE_VENUE_SUCCESS,
+          response: normalizeItem(data)
+        }),
         ({ response, message }) =>
           dispatch({
             type: types.UPDATE_VENUE_FAILURE,
@@ -97,7 +93,10 @@ export function addVenueReview(review) {
       }
     })
     .then(
-        ({ data }) => dispatch({ type: types.ADD_VENUE_REVIEW_SUCCESS, payload: data }),
+        ({ data }) => dispatch({
+          type: types.ADD_VENUE_REVIEW_SUCCESS,
+          response: normalizeItem(data)
+        }),
         ({ response, message }) =>
           dispatch({
             type: types.ADD_VENUE_REVIEW_FAILURE,
@@ -120,7 +119,10 @@ export function addVenueEvent(event) {
       }
     })
     .then(
-        ({ data }) => dispatch({ type: types.ADD_VENUE_EVENT_SUCCESS, payload: data }),
+        ({ data }) => dispatch({
+          type: types.ADD_VENUE_EVENT_SUCCESS,
+          response: normalizeItem(data)
+        }),
         ({ response, message }) =>
           dispatch({
             type: types.ADD_VENUE_EVENT_FAILURE,
@@ -129,20 +131,3 @@ export function addVenueEvent(event) {
       );
   }
 }
-// export function addUserGroup(group, id) {
-//   const token = localStorage.getItem('jwtToken');
-//   //check if the token is still valid, if so, get me from the server
-//   const request = axios({
-//     method: 'post',
-//     url: `${ROOT_URL}/users/${id}/groups`,
-//     data: group,
-//     headers: {
-//       'Authorization': `Bearer ${token}`
-//     }
-//   });
-//
-//   return {
-//     type: ADD_USER_GROUP,
-//     payload: request
-//   };
-// }
