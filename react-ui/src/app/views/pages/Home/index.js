@@ -6,6 +6,8 @@ import { actions as venueActions } from '../../../state/ducks/venue'
 import { actions as userActions, selectors as userSelectors } from '../../../state/ducks/user'
 import { actions as groupActions } from '../../../state/ducks/group'
 import { actions as searchActions } from '../../../state/ducks/search'
+import { getVenueList, isVenueLoading } from '../../../state/ducks/venue/reducer'
+
 
 import Home from './Home'
 
@@ -16,10 +18,10 @@ function mapStateToProps(state) {
     	user: getAuthUser(state),
       query: state.search.query,
       isAuth: state.auth.isAuth,
-      venues: state.venue.venueList,
+      venues: getVenueList(state),
       users: getAllUsers(state),
       groups: state.group.groupList,
-      isVenueLoading: state.venue.loading,
+      isVenueLoading: isVenueLoading(state),
       isGroupLoading: state.group.loading,
       isUserLoading: state.user.loading,
     };

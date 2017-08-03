@@ -8,6 +8,8 @@ import { Spinner } from '../../../components'
 
 import { actions as modalActions } from '../../../../state/ducks/modal'
 import { actions as venueActions } from '../../../../state/ducks/venue'
+import { getVenueList, isVenueLoading } from '../../../../state/ducks/venue/reducer'
+
 import AddEventForm from './AddEventForm'
 
 const customStyles = {
@@ -24,7 +26,7 @@ const customStyles = {
 class AddEventModal extends Component {
 
   componentDidMount() {
-    this.props.getVenueList();
+    this.props.fetchVenueList();
   }
 
   render() {
@@ -57,8 +59,8 @@ function mapStateToProps(state) {
     	author: state.auth.user,
       isAuth: state.auth.isAuth,
       subject: state.venue.venue,
-      venues: state.venue.venueList,
-      isLoading: state.venue.loading,
+      venues: getVenueList(state),
+      isLoading: isVenueLoading(state),
     };
 }
 

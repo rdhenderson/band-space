@@ -1,11 +1,11 @@
 import { createSelector } from 'reselect'
 import { searchType } from './types'
+import { getVenueList } from '../venue/reducer'
 
 const getSearchQuery = state => state.search.query;
 const getSearchType = state => state.search.searchType;
 const getGroupList = state => state.group.groupList;
 const getUserList = state => state.user.userList;
-const getVenueList = state => state.venue.venueList;
 
 function getNameIdTypeList(list, listType){
   if (!list || list.length < 1) return [];

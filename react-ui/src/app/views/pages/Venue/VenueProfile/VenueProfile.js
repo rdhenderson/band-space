@@ -15,23 +15,14 @@ class VenueProfile extends Component {
     this.state = {
       makeEdit : false,
       showConnect: false,
-      data: false,
     };
 
     this.toggleEdit = this.toggleEdit.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-      if (nextProps) {
-          this.setState({
-              data: true
-          });
-      }
-  }
   // Pull id from route parameters and get that venue from database
   componentDidMount() {
-    const id = this.props.match.params.id;
-    this.props.getVenue(id);
+    // const id = this.props.match.params.id;
   }
 
   toggleEdit(){
@@ -40,7 +31,7 @@ class VenueProfile extends Component {
   }
 
   render() {
-    if (this.props.isLoading || !this.state.data ) return (<Spinner />);
+    if (this.props.isLoading && !this.props.venue ) return (<Spinner />);
 
     if (this.props.error === true) return (<h1> "Error!"</h1>);
 

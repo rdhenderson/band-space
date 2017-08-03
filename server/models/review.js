@@ -23,7 +23,7 @@ const ReviewSchema = new Schema({
     sound: { type: Number, trim: true },
     value: { type: Number, trim: true },
     musicality: { type: Number, trim: true },
-    // TODO: Add other categories for user reviews.
+    showmanship: { type: Number, trim: true }
   },
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },

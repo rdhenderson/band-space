@@ -1,21 +1,21 @@
-// import { applyMiddleware, createStore } from "redux"
-//
 import logger from "redux-logger"
-// import reducer from "./reducers"
-//
-// // const middleware = applyMiddleware(logger);
-//
-// export default createStore(reducer);//, middleware);
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-
-// import logger from 'redux-logger'
 import promise from 'redux-promise';
-import ReduxThunk from 'redux-thunk'
+import reduxThunk from 'redux-thunk'
+import { throttle } from 'lodash/throttle'
 
+import { loadState, saveState } from './utils/localStorage.js'
 import reducer from './reducers';
-//Only set logger for dev environment, turn it off for heroku
-const middleware =
-  (process.env.HEROKU_ENV) ? applyMiddleware(promise, ReduxThunk) : applyMiddleware(promise, ReduxThunk, logger);
 
-export default createStore(reducer, composeWithDevTools(middleware));
+const persistedState = loadState();
+const middleware = [promise, reduxThunk]
+if (process.env.HEROKU_ENV) middleware.push(logger);
+
+const store = createStore(reducer, persistedState, composeWithDevTools(applyMiddleware(...middleware)));
+
+// Attempt to save state to local storage on changes (max: once per second).
+store.subscribe(() => saveState(store.getState()));
+
+
+export default store;

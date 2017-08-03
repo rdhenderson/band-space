@@ -15,7 +15,7 @@ class VenueList extends Component {
   // Get list of venues from database when component is mounting
   // Draw list of components
   componentDidMount() {
-    this.props.getVenueList();
+    this.props.fetchVenueList();
     this.props.changeSearchType({target:{value:'venues'}});
   }
 

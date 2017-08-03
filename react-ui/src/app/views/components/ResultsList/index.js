@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router'
 
 import { actions as searchActions, selectors as searchSelectors } from '../../../state/ducks/search'
 
@@ -16,4 +17,4 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators( { ...searchActions }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ResultsList);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ResultsList));

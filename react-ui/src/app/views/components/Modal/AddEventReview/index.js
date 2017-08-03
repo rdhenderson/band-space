@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 
 import { actions as modalActions } from '../../../../state/ducks/modal'
 import { actions as venueActions } from '../../../../state/ducks/venue'
+import { getVenueList, isVenueLoading } from '../../../../state/ducks/venue/reducer'
 
 import AddEventReview from './AddEventReview'
 
@@ -11,8 +12,8 @@ function mapStateToProps(state) {
     	author: state.auth.user,
       isAuth: state.auth.isAuth,
       subject: state.venue.venue,
-      venues: state.venue.venueList,
-      isLoading: state.venue.loading,
+      venues: getVenueList(state),
+      isLoading: isVenueLoading(state),
     };
 }
 
