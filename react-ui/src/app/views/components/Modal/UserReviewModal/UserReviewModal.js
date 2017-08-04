@@ -41,8 +41,7 @@ const UserReviewModal = (props) => {
         <UserReviewForm
           subject={props.subject}
           author={props.author}
-          hideModal={props.hideModal}
-          onSubmit={(values) => {props.addUserReview(values); props.hideModal()}}
+          onSubmit={props.handleSubmit}
         />
       </Modal>
     </div>

@@ -18,7 +18,7 @@ module.exports = function routes (app, passport) {
     if (process.env.ENV_HEROKU) {
      indexFile = `${__dirname}/../../react-ui/build/index.html`;
    } else {
-     indexFile = `${__dirname}/../../public/index.html`;
+     indexFile = `${__dirname}/../../react-ui/public/index.html`;
    }
     res.sendFile(path.resolve(indexFile));
   });

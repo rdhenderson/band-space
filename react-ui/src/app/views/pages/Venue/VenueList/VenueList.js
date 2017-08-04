@@ -1,5 +1,6 @@
 //Here we grab React, and peel component out of the library using ES6 syntax.
 import React, { Component } from 'react'
+import propTypes from 'prop-types'
 
 import { Spinner, ResultsList, SearchBar } from '../../../components'
 
@@ -9,7 +10,6 @@ class VenueList extends Component {
     this.state = {
       showAddVenue: false,
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   // Get list of venues from database when component is mounting
@@ -17,10 +17,6 @@ class VenueList extends Component {
   componentDidMount() {
     this.props.fetchVenueList();
     this.props.changeSearchType({target:{value:'venues'}});
-  }
-
-  handleSubmit(values) {
-    this.props.addVenue(values);
   }
 
   render() {
@@ -37,4 +33,8 @@ class VenueList extends Component {
     );
   }
 }
+
+VenueList.propTypes = {
+  isLoading: propTypes.bool.isRequired
+};
 export default VenueList;

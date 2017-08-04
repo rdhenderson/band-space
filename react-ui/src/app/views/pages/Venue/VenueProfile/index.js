@@ -3,17 +3,20 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router'
 
 import { actions as venueActions } from '../../../../state/ducks/venue'
-import { getVenueList, getVenue, isVenueError, isVenueLoading } from '../../../../state/ducks/venue/reducer'
+import * as venueSelectors from '../../../../state/ducks/venue/reducer'
 import { actions as modalActions } from '../../../../state/ducks/modal'
 
 import VenueProfile from './VenueProfile'
 
-function mapStateToProps(state, ownProps) {
+const { getVenueList, getVenue, isVenueError, isVenueLoading } = venueSelectors;
+// Take venue id from url param
+function mapStateToProps(state, { match }) {
+  const currentVenueId = match.params.id;
   return {
     	currUser: state.auth.user,
       isAuth: state.auth.isAuth,
       venues: getVenueList(state),
-      venue: getVenue(state, ownProps.match.params.id),
+      venue: getVenue(state, currentVenueId),
       error: isVenueError(state),
       isLoading: isVenueLoading(state),
     };

@@ -3,11 +3,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
 import { actions as authActions } from '../../../../state/ducks/auth'
-
+import { isAuthorized } from '../../../../state/ducks/auth/reducer.js'
 function mapStateToProps(state) {
   return {
-    user: state.auth,
-    isAuth: state.auth.isAuth,
+    isAuth: isAuthorized(state),
   };
 }
 

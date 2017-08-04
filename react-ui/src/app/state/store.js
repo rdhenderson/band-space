@@ -3,19 +3,51 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import promise from 'redux-promise';
 import reduxThunk from 'redux-thunk'
-import { throttle } from 'lodash/throttle'
+import axios from 'axios'
+import axiosMiddleware from 'redux-axios-middleware'
 
+import normalizeMiddleware from './middleware/normalizeData.js'
+
+import { throttle } from 'lodash'
 import { loadState, saveState } from './utils/localStorage.js'
 import reducer from './reducers';
 
-const persistedState = loadState();
-const middleware = [promise, reduxThunk]
-if (process.env.HEROKU_ENV) middleware.push(logger);
+export default function configureStore() {
+  const axiosClient = axios.create({
+    responseType: 'json'
+  })
+  // setup middleware chain
+  // const axiosMiddlewareConfig = {
+  //   interceptors: {
+  //     response: [{
+  //       success: function ({getState, dispatch, getSourceAction}, req) {
+  //         console.log(req); //contains information about request object
+  //         //...
+  //       },
+  //     }]
+  //   }
+  // };
+  const middleware = [
+    promise,
+    reduxThunk,
+    axiosMiddleware(axiosClient, {errorSuffix: '_FAILURE'}),
+    normalizeMiddleware
+  ];
 
-const store = createStore(reducer, persistedState, composeWithDevTools(applyMiddleware(...middleware)));
+  if (process.env.NODE_ENV !== 'production') {
+    middleware.push(logger);
+  }
 
-// Attempt to save state to local storage on changes (max: once per second).
-store.subscribe(() => saveState(store.getState()));
+  // retrieve state from localStorage if present
+  const persistedState = loadState();
+  const store = createStore(reducer, persistedState, composeWithDevTools(applyMiddleware(...middleware)));
 
+  // Attempt to save state to local storage on changes (max: once per second).
+  store.subscribe(throttle(() => {
+    console.log("Saved state");
+    saveState(store.getState());
+    return null;
+  }), 1000);
 
-export default store;
+  return store;
+}

@@ -13,16 +13,15 @@ class Login extends Component {
     this.state = {
       redirect: false,
     }
-    this.handleSubmit = this.handleSubmit.bind(this);
+    //  this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit({ email, password }) {
-    // event.preventDefault();
-    this.props.loginUser({email, password});
-    //FIXME: Make this an automatic redirect if user is authenticated in store.
-    // this.props.history.push('/profile');
-    this.setState({redirect: true});
-  }
+  // handleSubmit({ email, password }) {
+  //   // event.preventDefault();
+  //   this.props.loginUser({ email, password });
+  //   //FIXME: Make this an automatic redirect if user is authenticated in store.
+  //   // this.props.history.push('/profile');
+  // }
 
   render(){
 
@@ -38,7 +37,7 @@ class Login extends Component {
           <h2> Log Into BandSpace ! </h2>
           <p> See if you have any new reviews </p>
           <hr/>
-          <LoginForm onSubmit={this.handleSubmit} />
+          <LoginForm onSubmit={this.props.loginUser} />
           <ThirdPartyAuth connect={false} />
           <Link to="/auth/signup"> <p>Not a member?  Sign Up here </p></Link>
         </div>

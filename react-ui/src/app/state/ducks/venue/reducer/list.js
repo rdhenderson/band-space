@@ -5,10 +5,7 @@ import venue from './venue'
 
 function byId(state = {}, action) {
   if (action.response) {
-    return {
-      ...state,
-      ...action.response.venues,
-    };
+    return {...state, ...action.response.venues };
   }
   return state;
 }

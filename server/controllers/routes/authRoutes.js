@@ -14,7 +14,7 @@ module.exports = function(app, passport) {
     return passport.authenticate('local-signup', (err, token, user) => {
       if (err) {
         if (err.name === 'MongoError' && err.code === 11000) {
-          // the 11000 Mongo code is asdffor a duplication email error
+          // the 11000 Mongo code is for a duplication email error
           // the 409 HTTP status code is for conflict error
           console.log('Hit mongo error');
           return res.status(409).json({
@@ -43,6 +43,7 @@ module.exports = function(app, passport) {
   // process the login form
   app.post('/api/users/login', (req, res, next) => {
     passport.authenticate('local-login',  (err, token, user) => {
+      console.log('Request received', JSON.stringify(req.body));
       if (err) {
         if (err.name === 'IncorrectCredentialsError') {
           return res.status(400).json({

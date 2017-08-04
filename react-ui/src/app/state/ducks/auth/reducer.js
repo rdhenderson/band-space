@@ -1,47 +1,73 @@
-//Here we import our action types as constants
+/************************************************
+ * Auth State Branch:                           *
+ * auth: {                                      *
+ *  loading: [bool = false] - loading status    *
+ *  error: [String] - error message             *
+ *  token: [String] - user JWT                  *
+ *  id: [String] -- authorized user ID          *
+ * }                                            *
+ * Selectors:                                   *
+ *  - isAuthorized(state) - bool                *
+ *  - getAuthId(state) - authorized user id     *
+ *  - isAuthError(state) - error or null        *
+ *  - isAuthLoading(state) - loading state      *
+ *  - getAuthUser(state) - current user         *
+ ************************************************/
 import * as types from './types'
+import {combineReducers} from 'redux'
+import { getUser } from '../user/reducer'
 
-//It is best practice to define your initial state as a constant that gets passed as an argument to your reducer function
-const token = localStorage.getItem('jwtToken');
-
-const INITIAL_STATE = {
-  user: null,
-  isAuth: false,
-  error: null,
-  loading: true,
-  authId: null,
-  token,
-};
-
-export default function reducer(state = INITIAL_STATE, action){
-  let error, user;
-
+const loading = (state = false, action) => {
   switch (action.type) {
-    case types.LOGIN_USER:
-      return {...state, isAuth: false, error: null, loading:true }
-    case types.LOGIN_USER_SUCCESS:
-      user = action.payload.user;
-      return {...state, id: user._id, token: action.payload.token, user: action.payload.user, isAuth: true, error: null, loading:false }
-    case types.LOGIN_USER_FAILURE:
-      return {...state, isAuth: false, error: action.payload, loading:false }
-    case types.SIGNUP_USER:
-      return {...state, isAuth: false, error: null, loading:true }
-    case types.SIGNUP_USER_SUCCESS:
-      user = action.payload.user;
-      return {...state, id: user._id, token: action.payload.token, user: action.payload.user, isAuth: true, error: null, loading:false }
-    case types.SIGNUP_USER_FAILURE:
-      return {...state, token: null, isAuth: false, error: action.payload, loading:false }
-    case types.LOGOUT_USER:
-      return {...state, token: null, user: null, isAuth:false, error: null, loading: false }
-    case types.ME_FROM_TOKEN:// loading currentUser("me") from jwttoken in local/session storage storage,
-      return { ...state, loading: true};
-    case types.ME_FROM_TOKEN_SUCCESS://return user, status = authenticated and make loading = false
-      user = action.payload.user;
-      return { ...state, id: user._id, token: action.payload.token, user: action.payload.user, isAuth: true, error:null, loading: false}; //<-- authenticated
-    case types.ME_FROM_TOKEN_FAILURE:// return error and make loading = false
-      // error = action.payload.data || {message: action.payload.message};//2nd one is network or server down errors
-      return { ...state, token: null, error: action.payload, loading: false};
+    case types.AUTH:
+      return true;
+    case types.AUTH_SUCCESS:
+    case types.AUTH_FAILURE:
+      return false
     default:
       return state;
   }
 }
+const error = (state = false, action) => {
+  switch (action.type) {
+    case types.AUTH_SUCCESS:
+      return false;
+    case types.AUTH_FAILURE:
+      return action.payload
+    default:
+      return state;
+  }
+}
+
+const token = (state = null, action) => {
+  switch (action.type) {
+    case types.AUTH_SUCCESS:
+      return action.payload.data.token;
+    case types.AUTH_FAILURE:
+      return null;
+    default:
+      return state;
+  }
+}
+
+const id = (state = null, action) => {
+  switch (action.type) {
+    case types.AUTH_SUCCESS:
+      return action.payload.data.user._id;
+    case types.AUTH_FAILURE:
+      return null;
+    default:
+      return state;
+  }
+}
+export default combineReducers({ error, loading, token, id })
+
+/******************
+ * Auth Selectors *
+ ******************/
+export const isAuthorized  = state => (state.auth.id !== null)
+export const isAuthLoading = state => state.auth.loading
+export const getAuthId     = state => state.auth.id;
+export const isAuthError   = state => state.auth.error
+export const getAuthUser   = state => getUser(state, getAuthId(state))
+export const getAuthToken  = state => state.auth.token

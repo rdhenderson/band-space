@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router'
 
 import { actions as modalActions } from '../../../../state/ducks/modal'
 import AddReview from '../../AddReview'
@@ -38,11 +39,11 @@ const AddVenueReviewModal = (props) => {
   );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, {match}) {
   return {
     	author: state.auth.user,
       isAuth: state.auth.isAuth,
-      subject: state.venue.venue,
+      subject: getVenue(state, match.params.id),
     };
 }
 

@@ -1,10 +1,7 @@
 import { combineReducers } from 'redux'
+import reducer from './reducer'
 
-import error from './error'
-import loading from './loading'
-import list from './list'
-
-export default combineReducers({ error, list, loading })
+export default reducer
 
 export const getVenueList = state =>
   state.venue.list.ids.map( (id) => state.venue.list.byId[id]);

@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 import { types } from './index'
+import { getAuthId } from '../auth/reducer'
 
 const ROOT_URL = '/api/groups';
 
@@ -84,7 +85,7 @@ export function addGroup(group) {
 export function addGroupReview(review) {
   return (dispatch, getState) => {
     const state = getState();
-    const reviewMeta = { author: state.auth.id, subject: state.group.group._id}
+    const reviewMeta = { author: getAuthId(state), subject: state.group.group._id}
     const newReview = { ...review, ...reviewMeta };
     dispatch({type: types.ADD_GROUP_REVIEW})
     const token = localStorage.getItem('jwtToken');

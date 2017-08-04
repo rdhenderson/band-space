@@ -16,13 +16,7 @@ class VenueProfile extends Component {
       makeEdit : false,
       showConnect: false,
     };
-
     this.toggleEdit = this.toggleEdit.bind(this);
-  }
-
-  // Pull id from route parameters and get that venue from database
-  componentDidMount() {
-    // const id = this.props.match.params.id;
   }
 
   toggleEdit(){
@@ -90,11 +84,8 @@ class VenueProfile extends Component {
         }
         {venue && this.props.isAuth &&
           <div style={{display: "flex", justifyContent: "center"}} className="groupProfile__bottombody__botmain__right__header">
-            {/* <h1> Write a review? </h1> <img src="/img/edit.svg" onClick={() => this.props.showVenueReviewModal()} /> */}
+
             <h1> Write a Review! for {venue.name} </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('ADD_VENUE_REVIEW')} />
-            {/* <h1> Add Event </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('ADD_EVENT')} /> */}
-            {/* <h1> Validation Form </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('VALIDATION_FORM')} /> */}
-            {/* <h1> Add Event Review </h1> <img src="/img/edit.svg" onClick={() => this.props.showModal('ADD_EVENT_REVIEW')} /> */}
 
           </div>
         }

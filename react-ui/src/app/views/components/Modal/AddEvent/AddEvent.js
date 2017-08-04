@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router'
 
 import { Spinner } from '../../../components'
 
 import { actions as modalActions } from '../../../../state/ducks/modal'
 import { actions as venueActions } from '../../../../state/ducks/venue'
-import { getVenueList, isVenueLoading } from '../../../../state/ducks/venue/reducer'
+import { getVenue, getVenueList, isVenueLoading } from '../../../../state/ducks/venue/reducer'
 
 import AddEventForm from './AddEventForm'
 
@@ -54,11 +55,11 @@ class AddEventModal extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, { match }) {
   return {
     	author: state.auth.user,
       isAuth: state.auth.isAuth,
-      subject: state.venue.venue,
+      subject: getVenue(state, match.params.id),
       venues: getVenueList(state),
       isLoading: isVenueLoading(state),
     };
@@ -69,4 +70,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ hideModal, ...venueActions }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddEventModal);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AddEventModal));

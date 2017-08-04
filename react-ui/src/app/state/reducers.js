@@ -5,11 +5,17 @@ import { reducer as form } from 'redux-form';
 
 import * as reducer from './ducks';
 
-
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   ...reducer,
   burgerMenu,
   form,
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === 'LOGOUT_USER') {
+    state = undefined
+  }
+  return appReducer(state, action)
+}
 
 export default rootReducer;

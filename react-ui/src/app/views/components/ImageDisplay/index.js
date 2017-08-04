@@ -2,20 +2,20 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
 import { actions as venueActions } from '../../../state/ducks/venue'
-import { actions as userActions, selectors as userSelectors } from '../../../state/ducks/user'
+import { actions as userActions } from '../../../state/ducks/user'
+import { getUserList, isUserError, isUserLoading } from '../../../state/ducks/user/reducer'
 import { actions as groupActions } from '../../../state/ducks/group'
+import { isAuthorized, getAuthUser } from '../../../state/ducks/auth/reducer'
 
 import ImageDisplay from './ImageDisplay'
 
-const { getAuthUser } = userSelectors;
-
 function mapStateToProps(state, {type, subject_id}) {
   return {
-    isAuth: state.auth.isAuth,
-    currUser: state.auth.user,
-    userList: state.user.userList,
-    error: state.user.error,
-    isLoading: state.user.loading,
+    isAuth: isAuthorized(state),
+    currUser: getAuthUser(state),
+    userList: getUserList(state),
+    error: isUserError(state),
+    isLoading: isUserLoading(state),
   };
 }
 

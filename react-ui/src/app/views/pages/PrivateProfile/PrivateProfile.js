@@ -32,20 +32,20 @@ class PrivateProfile extends Component {
     this.toggleConnect = this.toggleConnect.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps && nextProps.user && !this.props.isAuth) {
-      this.props.fetchUser(this.props.authId);
-    } else if (nextProps) {
-      this.setState({ data: true });
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps && nextProps.user && !this.props.isAuth) {
+  //     this.props.fetchUser(this.props.authId);
+  //   } else if (nextProps) {
+  //     this.setState({ data: true });
+  //   }
+  // }
 
-  componentDidMount() {
-    if (this.props.isAuth) {
-      this.props.fetchUser(this.props.authId);
-    }
-    //if (this.props.user) this.setState({data:true})
-  }
+  // componentDidMount() {
+  //   if (this.props.isAuth) {
+  //     this.props.fetchUser(this.props.authId);
+  //   }
+  //   //if (this.props.user) this.setState({data:true})
+  // }
   // FIXME: Need a better location for this information
   // Need to confirm that user isn't already in members.
   userAddGroup(values) {
