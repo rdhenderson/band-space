@@ -9,7 +9,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "can-use-dom": "^0.1.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.13",
     "material-ui": "^0.18.7",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.0.2",
