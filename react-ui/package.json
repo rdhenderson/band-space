@@ -41,7 +41,7 @@
     "reselect": "^3.0.1"
   },
   "devDependencies": {
-    "react-scripts": "1.0.10"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "test": "react-scripts test --env=jsdom",
